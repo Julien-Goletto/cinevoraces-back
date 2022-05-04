@@ -1,0 +1,11 @@
+@protocol=http://
+@host=localhost
+@port=:3000
+@prefix=/v1
+@baseUrl={{protocol}}{{host}}{{port}}{{prefix}}
+
+### Get all platforms from db
+GET {{baseUrl}}/platforms
+
+### Get a platform by id
+GET {{baseUrl}}/platforms/28

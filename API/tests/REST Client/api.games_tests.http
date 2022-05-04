@@ -1,0 +1,37 @@
+@protocol=http://
+@host=localhost
+@port=:3000
+@prefix=/v1
+@baseUrl={{protocol}}{{host}}{{port}}{{prefix}}
+
+### Get all games from db
+GET {{baseUrl}}/games
+
+### Get all game infos with gameId
+GET {{baseUrl}}/games/1
+
+### Get a game from RAWG
+POST {{baseUrl}}/games/newgame
+content-type: application/json
+
+{
+  "platformId": 7,
+  "gameTitle": "Super Mario Odyssey"
+}
+
+### Post a new game
+POST {{baseUrl}}/games
+content-type: application/json
+
+{
+  "name": "Metroid Prime 25",
+  "platforms": [
+    "PS Vita"
+  ],
+  "released": "2017-02-23",
+  "background_image": "https://media.rawg.io/media/games/4cf/4cfc6b7f1850590a4634b08bfab308ab.jpg",
+  "genres": [ "Platformer", "Indie", "Action" ]
+}
+
+### Delete a game
+DELETE {{baseUrl}}/games/Metroid Prime 25
