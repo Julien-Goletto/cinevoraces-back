@@ -1,19 +1,17 @@
-## API Endpoints for ludotheque
+# API Endpoints for CinéVoraces
 
-method | route | description | returns | implemented ?
--------- | ------ | ---------- | ------- | -------
-GET | /games | get all games already registered in databse | Array of Objet _game_ (JSON) | Done
-GET | /games/{id} | get the game details that has the requested id | Object _game_ (JSON) | Done
-GET | /games/{title} | fetch a game object from RAWG, corresponding with user request | Object _game_ (JSON) |
-POST | /games | add a game in database, using previously returned game Object from RAWG | |
-GET | /games/user/{id} | get all videogames possessed by the requested user | Array of Objet _game_ (JSON) |
-GET | /platforms | get all videogames platforms in database | Array of _platform_ Object (JSON) | Done
-GET | /platforms/{id} | get the videogames platform that has the requested id | _platform_ Object (JSON) | Done
-GET | /games/platforms/{id} | get all videogames from platform requested | Array of Objet _game_ (JSON) |
-GET | /genres | get all videogames genres in database| Array of _genre_ Object (JSON) | Done
-GET | /genres/{id} | get the videogames genre that has the requested id | _genre_ Object (JSON) | Done
-GET | /games/genre/{id} | get all videogames from genre requested | Array of Objet _game_ (JSON)
-POST| users/register | Create a new user in database| Return a feedback message (String) | Done
-POST| users//login | Log in user, verifying credentials in database| Welcome back message (String) | Done
-POST| users/logout | Log out user| Goodbye message (String) | Done
-GET | /users | get all users in database| Array of pseudo (String) | Done
+method | route | description | returns | Page ? | Sprint | implemented ?
+-------- | ------ | ---------- | ------- | ------- | ------- | -------
+GET | /checkMovieTitle | Checks if sumbitted movie title refers to an already existing movie in movie table. | (Success) return void (Error) "Le film proposé est déjà enregistré." | Submit Movie | 2 |
+POST | /proposition | If not already in movie table, Post a proposition : a formated movie object to movie table with all metadatas, user id, publishing_date, isPublished ? & presentation. It also fills the jointed tables | (Success) String "Votre proposition a bien été enregistrée." (Error) "Le film proposé est déjà enregistré." | Submit Movie | 1 |
+PUT | /proposition | Allow user to modify its movie proposition. Both movie object and presentation can be modified. If new movie already in movie return error. It also fills the jointed tables  | (Success) String "Votre proposition a bien été modifiée." (Error) "Le film proposé est déjà enregistré." | Submit Movie | 1 |
+POST | /register | Post a new user in user table : pseudo, email, password & avatar_url | String "Votre compte a bien été créé. Merci de vous identifier"| Register Page | 1 |
+POST | /login | Check credentials with user table. If success, generate a JWT containing user.id, user.pseudo, user.avatar_url & user.role in session. | (Success) : JWT token - (Error): String "Informations de connexion erronées." | Connexion modal | 1 |
+GET | /user/:userId | Return user.avatar_url, user.pseudo, metrics (proposed movies, commented movies, liked movies, watchlist, rated movies). Check correspondance between userId and user.id (in JWT). if it matches, add proposition infos (if exists : title release date, directors, genres, publishing_date) & user.email | (Success) : _userInfos_ (JSON) (Error): String "Cet utilisateur n'est enregistré." | User page | 1 |
+PUT | /user/:userId | Check correspondance between userId and user.id (in JWT). If password modification requested, a check is needed. Then modify requested user parameters in user table | (Success) "Vos modifications ont bien étées prises en compte." (Error) exceptions on unique constraints or bad password | User Page | 1 |
+GET | /metrics | get the updated seasons count, movies count, countries count| _metrics_ (JSON) | Home | 1 |
+GET | /movies/:params | get a list of movies, fitting the query params : filtered conditions & pagination (with offset). Movie objects contain poster_url & id. Returns also genres, country & season list is param withFilters is True | Array of Objet _movies_ (JSON), arrays of _genres_, _countries_ & _seasons_ | Home + 404 + Movies Page | 1 |
+GET | /moviedetails/:movieId | get french_title, directors, release_date, duration, genres, casting, presentation. Plus interactions counters (bookmarks, likes, views, rates), average rating details from requested movie. Plus comments from users. If logged user, recover personnal : bookmark, viewed, liked, user rating & user comment. If user comment, it should appear in firt position of the comments array. | _movieDetails_ (JSON) | Movie Details | 1 |
+POST | /moviereview | For a logged user, post a review on first interaction with the UI : can be triggered by pressing bookmarked, viewed, liked, rated or create a comment | return void | Movie Details | 1 |
+PUT | /moviereview | For a logged user, alter a review. Can be modified by pressing bookmarked, viewed, liked, giving a rating or posting/editing a comment | return void | Movie Detail | 1 |
+DELETE | /moviereviewcomment | delete a comment from the requested user review | (Success) : String "Le commentaire a été supprimé." | Movie Details | 1 |

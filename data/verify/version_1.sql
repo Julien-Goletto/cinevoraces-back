@@ -1,13 +1,17 @@
--- Verify ludotheque:version_1 on pg
+-- Verify cinevoraces:version_1 on pg
 
 BEGIN;
 
-SELECT "name" from "genre";
-SELECT "name" from "platform";
-SELECT "pseudo","password" from "user";
-SELECT "name","released_on","background_image" from "game";
-SELECT "game_id","platform_id" from "game_has_platform";
-SELECT "game_id","genre_id" from "game_has_genre";
-SELECT "game_id","user_id","is_finished","is_prioritized","score" from "game_has_user";
+SELECT "id","name" FROM "genre";
+SELECT "id","name" FROM "language";
+SELECT "id","name"  FROM "country";
+SELECT "id","number","year" FROM "season";
+SELECT "id","pseudo","mail","password","avatar_url","mail_sub","role" FROM "user";
+SELECT "id", "french_title", "original_title", "directors", "release_date", "duration", "casting", "presentation",
+        "isPublished", "publishing_date","user_id", "season_id" FROM "movie";
+SELECT "viewed","bookmarked","liked","rating","comment","user_id", "movie_id" FROM "review";
+SELECT "movie_id","genre_id" FROM "movie_has_genre";
+SELECT "movie_id","country_id" FROM "movie_has_country";
+SELECT "movie_id","language_id" FROM "movie_has_language";
 
 ROLLBACK;
