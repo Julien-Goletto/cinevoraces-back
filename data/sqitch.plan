@@ -2,3 +2,4 @@
 %project=cinevoraces
 
 version_1 2022-05-04T12:49:37Z System Administrator <root@MacBook-Air-de-Julien.local> # structure de bdd
+version_2 2022-05-04T13:31:11Z System Administrator <root@MacBook-Air-de-Julien.local> # Seeding for tests

@@ -8,7 +8,7 @@ SELECT "id","name"  FROM "country";
 SELECT "id","number","year" FROM "season";
 SELECT "id","pseudo","mail","password","avatar_url","mail_sub","role" FROM "user";
 SELECT "id", "french_title", "original_title", "directors", "release_date", "duration", "casting", "presentation",
-        "isPublished", "publishing_date","user_id", "season_id" FROM "movie";
+        "is_published", "publishing_date","user_id", "season_id" FROM "movie";
 SELECT "viewed","bookmarked","liked","rating","comment","user_id", "movie_id" FROM "review";
 SELECT "movie_id","genre_id" FROM "movie_has_genre";
 SELECT "movie_id","country_id" FROM "movie_has_country";
