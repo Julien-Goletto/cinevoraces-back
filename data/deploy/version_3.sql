@@ -35,4 +35,47 @@ CREATE VIEW indiv_actions_metrics AS
 		ON movie.user_id = rc.user_id
 	GROUP BY movie.user_id,cc.comments_count, lc.likes_count, wc.watchlist_count, rc.ratings_count;
 
+-- Récupère toutes les informations des tables secondaires pour préparer une liste d'objets films complets avec
+-- Les métadonnées de l'objet film lui-même
+-- Les informations de la saison
+-- Les genres
+-- Les pays
+-- Les langues
+-- /!\ Inclut également les propositions en attente
+CREATE VIEW movies_infos AS
+	SELECT movie.id,movie.french_title,movie.original_title,movie.poster_url,movie.directors,movie.release_date,
+			movie.duration, movie.casting,movie.presentation,movie.is_published,
+			movie.publishing_date, movie.user_id as "user_id",
+			"user".pseudo AS user_pseudo,"user".avatar_url AS user_avatar_url,
+			season.number as season_number,
+		array_agg(DISTINCT genre.name) AS genres,
+		array_agg(DISTINCT country.name) AS countries,
+		array_agg(DISTINCT language.name) AS languages
+		FROM movie
+		JOIN "user" ON "user".id = movie.user_id
+		JOIN season ON season.id = movie.season_id
+		JOIN movie_has_genre ON movie.id = movie_has_genre.movie_id
+		JOIN genre ON movie_has_genre.genre_id = genre.id
+		JOIN movie_has_country ON movie.id = movie_has_country.movie_id
+		JOIN country ON movie_has_country.country_id = country.id
+		JOIN movie_has_language ON movie.id = movie_has_language.movie_id
+		JOIN "language" ON movie_has_language.language_id = "language".id
+		GROUP BY movie.id,movie.french_title,movie.original_title,movie.directors,movie.release_date,
+			movie.duration, movie.casting,movie.presentation, movie.is_published,
+			movie.publishing_date, movie.user_id, movie.season_id,
+			"user_id",user_pseudo,user_avatar_url,season_number;
+
+-- Liste des propositions en attente, avec french_title, poster_url, directors, release_date
+CREATE VIEW pending_propositions AS
+	SELECT french_title,poster_url,directors,release_date,"user_id"
+	FROM movies_infos
+	WHERE is_published = false;
+
+-- Liste des films de la saison en cours, avec id, french title, poster_url et season_number
+CREATE VIEW last_season_movies AS
+	SELECT id, french_title, poster_url, season_number
+	FROM movies_infos
+	GROUP BY id, french_title,poster_url,season_number
+	HAVING season_number = (SELECT MAX(season_number) FROM movies_infos);
+
 COMMIT;
