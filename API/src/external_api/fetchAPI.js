@@ -24,9 +24,9 @@ const fetchList = {
           directors.push(director.name);
         };
       });
-      actors = [];
+      casting = [];
       cast.slice(0, 5).map((actor) => {
-          actors.push(actor.name);
+          casting.push(actor.name);
       });
       genres = [];
       movieGenres.map((genre) => {
@@ -40,7 +40,7 @@ const fetchList = {
       spokenLanguages.map((language) => {
         languages.push(language.name);
       });
-      moviesList.push({title: movie.title, original_title: movie.original_title, genres, language: movie.original_language, release: movie.release_date, runtime: movieDetails.data.runtime, countries, languages, poster: movie.poster_path, directors, actors});
+      moviesList.push({french_title: movie.title, original_title: movie.original_title, genres, language: movie.original_language, release: movie.release_date, runtime: movieDetails.data.runtime, countries, languages, poster_url: movie.poster_path, directors, casting});
     };
     console.log(moviesList);
   },
