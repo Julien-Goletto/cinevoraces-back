@@ -1,9 +1,9 @@
 const axios = require('axios');
 
 /**
- * 
- * Function to call API TMDB to get list of films searchQuery with (title, original_title, genres, language, release, runtime, countries, languages, poster, directors, actors)
- */
+ * Function to call API TMDB to get list of films whith searchQuery
+ * result : (title, original_title, genres, language, release, runtime, countries, languages, poster, directors, actors)
+*/
 async function fetchList(){
   moviesList = [];
   const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=516d8c12d8c027c62bcfe73ec29e3220&language=fr-FR&include_adult=false&query=fight`);
@@ -41,20 +41,5 @@ async function fetchList(){
   };
   console.log(moviesList);
 };
-
-// Get detail of film selected (title, original title, release date, genre name, products country, language spoken, runtime)
-// Onject json with alls infos 
-// async function fetchMovieDetail(){
-//   const response = await axios.get('https://api.themoviedb.org/3/movie/550?api_key=516d8c12d8c027c62bcfe73ec29e3220&language=fr-FR&include_adult=false');
-//   console.log(response.data);
-// };
-
-// Get casting and director(s) of film selected 
-// Onject json from cast and directors
-// async function fetchastAndDirectors(){
-//   const response = await axios.get('https://api.themoviedb.org/3/movie/550/credits?api_key=319bf20e26c103de9dd61d22f63c0419&language=fr-FR&include_adult=false');
-
-//   console.log(response.data.cast[0].name, response.data.cast[1].name);
-// };
 
 fetchList();
