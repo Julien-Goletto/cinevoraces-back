@@ -41,29 +41,48 @@ CREATE VIEW indiv_actions_metrics AS
 -- Les genres
 -- Les pays
 -- Les langues
+-- Les metrics des films
 -- /!\ Inclut également les propositions en attente
 CREATE VIEW movies_infos AS
 	SELECT movie.id,movie.french_title,movie.original_title,movie.poster_url,movie.directors,movie.release_date,
-			movie.runtime, movie.casting,movie.presentation,movie.is_published,
-			movie.publishing_date, movie.user_id as "user_id",
-			"user".pseudo AS user_pseudo,"user".avatar_url AS user_avatar_url,
-			season.number as season_number,
-		array_agg(DISTINCT genre.name) AS genres,
-		array_agg(DISTINCT country.name) AS countries,
-		array_agg(DISTINCT language.name) AS languages
-		FROM movie
-		JOIN "user" ON "user".id = movie.user_id
-		JOIN season ON season.id = movie.season_id
-		JOIN movie_has_genre ON movie.id = movie_has_genre.movie_id
-		JOIN genre ON movie_has_genre.genre_id = genre.id
-		JOIN movie_has_country ON movie.id = movie_has_country.movie_id
-		JOIN country ON movie_has_country.country_id = country.id
-		JOIN movie_has_language ON movie.id = movie_has_language.movie_id
-		JOIN "language" ON movie_has_language.language_id = "language".id
-		GROUP BY movie.id,movie.french_title,movie.original_title,movie.directors,movie.release_date,
+		movie.duration, movie.casting,movie.presentation,movie.is_published,
+		movie.publishing_date, movie.user_id as "user_id",
+		"user".pseudo AS user_pseudo,"user".avatar_url AS user_avatar_url,
+		season.number as season_number,
+		array_agg(DISTINCT genre.name) AS genres,array_agg(DISTINCT country.name) AS countries,
+		array_agg(DISTINCT language.name) AS languages,
+		COALESCE(wc.watchlist_count,0) AS "watchlist_count", COALESCE(lc.likes_count,0) AS "likes_count",
+		COALESCE(rc.ratings_count,0) AS "ratings_count", ROUND(COALESCE(ar.avg_rating,0),0) AS "avg_rating"
+	FROM movie
+	JOIN "user" ON "user".id = movie.user_id
+	JOIN season ON season.id = movie.season_id
+	JOIN movie_has_genre ON movie.id = movie_has_genre.movie_id
+	JOIN genre ON movie_has_genre.genre_id = genre.id
+	JOIN movie_has_country ON movie.id = movie_has_country.movie_id
+	JOIN country ON movie_has_country.country_id = country.id
+	JOIN movie_has_language ON movie.id = movie_has_language.movie_id
+	JOIN "language" ON movie_has_language.language_id = "language".id
+	FULL OUTER JOIN
+		(SELECT review.movie_id AS "movie_id", COUNT(*) "watchlist_count"
+			FROM review where "bookmarked" = true GROUP BY movie_id) wc
+		ON movie.id = wc.movie_id
+	FULL OUTER JOIN
+		(SELECT review.movie_id AS "movie_id", COUNT(*) "likes_count"
+			FROM review where "liked" = true GROUP BY movie_id) lc
+		ON movie.id = lc.movie_id
+	JOIN
+		(SELECT review.movie_id AS "movie_id", COUNT(*) "ratings_count"
+		 	FROM "review" WHERE "rating" IS NOT NULL GROUP BY review.movie_id) rc
+	ON movie.user_id = rc.movie_id
+	JOIN
+		(SELECT review.movie_id AS "movie_id", AVG(rating) "avg_rating"
+		 	FROM "review" WHERE "rating" IS NOT NULL GROUP BY review.movie_id) ar
+	ON movie.user_id = ar.movie_id	
+GROUP BY movie.id,movie.french_title,movie.original_title,movie.directors,movie.release_date,
 			movie.duration, movie.casting,movie.presentation, movie.is_published,
 			movie.publishing_date, movie.user_id, movie.season_id,
-			"user_id",user_pseudo,user_avatar_url,season_number;
+			"user_id",user_pseudo,user_avatar_url,season_number,
+			watchlist_count, likes_count, ratings_count,avg_rating;
 
 -- Liste des propositions en attente, avec french_title, poster_url, directors, release_date
 CREATE VIEW pending_propositions AS
@@ -77,5 +96,16 @@ CREATE VIEW last_season_movies AS
 	FROM movies_infos
 	GROUP BY id, french_title,poster_url,season_number
 	HAVING season_number = (SELECT MAX(season_number) FROM movies_infos);
+
+-- Listes des options de filtres disponibles
+CREATE VIEW filters_options AS
+	SELECT sl.seasons_list seasons_list, gl.genres_list genres_list, cl.countries_list countries_list,
+			dl.min_max_dates min_max_dates
+	FROM
+		(SELECT array_agg(DISTINCT number) seasons_list FROM season) sl,
+		(SELECT array_agg(DISTINCT name) genres_list FROM genre) gl,
+		(SELECT array_agg(DISTINCT name) countries_list FROM country) cl,
+		(SELECT array_agg(mind.min || ',' || maxd.max) min_max_dates
+		FROM (SELECT MIN(release_date) FROM movie) mind, (SELECT MAX(release_date) FROM movie) maxd) dl;
 
 COMMIT;
