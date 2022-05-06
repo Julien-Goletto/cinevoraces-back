@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP FUNCTION new_movie;
+-- XXX Add DDLs here.
 
 COMMIT;
