@@ -2,7 +2,7 @@
 # Do not forget to make it executable with chmod +x
 
 # createuser cinevoraces
-# createdb cinevoraces -O cinevoraces
+createdb cinevoraces -O cinevoraces
 export PGUSER=cinevoraces
 
 # sqitch init cinevoraces --engine pg

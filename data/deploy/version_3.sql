@@ -45,7 +45,7 @@ CREATE VIEW indiv_actions_metrics AS
 -- /!\ Inclut également les propositions en attente
 CREATE VIEW movies_infos AS
 	SELECT movie.id,movie.french_title,movie.original_title,movie.poster_url,movie.directors,movie.release_date,
-		movie.duration, movie.casting,movie.presentation,movie.is_published,
+		movie.runtime, movie.casting,movie.presentation,movie.is_published,
 		movie.publishing_date, movie.user_id as "user_id",
 		"user".pseudo AS user_pseudo,"user".avatar_url AS user_avatar_url,
 		season.number as season_number,
@@ -79,7 +79,7 @@ CREATE VIEW movies_infos AS
 		 	FROM "review" WHERE "rating" IS NOT NULL GROUP BY review.movie_id) ar
 	ON movie.user_id = ar.movie_id	
 GROUP BY movie.id,movie.french_title,movie.original_title,movie.directors,movie.release_date,
-			movie.duration, movie.casting,movie.presentation, movie.is_published,
+			movie.runtime, movie.casting,movie.presentation, movie.is_published,
 			movie.publishing_date, movie.user_id, movie.season_id,
 			"user_id",user_pseudo,user_avatar_url,season_number,
 			watchlist_count, likes_count, ratings_count,avg_rating;
