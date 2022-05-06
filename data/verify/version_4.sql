@@ -2,6 +2,6 @@
 
 BEGIN;
 
-SELECT * FROM new_movie('french_title', 'original_title', 'poster_url', array['directors'], 1987, 120, array['casting'], 'presentation', 2025-05-25, 2, 1);
+SELECT * FROM new_movie('french_title', 'original_title', 'poster_url', array['directors'], '2020-05-22', 120, array['casting'], 'presentation', '2025-05-25', 2, 1);
 
 ROLLBACK;
