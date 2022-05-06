@@ -44,7 +44,7 @@ CREATE VIEW indiv_actions_metrics AS
 -- /!\ Inclut également les propositions en attente
 CREATE VIEW movies_infos AS
 	SELECT movie.id,movie.french_title,movie.original_title,movie.poster_url,movie.directors,movie.release_date,
-			movie.duration, movie.casting,movie.presentation,movie.is_published,
+			movie.runtime, movie.casting,movie.presentation,movie.is_published,
 			movie.publishing_date, movie.user_id as "user_id",
 			"user".pseudo AS user_pseudo,"user".avatar_url AS user_avatar_url,
 			season.number as season_number,

@@ -45,7 +45,7 @@ CREATE TABLE "movie"(
   "poster_url" TEXT NOT NULL,
   "directors" TEXT[] NOT NULL,
   "release_date" INTEGER NOT NULL,
-  "duration" INTEGER NOT NULL,
+  "runtime" INTEGER NOT NULL,
   "casting" TEXT[] NOT NULL,
   "presentation" TEXT NOT NULL,
   "is_published" BOOLEAN DEFAULT 'false',
