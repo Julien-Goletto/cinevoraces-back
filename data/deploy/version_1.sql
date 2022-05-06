@@ -44,7 +44,7 @@ CREATE TABLE "movie"(
   "original_title" TEXT NOT NULL,
   "poster_url" TEXT NOT NULL,
   "directors" TEXT[] NOT NULL,
-  "release_date" INTEGER NOT NULL,
+  "release_date" DATE NOT NULL,
   "runtime" INTEGER NOT NULL,
   "casting" TEXT[] NOT NULL,
   "presentation" TEXT NOT NULL,
