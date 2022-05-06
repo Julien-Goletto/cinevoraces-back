@@ -20,6 +20,7 @@
 | id | INTEGER | PRIMARY KEY, NOT NULL | Movie identification |
 | french_title | TEXT | NOT NULL | French title |
 | original_title | TEXT | NOT NULL | Original title |
+| poster_url | TEXT | NOT NULL | URL of the poster image |
 | directors | TEXT ARRAY | NOT NULL | Array containing all directors (between 1 to many) |
 | release_date | DATE | NOT NULL | The movie release date |
 | duration | INT | NOT NULL | Movie duration (minutes) |

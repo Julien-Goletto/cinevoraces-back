@@ -12,16 +12,16 @@ INSERT INTO "season" ("number","year") VALUES
 (1,2020),(2,2021),(3,2022);
 INSERT INTO "user" ("pseudo","mail","password","avatar_url","role") VALUES
 ('Julien','Julien@test.fr','Dictateur','http://vacherchertonimage.com','admin'),('Thimothé','Thimote@test.fr','Lebest','http://vacherchertasecondeimage.com','user');
-INSERT INTO "movie" ("french_title","original_title","directors","release_date","duration","casting","presentation","is_published","publishing_date","user_id","season_id") VALUES
+INSERT INTO "movie" ("french_title","original_title","poster_url","directors","release_date","runtime","casting","presentation","is_published","publishing_date","user_id","season_id") VALUES
 
-('Les Chaussons Rouges','The Red Shoes','{"Michael Powell","Emeric Pressburger"}',1948,125,'{"Moira Shearer","Marius Goring","Anton Walbrook","Robert Helpmann","Albert Bassermann"}',
+('Les Chaussons Rouges','The Red Shoes','poster_url','{"Michael Powell","Emeric Pressburger"}','1948-09-06',125,'{"Moira Shearer","Marius Goring","Anton Walbrook","Robert Helpmann","Albert Bassermann"}',
 'Je propose de regarder les chaussons rouges. Film de Powell et Pressburger (D''ailleurs vous pouvez vous jeter sur leurs autres films, Narcisse Noir, Le voyeur, ... Y''a rien à jeter). Pourquoi ? Parce qu''il est superbe. 
 Que la scène du ballet, je ne m''en suis jamais vraiment remis. Voilà... J''espère que ça vous plaira autant qu''à moi !',true,'2020-03-27',2,1),
 
-('Stalker', 'Stalker', '{"Andrei Tarkovsky"}',1979,162, '{"Alisa Freyndlikh", "Alexandr Kaydanovskiy", "Anatoliy Solonitsyne", "Nikolay Grinko", "Natalya Abramova"}', 
+('Stalker', 'Stalker','poster_url', '{"Andrei Tarkovsky"}','1979-04-17',162, '{"Alisa Freyndlikh", "Alexandr Kaydanovskiy", "Anatoliy Solonitsyne", "Nikolay Grinko", "Natalya Abramova"}', 
 'Un guide conduit deux hommes, l''un professeur et l''autre écrivain, à travers une zone connue comme la « chambre », afin d''exaucer tous leurs vœux.', true,'2021-12-06',1,2),
 
-('The King''s Choice','Kongens Nei','{"Michael Powell","Emeric Pressburger"}',1948,125,'{"Jesper Christensen","Anders Baasmo Christiansen","Karl Markovics","Tuva Novotny","Arthur Hakalahti"}',
+('The King''s Choice','Kongens Nei','poster_url','{"Michael Powell","Emeric Pressburger"}','2017-08-22',125,'{"Jesper Christensen","Anders Baasmo Christiansen","Karl Markovics","Tuva Novotny","Arthur Hakalahti"}',
 'J''ai décidé de vous proposer un film qui me paraît intéressant et un minimum original (et d''une qualité honorable dans sa réalisation / acteurs) tout en explorant un fait essentiel de l''Histoire norvégienne 
 (et indirectement de la WWII) avec le film : Kongens nei (Erik Poppe - 2016). Ultimatum en français. Je conseille fortement de le visionner en VO sous-titrée en français (ou autre), 
 car le film est centré notamment sur le personnage du Roi Haakon VII d''origine danoise (élément essentiel pour comprendre certains aspects du propos historique) et l''acteur Jesper Christensen 
@@ -29,7 +29,7 @@ fait un très bon boulot pour parler justement le norvégien avec un certain acc
 Je ne veux pas détailler davantage pour laisser la découverte, en sachant que je proposerais à l''issus de la semaine de visionnage une petite analyse historique pour aller plus loin et mieux appréhender les faits explorés par le film.',
 true,'2020-04-03',2,1),
 
-('New World', 'Sinsegye', '{"Park Hoon-jung"}', 2013, 135, '{"Lee Jung-jae", "Choi Min-sik", "Jung-min Hwang", "Park Sung-woong", "Song Ji-Hyo"}', 'Un flic infiltré dans une mafia devient l''ami du sous-boss. Dans un dilemme moral, 
+('New World', 'Sinsegye','poster_url', '{"Park Hoon-jung"}', '2013-02-21', 135, '{"Lee Jung-jae", "Choi Min-sik", "Jung-min Hwang", "Park Sung-woong", "Song Ji-Hyo"}', 'Un flic infiltré dans une mafia devient l''ami du sous-boss. Dans un dilemme moral, 
 il se trouve coincé entre son devoir de policier et ses sentiments.', false, '2022-05-27', 2, 3);
 INSERT INTO "review" ("user_id","movie_id","bookmarked","viewed","liked","rating","comment") VALUES
 (1,1,false,true,true,5,'Un grand merci à Wade pour cette proposition. C''est la deuxième fois que je le vois et, pour résumer, je l''ai trouvé encore plus puissant. Je vais essayer d''être pertinent et pas trop brouillon mais

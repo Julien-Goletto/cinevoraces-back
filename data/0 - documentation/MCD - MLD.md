@@ -15,7 +15,7 @@ Recommanded, 0N USER, 11 MOVIE
 
 SEASON : _number, year
 In, 1N SEASON, 11 MOVIE
-MOVIE : _french_title, original_title, director(s), release date, duration, casting, presentation, is_published, publishing_date,
+MOVIE : _french_title, original_title, poster_url, directors, release date, duration, casting, presentation, is_published, publishing_date,
 Belongs, 0N GENRE, 1N MOVIE
 GENRE : _name
 
@@ -34,7 +34,7 @@ COUNTRY: _name
 
 user (**id**, pseudo, mail, password, avatar_url, role, mail_sub, created_at, updated_at)  
 
-movie (**id**, french_title, original_title, directors, release_date, duration, casting, presentation, is_published, publishing_date, *#user_id*, *#season_id*, created_at, updated_at)  
+movie (**id**, french_title, original_title, poster_url, directors, release_date, duration, casting, presentation, is_published, publishing_date, *#user_id*, *#season_id*, created_at, updated_at)  
 
 season (**id**, number, year, created_at, updated_at)  
 
