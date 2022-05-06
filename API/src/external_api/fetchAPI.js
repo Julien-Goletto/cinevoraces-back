@@ -1,18 +1,19 @@
 const axios = require('axios');
 
-/**
- * Function to call API TMDB to get list of films whith searchQuery
- * result : (title, original_title, genres, language, release, runtime, countries, languages, poster, directors, actors)
-*/
-
 const fetchList = {
-
-  async fetchList(){
-    moviesList = [];
-    const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=516d8c12d8c027c62bcfe73ec29e3220&language=fr-FR&include_adult=false&query=fight`);
-    for (const movie of response.data.results) {
-      const movieDetails = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=516d8c12d8c027c62bcfe73ec29e3220&language=fr-FR&include_adult=false`);
-      const castAndDirectors = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=516d8c12d8c027c62bcfe73ec29e3220&language=fr-FR&include_adult=false`);
+  /**
+   * Function to call  3 times per movie the API TMDB to get a list of 5 top films whith searchQuery
+   * @param {searchQuery} String : query from user
+   * @param {TMDB_API_KEY} String : user key for API
+   * @returns {Array} Movie object with properties (title, original_title, genres, language, release, runtime, countries, languages, poster, directors, actors)
+   */
+  async fetchList(searchQuery, TMDB_API_KEY){
+    let moviesListPromises = [];
+    const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=fr-FR&include_adult=false&query=${searchQuery}`);
+    const shortenedResponse = response.data.results.slice(0,5);
+    for (const movie of shortenedResponse) {
+      const movieDetails = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_API_KEY}&language=fr-FR&include_adult=false`);
+      const castAndDirectors = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${TMDB_API_KEY}&language=fr-FR&include_adult=false`);
       const crew = castAndDirectors.data.crew;
       const cast = castAndDirectors.data.cast;
       const movieGenres = movieDetails.data.genres;
@@ -40,9 +41,10 @@ const fetchList = {
       spokenLanguages.map((language) => {
         languages.push(language.name);
       });
-      moviesList.push({french_title: movie.title, original_title: movie.original_title, genres, language: movie.original_language, release: movie.release_date, runtime: movieDetails.data.runtime, countries, languages, poster_url: movie.poster_path, directors, casting});
+      moviesListPromises.push({french_title: movie.title, original_title: movie.original_title, genres, language: movie.original_language, release: movie.release_date, runtime: movieDetails.data.runtime, countries, languages, poster_url: movie.poster_path, directors, casting});
     };
-    console.log(moviesList);
+    const moviesList = await Promise.all(moviesListPromises);
+    return moviesList;
   },
 };
 
