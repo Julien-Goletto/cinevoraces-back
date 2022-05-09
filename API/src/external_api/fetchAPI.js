@@ -88,7 +88,7 @@ const fetchAPI = {
     const movieWithDetails = 
       { french_title: movie.title, original_title: movie.original_title, genres,
       language: movie.original_language, release: movie.release_date, runtime: movieDetails.data.runtime,
-      countries, languages, poster_url: movie.poster_path, directors, casting };
+      countries, languages, poster_url: `https://image.tmdb.org/t/p/original` + movie.poster_path, directors, casting };
     return movieWithDetails;
   },
 };

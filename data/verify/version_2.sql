@@ -2,6 +2,6 @@
 
 BEGIN;
 
-SELECT * FROM new_movie('french_title', 'original_title', 'poster_url', array['directors'], '2020-05-22', 120, array['casting'], 'presentation', '2025-05-25', 2, 1);
+SELECT new_movie('Pour Sarah','For Sarah','toto',array['Damien Power'],'2022-02-25','135',array['Felix André Duval'],'Bonjour à tous, je m''appelle Joffrey et je ne connais pas la différence entre un film et une série. Déso.','2021-03-29',31,3,array['Thriller','Horror'],array['English'],array['United States of America']);
 
 ROLLBACK;

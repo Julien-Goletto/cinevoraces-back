@@ -96,7 +96,7 @@ const moviesList = require ('./moviesList.json');
  */
 function addAuthors(presentations){
   const authorsList = [];
-  for (let i = 1 ; i <= 109; i++){
+  for (let i = 1 ; i <= 108; i++){
     if (!authorsList.includes(presentations[i].author)){
       authorsList.push(presentations[i].author);
     }
@@ -122,14 +122,14 @@ function prepareDBSeeding(presentations,moviesList) {
   const authors = addAuthors(presentations);
   let seedingQueries = ``;
 
-  for (let i = 1 ; i <= moviesList.movies.length+1 ; i++){
+  for (let i = 1 ; i <= moviesList.movies.length ; i++){
     const movieTitleFromPresentation = presentations[i].title;
     for (const movie of moviesList.movies){
       if (movie.french_title == movieTitleFromPresentation){
         const queryToPush = `SELECT new_movie(`
           +`'${sanitizeSingleQuotes(movie.french_title)}',`
           +`'${sanitizeSingleQuotes(movie.original_title)}',`
-          +`'${`https://image.tmdb.org/t/p/original`+ movie.poster_url}',`
+          +`'${movie.poster_url}',`
           +`${formatSimpleListForPgsql(movie.directors)},`
           +`'${movie.release}',`
           +`'${movie.runtime}',`
@@ -158,4 +158,4 @@ function prepareDBSeeding(presentations,moviesList) {
 // fetchTMDBListWithDetails().then(result => console.log(result));
 // saveMoviesList();
 
-console.log(prepareDBSeeding(presentations,moviesList));
+prepareDBSeeding(presentations,moviesList);

@@ -14,7 +14,7 @@ CREATE OR REPLACE FUNCTION new_movie(
 	publishing_date DATE,
 	user_id INT,
 	season_id INT,
-  movie_genres TEXT[],
+  	movie_genres TEXT[],
 	movie_languages TEXT[],
 	movie_countries TEXT[]
 ) RETURNS void AS $$
