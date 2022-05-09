@@ -125,7 +125,7 @@ function prepareDBSeeding(presentations,moviesList) {
         const queryToPush = `SELECT new_movie(`
           +`'${sanitizeSingleQuotes(movie.french_title)}',`
           +`'${sanitizeSingleQuotes(movie.original_title)}',`
-          +`'${movie.poster_url}',`
+          +`'${`https://image.tmdb.org/t/p/original/`+ movie.poster_url}',`
           +`${formatSimpleListForPgsql(movie.directors)},`
           +`'${movie.release}',`
           +`'${movie.runtime}',`
@@ -135,8 +135,8 @@ function prepareDBSeeding(presentations,moviesList) {
           +`${parseInt(Object.keys(authors).find(key => authors[key] === presentations[i].author),10)+1},` // doit être un id
           +`${presentations[i].saison},` // doit être un id
           +`${formatSimpleListForPgsql(movie.genres)},`
-          +`${formatSimpleListForPgsql(movie.countries)},`
-          +`${formatSimpleListForPgsql(movie.languages)}`
+          +`${formatSimpleListForPgsql(movie.languages)},`
+          +`${formatSimpleListForPgsql(movie.countries)}`
           +`)`
         seedingQueries += queryToPush + `\n`;
       }
@@ -144,7 +144,7 @@ function prepareDBSeeding(presentations,moviesList) {
   }
   // Writing in a SQL instructions file
   const fileName = `createMovies.sql`;
-  appendFile(__dirname+"/"+fileName, seedingQueries);
+  appendFile(__dirname+"/"+fileName, seedingQueries);``
   return `L'écriture des fichiers SQL s'est bien passée`;
 };
 
@@ -153,4 +153,5 @@ function prepareDBSeeding(presentations,moviesList) {
 // fetchTMDBList().then(result => console.log(result));
 // fetchTMDBListWithDetails().then(result => console.log(result));
 // saveMoviesList();
+
 console.log(prepareDBSeeding(presentations,moviesList));
