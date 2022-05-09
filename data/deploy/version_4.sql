@@ -13,7 +13,10 @@ CREATE OR REPLACE FUNCTION new_movie(
 	presentation TEXT,
 	publishing_date DATE,
 	user_id INT,
-	season_id INT
+	season_id INT,
+  movie_genres TEXT[],
+	movie_languages TEXT[],
+	movie_countries TEXT[]
 ) RETURNS void AS $$
 
 DECLARE
@@ -25,9 +28,6 @@ DECLARE
 	language_id INT;
 	c TEXT;
 	country_id INT;
-  movie_genres TEXT[];
-	movie_languages TEXT[];
-	movie_countries TEXT[];
 
 BEGIN
 	IF NOT EXISTS (SELECT * FROM movie WHERE title=movie.french_title) THEN
