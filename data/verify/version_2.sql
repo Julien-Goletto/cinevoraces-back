@@ -1,16 +1,7 @@
--- Verify cinevoraces:version_2 on pg
+-- Verify cinevoraces:version_4 on pg
 
 BEGIN;
 
-SELECT * FROM "genre" WHERE "name"='Music';
-SELECT * FROM "language" WHERE "name"='Anglais';
-SELECT * FROM "country" WHERE "name"='Irlande';
-SELECT * FROM "season" WHERE "year"=2021;
-SELECT * FROM "user" WHERE "pseudo"='Thimothé';
-SELECT * FROM "movie" WHERE "french_title"='Stalker';
-SELECT * FROM "review" WHERE "movie_id"=2;
-SELECT * FROM "movie_has_genre" WHERE "movie_id"=1;
-SELECT * FROM "movie_has_country" WHERE "country_id"=2;
-SELECT * FROM "movie_has_language" WHERE "movie_id"=3;
+SELECT new_movie('Pour Sarah','For Sarah','toto',array['Damien Power'],'2022-02-25','135',array['Felix André Duval'],'Bonjour à tous, je m''appelle Joffrey et je ne connais pas la différence entre un film et une série. Déso.','2021-03-29',31,3,array['Thriller','Horror'],array['English'],array['United States of America']);
 
 ROLLBACK;

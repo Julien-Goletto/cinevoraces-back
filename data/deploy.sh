@@ -2,21 +2,17 @@
 # Do not forget to make it executable with chmod +x
 
 # createuser cinevoraces
-# createdb cinevoraces -O cinevoraces
+# createdb cinevoraces -O cinevoraces 
 export PGUSER=cinevoraces
 export PGPASSWORD=cinevoraces
 export PGDATABASE=cinevoraces
 
-# export PGUSER=cinevoraces
-# export PGPASSWORD=cinevoraces
-# export PGDATABASE=cinevoraces
-
 # sqitch init cinevoraces --engine pg
 
 # sqitch add version_1 -n "structure de bdd"
-# sqitch add version_2 -n "Seeding for tests"
+# sqitch add version_2 -n "Création fonction ajout film"
 # sqitch add version_3 -n "Création des vues"
-# sqitch add version_4 -n "Création fonction ajout film"
+# sqitch add version_4 -n "Seeding données réelles"
 
 # To revert (each following command can be adressed to a specific version)
 # sqitch revert db:pg:cinevoraces

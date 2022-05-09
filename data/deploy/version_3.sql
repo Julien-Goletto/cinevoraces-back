@@ -7,7 +7,7 @@ CREATE VIEW global_metrics AS
 
 	SELECT sc.ct "seasons_count",mc.ct "movies_count",cc.ct "countries_count"
 	FROM
-		(SELECT COUNT(*) ct FROM "season")sc,
+		(SELECT COUNT (*) ct FROM "season")sc,
 		(SELECT COUNT (*) ct FROM "movie")mc,
 		(SELECT COUNT (*) ct FROM "country")cc;
 

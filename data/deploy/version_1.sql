@@ -34,7 +34,7 @@ CREATE TABLE  "user" (
   "password" TEXT NOT NULL,
   "avatar_url" TEXT,
   "mail_sub" BOOLEAN DEFAULT 'false',
-  "role" TEXT NOT NULL,
+  "role" TEXT NOT NULL DEFAULT 'user',
   "createdAt" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   "updateAt" TIMESTAMPTZ 
 );
