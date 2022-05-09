@@ -5,6 +5,7 @@ const APIError = require('../Errors/APIError');
 const usersController = {
   async postNewUser(req, res) {
     const user = req.body;
+    debug(user);
     const result = await usersDataMapper.createNewUser(user);
     res.status(201).json(result);
   },
@@ -12,7 +13,8 @@ const usersController = {
   async logUser(req, res) {
     const user = req.body;
     const result = await usersDataMapper.getUser(user);
-    const returnedUser = {pseudo: result.pseudo, isAdmin: result.is_admin};
+    debug(result);
+    const returnedUser = {pseudo: result.pseudo, };
     req.session.user = returnedUser;
     res.status(200).json(returnedUser);
   },
@@ -29,7 +31,7 @@ const usersController = {
     const results = await usersDataMapper.GetUsersList();
     res.status(200).json(results);
   },
-  
+
   async deleteUser(req,res) {
     const pseudo = req.params.pseudo;
     const results = await usersDataMapper.deleteUserWithPseudo(pseudo);

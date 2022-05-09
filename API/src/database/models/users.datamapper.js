@@ -53,15 +53,14 @@ const usersDataMapper = {
    * @throws {APIError} if the table user is empty
    */
   async GetUsersList(){
-    const query = `SELECT array_agg(pseudo) AS "registered_users" FROM "user";`;
+    const query = `SELECT * FROM "user";`;
     const results = await client.query(query);
     if(!results.rowCount){
       throw new APIError ("No user registered yet.", 404);
     };
-    return results.rows[0].registered_users;
+    return results.rows;
   },
   async deleteUserWithPseudo(pseudo){
-    debug("On entre dans le datamapper")
     const query = {
       text: `DELETE FROM "user" WHERE pseudo = $1;`,
       values: [pseudo],
