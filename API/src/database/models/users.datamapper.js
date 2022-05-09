@@ -13,12 +13,12 @@ const usersDataMapper = {
    * @throws {APIError} if user already in base, due to unique constraint
    */
   async createUser(user) {
-    let {pseudo, mail, password, role} = user;
+    let {pseudo, mail, password} = user;
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password,salt);
     const query = {
-      text : `INSERT INTO "user"("pseudo", "mail", "password", "role") VALUES ($1,$2,$3,$4)`,
-      values:[pseudo,mail,encryptedPassword,role]
+      text : `INSERT INTO "user"("pseudo", "mail", "password", "role") VALUES ($1,$2,$3)`,
+      values:[pseudo,mail,encryptedPassword]
     };
     const results = await client.query(query);
     if(results.rowCount){

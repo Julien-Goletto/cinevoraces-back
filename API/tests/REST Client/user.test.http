@@ -14,8 +14,7 @@ content-type: application/json
 {
   "pseudo": "test",
   "mail": "test@test.fr",
-  "password": "test",
-  "role": "test"
+  "password": "test"
 }
 
 ### Get user with userId
