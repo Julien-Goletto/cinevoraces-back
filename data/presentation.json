@@ -122,7 +122,7 @@
     "title":"The Old Guard",
     "author":"Yves Signal",
     "saison":"1",
-    "date":"2020-07-",
+    "date":"2020-07-10",
     "presentation":
       ["Bon ben puisque personne n'y va, je propose une récréation !",
         "The Old Guard sur Netflix, adapté d'un bon comicbook avec la belle Charlize Theron, qui reprend la coupe de cheveux d'Aeon Flux.",
@@ -262,6 +262,7 @@
   "30": {
     "title":"Alabama Monroe",
     "author":"benbossman",
+    "saison":"1",
     "date":"2020-10-30",
     "presentation":
       ["Hello tout le monde, chose promise, chose due, je vous propose un film à voir pour cette semaine qui m'a particulièrement plu, Alabama Monroe (ou The Broken Circle Breakdown en VO).",
@@ -466,7 +467,7 @@
     "presentation":["Amis du soir bonsoir. Cette semaine je vous propose la suite de la trilogie Une enfance au soleil initiée par Checco et la Cité de Dieu avec Moonrise Kingdom de Wes Anderson. Âmes sensibles s'abstenir. "]
   },
   "50": {
-    "title":"Coup de Torchon",
+    "title":"Coup de torchon",
     "author":"Yves Signal",
     "saison":"2",
     "date":"2021-04-06",
@@ -487,7 +488,7 @@
         "En toute honnêteté, je ne sais pas trop quoi vous rajouter vu que je fais partie des gens qui ne matent pas trop les bandes-annonces, les synopsis ou autres... J'aime tellement le plaisir de la découverte !"]
   },
   "52": {
-    "title":"Mr. Holmes",
+    "title":"M. Holmes",
     "author":"Lukino",
     "saison":"2",
     "date":"2021-04-19",
@@ -498,7 +499,7 @@
         "Ayant déjà regardé Enola Holmes à la place Chambre 212 (tapez pas), je vous propose de visionner Mr. Holmes"]
   },
   "53": {
-    "title":"Un Seul Bras les Tua Tous",
+    "title":"Un Seul bras les tua tous",
     "author":"Yves Signal",
     "saison":"2",
     "date":"2021-04-28",
@@ -510,7 +511,7 @@
         "Production emblématique de la Shaw Brothers, le film remet en question la dévotion filiale largement glorifiée par le cinéma d'action chinois, avec une violence somme toute assez impressionnante. Le sabreur manchot a inspiré des tas de réalisateur et été adapté au travers d'un nombre considérable de films d'action de plus ou moins bonne facture (plutôt moins que plus), jusqu'à ce qu'un certain Tsui Hark ne décide de le réinvestir avec The Blade. Je pense que le jeu des 7 différences (en fait largement plus) entre les deux films peut s'avérer assez ludique pour vos yeux aguerris. Le film reste un classique qui je trouve a très bien vieilli, j'espère que vous prendrez beaucoup de plaisir à le regarder."]
   },
   "54": {
-    "title":"Il Était Une Fois En Chine",
+    "title":"Il était une fois en Chine",
     "author":"Yves Signal",
     "saison":"2",
     "date":"2021-04-29",
@@ -571,7 +572,7 @@
       "Vous ne manquerez pas de noter une quantité de petites choses empruntées depuis dans de nombreux media, comme par exemple la scène du bain, dans lequel se prélassera un certain sorceleur trente ans plus tard."]
   },
   "59": {
-    "title":"Cours, Lola, Cours",
+    "title":"Cours, Lola, cours",
     "author":"Sao",
     "saison":"2",
     "date":"2021-05-31",
@@ -585,7 +586,7 @@
         "Vous (re)verrez par vous-mêmes, il m'a beaucoup plus et ça fait un certain temps que je n'ai pas posé mes yeux dessus, j'espère que cela vous plaira"]
   },
   "60": {
-    "title":"Enquête sur un Citoyen Au-dessus de Tout Soupçon",
+    "title":"Enquête sur un citoyen au-dessus de tout soupçon",
     "author":"Mat-Mat",
     "saison":"2",
     "date":"2021-06-07",
@@ -596,7 +597,7 @@
         "J’espère que ça vous plaira autant qu’à moi ! Bon visionnage."]
   },
   "61": {
-    "title":"Batman Contre le Fantôme Masqué",
+    "title":"Batman contre le Fantôme masqué",
     "author":"Checco",
     "saison":"2",
     "date":"2021-14-06",
@@ -622,7 +623,7 @@
         "Il faut dire que l'expérience sensorielle risque d'être troublante ! Préparez-vous à un film quasi muet, bercé par une musique indus quasi bruitiste et porté par un montage irréprochable au rythme parfois effréné et aux inserts perturbants. Bonne séance !"]
   },
   "64": {
-    "title":"Hara-Kiri",
+    "title":"Harakiri",
     "author":"Niebelungen",
     "saison":"2",
     "date":"2021-07-05",
@@ -643,7 +644,7 @@
         "Bonne semaine et bon film !"]
   },
   "66": {
-    "title":"Spider-Man New Generation",
+    "title":"Spider-Man : New Generation",
     "author":"Flexagrume",
     "saison":"2",
     "date":"2021-07-19",
@@ -683,7 +684,7 @@
         "Il s'agit d'un néo-western crépusculaire, qui dépeint une Amérique post-subprimes en pleine déliquescence. C'est rêche, très beau visuellement, avec un dénouement inattendu. C'était l'un de mes coups de coeur de 2016, que je vous propose aujourd'hui car il n'avait pas bénéficié d'un gros éclairage en son temps."]
   },
   "70": {
-    "title":"I Don't Feel At Home In This Planet Anymore",
+    "title":"I Don't Feel at Home in This World Anymore",
     "author":"TuBuzz",
     "saison":"2",
     "date":"2021-08-09",
@@ -701,7 +702,7 @@
       ["Cette semaine je vous propose un film qui dépote avec The Raid de Gareth Evans (2011). On y suit un groupe de flics qui mène une opération plus que musclée dans un immeuble occupé par la mafia locale. Honnêtement le scénario est accessoire, si vous aimez les arts martiaux et les jeux de baston, ce film est pour vous ! On peut aussi souligner que les acteurs/cascadeurs sont époustouflants. J'espère juste que tout le monde ne l'a pas déjà vu !"]
   },
   "72": {
-    "title":"Printemps Tardif",
+    "title":"Printemps tardif",
     "author":"Klavor",
     "saison":"2",
     "date":"2021-08-23",
@@ -711,7 +712,7 @@
         "Bonne séance !"]
   },
   "73": {
-    "title":"Une Journée Particulière",
+    "title":"Une journée particulière",
     "author":"Mat-Mat",
     "saison":"2",
     "date":"2021-08-30",
@@ -721,7 +722,7 @@
       "Ça traite de l'enfermement vécu par ces deux êtres que tout semble opposer. Ne l'ayant jamais vu, je n'en dis pas plus. Hâte d'avoir votre avis ! Film disponible sur cinéplus. Bonne séance."]
   },
   "74": {
-    "title":"Il Etait Temps",
+    "title":"Il était Temps",
     "author":"Nieuh",
     "saison":"2",
     "date":"2021-09-06",
@@ -731,7 +732,7 @@
         "Cordialement."]
   },
   "75": {
-    "title":"Quand Passent Les Cigognes",
+    "title":"Quand passent les cigognes",
     "author":"Fariboles",
     "saison":"2",
     "date":"2021-09-13",
@@ -753,7 +754,7 @@
         "Bonne séance !"]
   },
   "77": {
-    "title":"Man From Earth",
+    "title":"The Man From Earth",
     "author":"Lukino",
     "saison":"2",
     "date":"2021-09-27",
@@ -766,7 +767,7 @@
         "La suite a même été mise à disposition par les créateurs eux-même sur pirate bay."]
   },
   "78": {
-    "title":"Qui Veut la Peau de Roger Rabbit",
+    "title":"Qui veut la peau de Roger Rabbit ?",
     "author":"Sao",
     "saison":"2",
     "date":"2021-10-04",
@@ -781,7 +782,7 @@
       "Si vous restez sur votre faim et voulez toujours plus de cartoons, 3 courts métrages promotionnel avaient été réalisés en même temps (trouvables sur les internets globaux)."]
   },
   "79": {
-    "title":"Silent Running",
+    "title":"Et la Terre survivra",
     "author":"Ruadir",
     "saison":"2",
     "date":"2021-10-11",
@@ -792,6 +793,7 @@
   "80": {
     "title":"Titan A.E.",
     "author":"Morbo",
+    "saison":"2",
     "date":"2021-10-16",
     "presentation":
       [
@@ -802,8 +804,9 @@
         "Pour la première je suis parti sur quelque chose d'inoffensif, voire inconséquent xD"]
   },
   "81": {
-    "title":"Assurance sur la Mort",
+    "title":"Assurance sur la mort",
     "author":"Seurcha",
+    "saison":"2",
     "date":"2021-10-25",
     "presentation":
       [
@@ -823,6 +826,7 @@
   "82": {
     "title":"The Strangers",
     "author":"MrSetzer",
+    "saison":"2",
     "date":"2021-11-02",
     "presentation":
       [
@@ -835,7 +839,7 @@
         "Bon visionnage !"]
   },
   "83": {
-    "title":"J'ai Rencontré le Diable",
+    "title":"J'ai rencontré le Diable",
     "author":"DrPierre",
     "saison":"2",
     "date":"2021-11-08",
@@ -878,14 +882,6 @@
         "J'adore ce thriller psychologique car il nous plonge brillamment dans la psyché de son antihéros. On ressent son isolement, sa paranoïa, son désespoir et toutes les émotions qui le submergent à la fin, qui n'est pas exempte de défauts que je lui pardonne volontiers. Michael Douglas était l'acteur parfait pour ce personnage antipathique pour qui on se prend toutefois d'empathie. J'ai très envie de le revoir et vous invite donc à le faire pour moi..."]
   },
   "87": {
-    "title":"Quand Passent Les Cigognes",
-    "author":"Fariboles",
-    "saison":"2",
-    "date":"2021-09-13",
-    "presentation":
-      ["Cette semaine nous découvrons Quand passent les cigognes. Film russe ou plutôt, soviétique de 1957 du réalisateur Mikhail Kalatozov. Je l’ai revu il y a quelques mois à l’occasion de sa restauration en 4K. Soviétique, et pourtant, pas question de propagande même si nous pouvions l’imaginer car ce film se passe dans le cadre de la Seconde Guerre Mondiale.  Le film se concentre sur Veronika et Boris, Boris est volontaire pour aller sur le front laissant donc Veronika derrière-lui. L’intérêt du film et la marque que ce film a laissé sur le cinéma soviétique ne repose pas sur l’histoire qui peut paraitre ‘’classique’’ mais sur les plans, les techniques utilisées par le réalisateur novatrices à l’époque et bien sûr, l’acteur et l’actrice principaux qui jouent merveilleusement bien. Le film sait retranscrire les émotions humaines en particulier dans une situation et un amour si intense. Ce film marque un renouveau dans le cinéma soviétique de l’époque et j’espère que les cigognes ne feront pas que passer mais sauront vous faire migrer avec elle, dans la vie de deux jeunes amoureux durant une des périodes les plus marquantes du XXème siècle."]
-  },
-  "88": {
     "title":"Mutafukaz",
     "author":"FlexAgrume",
     "saison":"2",
@@ -895,7 +891,7 @@
         "Cette semaine, je remonte le quota 'film d'animation' de Cinévorace avec Mutafukaz . J'ai cru comprendre que certains aiment bien ça en plus (coucou Arcanes). Je n'ai moi même pas vu ce film, donc je me suis dis que c'était l'occasion. Je ne connais pas particulièrement les univers de l'auteur (Guillaume Renard, alias Run), mais le monsieur semble avoir une affection pour les histoires de gangs, les petits frappes et des personnages qui sont souvent des losers.",
         "Synopsis : Angelino est un jeune loser parmi tant d’autres à Dark Meat City, une mégalopole sans pitié sous le soleil de Californie. La journée, il livre des pizzas dans tous les recoins de la ville et la nuit, il squatte une chambre d’hôtel minable avec son coloc Vinz et une armada de cafards qui font désormais un peu partie de sa famille. À la suite d’un accident de scooter lorsque son chemin a croisé par inadvertance la divine Luna, une fille aux cheveux noir de jais, notre jeune lascar commence à souffrir de maux de tête et d’étranges hallucinations. Des hallucinations, vous avez dit ? Hmm, peut-être pas... Pourchassé par des hommes en noir, Angelino n’a plus aucun doute : il est pris pour cible. Mais pourquoi lui ?"]
   },
-  "89": {
+  "88": {
     "title":"Annihilation",
     "author":"quilim",
     "saison":"2",
@@ -903,7 +899,7 @@
     "presentation":
       ["Bonjour à toutes et à tous. Si je ne me trompe pas de lieu pour publier, je propose pour cette semaine le visionnage de Annihilation d’Alex Garland d’après le roman de Jeff VanderMeer. Bon film."]
   },
-  "90": {
+  "89": {
     "title":"Paterson",
     "author":"Poulpator",
     "saison":"2",
@@ -911,8 +907,8 @@
     "presentation":
       ["Bonjour, le film de cette semaine n'est pas un film gris mais un film sur le gris. Je vous proposons Paterson de Jim Jarmusch, avec Kylo Ren ce gros nullos dans le rôle principal et Farahani Golshifteh de la série nulle Invasion. C'est disponible sur la plateforme Prime, de ce gros con de Jeff."]
   },
-  "91": {
-    "title":"Père Noël : Origines",
+  "90": {
+    "title":"Père Noël Origines",
     "author":"Fariboles",
     "saison":"2",
     "date":"2021-12-21",
@@ -921,7 +917,7 @@
         "Cette semaine, semaine des fêtes de Noël, je vous propose 'Père Noël Origines' ou 'Rare Exports: A Christmas Tale' de Jalmari Helander, film finlando-franco-norvégio-suédois. En Finlande, près de la frontière russo-finlandaise un homme d'affaires engage des chercheurs pour découvrir l'un des plus grands mystères de Noël. Les habitants sont menacés par ce qu'ils découvrent, un jeune garçon apprend la vraie nature du Père Noël et doit trouver un moyen de sauver les habitants et Noël !",
         "C'est sombre, mais pas trop, et ça puise dans le réservoir de la mythologie du Père Noël et ce qui l'entoure. C'est aussi un film sincère et rédempteur sans être trop mesquin. Et si vous êtes d'humeur à casser du vieux (Et pas en salle de cinéma cette fois-ci) vous êtes au bon endroit. C'est un buffet nordique à l'écran."]
   },
-  "92": {
+  "91": {
     "title":"Okkadu",
     "author":"Lukino",
     "saison":"3",
@@ -934,8 +930,8 @@
         "Le film n’est bien sûr disponible nulle part (sauf Amazone prime aux US/UK?), par contre il est disponible sur YouTube avec des sous-titres anglais uniquement: https://www.youtube.com/watch?v=KbvPhITOhrw",
         "Mais grâce à la magie de YouTube, il est possible de faire traduire les sous-titres anglais à la volée en français! (si vous comprenez l'anglais j'éviterais cette option :p)"]
   },
-  "93": {
-    "title":"La Vie Rêvée de Walter Mitty",
+  "92": {
+    "title":"La Vie rêvée de Walter Mitty",
     "author":"Morbo",
     "saison":"3",
     "date":"2021-01-10",
@@ -944,7 +940,7 @@
         "Au menu de cette semaine je vous propose un film disponible sur Disney +, La vie rêvée de Walter Mitty avec Ben Stiller et réalisé par lui même en 2013 ( 2013? put*** déjà? Fichtre...). C'est un film que j'avais découvert sans rien en connaître, hormis l'acteur principal que j'aime beaucoup et ce fut un visionnage très agréable. Je vous colle un résumé osef trouvé sur allo ciné pour le principe mais franchement vous focalisez pas là dessus et allez y en yolo comme moi.",
         "Walter Mitty est un homme ordinaire, enfermé dans son quotidien, qui n’ose s’évader qu’à travers des rêves à la fois drôles et extravagants. Mais confronté à une difficulté dans sa vie professionnelle, Walter doit trouver le courage de passer à l'action dans le monde réel. Il embarque alors dans un périple incroyable, pour vivre une aventure bien plus riche que tout ce qu'il aurait pu imaginer jusqu’ici. Et qui devrait changer sa vie à jamais."]
   },
-  "94": {
+  "93": {
     "title":"The Descent",
     "author":"Neofelis",
     "saison":"3",
@@ -954,7 +950,7 @@
         "Pour cette semaine je vous propose The Descent, un film de Neil Marshall (2005). Pour le pitch c’est un groupe de copines qui s’embarque dans l’exploration d’une cavité souterraine à l’occasion d’un week-end de retrouvailles entre amatrices d’activités nature et d’adrénaline. Mais, spoiler alert : ça tourne mal ! Je n’en dis pas beaucoup plus pour vous laisser découvrir le film. J’ai beaucoup aimé son ambiance générale qui évolue au cours du temps.",
         "PS : Je vous le déconseille si vous prévoyez une sortie spéléo ce week-end..."]
   },
-  "95": {
+  "94": {
     "title":"Le Corbeau",
     "author":"Seurcha",
     "saison":"3",
@@ -969,15 +965,15 @@
         "Véritable jeu de massacre, peinture d'un effondrement des valeurs au sein d'un groupe d'individus où la justice est impuissante et laisse place à la vengeance personnelle, tableau grisant mais glaçant de l'ambigüité humaine et de la part d'ombre ancrée en chacun de nous, il s'agit non seulement d'un discours philosophique passionnant de complexité et de profondeur, mais également d'une belle leçon de mise en scène. Dans un noir et blanc de grande qualité, Clouzot déploie une solide science du cadre et du récit visuel, comme cette scène mémorable d'une lampe qui se balance (je n'en dis pas plus), et offre à Pierre Fresnay un très grand rôle.",
         "Bon visionnage !"]
   },
-  "96": {
-    "title":"Train de Vie",
+  "95": {
+    "title":"Train de vie",
     "author":"Checco",
     "saison":"3",
     "date":"2021-01-30",
     "presentation":
       ["Malheureusement, l’actualité étant par moment toujours la même qu’il y a 80 ans, je vous propose un film comique sur ce thème pas très joyeux que fut la déportation, je vous propose Train de vie (1998) réalisé par Radu Mihaileanu. Attention, mon premier visionnage date d’il y a plus de 20 ans ! (aïe), mais j’en garde plutôt un bon souvenir, on verra ce que ça va donner. En toute cas, je suis ravi de le redécouvrir avec mon regard de vieux et de le partager avec vous. En effet, il me semble qu’il soit vite rentré dans l’oubli le plus total. Ou le voir ? Et ben c’est très compliqué, il me semble qu’il soit introuvable, c’est ça de tomber dans l’oubli. Alors n’hésitez pas à MP pour un prêt. @Morbo sapin roi des gorets, tu devrais trouver quelques rouflaquettes."]
   },
-  "97": {
+  "96": {
     "title":"Take Shelter",
     "author":"TuBuzz",
     "saison":"3",
@@ -988,7 +984,7 @@
         "On y retrouve Michael Shannon dans le rôle de Curtis LaForche, un père de famille dans une banlieue de province qui est de plus en plus en proie à des visions apocalyptiques. Un problème qu'il tente de cacher à sa femme Samantha (Jessica Chastain), se réfugiant physiquement et mentalement dans la construction d'un abri sous le jardin afin de préserver sa femme et sa fille malentendante d'une apocalypse imminente.",
         "Je ne souhaite vraiment pas en dire plus afin de ne pas ternir d'une quelconque façon votre visionnage. J'ai très hâte d'avoir vos retours et surtout de discuter du film."]
   },
-  "98": {
+  "97": {
     "title":"Gone Girl",
     "author":"Poulpator",
     "saison":"3",
@@ -999,7 +995,7 @@
         "Le pitch : Ben et Rosamund se kiffent trop, mais un jour…",
         "Si avec ça vous n'avez pas envie de le voir c'est que vous êtes biens difficiles."]
   },
-  "99": {
+  "98": {
     "title":"Copland",
     "author":"Louis-Cyrus",
     "saison":"3",
@@ -1009,7 +1005,7 @@
         "Bonjour à tous, pour cette semaine, je vous propose de voir (ou de revoir) Copland de James Mangold (Ford vs Ferrari, Logan, Walk the Line), sorti en 1997. C'est son deuxième film en tant que réalisateur, et il se retrouve déjà avec un gros casting, notamment avec De Niro, Stallone, Keitel, ou Ray Liotta.",
         "Synopsis:  Garrison, cité-dortoir du New Jersey, est surnommée «Copland», en raison des nombreux policiers new-yorkais qui y habitent. Freddy Heflin, le shérif de Garrison, rêve d'intégrer la police de New York. Lorsque Murray Babitch, un jeune officier, tue deux Noirs, Heflin découvre un vaste réseau de corruption..."]
   },
-  "100": {
+  "99": {
     "title":"Victoria",
     "author":"Calys",
     "saison":"3",
@@ -1021,7 +1017,7 @@
         "Victoria ça raconte l'histoire d'une jeune femme espagnole, fraîchement débarquée à Berlin, qui se laisse embarquer par quatre garçons dans une virée nocturne qui va rapidement déraper.",
         "Mais c'est surtout un impressionnant plan séquence de plus de deux heures qui m'avait scotché lors de mon premier visionnage. Voilà pourquoi je vous propose de le découvrir ou le redécouvrir aujourd'hui."]
   },
-  "101": {
+  "100": {
     "title":"The Power Of The Dog",
     "author":"Yves Signal",
     "saison":"3",
@@ -1035,8 +1031,8 @@
         "Côté palmarès, la coqueluche des festivals a récolté le lion d'argent du meilleur réalisateur à Venise, 3 Golden Globes et 12 nominations aux Oscars, si tant est que les événements d'auto-congratulation soient signifiants et des indicateurs fiables et pertinents.",
         "Bonne semaine et bon film !"]
   },
-  "102": {
-    "title":"Ascenceur Pour l'Échafaud",
+  "101": {
+    "title":"Ascenseur pour l'échafaud",
     "author":"Mat-Mat",
     "saison":"3",
     "date":"2021-03-15",
@@ -1048,7 +1044,7 @@
         "Bon visionnage !",
         "(J’ai hésité avec Le Voleur du même Louis Malle mais il était beaucoup moins dispo. Je le recommande chaudement, c’est un de mes films préférés. Belmondo y est parfait)."]
   },
-  "103": {
+  "102": {
     "title":"Memories of Murder",
     "author":"Poulpator",
     "saison":"3",
@@ -1056,7 +1052,7 @@
     "presentation":
       ["Je profite de ce début de printemps pour vous proposer un film de saison. Memories of Murder, puisque c'est de lui qu'il s'agit, est un film de Corée du Sud, dirigé par Bong Joon-Ho. Sortit en 2003, en pleine canicule ou presque, il narre la traque d'un individu peu recommandable par un duo de policier moustachus."]
   },
-  "104": {
+  "103": {
     "title":"Ali",
     "author":"Louis-Cyrus",
     "saison":"3",
@@ -1064,15 +1060,15 @@
     "presentation":
       ["Bonjour à tous, au vu de l’actualité, cette semaine je vous propose Ali de Michael Mann, sorti en 2001. Considéré comme un des meilleurs biopics, il raconte la vie de Mohamed Ali en se focalisant sur sa vie entre 64 et 74. Peut-être le meilleur rôle de Will Smith et Michael Mann derrière la caméra, ça ne peut être qu’un bon film."]
   },
-  "105": {
-    "title":"Tick, Tick... Boom !",
+  "104": {
+    "title":"tick, tick... BOOM!",
     "author":"Poulpator",
     "saison":"3",
     "date":"2021-04-06",
     "presentation":
       ["Cette semaine on se trémousse devant Tick, Tick... Boom! un film avec des chansons qui dansent, de Lin-Manuel Miranda, basé sur la comédie musicale de Jonathan Larson. Y a l'ex de Gwen Stacy dedans et la fille qui jouait Kelly dans Bad Boys for life avec Will. Forcément ça donne super envie à tout le monde. En plus c'est un film Netflix. Un gage de qualité."]
   },
-  "106": {
+  "105": {
     "title":"Kate",
     "author":"MrSetzer",
     "saison":"3",
@@ -1080,7 +1076,7 @@
     "presentation":
       ["Cette semaine, fi de la musique, fi de la poesie, on balance des pruneaux et on botte des culs avec KATE de Cédric Nicolas-Troyan, exclu Netflix sortie en 2021 ou comment surfer sur la vague John Wick mais au féminin avec Mary Elisabeth Winstead dans le rôle titre."]
   },
-  "107": {
+  "106": {
     "title":"Donnie Darko",
     "author":"Calys",
     "saison":"3",
@@ -1093,7 +1089,7 @@
         "C'est disponible sur MyCanal et la plupart des plateformes de location ou en MP pour un prêt.",
         "Bon visionnage !"]
   },
-  "108": {
+  "107": {
     "title":"Doomsday",
     "author":"Morbo",
     "saison":"3",
@@ -1109,7 +1105,7 @@
         "Comme je disais un peu plus tôt ce n'est pas un film que j'ai particulièrement envie de revoir mais j'ai par contre très envie d'entendre vos retour dessus. De plus en allant voir la fiche IMDB j'ai été très surpris du 5.9 qu'il se tape, je le voyais beaucoup plus bas que ça. Du coup je suis tout de même curieux de voir quel regard je porterai sur ce film aujourd'hui. Peut-être que mon goût pour le nanard qui s'est depuis développé offrira un semblant de rédemption à ce truc ?",
         "Bref Doomsday dispo sur Prime, enjoy! ( Checco, je t'expliquerai pourquoi les meumeu m'ont marquées ensuite )"]
   },
-  "109": {
+  "108": {
     "title":"The Dictator",
     "author":"Checco",
     "saison":"3",

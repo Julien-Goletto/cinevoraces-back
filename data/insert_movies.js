@@ -53,14 +53,6 @@ async function saveMoviesList (){
 }
 
 /**
- * Convert an array to an array format compatible with pgsql requirements
- * @param {Array} list 
- * @returns {string} concatenated array to string for using in pgsql purposes
- */
-function formatSimpleListForPgsql (list){
-  return `array['` + `${list.join(`','`)}` + `']`;
-}
-/**
  * Convert an including single quote string into double-single quotes string, format compatible with pgsql requirements
  * @param {string} string 
  * @returns {string} Sanitized string
@@ -68,8 +60,20 @@ function formatSimpleListForPgsql (list){
 function sanitizeSingleQuotes(string){
   return string.replace(/'+/g,"''");
 };
+/**
+ * Convert an array to an array format compatible with pgsql requirements
+ * @param {Array} list 
+ * @returns {string} concatenated array to string for using in pgsql purposes
+ */
+function formatSimpleListForPgsql (list){
+  let sanitizedList = [];
+  for (item of list){
+    sanitizedList.push(sanitizeSingleQuotes(item));
+  };
+  return `array['` + `${sanitizedList.join(`','`)}` + `']`;
+}
 function stringifyPresentation(array){
-  return array.join(`\n`)
+  return array.join(`\n`);
 };
 
 // const chaincharacter = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789~!@#$%^&*()_-+={}[]/\:;."'<>?`
@@ -125,7 +129,7 @@ function prepareDBSeeding(presentations,moviesList) {
         const queryToPush = `SELECT new_movie(`
           +`'${sanitizeSingleQuotes(movie.french_title)}',`
           +`'${sanitizeSingleQuotes(movie.original_title)}',`
-          +`'${`https://image.tmdb.org/t/p/original/`+ movie.poster_url}',`
+          +`'${`https://image.tmdb.org/t/p/original`+ movie.poster_url}',`
           +`${formatSimpleListForPgsql(movie.directors)},`
           +`'${movie.release}',`
           +`'${movie.runtime}',`
@@ -137,7 +141,7 @@ function prepareDBSeeding(presentations,moviesList) {
           +`${formatSimpleListForPgsql(movie.genres)},`
           +`${formatSimpleListForPgsql(movie.languages)},`
           +`${formatSimpleListForPgsql(movie.countries)}`
-          +`)`
+          +`);`
         seedingQueries += queryToPush + `\n`;
       }
     }
