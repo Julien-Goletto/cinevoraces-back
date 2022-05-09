@@ -2,7 +2,7 @@
 # Do not forget to make it executable with chmod +x
 
 # createuser cinevoraces
-createdb cinevoraces -O cinevoraces
+# createdb cinevoraces -O cinevoraces
 export PGUSER=cinevoraces
 export PGPASSWORD=cinevoraces
 export PGDATABASE=cinevoraces
@@ -23,4 +23,4 @@ export PGDATABASE=cinevoraces
 # To deploy
 sqitch deploy db:pg:cinevoraces
 # To verify
-# sqitch verify db:pg:cinevoraces
+sqitch verify db:pg:cinevoraces
