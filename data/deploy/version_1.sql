@@ -29,8 +29,8 @@ CREATE TABLE "season"(
 );
 CREATE TABLE  "user" (
   "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "pseudo" TEXT NOT NULL,
-  "mail" TEXT NOT NULL,
+  "pseudo" TEXT NOT NULL UNIQUE,
+  "mail" TEXT NOT NULL UNIQUE,
   "password" TEXT NOT NULL,
   "avatar_url" TEXT,
   "mail_sub" BOOLEAN DEFAULT 'false',

@@ -21,7 +21,7 @@ const usersDataMapper = {
       values:[pseudo,mail,encryptedPassword]
     };
     const results = await client.query(query);
-    if(results.rowCount){
+    if(!results.rowCount){
       throw new APIError ("This pseudo is already taken. Please choose another one.", 404);
     };
     return 'User successfully registered, please login to continue.';
