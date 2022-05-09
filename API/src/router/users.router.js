@@ -5,10 +5,10 @@ const usersController = require('../controllers/users.controller');
 const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
-// // Checking user and privegies
+// Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
 
-// // Joi validation compulsary for each payload containing data
+// Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
 const { userSchema } = require('../validation/schemas/');
 
@@ -25,7 +25,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .post('/register', validate('body',userSchema), routerWrapper(usersController.postNewUser))
+  .post('/register', validate('body',userSchema), routerWrapper(usersController.createUser))
   /**
    * Log the user comparing entered credentails with hashed datas in database,
    * then pass usefull infos to the session

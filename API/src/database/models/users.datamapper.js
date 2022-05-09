@@ -5,26 +5,28 @@ const APIError = require('../../Errors/APIError');
 const bcrypt = require('bcryptjs');
 
 const usersDataMapper = {
+
   /**
    * Save a  new user in database, using bcrypt for password encrypting
    * @param {Object} user 
    * @returns {String} feedback message
    * @throws {APIError} if user already in base, due to unique constraint
    */
-  async createNewUser(user) {
-    let {pseudo, password} = user;
+  async createUser(user) {
+    let {pseudo, mail, password} = user;
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password,salt);
     const query = {
-      text : `INSERT INTO "user"("pseudo","password") VALUES ($1,$2)`,
-      values:[pseudo,encryptedPassword],
+      text : `INSERT INTO "user"("pseudo", "mail", "password", "role") VALUES ($1,$2,$3)`,
+      values:[pseudo,mail,encryptedPassword]
     };
     const results = await client.query(query);
-    if(!results.rowCount){
+    if(results.rowCount){
       throw new APIError ("This pseudo is already taken. Please choose another one.", 404);
     };
     return 'User successfully registered, please login to continue.';
   },
+
   /**
    * From a user object, return a matching user, comparing hash in DB to entered password
    * @param {Object} user 
@@ -33,8 +35,7 @@ const usersDataMapper = {
    */
   async getUser(user) {
     const query = {
-      text : `SELECT pseudo, is_admin, password FROM "user"
-              WHERE pseudo = $1`,
+      text : `SELECT pseudo FROM "user" WHERE pseudo = $1`,
       values:[user.pseudo],
     }
     const results = await client.query(query);
@@ -53,15 +54,14 @@ const usersDataMapper = {
    * @throws {APIError} if the table user is empty
    */
   async GetUsersList(){
-    const query = `SELECT array_agg(pseudo) AS "registered_users" FROM "user";`;
+    const query = `SELECT * FROM "user";`;
     const results = await client.query(query);
     if(!results.rowCount){
       throw new APIError ("No user registered yet.", 404);
     };
-    return results.rows[0].registered_users;
+    return results.rows;
   },
   async deleteUserWithPseudo(pseudo){
-    debug("On entre dans le datamapper")
     const query = {
       text: `DELETE FROM "user" WHERE pseudo = $1;`,
       values: [pseudo],
