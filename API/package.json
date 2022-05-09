@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest --watch",
     "start": "node start.js",
-    "dev": "DEBUG=App,Game_Controller,User_Controller,Game_DataMapper,User_DataMapper,DB_Client,Error_Handler,Router_Wrapper,Validator,Check_User nodemon start.js"
+    "dev": "DEBUG=App,Movie_Controller,User_Controller,Movie_DataMapper,User_DataMapper,DB_Client,Error_Handler,Router_Wrapper,Validator,Check_User nodemon start.js"
   },
   "repository": {
     "type": "git",
