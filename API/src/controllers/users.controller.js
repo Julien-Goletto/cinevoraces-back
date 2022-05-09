@@ -3,19 +3,18 @@ const usersDataMapper = require('../database/models/users.datamapper');
 const APIError = require('../Errors/APIError');
 
 const usersController = {
-  async postNewUser(req, res) {
+  async createUser(req, res) {
     const user = req.body;
     debug(user);
-    const result = await usersDataMapper.createNewUser(user);
+    const result = await usersDataMapper.createUser(user);
     res.status(201).json(result);
   },
 
   async logUser(req, res) {
     const user = req.body;
+    debug(user);
     const result = await usersDataMapper.getUser(user);
-    debug(result);
-    const returnedUser = {pseudo: result.pseudo, };
-    req.session.user = returnedUser;
+    req.session.user = result;
     res.status(200).json(returnedUser);
   },
 

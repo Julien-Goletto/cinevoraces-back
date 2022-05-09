@@ -1,0 +1,22 @@
+@protocol=http://
+@host=localhost
+@port=:3000
+@prefix=/v1
+@baseUrl={{protocol}}{{host}}{{port}}{{prefix}}
+
+### Get all users from db
+GET {{baseUrl}}/users
+
+### Create a new user in db
+POST {{baseUrl}}/users/register
+content-type: application/json
+
+{
+  "pseudo": "test",
+  "mail": "test@test.fr",
+  "password": "test",
+  "role": "test"
+}
+
+### Get user with userId
+GET {{baseUrl}}/users/2

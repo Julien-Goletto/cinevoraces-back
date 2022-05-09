@@ -5,26 +5,28 @@ const APIError = require('../../Errors/APIError');
 const bcrypt = require('bcryptjs');
 
 const usersDataMapper = {
+
   /**
    * Save a  new user in database, using bcrypt for password encrypting
    * @param {Object} user 
    * @returns {String} feedback message
    * @throws {APIError} if user already in base, due to unique constraint
    */
-  async createNewUser(user) {
-    let {pseudo, password} = user;
+  async createUser(user) {
+    let {pseudo, mail, password, role} = user;
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password,salt);
     const query = {
-      text : `INSERT INTO "user"("pseudo", "mail, "password", "avatar_url") VALUES ($1,$2)`,
-      values:[pseudo,encryptedPassword],
+      text : `INSERT INTO "user"("pseudo", "mail", "password", "role") VALUES ($1,$2,$3,$4)`,
+      values:[pseudo,mail,encryptedPassword,role]
     };
     const results = await client.query(query);
-    if(!results.rowCount){
+    if(results.rowCount){
       throw new APIError ("This pseudo is already taken. Please choose another one.", 404);
     };
     return 'User successfully registered, please login to continue.';
   },
+
   /**
    * From a user object, return a matching user, comparing hash in DB to entered password
    * @param {Object} user 
@@ -33,8 +35,7 @@ const usersDataMapper = {
    */
   async getUser(user) {
     const query = {
-      text : `SELECT pseudo, is_admin, password FROM "user"
-              WHERE pseudo = $1`,
+      text : `SELECT pseudo FROM "user" WHERE pseudo = $1`,
       values:[user.pseudo],
     }
     const results = await client.query(query);
