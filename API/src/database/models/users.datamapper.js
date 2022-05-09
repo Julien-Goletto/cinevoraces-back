@@ -16,7 +16,7 @@ const usersDataMapper = {
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password,salt);
     const query = {
-      text : `INSERT INTO "user"("pseudo","password") VALUES ($1,$2)`,
+      text : `INSERT INTO "user"("pseudo", "mail, "password", "avatar_url") VALUES ($1,$2)`,
       values:[pseudo,encryptedPassword],
     };
     const results = await client.query(query);

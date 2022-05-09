@@ -4,8 +4,8 @@
 @prefix=/v1
 @baseUrl={{protocol}}{{host}}{{port}}{{prefix}}
 
-### Get all genres
-GET {{baseUrl}}/genres/
+### Get all movies from db
+GET {{baseUrl}}/movies
 
-### Get a genre by id
-GET {{baseUrl}}/genres/5
+### Get movie infos with movieId
+GET {{baseUrl}}/movies/2

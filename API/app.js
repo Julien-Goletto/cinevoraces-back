@@ -26,13 +26,12 @@ app.use(cors(corsOptions));
 const router = require('./src/router/');
 app.use('/v1', router); // Prefixing API routes and using router
 
-
 const expressSwagger = require('express-swagger-generator')(app);
 const expressSwaggerOptions = {
   swaggerDefinition: {
     info: {
-        description: 'A videogame library manager REST API',
-        title: 'Ludotheque',
+        description: 'A cineclub REST API',
+        title: 'Cinevoraces',
         version: '1.0.0',
     },
     host: `${HOST}:${PORT}`,
