@@ -44,6 +44,14 @@ usersRouter
    * @return {APIError} 404 - fail response
    */
   .get('/logout', routerWrapper(usersController.logOutUser))
+   /**
+   * Return user
+   * @route GET /users/userId
+   * @group - Users
+   * @returns {String} 200 - success response
+   * @returns {APIError} 404 - fail response
+   */
+    .get('/:userId', routerWrapper(usersController.getUserById))
     /**
    * Return users listing
    * @route GET /users/

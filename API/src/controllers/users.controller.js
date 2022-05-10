@@ -26,8 +26,14 @@ const usersController = {
     res.status(200).json('You have successfuly logged out.');
   },
 
+  async getUserById(req,res) {
+    userId = req.params.userId;
+    const results = await usersDataMapper.getUserById(userId);
+    res.status(200).json(results);
+  },
+
   async getUsersList(_,res) {
-    const results = await usersDataMapper.GetUsersList();
+    const results = await usersDataMapper.getUsersList();
     res.status(200).json(results);
   },
 

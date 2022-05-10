@@ -4,18 +4,18 @@
 @prefix=/v1
 @baseUrl={{protocol}}{{host}}{{port}}{{prefix}}
 
-### Get all users from db
-GET {{baseUrl}}/users
-
 ### Create a new user in db
 POST {{baseUrl}}/users/register
 content-type: application/json
 
 {
-  "pseudo": "patrick",
+  "pseudo": "loulou",
   "mail": "test@test.fr",
   "password": "test"
 }
 
+### Get all users from db
+GET {{baseUrl}}/users
+
 ### Get user with userId
-GET {{baseUrl}}/users/2
+GET {{baseUrl}}/users/1

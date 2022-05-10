@@ -28,24 +28,20 @@ const usersDataMapper = {
   },
 
   /**
-   * From a user object, return a matching user, comparing hash in DB to entered password
+   * User object, return matching user
    * @param {Object} user 
-   * @returns {Object} user informations from db to be processed in controller
-   * @throws {APIError} if credentials doesn't match
+   * @returns {Object} informations from db for user
+   * @throws {APIError} if user doesen't in db
    */
-  async getUser(user) {
+  async getUserById(userId) {
     const query = {
-      text : `SELECT pseudo FROM "user" WHERE pseudo = $1`,
-      values:[user.pseudo],
+      text : `SELECT * FROM "user" WHERE id=$1`,
+      values:[userId],
     }
     const results = await client.query(query);
     if(!results.rowCount){
       throw new APIError ("This account doesn't exist.", 404);
     };
-    const isCorrect = await bcrypt.compare(user.password,results.rows[0].password);
-    if(!isCorrect){
-      throw new APIError("Credentials don't match, please retry.",404);
-    }
     return results.rows[0];
   },
   /**
@@ -53,7 +49,7 @@ const usersDataMapper = {
    * @returns {ARRAY} of pseudos String
    * @throws {APIError} if the table user is empty
    */
-  async GetUsersList(){
+  async getUsersList(){
     const query = `SELECT * FROM "user";`;
     const results = await client.query(query);
     if(!results.rowCount){
