@@ -2,6 +2,13 @@ const debug = require('debug')('User_Controller');
 const usersDataMapper = require('../database/models/users.datamapper');
 const APIError = require('../Errors/APIError');
 
+const jwt = require('jsonwebtoken');
+const {ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET} = process.env;
+const jwtConfig = {
+  expiresIn: 3600,
+  algorithm: 'HS256',
+};
+
 const usersController = {
   async createUser(req, res) {
     const user = req.body;
@@ -12,6 +19,8 @@ const usersController = {
   async logUser(req, res) {
     const user = req.body;
     const result = await usersDataMapper.logUser(user);
+    const token = jwt.sign({...result},ACCESS_TOKEN_SECRET,jwtConfig);
+    debug(token);
     req.session.user = result;
     res.status(200).json(result);
   },
