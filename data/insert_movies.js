@@ -96,7 +96,7 @@ const moviesList = require ('./moviesList.json');
  */
 function addAuthors(presentations){
   const authorsList = [];
-  for (let i = 1 ; i <= 108; i++){
+  for (let i = 1 ; i <= Object.keys(presentations).length; i++){
     if (!authorsList.includes(presentations[i].author)){
       authorsList.push(presentations[i].author);
     }
@@ -120,13 +120,15 @@ function addAuthors(presentations){
  */
 function prepareDBSeeding(presentations,moviesList) {
   const authors = addAuthors(presentations);
+  console.log(`Nombre de films présentés : ${Object.keys(presentations).length}` + `\n`
+                + `Nombre de films listés : ${moviesList.movies.length}`)
   let seedingQueries = ``;
-
   for (let i = 1 ; i <= moviesList.movies.length ; i++){
     const movieTitleFromPresentation = presentations[i].title;
+    let queryToPush='';
     for (const movie of moviesList.movies){
       if (movie.french_title == movieTitleFromPresentation){
-        const queryToPush = `SELECT new_movie(`
+        queryToPush += `SELECT new_movie(`
           +`'${sanitizeSingleQuotes(movie.french_title)}',`
           +`'${sanitizeSingleQuotes(movie.original_title)}',`
           +`'${movie.poster_url}',`
@@ -136,20 +138,24 @@ function prepareDBSeeding(presentations,moviesList) {
           +`${formatSimpleListForPgsql(movie.casting)},`
           +`'${sanitizeSingleQuotes(stringifyPresentation(presentations[i].presentation))}',`
           +`'${presentations[i].date}',`
-          +`${parseInt(Object.keys(authors).find(key => authors[key] === presentations[i].author),10)+1},` // doit être un id
-          +`${presentations[i].saison},` // doit être un id
+          +`${parseInt(Object.keys(authors).find(key => authors[key] === presentations[i].author),10)+1},`
+          +`${presentations[i].saison},`
           +`${formatSimpleListForPgsql(movie.genres)},`
           +`${formatSimpleListForPgsql(movie.languages)},`
           +`${formatSimpleListForPgsql(movie.countries)}`
-          +`);`
-        seedingQueries += queryToPush + `\n`;
+          +`);`;
       }
     }
+    if(queryToPush){
+      seedingQueries += queryToPush + `\n`;
+    } else {
+      console.log(`Le film ${presentations[i].title} n'a pas pu être traité`);
+    };
   }
   // Writing in a SQL instructions file
   const fileName = `createMovies.sql`;
   appendFile(__dirname+"/"+fileName, seedingQueries);``
-  return `L'écriture des fichiers SQL s'est bien passée`;
+  console.log(`L'écriture des fichiers SQL est terminée.`);
 };
 
 // fetch5TopMoviesFromQuery().then(result => console.log(result));
