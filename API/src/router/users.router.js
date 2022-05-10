@@ -67,7 +67,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .delete('/:pseudo', checkingUser.checkAutorization, routerWrapper(usersController.deleteUser));
+  .delete('/:pseudo', routerWrapper(usersController.deleteUser));
 
 usersRouter.use(handleError);
 

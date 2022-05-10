@@ -1,5 +1,7 @@
 const debug = require('debug')('Check_User');
 const APIError = require('../Errors/APIError');
+const { refreshAccessToken } = require('../JWT/jwt.module');
+const jwtMethods = require('../JWT/jwt.module');
 
   /**
    * Method collection relative to user status : connection and authorization
@@ -13,21 +15,31 @@ const APIError = require('../Errors/APIError');
    * @throws {APIError} If connections status / authorization aren't matched to perform the next action
    */
 const checkingUser ={
+  /**
+   * Check the jwt in session to ensure it presents the correct format
+   */
   checkLogStatus(req,_,next){
-    if(req.session.user){
+    const cookies = jwtMethods.cookieParser(req.headers.cookie);
+    if(jwtMethods.checkTokenContent(token)){
       next();
     }
     else {
       throw new APIError("To continue, you must be logged in.");
     };
   },
-  checkAutorization(req,_,next){
-    if(req.session.user.isAdmin){
-      next();
-    }
-    else {
-      throw new APIError("You doesn't have the authorization for this action.");
-    };
+  checkAuthorization(req,res,next){
+    const accessToken = jwtMethods.refreshAccessToken(req.headers.cookie);
+    debug(jwtMethods.decryptAccessToken(jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie),'accessToken')));
+    res.cookie('accessToken', accessToken);
+    debug(res.cookie);
+    next();
+    // const token = jwtMethods.decryptAccessToken(req.session.accessToken);
+    // if(jwtMethods.checkTokenAuthorization(token)){
+    //   next();
+    // }
+    // else {
+    //   throw new APIError("You doesn't have the authorization for this action.");
+    // };
   },
 };
 

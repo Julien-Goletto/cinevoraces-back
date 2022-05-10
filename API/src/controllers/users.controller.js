@@ -1,13 +1,7 @@
 const debug = require('debug')('User_Controller');
 const usersDataMapper = require('../database/models/users.datamapper');
 const APIError = require('../Errors/APIError');
-
-const jwt = require('jsonwebtoken');
-const {ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET} = process.env;
-const jwtConfig = {
-  expiresIn: 3600,
-  algorithm: 'HS256',
-};
+const jwtMethods = require('../JWT/jwt.module');
 
 const usersController = {
   async createUser(req, res) {
@@ -19,9 +13,10 @@ const usersController = {
   async logUser(req, res) {
     const user = req.body;
     const result = await usersDataMapper.logUser(user);
-    const token = jwt.sign({...result},ACCESS_TOKEN_SECRET,jwtConfig);
-    debug(token);
-    req.session.user = result;
+    const accessToken = jwtMethods.createAccessToken(result);
+    const refreshToken = jwtMethods.createRefreshToken(result);
+    res.cookie('accessToken', accessToken);
+    res.cookie('refreshToken', refreshToken);
     res.status(200).json(result);
   },
 
@@ -34,7 +29,7 @@ const usersController = {
   },
 
   async getUserById(req,res) {
-    userId = req.params.userId;
+    const userId = req.params.userId;
     const results = await usersDataMapper.getUserById(userId);
     res.status(200).json(results);
   },

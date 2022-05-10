@@ -28,20 +28,19 @@ const usersDataMapper = {
   },
 
   async logUser(user) {
-    const {pseudo, mail, password} = user;
     let query = {
       text: 'SELECT * FROM "user" WHERE pseudo=$1',
-      values: [pseudo]
+      values: [user.pseudo]
     };
     const result = await client.query(query);
     if(!result.rowCount){
       throw new APIError ("Invalid credentials", 404);
     };
-    const testBCrypt = (await bcrypt.compare(password,result.rows[0].password));
-    if (!await bcrypt.compare(password,result.rows[0].password)) {
+    if (!await bcrypt.compare(user.password,result.rows[0].password)) {
       throw new APIError ("Invalid credentials", 404);
     }
-    return result.rows[0];
+    const keys = ['id','pseudo','role'];
+    return Object.fromEntries(Object.entries(result.rows[0]).filter(([key,_]) => keys.includes(key)));
   },
 
   /**

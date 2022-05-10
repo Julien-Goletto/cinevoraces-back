@@ -7,7 +7,6 @@ const moviesRouter = express.Router();
 // Gestion des erreurs
 const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
-
 // Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
 
@@ -23,7 +22,7 @@ moviesRouter
    * @returns {Array} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .get('/', routerWrapper(moviesController.getAllMovies))
+  .get('/', checkingUser.checkAuthorization, routerWrapper(moviesController.getAllMovies))
   /**
    * Get a detailled movie object saved in database via its id
    * @route Get /movies/:movieId
