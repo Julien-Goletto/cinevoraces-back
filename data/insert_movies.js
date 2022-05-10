@@ -104,7 +104,7 @@ function addAuthors(presentations){
   let seedingQueries = `INSERT INTO "user" ("pseudo","mail","password") VALUES\n`
   let id = 1;
   for (author of authorsList){
-    seedingQueries += `('${author}','mailbidon','${createRandomPassWord(chaincharacter,20)}'),\n`
+    seedingQueries += `('${author}', 'mailbidon${id}' ,'${createRandomPassWord(chaincharacter,20)}'),\n`
     id++
   }
   seedingQueries = seedingQueries.slice(0,-2) + `;`
