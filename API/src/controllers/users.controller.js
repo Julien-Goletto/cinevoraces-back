@@ -5,17 +5,15 @@ const APIError = require('../Errors/APIError');
 const usersController = {
   async createUser(req, res) {
     const user = req.body;
-    debug(user);
     const result = await usersDataMapper.createUser(user);
     res.status(201).json(result);
   },
 
   async logUser(req, res) {
     const user = req.body;
-    debug(user);
-    const result = await usersDataMapper.getUser(user);
+    const result = await usersDataMapper.logUser(user);
     req.session.user = result;
-    res.status(200).json(returnedUser);
+    res.status(200).json(result);
   },
 
   logOutUser(req, res) {
@@ -26,8 +24,14 @@ const usersController = {
     res.status(200).json('You have successfuly logged out.');
   },
 
+  async getUserById(req,res) {
+    userId = req.params.userId;
+    const results = await usersDataMapper.getUserById(userId);
+    res.status(200).json(results);
+  },
+
   async getUsersList(_,res) {
-    const results = await usersDataMapper.GetUsersList();
+    const results = await usersDataMapper.getUsersList();
     res.status(200).json(results);
   },
 
