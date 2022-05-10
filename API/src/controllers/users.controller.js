@@ -5,14 +5,12 @@ const APIError = require('../Errors/APIError');
 const usersController = {
   async createUser(req, res) {
     const user = req.body;
-    debug(user);
     const result = await usersDataMapper.createUser(user);
     res.status(201).json(result);
   },
 
   async logUser(req, res) {
     const user = req.body;
-    debug(user);
     const result = await usersDataMapper.logUser(user);
     req.session.user = result;
     res.status(200).json(result);

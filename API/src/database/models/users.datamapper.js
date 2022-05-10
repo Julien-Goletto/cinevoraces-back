@@ -41,7 +41,7 @@ const usersDataMapper = {
     if (!await bcrypt.compare(password,result.rows[0].password)) {
       throw new APIError ("Invalid credentials", 404);
     }
-    debug(result.rows[0]);
+    return result.rows[0];
   },
 
   /**
