@@ -9,9 +9,19 @@ POST {{baseUrl}}/users/register
 content-type: application/json
 
 {
-  "pseudo": "loulou",
-  "mail": "test@test.fr",
-  "password": "test"
+  "pseudo": "colo",
+  "mail": "new@test.fr",
+  "password": "apero"
+}
+
+### Log user
+POST {{baseUrl}}/users/login
+content-type: application/json
+
+{
+  "pseudo": "colo",
+  "mail": "new@test.fr",
+  "password": "tata"
 }
 
 ### Get all users from db

@@ -27,6 +27,23 @@ const usersDataMapper = {
     return 'User successfully registered, please login to continue.';
   },
 
+  async logUser(user) {
+    const {pseudo, mail, password} = user;
+    let query = {
+      text: 'SELECT * FROM "user" WHERE pseudo=$1',
+      values: [pseudo]
+    };
+    const result = await client.query(query);
+    if(!result.rowCount){
+      throw new APIError ("Invalid credentials", 404);
+    };
+    const testBCrypt = (await bcrypt.compare(password,result.rows[0].password));
+    if (!await bcrypt.compare(password,result.rows[0].password)) {
+      throw new APIError ("Invalid credentials", 404);
+    }
+    debug(result.rows[0]);
+  },
+
   /**
    * User object, return matching user
    * @param {Object} user 
@@ -44,6 +61,7 @@ const usersDataMapper = {
     };
     return results.rows[0];
   },
+
   /**
    * Return a list containing all registered users
    * @returns {ARRAY} of pseudos String

@@ -13,9 +13,9 @@ const usersController = {
   async logUser(req, res) {
     const user = req.body;
     debug(user);
-    const result = await usersDataMapper.getUser(user);
+    const result = await usersDataMapper.logUser(user);
     req.session.user = result;
-    res.status(200).json(returnedUser);
+    res.status(200).json(result);
   },
 
   logOutUser(req, res) {
