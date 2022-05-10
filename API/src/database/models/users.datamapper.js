@@ -17,11 +17,11 @@ const usersDataMapper = {
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password,salt);
     const query = {
-      text : `INSERT INTO "user"("pseudo", "mail", "password", "role") VALUES ($1,$2,$3)`,
+      text : `INSERT INTO "user"("pseudo", "mail", "password") VALUES ($1,$2,$3)`,
       values:[pseudo,mail,encryptedPassword]
     };
     const results = await client.query(query);
-    if(results.rowCount){
+    if(!results.rowCount){
       throw new APIError ("This pseudo is already taken. Please choose another one.", 404);
     };
     return 'User successfully registered, please login to continue.';

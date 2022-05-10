@@ -12,7 +12,7 @@ POST {{baseUrl}}/users/register
 content-type: application/json
 
 {
-  "pseudo": "test",
+  "pseudo": "patrick",
   "mail": "test@test.fr",
   "password": "test"
 }
