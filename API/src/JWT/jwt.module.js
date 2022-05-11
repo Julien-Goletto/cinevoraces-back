@@ -44,14 +44,6 @@ const jwtMethods = {
     for (const cookie of cookies){
       if(cookie.name === `${cookieToFind}`){return cookie.cookie};
     };
-  },
-  refreshAccessToken(cookie){
-    // On récupère le refresh token
-    const user = jwtMethods.decryptRefreshToken(jwtMethods.cookieFinder(jwtMethods.cookieParser(cookie),'refreshToken'));
-    // Vérification présence user en bdd
-    delete user.iat;
-    delete user.exp;
-    return accessToken = jwtMethods.createAccessToken(user);
   }
 };
 
