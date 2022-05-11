@@ -3,7 +3,7 @@ const debug = require('debug')('JWT');
 const jwt = require('jsonwebtoken');
 const {ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET} = process.env;
 const jwtATConfig = {
-  expiresIn: 3600,
+  expiresIn: 5,
   algorithm: 'HS256',
 };
 const jwtRTConfig = {
@@ -38,7 +38,7 @@ const jwtMethods = {
     for (let cookie of cookiesToParse){
       cookies.push ({...cookie.split('=')});
     };
-    return cookies.map(item=> {return {name: item[0],cookie: item[1]}});
+    return cookies.map(item => {return {name: item[0],cookie: item[1]}});
   },
   cookieFinder(cookies, cookieToFind){
     for (const cookie of cookies){
@@ -48,7 +48,6 @@ const jwtMethods = {
   refreshAccessToken(cookie){
     // On récupère le refresh token
     const user = jwtMethods.decryptRefreshToken(jwtMethods.cookieFinder(jwtMethods.cookieParser(cookie),'refreshToken'));
-    // debug(user);
     // Vérification présence user en bdd
     delete user.iat;
     delete user.exp;

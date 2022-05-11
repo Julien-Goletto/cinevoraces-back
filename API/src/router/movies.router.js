@@ -9,6 +9,8 @@ const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 // Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
+// Refresh access token
+const refreshAccessToken = require('../middlewares/refreshAccessToken');
 
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
@@ -22,7 +24,7 @@ moviesRouter
    * @returns {Array} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .get('/', checkingUser.checkAuthorization, routerWrapper(moviesController.getAllMovies))
+  .get('/', refreshAccessToken, checkingUser.checkAuthorization, routerWrapper(moviesController.getAllMovies))
   /**
    * Get a detailled movie object saved in database via its id
    * @route Get /movies/:movieId
