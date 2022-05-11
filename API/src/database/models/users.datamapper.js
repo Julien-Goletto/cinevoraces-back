@@ -55,6 +55,11 @@ const usersDataMapper = {
    * @param {Object} user informations
    */
   async updateUser(userId, user) {
+    const passwordToEmcrypt = user.password;
+    const salt = await bcrypt.genSalt(10);
+    const passwordCrypted = await bcrypt.hash(passwordToEmcrypt,salt);
+    user.password = passwordCrypted;
+    console.log(user);
     let query = {
       text: `SELECT * FROM "user" WHERE id=$1`,
       values: [userId]
