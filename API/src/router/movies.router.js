@@ -39,11 +39,11 @@ moviesRouter
    * @route POST /movies/newmovie/
    * @group - Movies
    * @param {Integer} movieId - movie Id
-   * @param {String} MovieTitle - movvie Title
+   * @param {String} MovieTitle - movvie
    * @returns {Movie} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .post('/newmovie', refreshAccessToken, checkingUser.checkLogStatus, validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.postMovie))
+  .post('/newmovie', checkingUser.checkLogStatus, validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.addNewMovie))
 
 moviesRouter.use(handleError);
 

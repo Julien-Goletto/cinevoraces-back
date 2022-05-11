@@ -11,6 +11,12 @@ const moviesController = {
     const movieId = req.params.movieId;
     const result = await moviesDataMapper.getMovieByID(movieId);
     res.status(200).json(result);
+  },
+
+  async addNewMovie(req, res) {
+    const movie = req.body;
+    const result = await moviesDataMapper.addNewMovie(movie);
+    res.status(201).json(result);
   }
 };
 

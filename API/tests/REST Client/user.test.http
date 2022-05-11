@@ -19,7 +19,7 @@ POST {{baseUrl}}/users/login
 content-type: application/json
 
 {
-  "pseudo": "Ester",
+  "pseudo": "colo",
   "mail": "new@test.fr",
   "password": "apero"
 }
