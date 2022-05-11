@@ -35,14 +35,15 @@ moviesRouter
    */
   .get('/:movieId', routerWrapper(moviesController.getMovieByID))
   /**
-   * Get a game from RAWG services, getting all datas, before adding it to database with next post method
+   * Get a movie,, getting all datas for adding it to database
    * @route POST /movies/newmovie/
    * @group - Movies
-   * @param {Integer} movieId - correspond to movie Id
+   * @param {Integer} movieId - movie Id
+   * @param {String} MovieTitle - movvie Title
    * @returns {Movie} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .post('/newmovie/', checkingUser.checkLogStatus, validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.postMovie))
+  .post('/newmovie', refreshAccessToken, checkingUser.checkLogStatus, validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.postMovie))
 
 moviesRouter.use(handleError);
 
