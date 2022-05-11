@@ -27,6 +27,12 @@ const usersDataMapper = {
     return 'User successfully registered, please login to continue.';
   },
 
+  /**
+   * Log user with database and using bcrypt
+   * @param {Object} user informations
+   * @returns {Object} feedback message
+   * @throws {APIError} if user enter invalid credential 
+   */
   async logUser(user) {
     let query = {
       text: 'SELECT * FROM "user" WHERE pseudo=$1',
@@ -44,6 +50,29 @@ const usersDataMapper = {
   },
 
   /**
+   * Modify user informations
+   * @param {Int} userId of user
+   * @param {Object} user informations
+   */
+  async updateUser(userId, user) {
+    let query = {
+      text: `SELECT * FROM "user" WHERE id=$1`,
+      values: [userId]
+    };
+    const result = await client.query(query);
+    if(!result.rowCount){
+      throw new APIError ("This account doesn't exist.", 404);
+    };
+    for (key in user){
+      query = {
+        text: `UPDATE "user" SET ${key}=$1 WHERE id=$2`,
+        values: [user[key], userId]
+      };
+      await client.query(query);
+    };
+  },
+
+  /**
    * User object, return matching user
    * @param {Object} user 
    * @returns {Object} informations from db for user
@@ -54,11 +83,11 @@ const usersDataMapper = {
       text : `SELECT * FROM "user" WHERE id=$1`,
       values:[userId],
     }
-    const results = await client.query(query);
-    if(!results.rowCount){
+    const result = await client.query(query);
+    if(!result.rowCount){
       throw new APIError ("This account doesn't exist.", 404);
     };
-    return results.rows[0];
+    return result.rows[0];
   },
 
   /**
@@ -73,19 +102,7 @@ const usersDataMapper = {
       throw new APIError ("No user registered yet.", 404);
     };
     return results.rows;
-  },
-  async deleteUserWithPseudo(pseudo){
-    const query = {
-      text: `DELETE FROM "user" WHERE pseudo = $1;`,
-      values: [pseudo],
-    };
-    const results = await client.query(query);
-    if(!results.rowCount){
-      throw new APIError ("This user doesn't exist.", 404);
-    };
-    debug(results);
-    return 'User successfuly deleted.';
-  },
+  }
 };
 
 module.exports = usersDataMapper;

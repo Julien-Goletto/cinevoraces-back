@@ -36,6 +36,7 @@ usersRouter
    * @returns {APIError} 404 - fail response
    */
   .post('/login', validate('body',userSchema), routerWrapper(usersController.logUser))
+  .put('/:userId', validate('body',userSchema), routerWrapper(usersController.updateUser))
     /**
    * Disconnect user, suppressing the session.user
    * @route GET /users/logout

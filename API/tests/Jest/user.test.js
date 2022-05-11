@@ -7,9 +7,9 @@ const request = supertest(app);
 const session = require('supertest-session');
 let testSession = session(app);
 
-const user = {pseudo: "Test1", mail: "Test1@test.fr", password: "Test"};
-const registeredUser = {pseudo: "Test2",mail: "Test2@test.fr", password: "test"};
-const adminUser = {pseudo: "Test3",mail: "Test3@test.fr", password: "test"};
+const user = {pseudo: "Test3", mail: "Test3@test.fr", password: "Test"};
+const registeredUser = {pseudo: "Test4",mail: "Test4@test.fr", password: "test"};
+const adminUser = {pseudo: "Test5",mail: "Test5@test.fr", password: "test"};
 
 
 describe('Users roads', ()=>{

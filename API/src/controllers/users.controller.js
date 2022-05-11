@@ -20,18 +20,17 @@ const usersController = {
     res.status(200).json(result);
   },
 
-  logOutUser(req, res) {
-    if(!req.session.user){
-      throw new APIError('You are not logged.')
-    };
-    delete req.session.user;
-    res.status(200).json('You have successfuly logged out.');
+  async updateUser(req, res) {
+    const userId = req.params.userId;
+    const user = req.body;
+    const result = await usersDataMapper.updateUser(userId, user);
+    res.status(200).json('Succeful change informations.');
   },
 
   async getUserById(req,res) {
     const userId = req.params.userId;
-    const results = await usersDataMapper.getUserById(userId);
-    res.status(200).json(results);
+    const result = await usersDataMapper.getUserById(userId);
+    res.status(200).json(result);
   },
 
   async getUsersList(_,res) {
@@ -39,10 +38,12 @@ const usersController = {
     res.status(200).json(results);
   },
 
-  async deleteUser(req,res) {
-    const pseudo = req.params.pseudo;
-    const results = await usersDataMapper.deleteUserWithPseudo(pseudo);
-    res.status(200).json(results);
+  logOutUser(req, res) {
+    if(!req.session.user){
+      throw new APIError('You are not logged.')
+    };
+    delete req.session.user;
+    res.status(200).json('You have successfuly logged out.');
   }
 };
 

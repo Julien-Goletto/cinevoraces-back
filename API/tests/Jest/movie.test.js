@@ -9,7 +9,7 @@ let testSession = session(app);
 
 describe('Movies roads', ()=>{
   it('Should get all movies in database', async ()=> {
-    const response = await request.get('/v1/movies');
+    const response = await testSession.get('/v1/movies');
     expect(response.status).toBe(200);
   });
   it('Should get a object from on movie in database whith id', async ()=> {
