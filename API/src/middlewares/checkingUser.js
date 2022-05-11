@@ -1,5 +1,7 @@
 const debug = require('debug')('Check_User');
 const APIError = require('../Errors/APIError');
+const jwtMethods = require('../JWT/jwt.module');
+const usersController = require('../controllers/users.controller');
 
   /**
    * Method collection relative to user status : connection and authorization
@@ -7,22 +9,34 @@ const APIError = require('../Errors/APIError');
    * @route GET /v1/checkingUser
    * @group - Middlewares
    * @param {req} request
-   * @param {res} response
    * @param {next} next
    * @returns {next()} if tests pass
    * @throws {APIError} If connections status / authorization aren't matched to perform the next action
    */
-const checkingUser ={
+const checkingUser = {
+  /**
+   * Check the jwt in session to ensure it presents the correct format
+   */
   checkLogStatus(req,_,next){
-    if(req.session.user){
+    const accessToken = jwtMethods.decryptRefreshToken(
+      jwtMethods.cookieFinder(
+        jwtMethods.cookieParser(req.headers.cookie),'refreshToken'
+      )
+    );
+    if(jwtMethods.checkTokenContent(accessToken)){
       next();
     }
     else {
       throw new APIError("To continue, you must be logged in.");
     };
   },
-  checkAutorization(req,_,next){
-    if(req.session.user.isAdmin){
+  checkAuthorization(req,_,next){
+    const accessToken = jwtMethods.decryptRefreshToken(
+      jwtMethods.cookieFinder(
+        jwtMethods.cookieParser(req.headers.cookie),'refreshToken'
+      )
+    );
+    if(jwtMethods.checkTokenAuthorization(accessToken)){
       next();
     }
     else {

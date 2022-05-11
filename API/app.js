@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { HOST, PORT } = process.env;
+const { HOST, PORT} = process.env;
 const express = require('express');
 
 const app = express();
@@ -12,7 +12,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false, maxAge:null  }
+  cookie: { secure: false, maxAge:null }
 }));
 
 // Setting CORS
