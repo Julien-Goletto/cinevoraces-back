@@ -6,7 +6,6 @@ const clientConfig = process.env.DATABASE_URL || { database: DB_NAME,user: DB_US
 
 const client = new Pool (clientConfig, 
   {
-    connectionString: process.env.DATABASE_URL,
     ssl:{ rejectUnauthorized: false } // On accepte de se passer de SSL
   }
 );
