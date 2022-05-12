@@ -9,9 +9,9 @@ POST {{baseUrl}}/users/register
 content-type: application/json
 
 {
-  "pseudo": "colo1",
-  "mail": "new@test2.fr",
-  "password": "apero",
+  "pseudo": "bibou",
+  "mail": "bi@bou.fr",
+  "password": "bibibou"
 }
 
 ### Log user
@@ -19,13 +19,26 @@ POST {{baseUrl}}/users/login
 content-type: application/json
 
 {
-  "pseudo": "colo",
-  "mail": "new@test.fr",
-  "password": "apero"
+  "pseudo": "Ester1",
+  "mail": "bi@bou.fr",
+  "password": "bibibou"
+}
+
+### Update user
+PUT {{baseUrl}}/users/34
+content-type: application/json
+
+{
+  "pseudo": "Ester1",
+  "mail": "new@test1.fr",
+  "password": "sql"
 }
 
 ### Get all users from db
 GET {{baseUrl}}/users
 
 ### Get user with userId
-GET {{baseUrl}}/users/1
+GET {{baseUrl}}/users/35
+
+### LogOut user
+GET {{{{baseUrl}}}}/users/logout

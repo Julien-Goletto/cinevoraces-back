@@ -27,6 +27,12 @@ const usersDataMapper = {
     return 'User successfully registered, please login to continue.';
   },
 
+  /**
+   * Log user with database and using bcrypt
+   * @param {Object} user informations
+   * @returns {Object} feedback message
+   * @throws {APIError} if user enter invalid credential 
+   */
   async logUser(user) {
     let query = {
       text: 'SELECT * FROM "user" WHERE pseudo=$1',
@@ -44,21 +50,53 @@ const usersDataMapper = {
   },
 
   /**
+   * Modify user informations
+   * @param {Int} userId of user
+   * @param {Object} user informations
+   */
+  async updateUser(userId, user) {
+    const passwordToEmcrypt = user.password;
+    const salt = await bcrypt.genSalt(10);
+    const passwordCrypted = await bcrypt.hash(passwordToEmcrypt,salt);
+    user.password = passwordCrypted;
+    console.log(user);
+    let query = {
+      text: `SELECT * FROM "user" WHERE id=$1`,
+      values: [userId]
+    };
+    const result = await client.query(query);
+    if(!result.rowCount){
+      throw new APIError ("This account doesn't exist.", 404);
+    };
+    for (key in user){
+      query = {
+        text: `UPDATE "user" SET ${key}=$1 WHERE id=$2`,
+        values: [user[key], userId]
+      };
+      await client.query(query);
+    };
+  },
+
+  /**
    * User object, return matching user
    * @param {Object} user 
    * @returns {Object} informations from db for user
    * @throws {APIError} if user doesen't in db
    */
-  async getUserById(userId) {
+  async getUserById(userId, hasRights) {
+    let columns = 'id,pseudo,avatar_url';
+    if (hasRights){
+      columns += ',mail';
+    }
     const query = {
-      text : `SELECT * FROM "user" WHERE id=$1`,
+      text : `SELECT ${columns} FROM "user" WHERE id=$1`,
       values:[userId],
     }
-    const results = await client.query(query);
-    if(!results.rowCount){
+    const result = await client.query(query);
+    if(!result.rowCount){
       throw new APIError ("This account doesn't exist.", 404);
     };
-    return results.rows[0];
+    return result.rows[0];
   },
 
   /**
@@ -85,7 +123,7 @@ const usersDataMapper = {
     };
     debug(results);
     return 'User successfuly deleted.';
-  },
+  }
 };
 
 module.exports = usersDataMapper;

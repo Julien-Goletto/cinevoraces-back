@@ -3,11 +3,11 @@ const debug = require('debug')('JWT');
 const jwt = require('jsonwebtoken');
 const {ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET} = process.env;
 const jwtATConfig = {
-  expiresIn: 5,
+  expiresIn: 60,
   algorithm: 'HS256',
 };
 const jwtRTConfig = {
-  expiresIn: '1y',
+  expiresIn: '30d',
   algorithm: 'HS256',
 };
 

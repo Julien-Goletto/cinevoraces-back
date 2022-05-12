@@ -36,6 +36,7 @@ usersRouter
    * @returns {APIError} 404 - fail response
    */
   .post('/login', validate('body',userSchema), routerWrapper(usersController.logUser))
+  .put('/:userId', checkingUser.checkLogStatus, validate('body',userSchema), routerWrapper(usersController.updateUser))
     /**
    * Disconnect user, suppressing the session.user
    * @route GET /users/logout
@@ -51,7 +52,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-    .get('/:userId', routerWrapper(usersController.getUserById))
+    .get('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
     /**
    * Return users listing
    * @route GET /users/
