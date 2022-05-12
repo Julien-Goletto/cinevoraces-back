@@ -19,7 +19,7 @@ POST {{baseUrl}}/users/login
 content-type: application/json
 
 {
-  "pseudo": "Ester1",
+  "pseudo": "bibou",
   "mail": "bi@bou.fr",
   "password": "bibibou"
 }
@@ -38,7 +38,8 @@ content-type: application/json
 GET {{baseUrl}}/users
 
 ### Get user with userId
-GET {{baseUrl}}/users/34
+
+GET {{baseUrl}}/users/24
 
 ### LogOut user
 GET {{{{baseUrl}}}}/users/logout

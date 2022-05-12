@@ -24,7 +24,7 @@ moviesRouter
    * @returns {Array} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .get('/', refreshAccessToken, checkingUser.checkAuthorization, routerWrapper(moviesController.getAllMovies))
+  .get('/', routerWrapper(moviesController.getAllMovies))
   /**
    * Get a detailled movie object saved in database via its id
    * @route Get /movies/:movieId
@@ -35,10 +35,9 @@ moviesRouter
    */
   .get('/:movieId', routerWrapper(moviesController.getMovieByID))
   /**
-   * Get a movie,, getting all datas for adding it to database
+   * Post a movie to database, on frontend request
    * @route POST /movies/newmovie/
    * @group - Movies
-
    * @param {NewMovie.model} NewMovie.body.required - correspond to movie Id
    * @returns {Movie} 200 - success response
    * @returns {APIError} 404 - fail response

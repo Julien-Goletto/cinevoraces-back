@@ -9,7 +9,12 @@ const movieSchema = Joi.object({
   runtime: Joi.number().required(),
   casting: Joi.array().items(Joi.string()).min(1).required(),
   presentation: Joi.string().required(),
-  publishing_date: Joi.date().required()
+  publishing_date: Joi.date().required(),
+  user_id: Joi.number().required(),
+  season_id: Joi.number().required(),
+  movie_genres: Joi.array().items(Joi.string()).min(1).required(),
+  movie_languages: Joi.array().items(Joi.string()).min(1).required(),
+  movie_countries: Joi.array().items(Joi.string()).min(1).required()
 }).required();
 
 module.exports = movieSchema;
