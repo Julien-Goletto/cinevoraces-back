@@ -10,6 +10,7 @@ const metricsRouter = require('./metrics.router');
 
 // Adding subrouters
 router
+  .get('/', (_,res) => res.send('Coucou'))
   .use('/movies', moviesRouter)
   .use('/users', usersRouter)
   .use('/metrics', metricsRouter);

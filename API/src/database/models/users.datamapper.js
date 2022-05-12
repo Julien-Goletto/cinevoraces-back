@@ -24,36 +24,88 @@ const usersDataMapper = {
     if(!results.rowCount){
       throw new APIError ("This pseudo is already taken. Please choose another one.", 404);
     };
+
     return 'User successfully registered, please login to continue.';
   },
 
   /**
-   * From a user object, return a matching user, comparing hash in DB to entered password
-   * @param {Object} user 
-   * @returns {Object} user informations from db to be processed in controller
-   * @throws {APIError} if credentials doesn't match
+   * Log user with database and using bcrypt
+   * @param {Object} user informations
+   * @returns {Object} feedback message
+   * @throws {APIError} if user enter invalid credential 
    */
-  async getUser(user) {
-    const query = {
-      text : `SELECT pseudo FROM "user" WHERE pseudo = $1`,
-      values:[user.pseudo],
+  async logUser(user) {
+    let query = {
+      text: 'SELECT * FROM "user" WHERE pseudo=$1',
+      values: [user.pseudo]
+    };
+    const result = await client.query(query);
+    if(!result.rowCount){
+      throw new APIError ("Invalid credentials", 404);
+    };
+    if (!await bcrypt.compare(user.password,result.rows[0].password)) {
+      throw new APIError ("Invalid credentials", 404);
     }
-    const results = await client.query(query);
-    if(!results.rowCount){
+    const keys = ['id','pseudo','role'];
+    return Object.fromEntries(Object.entries(result.rows[0]).filter(([key,_]) => keys.includes(key)));
+  },
+
+  /**
+   * Modify user informations
+   * @param {Int} userId of user
+   * @param {Object} user informations
+   */
+  async updateUser(userId, user) {
+    const passwordToEmcrypt = user.password;
+    const salt = await bcrypt.genSalt(10);
+    const passwordCrypted = await bcrypt.hash(passwordToEmcrypt,salt);
+    user.password = passwordCrypted;
+    console.log(user);
+    let query = {
+      text: `SELECT * FROM "user" WHERE id=$1`,
+      values: [userId]
+    };
+    const result = await client.query(query);
+    if(!result.rowCount){
       throw new APIError ("This account doesn't exist.", 404);
     };
-    const isCorrect = await bcrypt.compare(user.password,results.rows[0].password);
-    if(!isCorrect){
-      throw new APIError("Credentials don't match, please retry.",404);
-    }
-    return results.rows[0];
+    for (key in user){
+      query = {
+        text: `UPDATE "user" SET ${key}=$1 WHERE id=$2`,
+        values: [user[key], userId]
+      };
+      await client.query(query);
+    };
   },
+
+  /**
+   * User object, return matching user
+   * @param {Object} user 
+   * @returns {Object} informations from db for user
+   * @throws {APIError} if user doesen't in db
+   */
+  async getUserById(userId, hasRights) {
+    let columns = 'id,pseudo,avatar_url';
+    if (hasRights){
+      columns += ',mail';
+    }
+    const query = {
+      text : `SELECT ${columns} FROM "user" WHERE id=$1`,
+      values:[userId],
+    }
+    const result = await client.query(query);
+    if(!result.rowCount){
+      throw new APIError ("This account doesn't exist.", 404);
+    };
+    return result.rows[0];
+  },
+
   /**
    * Return a list containing all registered users
    * @returns {ARRAY} of pseudos String
    * @throws {APIError} if the table user is empty
    */
-  async GetUsersList(){
+  async getUsersList(){
     const query = `SELECT * FROM "user";`;
     const results = await client.query(query);
     if(!results.rowCount){
@@ -61,10 +113,10 @@ const usersDataMapper = {
     };
     return results.rows;
   },
-  async deleteUserWithPseudo(pseudo){
+  async deleteUserWithUserId(userId){
     const query = {
-      text: `DELETE FROM "user" WHERE pseudo = $1;`,
-      values: [pseudo],
+      text: `DELETE FROM "user" WHERE id = $1;`,
+      values: [userId],
     };
     const results = await client.query(query);
     if(!results.rowCount){
@@ -72,7 +124,7 @@ const usersDataMapper = {
     };
     debug(results);
     return 'User successfuly deleted.';
-  },
+  }
 };
 
 module.exports = usersDataMapper;

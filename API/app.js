@@ -12,7 +12,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false, maxAge:null  }
+  cookie: { secure: false, maxAge:null }
 }));
 
 // Setting CORS
