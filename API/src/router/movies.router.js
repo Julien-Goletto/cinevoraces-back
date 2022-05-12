@@ -47,8 +47,8 @@ moviesRouter
 
    /**
  * @typedef NewMovie
- * @property {string} frenchTitle- french title
- * @property {string} originalTitle- originaltitle
+ * @property {string} frenchTitle - french title
+ * @property {string} originalTitle - originaltitle
  * @property {string} posterUrl - poster hosted on TMDB
  * @property {Array} directors - directors list (strings)
  * @property {string} releaseDate - release date (date)
