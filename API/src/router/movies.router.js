@@ -35,15 +35,33 @@ moviesRouter
    */
   .get('/:movieId', routerWrapper(moviesController.getMovieByID))
   /**
-   * Get a movie,, getting all datas for adding it to database
+   * Post a movie to database, on frontend request
    * @route POST /movies/newmovie/
    * @group - Movies
-   * @param {Integer} movieId - movie Id
-   * @param {String} MovieTitle - movvie
+   * @param {NewMovie.model} NewMovie.body.required - correspond to movie Id
    * @returns {Movie} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .post('/newmovie', validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.addNewMovie))
+  .post('/newmovie/', checkingUser.checkLogStatus,
+    validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.postMovie))
+
+   /**
+ * @typedef NewMovie
+ * @property {string} frenchTitle - french title
+ * @property {string} originalTitle - originaltitle
+ * @property {string} posterUrl - poster hosted on TMDB
+ * @property {Array} directors - directors list (strings)
+ * @property {string} releaseDate - release date (date)
+ * @property {integer} runtime - runtime
+ * @property {Array} casting - five first actors from movie cast (strings)
+ * @property {string} presentation - user presentation
+ * @property {string} publishingDate - publishing date of the movie on Cinévoraces (date)
+ * @property {integer} userId - user id
+ * @property {integer} seasonId - season id
+ * @property {Array} movieGenres - Array of movie genres (strings)
+ * @property {Array} movieLanguages - Array of movie languages (strings)
+ * @property {Array} movieCountries - Array of movie Countries (strings)
+ */
 
 moviesRouter.use(handleError);
 

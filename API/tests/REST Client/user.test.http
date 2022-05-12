@@ -25,19 +25,20 @@ content-type: application/json
 }
 
 ### Update user
-PUT {{baseUrl}}/users/19
+PUT {{baseUrl}}/users/34
 content-type: application/json
 
 {
-  "pseudo": "Ester",
-  "mail": "new@test.fr",
-  "password": "apero"
+  "pseudo": "Ester1",
+  "mail": "new@test1.fr",
+  "password": "sql"
 }
 
 ### Get all users from db
 GET {{baseUrl}}/users
 
 ### Get user with userId
+
 GET {{baseUrl}}/users/24
 
 ### LogOut user

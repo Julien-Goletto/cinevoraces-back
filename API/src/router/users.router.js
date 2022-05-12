@@ -21,22 +21,22 @@ usersRouter
    * Save a new user in database
    * @route POST /users/register
    * @group - Users
-   * @param {User}  user- user object credentials
+   * @param {UserRegistration.model}  UserRegistration.body.required- user object credentials
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
   .post('/register', validate('body',userSchema), routerWrapper(usersController.createUser))
   /**
    * Log the user comparing entered credentails with hashed datas in database,
-   * then pass usefull infos to the session
+   * then create two JWT: Access and Refresh tokens, passed into cookies.
    * @route POST /users/login
    * @group - Users
-   * @param {User} user - user object credentials
+   * @param {UserLogin.model} UserLogin.body.required - user object credentials
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
   .post('/login', validate('body',userSchema), routerWrapper(usersController.logUser))
-  .put('/:userId', validate('body',userSchema), routerWrapper(usersController.updateUser))
+  .put('/:userId', checkingUser.checkLogStatus, validate('body',userSchema), routerWrapper(usersController.updateUser))
     /**
    * Disconnect user, suppressing the session.user
    * @route GET /users/logout
@@ -52,7 +52,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-    .get('/:userId', routerWrapper(usersController.getUserById))
+    .get('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
     /**
    * Return users listing
    * @route GET /users/
@@ -68,7 +68,19 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .delete('/:pseudo', routerWrapper(usersController.deleteUser));
+  .delete('/:userId', routerWrapper(usersController.deleteUser));
+
+  /**
+ * @typedef UserRegistration
+ * @property {String} pseudo - User Pseudo (unique)
+ * @property {String} mail - User email (unique)
+ * @property {String} password - User password
+ */
+  /**
+ * @typedef UserLogin
+ * @property {String} pseudo - User Pseudo (unique)
+ * @property {String} password - User password
+ */
 
 usersRouter.use(handleError);
 

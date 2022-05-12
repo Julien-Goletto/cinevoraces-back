@@ -21,15 +21,32 @@ const usersController = {
   },
 
   async updateUser(req, res) {
-    const userId = req.params.userId;
+    const requestedUserId = parseInt(req.params.userId);
+    // Additionnal Safe guard
+    const requestingUserId = jwtMethods.decryptAccessToken
+    (
+      jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie),'accessToken')
+    ).id;
+    debug(requestedUserId,requestingUserId);
+    if(requestedUserId != requestingUserId){
+      throw new APIError('You have no right to change these parameters');
+    }
     const user = req.body;
-    const result = await usersDataMapper.updateUser(userId, user);
+    await usersDataMapper.updateUser(requestedUserId, user);
     res.status(200).json('Succeful change informations.');
   },
 
   async getUserById(req,res) {
-    const userId = req.params.userId;
-    const result = await usersDataMapper.getUserById(userId);
+    const requestedUserId = parseInt(req.params.userId);
+    const requestingUserId = jwtMethods.decryptAccessToken
+    (
+      jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie),'accessToken')
+    ).id;
+    let hasRights = false;
+    if(requestedUserId === requestingUserId){
+      hasRights = true;
+    }
+    const result = await usersDataMapper.getUserById(requestedUserId, hasRights);
     res.status(200).json(result);
   },
 
@@ -44,6 +61,12 @@ const usersController = {
     };
     delete req.session.user;
     res.status(200).json('You have successfuly logged out.');
+  },
+
+  async deleteUser(req,res) {
+    const userId = req.params.userId;
+    const results = await usersDataMapper.deleteUserWithPseudo(userId);
+    res.status(200).json(results);
   }
 };
 

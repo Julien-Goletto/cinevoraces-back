@@ -55,6 +55,11 @@ const usersDataMapper = {
    * @param {Object} user informations
    */
   async updateUser(userId, user) {
+    const passwordToEmcrypt = user.password;
+    const salt = await bcrypt.genSalt(10);
+    const passwordCrypted = await bcrypt.hash(passwordToEmcrypt,salt);
+    user.password = passwordCrypted;
+    console.log(user);
     let query = {
       text: `SELECT * FROM "user" WHERE id=$1`,
       values: [userId]
@@ -78,9 +83,13 @@ const usersDataMapper = {
    * @returns {Object} informations from db for user
    * @throws {APIError} if user doesen't in db
    */
-  async getUserById(userId) {
+  async getUserById(userId, hasRights) {
+    let columns = 'id,pseudo,avatar_url';
+    if (hasRights){
+      columns += ',mail';
+    }
     const query = {
-      text : `SELECT * FROM "user" WHERE id=$1`,
+      text : `SELECT ${columns} FROM "user" WHERE id=$1`,
       values:[userId],
     }
     const result = await client.query(query);
@@ -102,6 +111,18 @@ const usersDataMapper = {
       throw new APIError ("No user registered yet.", 404);
     };
     return results.rows;
+  },
+  async deleteUserWithUserId(userId){
+    const query = {
+      text: `DELETE FROM "user" WHERE id = $1;`,
+      values: [userId],
+    };
+    const results = await client.query(query);
+    if(!results.rowCount){
+      throw new APIError ("This user doesn't exist.", 404);
+    };
+    debug(results);
+    return 'User successfuly deleted.';
   }
 };
 
