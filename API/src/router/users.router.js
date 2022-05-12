@@ -47,7 +47,7 @@ usersRouter
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .put('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.updateUser))
+  .put('/:userId', validate('body',userSchema), checkingUser.checkLogStatus, routerWrapper(usersController.updateUser))
     /**
    * Disconnect user, suppressing the session.user
    * @route GET /users/logout
