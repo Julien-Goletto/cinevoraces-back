@@ -61,6 +61,12 @@ const usersController = {
     };
     delete req.session.user;
     res.status(200).json('You have successfuly logged out.');
+  },
+
+  async deleteUser(req,res) {
+    const userId = req.params.userId;
+    const results = await usersDataMapper.deleteUserWithPseudo(userId);
+    res.status(200).json(results);
   }
 };
 

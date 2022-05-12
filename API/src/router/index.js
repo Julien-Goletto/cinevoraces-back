@@ -9,6 +9,7 @@ const usersRouter = require('./users.router');
 
 // Adding subrouters
 router
+  .get('/', (_,res) => res.send('Coucou'))
   .use('/movies', moviesRouter)
   .use('/users', usersRouter);
 

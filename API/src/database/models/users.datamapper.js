@@ -111,6 +111,18 @@ const usersDataMapper = {
       throw new APIError ("No user registered yet.", 404);
     };
     return results.rows;
+  },
+  async deleteUserWithUserId(userId){
+    const query = {
+      text: `DELETE FROM "user" WHERE id = $1;`,
+      values: [userId],
+    };
+    const results = await client.query(query);
+    if(!results.rowCount){
+      throw new APIError ("This user doesn't exist.", 404);
+    };
+    debug(results);
+    return 'User successfuly deleted.';
   }
 };
 
