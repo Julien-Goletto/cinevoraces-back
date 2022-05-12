@@ -38,7 +38,7 @@ content-type: application/json
 GET {{baseUrl}}/users
 
 ### Get user with userId
-GET {{baseUrl}}/users/35
+GET {{baseUrl}}/users/34
 
 ### LogOut user
 GET {{{{baseUrl}}}}/users/logout
