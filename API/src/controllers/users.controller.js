@@ -40,8 +40,8 @@ const usersController = {
   },
 
   async deleteUser(req,res) {
-    const pseudo = req.params.pseudo;
-    const results = await usersDataMapper.deleteUserWithPseudo(pseudo);
+    const userId = req.params.userId;
+    const results = await usersDataMapper.deleteUserWithPseudo(userId);
     res.status(200).json(results);
   }
 };
