@@ -79,6 +79,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
+
   .delete('/:userId', refreshAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
 
   /**
