@@ -83,9 +83,13 @@ const usersDataMapper = {
    * @returns {Object} informations from db for user
    * @throws {APIError} if user doesen't in db
    */
-  async getUserById(userId) {
+  async getUserById(userId, hasRights) {
+    let columns = 'id,pseudo,avatar_url';
+    if (hasRights){
+      columns += ',mail';
+    }
     const query = {
-      text : `SELECT * FROM "user" WHERE id=$1`,
+      text : `SELECT ${columns} FROM "user" WHERE id=$1`,
       values:[userId],
     }
     const result = await client.query(query);

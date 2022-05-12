@@ -11,7 +11,7 @@ content-type: application/json
 {
   "pseudo": "bibou",
   "mail": "bi@bou.fr",
-  "password": "bibibou",
+  "password": "bibibou"
 }
 
 ### Log user
@@ -19,18 +19,18 @@ POST {{baseUrl}}/users/login
 content-type: application/json
 
 {
-  "pseudo": "Ester",
-  "mail": "new@test.fr",
-  "password": "sql"
+  "pseudo": "Ester1",
+  "mail": "bi@bou.fr",
+  "password": "bibibou"
 }
 
 ### Update user
-PUT {{baseUrl}}/users/19
+PUT {{baseUrl}}/users/34
 content-type: application/json
 
 {
-  "pseudo": "Ester",
-  "mail": "new@test.fr",
+  "pseudo": "Ester1",
+  "mail": "new@test1.fr",
   "password": "sql"
 }
 
@@ -38,7 +38,7 @@ content-type: application/json
 GET {{baseUrl}}/users
 
 ### Get user with userId
-GET {{baseUrl}}/users/19
+GET {{baseUrl}}/users/35
 
 ### LogOut user
 GET {{{{baseUrl}}}}/users/logout
