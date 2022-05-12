@@ -19,7 +19,7 @@ const usersRouter = express.Router();
 usersRouter
   /**
    * Save a new user in database
-   * @route POST /users/register
+   * @route POST /v1/users/register
    * @group - Users
    * @param {User}  user- user object credentials
    * @returns {String} 200 - success response
@@ -29,7 +29,7 @@ usersRouter
   /**
    * Log the user comparing entered credentails with hashed datas in database,
    * then pass usefull infos to the session
-   * @route POST /users/login
+   * @route POST /v1/users/login
    * @group - Users
    * @param {User} user - user object credentials
    * @returns {User} 200 - success response
@@ -38,7 +38,7 @@ usersRouter
   .post('/login', validate('body',userSchema), routerWrapper(usersController.logUser))
     /**
    * Disconnect user, suppressing the session.user
-   * @route GET /users/logout
+   * @route GET /v1/users/logout
    * @group - Users
    * @return {String} 200 - success response
    * @return {APIError} 404 - fail response
@@ -46,7 +46,7 @@ usersRouter
   .get('/logout', routerWrapper(usersController.logOutUser))
     /**
    * Return users listing
-   * @route GET /users/
+   * @route GET /v1/users/
    * @group - Users
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
@@ -54,7 +54,7 @@ usersRouter
   .get('/', routerWrapper(usersController.getUsersList))
     /**
    * Delete a user, using the pseudo (admin only)
-   * @route GET /users/:pseudo
+   * @route GET /v1/users/:pseudo
    * @group - Users
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response

@@ -18,7 +18,7 @@ const { moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema }
 moviesRouter
   /**
    * Get a list of all movies objects saved in database
-   * @route Get /movies
+   * @route Get /v1/movies
    * @group - Movies
    * @returns {Array} 200 - success response
    * @returns {APIError} 404 - fail response
@@ -26,7 +26,7 @@ moviesRouter
   .get('/', routerWrapper(moviesController.getAllMovies))
   /**
    * Get a detailled movie object saved in database via its id
-   * @route Get /movies/:movieId
+   * @route Get /v1/movies/:movieId
    * @group - Movies
    * @param {Integer} movieId
    * @returns {Movie} 200 - success response
@@ -35,7 +35,7 @@ moviesRouter
   .get('/:movieId', routerWrapper(moviesController.getMovieByID))
   /**
    * Get a game from RAWG services, getting all datas, before adding it to database with next post method
-   * @route POST /movies/newmovie/
+   * @route POST /v1/movies/newmovie/
    * @group - Movies
    * @param {Integer} movieId - correspond to movie Id
    * @returns {Movie} 200 - success response
