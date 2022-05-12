@@ -11,12 +11,12 @@ GET {{baseUrl}}/movies
 GET {{baseUrl}}/movies/2
 
 ### Add new movie
-POST {{{baseUrl}}}/movies/newmovie
+POST {{baseUrl}}/movies/newmovie
 content-type: application/json
 
 {
-  "title": "Le gentil test",
-  "original_title": "The Red test",
+  "french_title": "Le gentil test 4",
+  "original_title": "The Red test 4",
   "poster_url": "https://image.tmdb.org/t/p/original/eByAzqYc1ncYkaoxsYupkvMOL8H.jpg",
   "directors": ["Emeric Pressburger","Michael Powell"],
   "release_date": "1948-09-06",
@@ -24,9 +24,9 @@ content-type: application/json
   "casting": ["Moira Shearer","Adolf Wohlbrück","Marius Goring","Léonide Massine","Robert Helpmann"],
   "presentation": "Je propose de regarder les chaussons rouges. Film de Powell et Pressburger (D''ailleurs vous pouvez vous jeter sur leurs autres films, Narcisse Noir, Le voyeur, ... Y''a rien à jeter). Pourquoi ? Parce qu''il est superbe. Que la scène du ballet, je ne m''en suis jamais vraiment remis. Voilà... J''espère que ça vous plaira autant qu''à moi !",
   "publishing_date": "2020-03-20",
-  "user_id": 1,
-  "season_id": 1,
-  "movie_genres": ["Drame","Romance"],
-  "movie_languages": ["Pусский","English","Français"],
-  "movie_countries": ["United Kingdom"]
+  "user_id": 19,
+  "season_id": 3,
+  "movie_genres": ["test","test1"],
+  "movie_languages": ["Pусский","English","Roumain"],
+  "movie_countries": ["Dans une foret"]
 }

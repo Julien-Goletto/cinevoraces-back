@@ -24,7 +24,7 @@ moviesRouter
    * @returns {Array} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .get('/', refreshAccessToken, checkingUser.checkAuthorization, routerWrapper(moviesController.getAllMovies))
+  .get('/', routerWrapper(moviesController.getAllMovies))
   /**
    * Get a detailled movie object saved in database via its id
    * @route Get /movies/:movieId
@@ -43,7 +43,7 @@ moviesRouter
    * @returns {Movie} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .post('/newmovie', checkingUser.checkLogStatus, validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.addNewMovie))
+  .post('/newmovie', validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.addNewMovie))
 
 moviesRouter.use(handleError);
 
