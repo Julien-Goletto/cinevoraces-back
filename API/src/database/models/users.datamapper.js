@@ -74,10 +74,10 @@ const usersDataMapper = {
     };
     return results.rows;
   },
-  async deleteUserWithPseudo(pseudo){
+  async deleteUserWithUserId(userId){
     const query = {
-      text: `DELETE FROM "user" WHERE pseudo = $1;`,
-      values: [pseudo],
+      text: `DELETE FROM "user" WHERE id = $1;`,
+      values: [userId],
     };
     const results = await client.query(query);
     if(!results.rowCount){
