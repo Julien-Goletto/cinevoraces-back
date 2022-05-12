@@ -1,8 +1,8 @@
 const debug = require('debug')('JWT');
 const jwt = require('jsonwebtoken');
 
-const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
-const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
+const ACCESS_TOKEN_SECRET = `${process.env.ACCESS_TOKEN_SECRET}`;
+const REFRESH_TOKEN_SECRET = `${process.env.REFRESH_TOKEN_SECRET}`;
 
 const jwtATConfig = {
   expiresIn: 60,
