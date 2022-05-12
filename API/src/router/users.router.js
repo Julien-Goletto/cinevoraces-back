@@ -13,7 +13,7 @@ const refreshAccessToken = require('../middlewares/refreshAccessToken');
 
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
-const { userSchema } = require('../validation/schemas/');
+const { createUserSchema, userLoginSchema } = require('../validation/schemas/');
 
 
 // Configuration du subRouter 
@@ -28,7 +28,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .post('/register', validate('body',userSchema), routerWrapper(usersController.createUser))
+  .post('/register', validate('body', createUserSchema), routerWrapper(usersController.createUser))
   /**
    * Log the user comparing entered credentails with hashed datas in database,
    * then create two JWT: Access and Refresh tokens, passed into cookies.
@@ -38,7 +38,7 @@ usersRouter
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .post('/login', validate('body',userSchema), routerWrapper(usersController.logUser))
+  .post('/login', validate('body',userLoginSchema), routerWrapper(usersController.logUser))
   /**
    * Update user with informations give by user
    * @route PUT /users/userId
@@ -47,7 +47,7 @@ usersRouter
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .put('/:userId', validate('body',userSchema), checkingUser.checkLogStatus, routerWrapper(usersController.updateUser))
+  .put('/:userId', refreshAccessToken, checkingUser.checkLogStatus, validate('body',userLoginSchema), routerWrapper(usersController.updateUser))
     /**
    * Disconnect user, suppressing the session.user
    * @route GET /users/logout
@@ -55,7 +55,7 @@ usersRouter
    * @return {String} 200 - success response
    * @return {APIError} 404 - fail response
    */
-  .get('/logout', checkingUser.checkLogStatus, routerWrapper(usersController.logOutUser))
+  .get('/logout', refreshAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.logOutUser))
    /**
    * Return user
    * @route GET /users/userId
@@ -63,7 +63,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-    .get('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
+    .get('/:userId', refreshAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
     /**
    * Return users listing
    * @route GET /users/
@@ -71,7 +71,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .get('/', checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
+  .get('/', refreshAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
     /**
    * Delete a user, using the pseudo (admin only)
    * @route GET /users/:pseudo
@@ -79,7 +79,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .delete('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
+  .delete('/:userId', refreshAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
 
   /**
  * @typedef UserRegistration

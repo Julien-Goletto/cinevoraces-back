@@ -9,9 +9,9 @@ POST {{baseUrl}}/users/register
 content-type: application/json
 
 {
-  "pseudo": "bibou",
-  "mail": "bi@bou.fr",
-  "password": "bibibou"
+  "pseudo": "YusefDu93",
+  "mail": "la@france.fr",
+  "password": "MaFrance"
 }
 
 ### Log user
@@ -19,19 +19,18 @@ POST {{baseUrl}}/users/login
 content-type: application/json
 
 {
-  "pseudo": "Ester1",
-  "mail": "new@test1.fr",
-  "password": "sql"
+  "pseudo": "YusefDu93",
+  "password": "MaFrance"
 }
 
 ### Update user
-PUT {{baseUrl}}/users/34
+PUT {{baseUrl}}/users/29
 content-type: application/json
 
 {
-  "pseudo": "Ester1",
-  "mail": "new@test1.fr",
-  "password": "sql"
+  "pseudo": "YussefDu31",
+  "mail": "France@ma.fr",
+  "password": "FranceMaWesh"
 }
 
 ### Get all users from db
@@ -39,7 +38,7 @@ GET {{baseUrl}}/users
 
 ### Get user with userId
 
-GET {{baseUrl}}/users/24
+GET {{baseUrl}}/users/29
 
 ### LogOut user
 GET {{{{baseUrl}}}}/users/logout
