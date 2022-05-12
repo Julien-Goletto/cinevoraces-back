@@ -19,9 +19,9 @@ POST {{baseUrl}}/users/login
 content-type: application/json
 
 {
-  "pseudo": "bibou",
-  "mail": "bi@bou.fr",
-  "password": "bibibou"
+  "pseudo": "Ester1",
+  "mail": "new@test1.fr",
+  "password": "sql"
 }
 
 ### Update user

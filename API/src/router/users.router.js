@@ -8,6 +8,9 @@ const routerWrapper = require('../middlewares/routerWrapper');
 // Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
 
+// Refresh access token
+const refreshAccessToken = require('../middlewares/refreshAccessToken');
+
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
 const { userSchema } = require('../validation/schemas/');
@@ -36,7 +39,15 @@ usersRouter
    * @returns {APIError} 404 - fail response
    */
   .post('/login', validate('body',userSchema), routerWrapper(usersController.logUser))
-  .put('/:userId', checkingUser.checkLogStatus, validate('body',userSchema), routerWrapper(usersController.updateUser))
+  /**
+   * Update user with informations give by user
+   * @route PUT /users/userId
+   * @group - Users
+   * @param {UserUpdate.model} UserUpdate.body.required - user object credentials
+   * @returns {User} 200 - success response
+   * @returns {APIError} 404 - fail response
+   */
+  .put('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.updateUser))
     /**
    * Disconnect user, suppressing the session.user
    * @route GET /users/logout
@@ -44,7 +55,7 @@ usersRouter
    * @return {String} 200 - success response
    * @return {APIError} 404 - fail response
    */
-  .get('/logout', routerWrapper(usersController.logOutUser))
+  .get('/logout', checkingUser.checkLogStatus, routerWrapper(usersController.logOutUser))
    /**
    * Return user
    * @route GET /users/userId
@@ -60,7 +71,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .get('/', routerWrapper(usersController.getUsersList))
+  .get('/', checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
     /**
    * Delete a user, using the pseudo (admin only)
    * @route GET /users/:pseudo
@@ -68,7 +79,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .delete('/:userId', routerWrapper(usersController.deleteUser));
+  .delete('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
 
   /**
  * @typedef UserRegistration
@@ -81,7 +92,12 @@ usersRouter
  * @property {String} pseudo - User Pseudo (unique)
  * @property {String} password - User password
  */
-
+  /**
+ * @typedef UserUpdate
+ * @property {String} pseudo - User Pseudo (unique)
+ * @property {String} mail - User mail (unique)
+ * @property {String} password - User password
+ */
 usersRouter.use(handleError);
 
 module.exports = usersRouter;
