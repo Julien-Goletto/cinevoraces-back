@@ -31,7 +31,7 @@ usersRouter
   .post('/register', validate('body', createUserSchema), routerWrapper(usersController.createUser))
   /**
    * Log the user comparing entered credentails with hashed datas in database,
-   * * then pass usefull infos to the session
+   * then create two JWT: Access and Refresh tokens, passed into cookies.
    * @route POST /v1/users/login
    * @group - Users
    * @param {UserLogin.model} UserLogin.body.required - user object credentials

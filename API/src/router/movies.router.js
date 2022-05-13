@@ -45,7 +45,7 @@ moviesRouter
   .post('/newmovie/', checkingUser.checkLogStatus,
     validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.postMovie))
 
-   /**
+  /**
  * @typedef NewMovie
  * @property {string} frenchTitle - french title
  * @property {string} originalTitle - originaltitle
