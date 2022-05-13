@@ -57,6 +57,8 @@ CREATE VIEW movies_infos AS
 		array_agg(DISTINCT language.name) AS languages,
 		-- Watchlist counts
 		COALESCE(wc.watchlist_count,0) AS "watchlist_count",
+		-- Views counts
+		COALESCE(vc.views_count,0) AS "views_count",
 		-- Likes counts
 		COALESCE(lc.likes_count,0) AS "likes_count",
 		-- Ratings counts
@@ -81,6 +83,11 @@ CREATE VIEW movies_infos AS
 			(SELECT review.movie_id AS "movie_id", COUNT(*) "watchlist_count"
 				FROM review where "bookmarked" = true GROUP BY movie_id) wc
 			ON movie.id = wc.movie_id
+			-- Jointure views
+			FULL OUTER JOIN
+			(SELECT review.movie_id AS "movie_id", COUNT(*) "views_count"
+				FROM review where "viewed" = true GROUP BY movie_id) vc
+			ON movie.id = vc.movie_id
 			-- Jointure likes
 			FULL OUTER JOIN
 			(SELECT review.movie_id AS "movie_id", COUNT(*) "likes_count"
@@ -102,7 +109,7 @@ CREATE VIEW movies_infos AS
 		movie.runtime, movie.casting,movie.presentation, movie.is_published,
 		movie.publishing_date, movie.user_id, movie.season_id,
 		"user_id",user_pseudo,user_avatar_url,season_number,
-		watchlist_count,likes_count,ratings_count,avg_rating;
+		watchlist_count,views_count,likes_count,ratings_count,avg_rating;
 
 -- Liste des propositions en attente, avec french_title, poster_url, directors, release_date
 CREATE VIEW pending_propositions AS
