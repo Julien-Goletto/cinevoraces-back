@@ -21,15 +21,22 @@ app.use(session({
 const cors = require('cors');
 
 const corsOptions = {
-  origin: '*',
-  optionSucessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true,
+  origin: 'http://localhost:3000',
+  optionSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));
 
+const cookieParser = require('cookie-parser');
+const csurf = require('csurf');
+
+const csrfProtection = csurf({ cookie: { key: '__session', httpOnly: true } });
+app.use(cookieParser());
 const expressSwagger = require('express-swagger-generator')(app);
 const router = require('./src/router');
 
 app.use('/v1', router); // Prefixing API routes and using router
+app.use(csrfProtection);
 
 const expressSwaggerOptions = {
   swaggerDefinition: {
