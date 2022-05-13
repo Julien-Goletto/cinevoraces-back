@@ -14,7 +14,7 @@ const movieSchema = Joi.object({
   season_id: Joi.number().required(),
   movie_genres: Joi.array().items(Joi.string()).min(1).required(),
   movie_languages: Joi.array().items(Joi.string()).min(1).required(),
-  movie_countries: Joi.array().items(Joi.string()).min(1).required()
+  movie_countries: Joi.array().items(Joi.string()).min(1).required(),
 }).required();
 
 module.exports = movieSchema;

@@ -8,8 +8,8 @@ const path = require('path');
  * @property {string} message - Error message
  * @property {string} url - URL requested
  */
-class APIError extends Error{
-  constructor(message, url, status = 500){
+class APIError extends Error {
+  constructor(message, url, status = 500) {
     super(message); // Call for the parent's constructor
     this.status = status;
     this.url = url;
@@ -25,11 +25,10 @@ class APIError extends Error{
     console.error(this.url, this.message, new Date());
 
     // Async writing in logfiles
-    const logPath = path.resolve(__dirname, `../../logs`);
-    const fileName = new Date().toISOString().split('T')[0]+'.csv';
-    
-    await appendFile(logPath+"/"+fileName, `${new Date().toLocaleTimeString()},${this.url},${this.message}\n`);
+    const logPath = path.resolve(__dirname, '../../logs');
+    const fileName = `${new Date().toISOString().split('T')[0]}.csv`;
+    await appendFile(`${logPath}/${fileName}`, `${new Date().toLocaleTimeString()},${this.url},${this.message}\n`);
   }
-};
+}
 
 module.exports = APIError;

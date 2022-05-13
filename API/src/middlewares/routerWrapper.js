@@ -1,5 +1,3 @@
-const debug = require('debug')('Router_Wrapper');
-
 /**
  * Wrap any called controller method with a try catch pattern
  * @route GET /v1/routerWrapper
@@ -10,15 +8,12 @@ const debug = require('debug')('Router_Wrapper');
  * @returns {method} if no error
  * @throws {err} intercept the emitted error to pass it to the upper layer with the Error Handler.
  */
-const routerWrapper = (method) => {
-  return async (req, res, next) => {
-    try{
-      await method(req, res, next);
-    }
-    catch(err){
-      debug('ERROR', err);
-      next(err);
-    }
+const routerWrapper = (method) => async (req, res, next) => {
+  try {
+    await method(req, res, next);
+  } catch (err) {
+    console.log('ERROR', err);
+    next(err);
   }
 };
 

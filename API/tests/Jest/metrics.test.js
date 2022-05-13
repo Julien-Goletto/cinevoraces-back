@@ -1,13 +1,14 @@
 require('dotenv').config();
 
 const supertest = require('supertest');
+// const session = require('supertest-session');
 const app = require('../../app');
+
 const request = supertest(app);
 
-const session = require('supertest-session');
-let testSession = session(app);
+// const testSession = session(app);
 
-describe("API e2e", ()=> {
+describe('API e2e', () => {
   // beforeEach(function(done){
   //   testSession.post('/v1/users/login')
   //   .send({pseudo: "Tutu",password: "test"})
@@ -18,21 +19,21 @@ describe("API e2e", ()=> {
   //     return done();
   //   });
   // });
-  describe('Metrics routes', ()=>{
-    it('Should get general metrics', async ()=> {
+  describe('Metrics routes', () => {
+    it('Should get general metrics', async () => {
       const response = await request.get('/v1/metrics/');
       expect(response.status).toBe(200);
-      expect(response.text).toContain("seasons_count");
+      expect(response.text).toContain('seasons_count');
     });
-    it('Should get all individual metrics', async ()=> {
+    it('Should get all individual metrics', async () => {
       const response = await request.get('/v1/metrics/all');
       expect(response.status).toBe(200);
-      expect(response.text).toContain("proposed_movies_count");
+      expect(response.text).toContain('proposed_movies_count');
     });
-    it('Should get general metrics', async ()=> {
+    it('Should get general metrics', async () => {
       const response = await request.get('/v1/metrics/1');
       expect(response.status).toBe(200);
-      expect(response.text).toContain("proposed_movies_count");
+      expect(response.text).toContain('proposed_movies_count');
     });
   });
 });
