@@ -19,7 +19,7 @@ const { moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema }
 moviesRouter
   /**
    * Get a list of all movies objects saved in database
-   * @route Get /movies
+   * @route Get /v1/movies
    * @group - Movies
    * @returns {Array} 200 - success response
    * @returns {APIError} 404 - fail response
@@ -27,7 +27,7 @@ moviesRouter
   .get('/', routerWrapper(moviesController.getAllMovies))
   /**
    * Get a detailled movie object saved in database via its id
-   * @route Get /movies/:movieId
+   * @route Get /v1/movies/:movieId
    * @group - Movies
    * @param {Integer} movieId
    * @returns {Movie} 200 - success response
@@ -35,7 +35,7 @@ moviesRouter
    */
   .get('/:movieId', routerWrapper(moviesController.getMovieByID))
   /**
-   * Post a movie to database, on frontend request
+  * Post a movie to database, on frontend request
    * @route POST /movies/newmovie/
    * @group - Movies
    * @param {NewMovie.model} NewMovie.body.required - correspond to movie Id
@@ -45,7 +45,7 @@ moviesRouter
   .post('/newmovie/', checkingUser.checkLogStatus,
     validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.postMovie))
 
-   /**
+  /**
  * @typedef NewMovie
  * @property {string} frenchTitle - french title
  * @property {string} originalTitle - originaltitle
