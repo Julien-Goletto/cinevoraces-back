@@ -19,7 +19,7 @@ const moviesDataMapper = {
 
   async getMovieByID(movieId) {
     const query =  {
-      text: 'SELECT * FROM movie WHERE id=$1',
+      text: 'SELECT * FROM movies_infos WHERE id=$1',
       values: [movieId]
     };
     const results = await client.query(query);
