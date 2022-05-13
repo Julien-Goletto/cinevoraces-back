@@ -11,7 +11,7 @@ const moviesDataMapper = {
     const query = 'SELECT * FROM movies_infos';
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('No movie saved yet', 404);
+      throw new APIError('No movies saved yet', 404);
     }
     return results.rows;
   },
@@ -28,6 +28,15 @@ const moviesDataMapper = {
     return results.rows;
   },
 
+  async getAllMoviesFromLastSeason() {
+    const query = 'SELECT * FROM public.last_season_movies';
+    const results = await client.query(query);
+    if (!results.rowCount) {
+      throw new APIError('No movies saved yet', 404);
+    }
+    return results.rows;
+  },
+
   async getAllMoviesBySeason(seasonId) {
     const query = {
       text: 'SELECT * FROM movies_infos WHERE season_number=$1',
@@ -35,7 +44,7 @@ const moviesDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('No movie saved yet', 404);
+      throw new APIError('No movies saved yet', 404);
     }
     return results.rows;
   },

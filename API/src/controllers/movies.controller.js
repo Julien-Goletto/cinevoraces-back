@@ -11,6 +11,10 @@ const moviesController = {
     const result = await moviesDataMapper.getMovieByID(movieId);
     res.status(200).json(result);
   },
+  async getAllMoviesFromLastSeason(req, res) {
+    const results = await moviesDataMapper.getAllMoviesFromLastSeason();
+    res.status(200).json(results);
+  },
 
   async getAllMoviesBySeason(req, res) {
     const results = await moviesDataMapper.getAllMoviesBySeason(req.params.seasonId);

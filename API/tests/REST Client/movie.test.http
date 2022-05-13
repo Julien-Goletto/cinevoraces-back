@@ -10,6 +10,9 @@ GET {{baseUrl}}/movies
 ### Get movie infos with movieId
 GET {{baseUrl}}/movies/2
 
+### Get all movies for last season
+GET {{baseUrl}}/movies/lastseason
+
 ### Get all movies by seasonId
 GET {{baseUrl}}/movies/season/2
 
