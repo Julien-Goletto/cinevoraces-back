@@ -16,7 +16,6 @@ const usersController = {
     const refreshToken = jwtMethods.createRefreshToken(result);
     res.cookie('accessToken', accessToken);
     res.cookie('refreshToken', refreshToken);
-    console.log(req.headers.cookie);
     res.status(200).json(result);
   },
 
