@@ -10,7 +10,7 @@ const refreshTokensRouter = express.Router();
 
 refreshTokensRouter
   /**
-   * Renew and send into cookies new access and refresh tokens
+   * Renew and send into cookies new access and refresh tokens, and userId in json
    * @route GET /v1/refreshTokens
    * @group - Metrics
    * @returns {Array} 200 - success response

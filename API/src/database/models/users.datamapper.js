@@ -82,7 +82,6 @@ const usersDataMapper = {
     query.text = query.text.slice(0, -1);
     query.text += ` WHERE id=$${i}`;
     query.values.push(userId);
-    console.log(query);
     await client.query(query);
   },
 
