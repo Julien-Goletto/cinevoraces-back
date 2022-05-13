@@ -31,7 +31,7 @@ const moviesDataMapper = {
 
   async getAllMoviesBySeason(seasonId) {
     const query = {
-      text: 'SELECT * FROM movie WHERE season_id=$1',
+      text: 'SELECT * FROM movies_infos WHERE season_number=$1',
       values: [seasonId]
     };
     const results = await client.query(query);
