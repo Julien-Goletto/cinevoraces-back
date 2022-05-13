@@ -9,7 +9,7 @@ const moviesDataMapper = {
    * @throws {APIError} If db is empty
    */
   async getAllMovies() {
-    const query = 'SELECT * FROM movie';
+    const query = 'SELECT * FROM movies_infos';
     const results = await client.query(query);
     if(!results.rowCount){
       throw new APIError ("No movie saved yet", 404);
