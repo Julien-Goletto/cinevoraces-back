@@ -3,6 +3,7 @@ require('dotenv').config({path: '../API/.env'});
 const {TMDB_API_KEY} = process.env;
 
 const { appendFile } = require('fs/promises');
+const bcrypt = require('bcrypt');
 
 const searchQuery = 'Fight Club';
 const listId = 8201424;
@@ -78,11 +79,14 @@ function stringifyPresentation(array){
 
 // const chaincharacter = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789~!@#$%^&*()_-+={}[]/\:;."'<>?`
 const chaincharacter = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789~!@#$%^&*_-+=/:;."<>?`
-function createRandomPassWord (chaincharacter,length){
+async function createRandomPassWord (chaincharacter,length){
   let password = '';
+  const salt = await bcrypt.genSalt(10);
   for (let i=0 ; i < length; i++){
     password += chaincharacter[Math.floor(Math.random() * chaincharacter.length)];
   }
+  console.log(password);
+  password = await bcrypt.hash(password, salt);
   return password;
 };
 
@@ -94,7 +98,7 @@ const moviesList = require ('./moviesList.json');
 /**
  * Returns a list of all authors that post movies
  */
-function addAuthors(presentations){
+async function addAuthors(presentations){
   const authorsList = [];
   for (let i = 1 ; i <= Object.keys(presentations).length; i++){
     if (!authorsList.includes(presentations[i].author)){
@@ -104,7 +108,8 @@ function addAuthors(presentations){
   let seedingQueries = `INSERT INTO "user" ("pseudo","mail","password") VALUES\n`
   let id = 1;
   for (author of authorsList){
-    seedingQueries += `('${author}', 'mailbidon${id}' ,'${createRandomPassWord(chaincharacter,20)}'),\n`
+    const hashedPw = await createRandomPassWord(chaincharacter,20);
+    seedingQueries += `('${author}', 'mailbidon${id}' ,'${hashedPw}'),\n`
     id++
   }
   seedingQueries = seedingQueries.slice(0,-2) + `;`
