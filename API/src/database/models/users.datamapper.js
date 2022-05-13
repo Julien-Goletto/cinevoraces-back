@@ -59,9 +59,11 @@ const usersDataMapper = {
    */
   async updateUser(userId, user) {
     const userToModify = user;
-    const salt = await bcrypt.genSalt(10);
-    const passwordCrypted = await bcrypt.hash(userToModify.password, salt);
-    userToModify.password = passwordCrypted;
+    if (userToModify.password) {
+      const salt = await bcrypt.genSalt(10);
+      const passwordCrypted = await bcrypt.hash(userToModify.password, salt);
+      userToModify.password = passwordCrypted;
+    }
     let query = {
       text: 'SELECT * FROM "user" WHERE id=$1',
       values: [userId],
@@ -70,15 +72,17 @@ const usersDataMapper = {
     if (!result.rowCount) {
       throw new APIError("This account doesn't exist.", 404);
     }
-    query = { text: 'UPDATE "user" SET', values: [] };
+    query = { text: 'UPDATE "user" SET ', values: [] };
     let i = 1;
     for (const key of Object.keys(userToModify)) {
       query.text += `"${key}" = $${i},`;
       query.values.push(userToModify[key]);
       i += 1;
     }
-    query.text += ` WHERE id=${i}`;
+    query.text = query.text.slice(0, -1);
+    query.text += ` WHERE id=$${i}`;
     query.values.push(userId);
+    console.log(query);
     await client.query(query);
   },
 

@@ -10,7 +10,7 @@ const checkingUser = require('../middlewares/checkingUser');
 
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
-const { createUserSchema, userLoginSchema } = require('../validation/schemas');
+const { createUserSchema, userLoginSchema, userUpdateSchema } = require('../validation/schemas');
 
 // Configuration du subRouter
 const usersRouter = express.Router();
@@ -43,7 +43,7 @@ usersRouter
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .put('/:userId', checkingUser.checkLogStatus, validate('body', userLoginSchema), routerWrapper(usersController.updateUser))
+  .put('/:userId', checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
   /**
    * Disconnect user, suppressing the session.user
    * @route GET /v1/users/logout

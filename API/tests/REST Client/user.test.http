@@ -19,24 +19,19 @@ POST {{baseUrl}}/users/login
 content-type: application/json
 
 {
-  "pseudo": "YusefDu93",
-  "password": "MaFrance"
+  "pseudo": "YussefDu31",
+  "password": "FranceMaWesh"
 }
 
 ### Refresh tokens
-<<<<<<< HEAD
 POST {{baseUrl}}/refreshTokens
-=======
-GET {{baseUrl}}/refreshTokens
->>>>>>> 80da9b690891b55c0ddd613b2507801617a36bde
 
 ### Update user
-PUT {{baseUrl}}/users/29
+PUT {{baseUrl}}/users/33
 content-type: application/json
 
 {
   "pseudo": "YussefDu31",
-  "mail": "France@ma.fr",
   "password": "FranceMaWesh"
 }
 
