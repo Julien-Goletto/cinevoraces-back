@@ -8,9 +8,6 @@ const routerWrapper = require('../middlewares/routerWrapper');
 // Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
 
-// Refresh access token
-// const refreshAccessToken = require('../middlewares/refreshAccessToken');
-
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
 const { createUserSchema, userLoginSchema } = require('../validation/schemas');

@@ -24,7 +24,11 @@ content-type: application/json
 }
 
 ### Refresh tokens
+<<<<<<< HEAD
 POST {{baseUrl}}/refreshTokens
+=======
+GET {{baseUrl}}/refreshTokens
+>>>>>>> 80da9b690891b55c0ddd613b2507801617a36bde
 
 ### Update user
 PUT {{baseUrl}}/users/29
