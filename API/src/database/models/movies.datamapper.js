@@ -38,7 +38,6 @@ const moviesDataMapper = {
     if(!results.rowCount){
       throw new APIError ("No movie saved yet", 404);
     };
-    console.log(results.rows);
     return results.rows;
   },
 

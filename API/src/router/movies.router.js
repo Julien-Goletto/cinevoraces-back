@@ -50,7 +50,7 @@ moviesRouter
    * @returns {APIError} 404 - fail response
    */
   .post('/newmovie/', checkingUser.checkLogStatus,
-    validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.postMovie))
+    validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.addNewMovie))
 
   /**
  * @typedef NewMovie
