@@ -1,5 +1,4 @@
 const metricsDataMapper = require('../database/models/metrics.datamapper');
-const APIError = require('../Errors/APIError');
 
 const metricsController = {
   async generalMetrics(_, res) {
@@ -15,7 +14,7 @@ const metricsController = {
   async userMetricsById(req, res) {
     const results = await metricsDataMapper.getAllUsersMetrics(req.params.userId);
     res.status(200).json(results);
-  }
+  },
 };
 
 module.exports = metricsController;

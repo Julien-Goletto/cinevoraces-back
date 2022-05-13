@@ -1,7 +1,7 @@
 const express = require('express');
 const moviesController = require('../controllers/movies.controller');
 
-// Configuration du subRouter 
+// Configuration du subRouter
 const moviesRouter = express.Router();
 
 // Gestion des erreurs
@@ -12,7 +12,9 @@ const checkingUser = require('../middlewares/checkingUser');
 
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
-const { moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema } = require('../validation/schemas/');
+const {
+  moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema,
+} = require('../validation/schemas');
 
 moviesRouter
   /**

@@ -10,10 +10,9 @@ const checkingUser = require('../middlewares/checkingUser');
 
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
-const { createUserSchema, userLoginSchema } = require('../validation/schemas/');
+const { createUserSchema, userLoginSchema } = require('../validation/schemas');
 
-
-// Configuration du subRouter 
+// Configuration du subRouter
 const usersRouter = express.Router();
 
 usersRouter
@@ -35,7 +34,7 @@ usersRouter
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .post('/login', validate('body',userLoginSchema), routerWrapper(usersController.logUser))
+  .post('/login', validate('body', userLoginSchema), routerWrapper(usersController.logUser))
   /**
    * Update user with informations give by user
    * @route PUT /v1/users/userId
@@ -44,8 +43,8 @@ usersRouter
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .put('/:userId', checkingUser.checkLogStatus, validate('body',userLoginSchema), routerWrapper(usersController.updateUser))
-    /**
+  .put('/:userId', checkingUser.checkLogStatus, validate('body', userLoginSchema), routerWrapper(usersController.updateUser))
+  /**
    * Disconnect user, suppressing the session.user
    * @route GET /v1/users/logout
    * @group - Users
@@ -53,15 +52,15 @@ usersRouter
    * @return {APIError} 404 - fail response
    */
   .get('/logout', checkingUser.checkLogStatus, routerWrapper(usersController.logOutUser))
-   /**
+  /**
    * Return user
    * @route GET /v1/users/userId
    * @group - Users
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-    .get('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
-    /**
+  .get('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
+  /**
    * Return users listing
    * @route GET /v1/users/
    * @group - Users
@@ -69,7 +68,7 @@ usersRouter
    * @returns {APIError} 404 - fail response
    */
   .get('/', checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
-    /**
+  /**
    * Delete a user, using the pseudo (admin only)
    * @route GET /v1/users/:pseudo
    * @group - Users
@@ -78,18 +77,18 @@ usersRouter
    */
   .delete('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
 
-  /**
+/**
  * @typedef UserRegistration
  * @property {String} pseudo - User Pseudo (unique)
  * @property {String} mail - User email (unique)
  * @property {String} password - User password
  */
-  /**
+/**
  * @typedef UserLogin
  * @property {String} pseudo - User Pseudo (unique)
  * @property {String} password - User password
  */
-  /**
+/**
  * @typedef UserUpdate
  * @property {String} pseudo - User Pseudo (unique)
  * @property {String} mail - User mail (unique)

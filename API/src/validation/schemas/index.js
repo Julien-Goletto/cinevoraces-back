@@ -7,4 +7,13 @@ const languageSchema = require('./language.schema');
 const countrySchema = require('./country.schema');
 const seasonSchema = require('./season.schema');
 
-module.exports = { moviesSchema, reviewSchema, createUserSchema, userLoginSchema, genreSchema, languageSchema, countrySchema, seasonSchema };
+module.exports = {
+  moviesSchema,
+  reviewSchema,
+  createUserSchema,
+  userLoginSchema,
+  genreSchema,
+  languageSchema,
+  countrySchema,
+  seasonSchema,
+};
