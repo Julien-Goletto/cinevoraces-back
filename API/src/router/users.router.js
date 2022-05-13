@@ -47,7 +47,7 @@ usersRouter
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .put('/:userId', refreshAccessToken, checkingUser.checkLogStatus, validate('body',userLoginSchema), routerWrapper(usersController.updateUser))
+  .put('/:userId', checkingUser.checkLogStatus, validate('body',userLoginSchema), routerWrapper(usersController.updateUser))
     /**
    * Disconnect user, suppressing the session.user
    * @route GET /v1/users/logout
@@ -55,7 +55,7 @@ usersRouter
    * @return {String} 200 - success response
    * @return {APIError} 404 - fail response
    */
-  .get('/logout', refreshAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.logOutUser))
+  .get('/logout', checkingUser.checkLogStatus, routerWrapper(usersController.logOutUser))
    /**
    * Return user
    * @route GET /v1/users/userId
@@ -63,7 +63,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-    .get('/:userId', refreshAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
+    .get('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
     /**
    * Return users listing
    * @route GET /v1/users/
@@ -71,7 +71,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .get('/', refreshAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
+  .get('/', checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
     /**
    * Delete a user, using the pseudo (admin only)
    * @route GET /v1/users/:pseudo
@@ -79,8 +79,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-
-  .delete('/:userId', refreshAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
+  .delete('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
 
   /**
  * @typedef UserRegistration
