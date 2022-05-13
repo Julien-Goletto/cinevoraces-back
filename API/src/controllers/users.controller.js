@@ -33,7 +33,7 @@ const usersController = {
     }
     const user = req.body;
     await usersDataMapper.updateUser(requestedUserId, user);
-    res.status(200).json('Succeful change informations.');
+    res.status(200).json('Successfull change informations.');
   },
 
   async getUserById(req,res) {

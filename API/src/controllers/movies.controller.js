@@ -1,4 +1,3 @@
-const debug = require('debug')('Movie_Controller');
 const moviesDataMapper = require('../database/models/movies.datamapper');
 
 const moviesController = {
