@@ -19,8 +19,16 @@ POST {{baseUrl}}/users/login
 content-type: application/json
 
 {
-  "pseudo": "YussefDu31",
-  "password": "FranceMaWesh"
+  "pseudo": "Mat-Mat",
+  "password": "e5BkKI_rG5fg_6l!qG1I"
+}
+### Log admin
+POST {{baseUrl}}/users/login
+content-type: application/json
+
+{
+  "pseudo": "Yves Signal",
+  "password": "K_foDAInGDeXiN~bt/Bx"
 }
 
 ### Refresh tokens
