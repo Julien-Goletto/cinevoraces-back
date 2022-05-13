@@ -1,5 +1,4 @@
 const client = require('../dbclient');
-// const debug = require('debug')("Metrics_DataMapper");
 const APIError = require('../../Errors/APIError');
 
 const metricsDataMapper = {
@@ -18,11 +17,11 @@ const metricsDataMapper = {
    * @throws {APIError} If db is empty
    */
   async getAllUsersMetrics() {
-    const query =  'SELECT * FROM indiv_actions_metrics';
+    const query = 'SELECT * FROM indiv_actions_metrics';
     const results = await client.query(query);
-    if(!results.rowCount){
-      throw new APIError ("No user saved in database.", 404);
-    };
+    if (!results.rowCount) {
+      throw new APIError('No user saved in database.', 404);
+    }
     return results.rows;
   },
   /**
@@ -31,17 +30,17 @@ const metricsDataMapper = {
    * @throws {APIError} If db is empty
    */
   async getUserMetricsByID(userId) {
-    const query =  {
+    const query = {
       text: `SELECT proposed_movies_count,comments_count,likes_counts,watchlist_count,ratings_count
               FROM indiv_actions_metrics WHERE id=$1`,
       values: [userId],
     };
     const results = await client.query(query);
-    if(!results.rowCount){
-      throw new APIError ("This user doesn't exist.", 404);
-    };
+    if (!results.rowCount) {
+      throw new APIError("This user doesn't exist.", 404);
+    }
     return results.rows;
-  }
+  },
 };
 
 module.exports = metricsDataMapper;

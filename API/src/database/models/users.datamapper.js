@@ -1,29 +1,28 @@
-const client = require('../dbclient');
-const debug = require('debug')("User_DataMapper");
-const APIError = require('../../Errors/APIError');
-
+/* eslint-disable no-restricted-syntax */
 const bcrypt = require('bcryptjs');
+const client = require('../dbclient');
+const APIError = require('../../Errors/APIError');
 
 const usersDataMapper = {
 
   /**
    * Save a  new user in database, using bcrypt for password encrypting
-   * @param {Object} user 
+   * @param {Object} user
    * @returns {String} feedback message
    * @throws {APIError} if user already in base, due to unique constraint
    */
   async createUser(user) {
-    let {pseudo, mail, password} = user;
+    const { pseudo, mail, password } = user;
     const salt = await bcrypt.genSalt(10);
-    const encryptedPassword = await bcrypt.hash(password,salt);
+    const encryptedPassword = await bcrypt.hash(password, salt);
     const query = {
-      text : `INSERT INTO "user"("pseudo", "mail", "password") VALUES ($1,$2,$3)`,
-      values:[pseudo,mail,encryptedPassword]
+      text: 'INSERT INTO "user"("pseudo", "mail", "password") VALUES ($1,$2,$3)',
+      values: [pseudo, mail, encryptedPassword],
     };
     const results = await client.query(query);
-    if(!results.rowCount){
-      throw new APIError ("This pseudo is already taken. Please choose another one.", 404);
-    };
+    if (!results.rowCount) {
+      throw new APIError('This pseudo is already taken. Please choose another one.', 404);
+    }
 
     return 'User successfully registered, please login to continue.';
   },
@@ -32,22 +31,25 @@ const usersDataMapper = {
    * Log user with database and using bcrypt
    * @param {Object} user informations
    * @returns {Object} feedback message
-   * @throws {APIError} if user enter invalid credential 
+   * @throws {APIError} if user enter invalid credential
    */
   async logUser(user) {
-    let query = {
+    const query = {
       text: 'SELECT * FROM "user" WHERE pseudo=$1',
-      values: [user.pseudo]
+      values: [user.pseudo],
     };
     const result = await client.query(query);
-    if(!result.rowCount){
-      throw new APIError ("Invalid credentials", 404);
-    };
-    if (!await bcrypt.compare(user.password,result.rows[0].password)) {
-      throw new APIError ("Invalid credentials", 404);
+    if (!result.rowCount) {
+      throw new APIError('Invalid credentials', 404);
     }
-    const keys = ['id','pseudo','role'];
-    return Object.fromEntries(Object.entries(result.rows[0]).filter(([key,_]) => keys.includes(key)));
+    if (!await bcrypt.compare(user.password, result.rows[0].password)) {
+      throw new APIError('Invalid credentials', 404);
+    }
+    const keys = ['id', 'pseudo', 'role'];
+    return Object.fromEntries(
+      // eslint-disable-next-line comma-dangle
+      Object.entries(result.rows[0]).filter(([key]) => keys.includes(key))
+    );
   },
 
   /**
@@ -56,47 +58,49 @@ const usersDataMapper = {
    * @param {Object} user informations
    */
   async updateUser(userId, user) {
-    const passwordToEmcrypt = user.password;
+    const userToModify = user;
     const salt = await bcrypt.genSalt(10);
-    const passwordCrypted = await bcrypt.hash(passwordToEmcrypt,salt);
-    user.password = passwordCrypted;
-    console.log(user);
+    const passwordCrypted = await bcrypt.hash(userToModify.password, salt);
+    userToModify.password = passwordCrypted;
     let query = {
-      text: `SELECT * FROM "user" WHERE id=$1`,
-      values: [userId]
+      text: 'SELECT * FROM "user" WHERE id=$1',
+      values: [userId],
     };
     const result = await client.query(query);
-    if(!result.rowCount){
-      throw new APIError ("This account doesn't exist.", 404);
-    };
-    for (key in user){
-      query = {
-        text: `UPDATE "user" SET ${key}=$1 WHERE id=$2`,
-        values: [user[key], userId]
-      };
-      await client.query(query);
-    };
+    if (!result.rowCount) {
+      throw new APIError("This account doesn't exist.", 404);
+    }
+    query = { text: 'UPDATE "user" SET', values: [] };
+    let i = 1;
+    for (const key of Object.keys(userToModify)) {
+      query.text += `"${key}" = $${i},`;
+      query.values.push(userToModify[key]);
+      i += 1;
+    }
+    query.text += ` WHERE id=${i}`;
+    query.values.push(userId);
+    await client.query(query);
   },
 
   /**
    * User object, return matching user
-   * @param {Object} user 
+   * @param {Object} user
    * @returns {Object} informations from db for user
    * @throws {APIError} if user doesen't in db
    */
   async getUserById(userId, hasRights) {
     let columns = 'id,pseudo,avatar_url';
-    if (hasRights){
+    if (hasRights) {
       columns += ',mail';
     }
     const query = {
-      text : `SELECT ${columns} FROM "user" WHERE id=$1`,
-      values:[userId],
-    }
-    const result = await client.query(query);
-    if(!result.rowCount){
-      throw new APIError ("This account doesn't exist.", 404);
+      text: `SELECT ${columns} FROM "user" WHERE id=$1`,
+      values: [userId],
     };
+    const result = await client.query(query);
+    if (!result.rowCount) {
+      throw new APIError("This account doesn't exist.", 404);
+    }
     return result.rows[0];
   },
 
@@ -105,26 +109,25 @@ const usersDataMapper = {
    * @returns {ARRAY} of pseudos String
    * @throws {APIError} if the table user is empty
    */
-  async getUsersList(){
-    const query = `SELECT * FROM "user";`;
+  async getUsersList() {
+    const query = 'SELECT * FROM "user";';
     const results = await client.query(query);
-    if(!results.rowCount){
-      throw new APIError ("No user registered yet.", 404);
-    };
+    if (!results.rowCount) {
+      throw new APIError('No user registered yet.', 404);
+    }
     return results.rows;
   },
-  async deleteUserWithUserId(userId){
+  async deleteUserWithUserId(userId) {
     const query = {
-      text: `DELETE FROM "user" WHERE id = $1;`,
+      text: 'DELETE FROM "user" WHERE id = $1;',
       values: [userId],
     };
     const results = await client.query(query);
-    if(!results.rowCount){
-      throw new APIError ("This user doesn't exist.", 404);
-    };
-    debug(results);
+    if (!results.rowCount) {
+      throw new APIError("This user doesn't exist.", 404);
+    }
     return 'User successfuly deleted.';
-  }
+  },
 };
 
 module.exports = usersDataMapper;

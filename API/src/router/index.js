@@ -1,4 +1,5 @@
-const {Router} = require('express');
+const { Router } = require('express');
+
 const router = Router();
 
 // Import middlewares for checking user role if necessary
@@ -10,7 +11,7 @@ const metricsRouter = require('./metrics.router');
 
 // Adding subrouters
 router
-  .get('/', (_,res) => res.send('Coucou'))
+  .get('/', (_, res) => res.send('Coucou'))
   .use('/movies', moviesRouter)
   .use('/users', usersRouter)
   .use('/metrics', metricsRouter);
