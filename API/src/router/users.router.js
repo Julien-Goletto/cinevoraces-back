@@ -28,7 +28,7 @@ usersRouter
   .post('/register', validate('body',userSchema), routerWrapper(usersController.createUser))
   /**
    * Log the user comparing entered credentails with hashed datas in database,
-   * then pass usefull infos to the session
+   * * then pass usefull infos to the session
    * @route POST /v1/users/login
    * @group - Users
    * @param {User} user - user object credentials
