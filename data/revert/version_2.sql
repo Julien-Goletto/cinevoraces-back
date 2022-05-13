@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP FUNCTION new_movie;
+DROP FUNCTION IF EXISTS new_movie;
 
 COMMIT;

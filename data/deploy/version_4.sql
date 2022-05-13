@@ -2,43 +2,51 @@
 
 BEGIN;
 
+-- Seeding seasons
 INSERT INTO "season" ("number","year") VALUES
 (1,2020),(2,2021),(3,2022);
 
+-- Ajouts des users
 INSERT INTO "user" ("pseudo","mail","password") VALUES
-('Mat-Mat','mailbidon','ay:kgd_DXp=_VSlv*N5#'),
-('Yves Signal','mailbidon','EKo#Vk71:?DeW!4;Kbg%'),
-('ajcrou','mailbidon','>-gjurhD6L!+ze!xuD@@'),
-('Miku','mailbidon','pUlMzIPT_+jkpF+?;2FB'),
-('Mordicus','mailbidon','a$%os*k//0vJaZ/Qkiq;'),
-('Woulfo','mailbidon','hI$9cefDU#LE6aK0L;sV'),
-('Lukino','mailbidon','Ag:dO!@9s_53muf!IY5Y'),
-('Guillaume','mailbidon','Ti0RicuC?M"rBU?BkKxp'),
-('Checco','mailbidon','$WlWZ4LSSrz:X!.c1Vv='),
-('Neofelis','mailbidon','54l@+U?ZVQy"S3m?Ag"7'),
-('Sabbata','mailbidon','AZ/R-g.J--asa!0K1S6$'),
-('benbossman','mailbidon','mXSDgq~ngnc;i9?C3m5M'),
-('HR','mailbidon','=iWLL8r-vZz2N1nz&Gq6'),
-('Poulpator','mailbidon','Y#e"j>+;KSv$XJ8=.Ab7'),
-('Pyjama Wallon','mailbidon','1S-t8yLidB=6;^l:P1m%'),
-('Sao','mailbidon','usuPs2/xtZ"+5H^V_C/~'),
-('Fariboles','mailbidon','O;.6j!U_vy@8!lkEAiV*'),
-('Eiffel-AD','mailbidon','/5Uqz6u~4W6L4H8Bv5Y7'),
-('Niebelungen','mailbidon','@~mR=bCo@G+>";Ev$Xu3'),
-('Flexagrume','mailbidon','?Nh3xB<Ki9#2V-!$C;&V'),
-('Seurcha','mailbidon','thi0Zg:/p:.c8~yUcUNv'),
-('TuBuzz','mailbidon','Ss3sPQ~uiMN>i.WzJP7j'),
-('Klavor','mailbidon','y:OT<.S*ik7%YW/riWrT'),
-('Nieuh','mailbidon','s+uBk@CZt-yfyzr?07G5'),
-('Ruadir','mailbidon','B2*_B/-tJzYz.PQK:7g#'),
-('Morbo','mailbidon','SK.HqpVGS&U+mXuBmvPk'),
-('MrSetzer','mailbidon','faR8J#Kip@H<"ndo7A$m'),
-('DrPierre','mailbidon','?~?jnr6?i*Eh*cR@!M:2'),
-('FlexAgrume','mailbidon','Es$dir3P$!nHuvI?LOZ9'),
-('quilim','mailbidon','PgrcKNRnO.H%2-e5_u1i'),
-('Louis-Cyrus','mailbidon','V&/md+EfrDD>Z9?NaT@y'),
-('Calys','mailbidon','p0/!56&e//CH+Kd#=2Nk');
+('Mat-Mat', 'mailbidon1' ,'dDaVaPO?ecIhtpxDjIal'),
+('Yves Signal', 'mailbidon2' ,'GD<4V@pPrAsc^U!E<Qcr'),
+('ajcrou', 'mailbidon3' ,'xVtJ:hT&VB;6;GAy7ikF'),
+('Miku', 'mailbidon4' ,'/d+A$eF0#vgQyNubij:4'),
+('Mordicus', 'mailbidon5' ,'YvWCaM@z;uc3>oX-A/TS'),
+('Woulfo', 'mailbidon6' ,'BRAj^EnKzGO2dg-A@9t:'),
+('Lukino', 'mailbidon7' ,'Qmt=2Bju&C<E!Rvc+n~u'),
+('Guillaume', 'mailbidon8' ,'4YPmK9UUDluvcfXy%8.t'),
+('Checco', 'mailbidon9' ,'&YF^Qd>*PgEz378W-_r.'),
+('Neofelis', 'mailbidon10' ,'pdQz0I_g>.0TIl/XS$/7'),
+('Sabbata', 'mailbidon11' ,'J5xqnz6!On.mTPXOSDpN'),
+('benbossman', 'mailbidon12' ,'6hRzG31T766frt$#-&vY'),
+('HR', 'mailbidon13' ,'ZmM/fUx8PXYU567b?%Lr'),
+('Poulpator', 'mailbidon14' ,';G%--<&$truIs:<fv#s?'),
+('Pyjama Wallon', 'mailbidon15' ,'^yu8^zqUkq4M*K0%kVM$'),
+('Sao', 'mailbidon16' ,'taIq!Qt%EOmpciLSanQp'),
+('Fariboles', 'mailbidon17' ,'bC2@zrsKn+=R>CW/=JyF'),
+('Eiffel-AD', 'mailbidon18' ,'2o60Q8PY3YE#;tNp;;9B'),
+('Niebelungen', 'mailbidon19' ,'TfE6-3DY1Y^^~"Q~HnP9'),
+('Flexagrume', 'mailbidon20' ,'&u_e.44Y@Q?7pUv.!#l3'),
+('Seurcha', 'mailbidon21' ,'lbpIo0=$XRpzVC^9mb;!'),
+('TuBuzz', 'mailbidon22' ,'P0CK%C4Cd=A%q.jHYsjR'),
+('Klavor', 'mailbidon23' ,'WcdUcetYCF<Dh9jdrEcN'),
+('Nieuh', 'mailbidon24' ,'x1k509ZzW6GAG=p?oFy.'),
+('Ruadir', 'mailbidon25' ,'@$qW/x";:/LNe*cs:@7C'),
+('Morbo', 'mailbidon26' ,'eJZnjoE2a^tmFB~KJz0@'),
+('MrSetzer', 'mailbidon27' ,'_<05lV_6vDacPEDuy98g'),
+('DrPierre', 'mailbidon28' ,'r<8eByVFS$NXuMaA#2rW'),
+('FlexAgrume', 'mailbidon29' ,':M>BR-na*TYVv?hicl4m'),
+('quilim', 'mailbidon30' ,':n?i/AgELcPkt70Y5Ps7'),
+('Louis-Cyrus', 'mailbidon31' ,'#>MZgCOYX$bB=8Ka2*;Y'),
+('Calys', 'mailbidon32' ,'7~Gm8PjWALRRyuZFZgp$');
 
+-- Passage de Yves Signal en admin
+UPDATE "user"
+SET role = 'admin'
+WHERE pseudo = 'Yves Signal';
+
+-- Seeding des films archivés
 SELECT new_movie('Les Chaussons rouges','The Red Shoes','https://image.tmdb.org/t/p/original/eByAzqYc1ncYkaoxsYupkvMOL8H.jpg',array['Emeric Pressburger','Michael Powell'],'1948-09-06','133',array['Moira Shearer','Adolf Wohlbrück','Marius Goring','Léonide Massine','Robert Helpmann'],'Je propose de regarder les chaussons rouges. Film de Powell et Pressburger (D''ailleurs vous pouvez vous jeter sur leurs autres films, Narcisse Noir, Le voyeur, ... Y''a rien à jeter). Pourquoi ? Parce qu''il est superbe. Que la scène du ballet, je ne m''en suis jamais vraiment remis. Voilà... J''espère que ça vous plaira autant qu''à moi !','2020-03-20',1,1,array['Drame','Romance'],array['Pусский','English','Français'],array['United Kingdom']);
 SELECT new_movie('Stalker','Сталкер','https://image.tmdb.org/t/p/original/91pnITUEwt1GfYy55zA2AZSTSVb.jpg',array['Andrei Tarkovsky'],'1979-05-25','163',array['Aleksandr Kaydanovskiy','Anatoliy Solonitsyn','Nikolay Grinko','Alisa Freyndlikh','Natasha Abramova'],'Comment embrayer derrière Powell et Pressburger ? Peut-être en invitant un autre réalisateur prestigieux, russe de surcroît. Venez déambuler avec nous dans la zone, cette semaine je vous propose de (re)voir le futur post-apocalyptique façon Andreï Tarkovski.','2020-03-27',2,1,array['Science-Fiction','Drame'],array['Pусский'],array['Soviet Union']);
 SELECT new_movie('The King''s Choice','Kongens nei','https://image.tmdb.org/t/p/original/daKZmVgLlDwuO9sSRwevvh8alaS.jpg',array['Erik Poppe'],'2016-09-29','135',array['Jesper Christensen','Anders Baasmo Christiansen','Karl Markovics','Tuva Novotny','Arthur Hakalahti'],'J''ai décidé de vous proposer un film qui me paraît intéressant et un minimum original (et d''une qualité honorable dans sa réalisation / acteurs) tout en explorant un fait essentiel de l''Histoire norvégienne (et indirectement de la WWII) avec le film : Kongens nei (Erik Poppe - 2016). Ultimatum en français.
@@ -395,6 +403,11 @@ Comme je disais un peu plus tôt ce n''est pas un film que j''ai particulièreme
 Bref Doomsday dispo sur Prime, enjoy! ( Checco, je t''expliquerai pourquoi les meumeu m''ont marquées ensuite )','2021-04-25',26,3,array['Action','Thriller','Science-Fiction'],array['English'],array['Germany','United Kingdom','United States of America','South Africa']);
 SELECT new_movie('The Dictator','The Dictator','https://image.tmdb.org/t/p/original/zKcCaWewiEF2XGJDSureoXb2uoo.jpg',array['Larry Charles'],'2012-05-15','83',array['Sacha Baron Cohen','Ben Kingsley','Anna Faris','Jason Mantzoukas','Sayed Badreya'],'Je cherchais un film absurde, drôle ou politiquement incorrecte. J’avais d’abord pensé à Tonnerre sous les Tropiques (Tropic Thunder, 2008), mais finalement je l’ai trouvé trop convenu/connu. Alors, j’ai plutôt pensé au Le Fantôme de la liberté (1974) de Buñuel. Mais en le rematant (voyez comme je prends mon travail de proposeur au sérieux), je l’ai trouvé pas assez absurde et drôle, un peu déçu quoi. Alors, je me suis retourné vers ce vieux Chaplin, avec naturellement* Le Dictateur* (The Great Dictator, 1940), que tout le monde connaît, mais que personne n’a réellement vu en entier. Pareil (et ramaté) ce n’est pas un film super drôle/absurde, certes il montre l’absurdité des régimes fascistes, se moque de Hitler et Benito, mais son discours est une mise en garde, qui par les temps qui courent, on en sort le cœur lourd. Bon finalement, j’ai retiré Great, et je vous propose donc plutôt … Le Dictateur (The Dictator, 2012), de Larry Charles, avec naturellement Sacha Cohen ! Niveau humour con, vous serez servi !','2021-05-02',9,3,array['Comédie'],array['English','עִבְרִית'],array['United States of America']);
 
+-- Mise à jour des statuts des films archivés
+UPDATE movie
+SET is_published = 'true';
+
+-- Ajout de reviews
 INSERT INTO "review" ("user_id","movie_id","bookmarked","viewed","liked","rating","comment") VALUES
 (1,1,false,true,true,5,'Un grand merci à Wade pour cette proposition. C''est la deuxième fois que je le vois et, pour résumer, je l''ai trouvé encore plus puissant. Je vais essayer d''être pertinent et pas trop brouillon mais
  ce film m''a retourné donc je ne garantis pas la cohérence de cette "critique". L''avantage de revoir un film c''est qu''on évacue les grandes lignes du scénario et qu''on se focalise sur des détails passés inaperçus la première fois.
