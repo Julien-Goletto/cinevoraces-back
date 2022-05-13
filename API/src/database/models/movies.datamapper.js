@@ -29,6 +29,19 @@ const moviesDataMapper = {
     return results.rows;
   },
 
+  async getAllMoviesBySeason(seasonId) {
+    const query = {
+      text: 'SELECT * FROM movie WHERE season_id=$1',
+      values: [seasonId]
+    };
+    const results = await client.query(query);
+    if(!results.rowCount){
+      throw new APIError ("No movie saved yet", 404);
+    };
+    console.log(results.rows);
+    return results.rows;
+  },
+
   async addNewMovie(movie){
     let query =  {
       text: 'SELECT * FROM movie WHERE french_title=$1',
