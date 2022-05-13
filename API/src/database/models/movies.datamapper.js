@@ -28,6 +28,15 @@ const moviesDataMapper = {
     return results.rows;
   },
 
+  async getAllMoviesForLastSeason() {
+    const query = 'SELECT * FROM last_season_movies';
+    const results = await client.query(query);
+    if (!results.rowCount) {
+      throw new APIError('No movie saved yet', 404);
+    }
+    return results.rows;
+  },
+
   async getAllMoviesBySeason(seasonId) {
     const query = {
       text: 'SELECT * FROM movies_infos WHERE season_number=$1',

@@ -35,6 +35,14 @@ moviesRouter
    */
   .get('/:movieId', routerWrapper(moviesController.getMovieByID))
   /**
+   * Get all movie for last season
+   * @route Get /v1/movies/lastseason
+   * @group - Movies
+   * @returns {Movie} 200 - success response
+   * @returns {APIError} 404 - fail response
+   */
+  .get('/lastseason', routerWrapper(moviesController.getAllMoviesForLastSeason))
+  /**
    * Get all movie by season
    * @route Get /v1/movies/season/:seasonId
    * @group - Movies
