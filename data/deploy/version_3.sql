@@ -119,7 +119,7 @@ CREATE VIEW pending_propositions AS
 
 -- Liste des films de la saison en cours, avec id, french title, poster_url et season_number
 CREATE VIEW last_season_movies AS
-	SELECT id, french_title, poster_url, season_number
+	SELECT *
 	FROM movies_infos
 	GROUP BY id, french_title,poster_url,season_number
 	HAVING season_number = (SELECT MAX(season_number) FROM movies_infos);
