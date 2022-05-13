@@ -23,6 +23,9 @@ content-type: application/json
   "password": "MaFrance"
 }
 
+### Refresh tokens
+GET {{baseUrl}}/refreshTokens
+
 ### Update user
 PUT {{baseUrl}}/users/29
 content-type: application/json
