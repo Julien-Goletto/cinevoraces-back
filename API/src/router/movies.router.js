@@ -51,10 +51,14 @@ moviesRouter
    * @returns {Movie} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .post('/newmovie/', checkingUser.checkLogStatus,
-    validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema), routerWrapper(moviesController.addNewMovie))
+  .post(
+    '/newmovie/',
+    checkingUser.checkLogStatus,
+    validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema),
+    routerWrapper(moviesController.addNewMovie),
+  );
 
-  /**
+/**
  * @typedef NewMovie
  * @property {string} frenchTitle - french title
  * @property {string} originalTitle - originaltitle
