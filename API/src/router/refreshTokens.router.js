@@ -5,15 +5,16 @@ const refreshTokensController = require('../controllers/refreshTokens.controller
 const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
-// Configuration du subRouter 
+// Configuration du subRouter
 const refreshTokensRouter = express.Router();
 
 refreshTokensRouter
   /**
-   * Renew and send into cookies new access and refresh tokens
+   * Renew and send into cookies new access and refresh tokens, and userId in json
    * @route GET /v1/refreshTokens
    * @group - Metrics
-   * @returns {Array} 200 - success response - access and refresh token renewed and sent into cookies
+   * @returns {integer} 200 - success response
+   * access and refresh token renewed and sent into cookies + userId
    */
   .get('/', routerWrapper(refreshTokensController.refreshTokens));
 
