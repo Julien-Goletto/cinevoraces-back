@@ -36,13 +36,13 @@ moviesRouter
   .get('/:movieId', routerWrapper(moviesController.getMovieByID))
   /**
    * Get all movie by season
-   * @route Get /v1/movies/:seasonId
+   * @route Get /v1/movies/season/:seasonId
    * @group - Movies
    * @param {Integer} seasonId
    * @returns {Movie} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .get('/:movieId', routerWrapper(moviesController.getAllMoviesBySeason))
+  .get('/season/:seasonId', routerWrapper(moviesController.getAllMoviesBySeason))
   /**
   * Post a movie to database, on frontend request
    * @route POST /movies/newmovie/

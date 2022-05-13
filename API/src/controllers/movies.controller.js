@@ -13,6 +13,11 @@ const moviesController = {
     res.status(200).json(result);
   },
 
+  async getAllMoviesBySeason(req, res) {
+    const results = await moviesDataMapper.getAllMoviesBySeason(req.params.seasonId);
+    res.status(200).json(results);
+  },
+
   async addNewMovie(req, res) {
     const movie = req.body;
     const result = await moviesDataMapper.addNewMovie(movie);

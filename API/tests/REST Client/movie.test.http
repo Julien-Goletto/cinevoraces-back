@@ -10,6 +10,9 @@ GET {{baseUrl}}/movies
 ### Get movie infos with movieId
 GET {{baseUrl}}/movies/2
 
+### Get all movies by seasonId
+GET {{baseUrl}}/movies/season/2
+
 ### Add new movie
 POST {{baseUrl}}/movies/newmovie
 content-type: application/json
