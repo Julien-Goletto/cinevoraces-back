@@ -121,8 +121,7 @@ CREATE VIEW pending_propositions AS
 CREATE VIEW last_season_movies AS
 	SELECT *
 	FROM movies_infos
-	GROUP BY id, french_title,poster_url,season_number
-	HAVING season_number = (SELECT MAX(season_number) FROM movies_infos);
+	WHERE season_number = (SELECT MAX(season_number) FROM movies_infos);
 
 -- Listes des options de filtres disponibles
 CREATE VIEW filters_options AS
