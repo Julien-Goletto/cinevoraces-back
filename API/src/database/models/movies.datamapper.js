@@ -17,9 +17,9 @@ const moviesDataMapper = {
   },
 
   async getMovieByID(movieId) {
-    const query =  {
+    const query = {
       text: 'SELECT * FROM movies_infos WHERE id=$1',
-      values: [movieId]
+      values: [movieId],
     };
     const results = await client.query(query);
     if (!results.rowCount) {
@@ -31,12 +31,12 @@ const moviesDataMapper = {
   async getAllMoviesBySeason(seasonId) {
     const query = {
       text: 'SELECT * FROM movies_infos WHERE season_number=$1',
-      values: [seasonId]
+      values: [seasonId],
     };
     const results = await client.query(query);
-    if(!results.rowCount){
-      throw new APIError ("No movie saved yet", 404);
-    };
+    if (!results.rowCount) {
+      throw new APIError('No movie saved yet', 404);
+    }
     return results.rows;
   },
 

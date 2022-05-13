@@ -34,7 +34,15 @@ usersRouter
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .post('/login', validate('body', userLoginSchema), routerWrapper(usersController.logUser))
+  .post(
+    '/login',
+    (req, _, next) => {
+      console.log(req.headers.cookie);
+      next();
+    },
+    validate('body', userLoginSchema),
+    routerWrapper(usersController.logUser),
+  )
   /**
    * Update user with informations give by user
    * @route PUT /v1/users/userId

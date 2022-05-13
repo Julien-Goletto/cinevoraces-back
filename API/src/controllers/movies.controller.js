@@ -1,8 +1,9 @@
 const moviesDataMapper = require('../database/models/movies.datamapper');
 
 const moviesController = {
-  async getAllMovies(_, res) {
+  async getAllMovies(req, res) {
     const results = await moviesDataMapper.getAllMovies();
+    console.log(req.headers.cookie);
     res.status(200).json(results);
   },
 
