@@ -18,8 +18,8 @@ POST {{baseUrl}}/movies/newmovie
 content-type: application/json
 
 {
-  "french_title": "Le gentil test 4",
-  "original_title": "The Red test 4",
+  "french_title": "Le gentil test",
+  "original_title": "The Red test",
   "poster_url": "https://image.tmdb.org/t/p/original/eByAzqYc1ncYkaoxsYupkvMOL8H.jpg",
   "directors": ["Emeric Pressburger","Michael Powell"],
   "release_date": "1948-09-06",
