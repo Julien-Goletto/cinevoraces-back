@@ -9,7 +9,7 @@ const jwtATConfig = {
   algorithm: 'HS256',
 };
 const jwtRTConfig = {
-  expiresIn: '30d',
+  expiresIn: '1d',
   algorithm: 'HS256',
 };
 
