@@ -34,6 +34,14 @@ usersRouter
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
+  .put('/modify/:userPseudo', checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
+  /**
+   * Disconnect user, suppressing the session.user
+   * @route GET /v1/users/logout
+   * @group - Users
+   * @return {String} 200 - success response
+   * @return {APIError} 404 - fail response
+   */
   .post('/login', validate('body', userLoginSchema), routerWrapper(usersController.logUser))
   /**
    * Update user with informations give by user
@@ -42,14 +50,6 @@ usersRouter
    * @param {UserUpdate.model} UserUpdate.body.required - user object credentials
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
-   */
-  .put('/:userId', checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
-  /**
-   * Disconnect user, suppressing the session.user
-   * @route GET /v1/users/logout
-   * @group - Users
-   * @return {String} 200 - success response
-   * @return {APIError} 404 - fail response
    */
   .get('/logout', checkingUser.checkLogStatus, routerWrapper(usersController.logOutUser))
   /**
@@ -75,7 +75,7 @@ usersRouter
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .delete('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
+  .delete('/:userPseudo', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
 
 /**
  * @typedef UserRegistration

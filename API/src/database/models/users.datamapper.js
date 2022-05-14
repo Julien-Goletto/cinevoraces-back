@@ -40,10 +40,10 @@ const usersDataMapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError('Invalid credentials', 404);
+      throw new APIError('Invalid credentials', '', 404); // à déplacer dans les controllers
     }
     if (!await bcrypt.compare(user.password, result.rows[0].password)) {
-      throw new APIError('Invalid credentials', 404);
+      throw new APIError('Invalid credentials', '', 404);
     }
     const keys = ['id', 'pseudo', 'role'];
     return Object.fromEntries(
@@ -54,10 +54,10 @@ const usersDataMapper = {
 
   /**
    * Modify user informations
-   * @param {Int} userId of user
+   * @param {string} userPseudo of user
    * @param {Object} user informations
    */
-  async updateUser(userId, user) {
+  async updateUser(userPseudo, user) {
     const userToModify = user;
     if (userToModify.password) {
       const salt = await bcrypt.genSalt(10);
@@ -65,8 +65,8 @@ const usersDataMapper = {
       userToModify.password = passwordCrypted;
     }
     let query = {
-      text: 'SELECT * FROM "user" WHERE id=$1',
-      values: [userId],
+      text: 'SELECT * FROM "user" WHERE pseudo = $1',
+      values: [userPseudo],
     };
     const result = await client.query(query);
     if (!result.rowCount) {
@@ -80,9 +80,10 @@ const usersDataMapper = {
       i += 1;
     }
     query.text = query.text.slice(0, -1);
-    query.text += ` WHERE id=$${i}`;
-    query.values.push(userId);
+    query.text += ` WHERE pseudo=$${i}`;
+    query.values.push(userPseudo);
     await client.query(query);
+    return 'User modifications have been saved.';
   },
 
   /**
@@ -120,16 +121,16 @@ const usersDataMapper = {
     }
     return results.rows;
   },
-  async deleteUserWithUserId(userId) {
+  async deleteUserByPseudo(userPseudo) {
     const query = {
-      text: 'DELETE FROM "user" WHERE id = $1;',
-      values: [userId],
+      text: 'DELETE FROM "user" WHERE pseudo = $1;',
+      values: [userPseudo],
     };
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError("This user doesn't exist.", 404);
     }
-    return 'User successfuly deleted.';
+    return `User successfuly deleted ${userPseudo}.`;
   },
 };
 
