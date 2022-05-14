@@ -5,13 +5,13 @@ const session = require('supertest-session');
 const app = require('../../app');
 
 const request = supertest(app);
+const newUserSession = session(app);
 const userSession = session(app);
 const adminSession = session(app);
 
 const newUser = { pseudo: 'Test', mail: 'Test@test.fr', password: 'Test' };
 const newUserLogin = { pseudo: 'Test', password: 'Test' };
-// const modifiedNewUser = { pseudo: 'Test2' };
-// const modifiedNewUserLogin = { pseudo: 'Test2', password: 'Test' };
+const modifiedNewUser = { mail: 'maibidon+tetedecon' };
 const registeredUser = { pseudo: 'Mat-Mat', password: 'e5BkKI_rG5fg_6l!qG1I' };
 const adminUser = { pseudo: 'Yves Signal', password: 'K_foDAInGDeXiN~bt/Bx' };
 
@@ -23,19 +23,13 @@ describe('API e2e', () => {
       expect(response.text).toContain('User successfully registered, please login to continue.');
     });
     it('Should log the new user', async () => {
-      const response = await request.post('/v1/users/login').send({ ...newUserLogin });
+      const response = await newUserSession.post('/v1/users/login').send({ ...newUserLogin });
       expect(response.status).toBe(200);
     });
-    // it('Should update a user with Test2 pseudo instead of Test', async () => {
-    //   const response = await request
-    //    .put(`/v1/users/modify/Test`)
-    //    .send({ mail: "maibidon+tetedecon"});
-    //   expect(response.status).toBe(201);
-    // });
-    // it('Should log the new user with updated pseudo Test2', async () => {
-    //   const response = await request.post('/v1/users/login').send({ ...modifiedNewUserLogin });
-    //   expect(response.status).toBe(200);
-    // });
+    it('Should update a user with Test2 pseudo instead of Test', async () => {
+      const response = await newUserSession.put(`/v1/users/modify/${newUser.pseudo}`).send(modifiedNewUser);
+      expect(response.status).toBe(201);
+    });
     it('Should log a user', async () => {
       const response = await userSession.post('/v1/users/login').send({ ...registeredUser });
       expect(response.status).toBe(200);
