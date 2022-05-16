@@ -93,7 +93,7 @@ const usersDataMapper = {
    * @throws {APIError} if user doesen't in db
    */
   async getUserById(userId, hasRights) {
-    let columns = 'id,pseudo,avatar_url';
+    let columns = 'id,pseudo,avatar_url,created_at';
     if (hasRights) {
       columns += ',mail';
     }
@@ -114,7 +114,7 @@ const usersDataMapper = {
    * @throws {APIError} if the table user is empty
    */
   async getUsersList() {
-    const query = 'SELECT * FROM "user";';
+    const query = 'SELECT "user".id, "user".pseudo, "user".avatar_url, "user".created_at FROM "user";';
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError('No user registered yet.', 404);
