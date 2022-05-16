@@ -48,7 +48,7 @@ GET {{baseUrl}}/users
 
 ### Get user with userId
 
-GET {{baseUrl}}/users/33
+GET {{baseUrl}}/users/2
 
 ### LogOut user
 GET {{{{baseUrl}}}}/users/logout
