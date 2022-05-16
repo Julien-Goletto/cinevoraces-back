@@ -17,23 +17,41 @@ const checkingUser = {
    * Check the jwt in session to ensure it presents the correct format
    */
   checkLogStatus(req, _, next) {
-    const accessToken = jwtMethods.decryptRefreshToken(
-      jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'refreshToken'),
-    );
-    if (jwtMethods.checkTokenContent(accessToken)) {
+    let token;
+    if (req.headers.authorization) {
+      // eslint-disable-next-line prefer-destructuring
+      token = req.headers.authorization.split(' ')[0];
+    }
+    if (req.headers.cookie) {
+      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
+    }
+    if (!token) {
+      throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
+    }
+    const user = jwtMethods.decryptAccessToken(token);
+    if (jwtMethods.checkTokenContent(user)) {
       next();
     } else {
-      throw new APIError('To continue, you must be logged in.');
+      throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
     }
   },
   checkAuthorization(req, _, next) {
-    const accessToken = jwtMethods.decryptRefreshToken(
-      jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'refreshToken'),
-    );
-    if (jwtMethods.checkTokenAuthorization(accessToken)) {
+    let token;
+    if (req.headers.authorization) {
+      // eslint-disable-next-line prefer-destructuring
+      token = req.headers.authorization.split(' ')[0];
+    }
+    if (req.headers.cookie) {
+      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
+    }
+    if (!token) {
+      throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
+    }
+    const user = jwtMethods.decryptAccessToken(token);
+    if (jwtMethods.checkTokenAuthorization(user)) {
       next();
     } else {
-      throw new APIError("You doesn't have the authorization for this action.");
+      throw new APIError("Vous n'avez pas la permission de réaliser cette action.");
     }
   },
 };
