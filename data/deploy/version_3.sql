@@ -134,4 +134,9 @@ CREATE VIEW filters_options AS
 		(SELECT array_agg(mind.min || ',' || maxd.max) min_max_dates
 		FROM (SELECT MIN(release_date) FROM movie) mind, (SELECT MAX(release_date) FROM movie) maxd) dl;
 
+-- Liste des commentaires pour un film
+CREATE VIEW reviews_movie AS
+	SELECT user_id,"user".pseudo,movie_id,rating,review.created_at,comment,avatar_url FROM review
+	JOIN "user" ON "user_id" = "user".id;
+	
 COMMIT;
