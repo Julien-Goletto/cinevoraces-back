@@ -14,7 +14,6 @@ module.exports = (prop, schema) => async (req, _, next) => {
     await schema.validateAsync(req[prop]);
     next();
   } catch (err) {
-    // Code original de BN : next(new APIError(error, { statusCode: 400 }));
     next(new APIError(`${err}\n | 'The passed object doesn't fit with the required format.`, req.url, 400));
   }
 };
