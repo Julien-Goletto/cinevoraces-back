@@ -13,7 +13,7 @@ const checkingUser = require('../middlewares/checkingUser');
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
 const {
-  moviesSchema, moviesUpdateSchema, genreSchema, languageSchema, countrySchema, seasonSchema,
+  movieSchema, movieUpdateSchema, genreSchema, languageSchema, countrySchema, seasonSchema,
 } = require('../validation/schemas');
 
 moviesRouter
@@ -70,7 +70,7 @@ moviesRouter
   .post(
     '/newmovie/',
     checkingUser.checkLogStatus,
-    validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema),
+    validate('body', movieSchema, genreSchema, languageSchema, countrySchema, seasonSchema),
     routerWrapper(moviesController.addNewMovie),
   )
   /**
@@ -85,7 +85,7 @@ moviesRouter
   .put(
     '/:movieTitle',
     checkingUser.checkAuthorization,
-    validate('body', moviesUpdateSchema, genreSchema, languageSchema, countrySchema, seasonSchema),
+    validate('body', movieUpdateSchema),
     routerWrapper(moviesController.deleteMovie),
   )
   /**
@@ -102,6 +102,7 @@ moviesRouter
     routerWrapper(moviesController.deleteMovie),
   );
 
+moviesRouter.use(handleError);
 /**
  * @typedef NewMovie
  * @property {string} frenchTitle - french title
@@ -131,7 +132,5 @@ moviesRouter
  * @property {string} presentation - user presentation
  * @property {string} publishingDate - publishing date of the movie on Cinévoraces (date)
  */
-
-moviesRouter.use(handleError);
 
 module.exports = moviesRouter;

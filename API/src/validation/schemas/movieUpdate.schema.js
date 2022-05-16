@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const moviesUpdateSchema = Joi.object({
+const movieUpdateSchema = Joi.object({
   french_title: Joi.string(),
   original_title: Joi.string(),
   poster_url: Joi.string(),
@@ -10,6 +10,6 @@ const moviesUpdateSchema = Joi.object({
   casting: Joi.array().items(Joi.string()).min(1),
   presentation: Joi.string(),
   publishing_date: Joi.date(),
-}).min(1).required();
+}).min(1);
 
-module.exports = moviesUpdateSchema;
+module.exports = movieUpdateSchema;

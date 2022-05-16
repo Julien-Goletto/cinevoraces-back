@@ -59,7 +59,7 @@ const moviesDataMapper = {
       text: 'SELECT * FROM movie WHERE french_title=$1',
       values: [movie.french_title],
     };
-    const results = await client.query(query);
+    let results = await client.query(query);
     if (results.rowCount) {
       throw new APIError('Movie already here', 404);
     }
@@ -70,7 +70,10 @@ const moviesDataMapper = {
         movie.user_id, movie.season_id, movie.movie_genres, movie.movie_languages,
         movie.movie_countries],
     };
-    await client.query(query);
+    results = await client.query(query);
+    if (!results.rowCount) {
+      throw new Error("Le film n'a pas pu être enregistré.");
+    }
     return 'Movie added in database';
   },
   async updateMovieByTitle(movieTitle, movieInfos) {
