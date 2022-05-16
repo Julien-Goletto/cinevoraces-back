@@ -60,18 +60,18 @@ describe('API e2e', () => {
       expect(response.status).toBe(200);
       expect(response.text).toContain('La Cité de Dieu');
     });
-    // it('Should create a new movie in database', async () => {
-    //   const response = await userSession.post('/v1/movies/newmovie').send(newMovie);
-    //   expect(response.status).toBe(201);
-    // });
+    it('Should create a new movie in database', async () => {
+      const response = await userSession.post('/v1/movies/newmovie').send(newMovie);
+      expect(response.status).toBe(201);
+    });
     // it('Should update the new movie', async () => {
-    //   const response = await adminSession.put(`/v1/movies/delete/${newMovie.french_title}`).send(movieInfosToModify);
+    //   const response = await adminSession.put(`/v1/movies/modify/${newMovie.french_title}`).send(movieInfosToModify);
     //   console.log(response);
     //   expect(response.status).toBe(201);
     // });
-    // it('Should delete the new added movie', async () => {
-    //   const response = await adminSession.delete(`/v1/movies/${newMovie.french_title}`);
-    //   expect(response.status).toBe(200);
-    // });
+    it('Should delete the new added movie', async () => {
+      const response = await adminSession.delete(`/v1/movies/${newMovie.french_title}`);
+      expect(response.status).toBe(200);
+    });
   });
 });

@@ -83,7 +83,7 @@ moviesRouter
    * @returns {APIError} 404 - Le film n'a pas pu être modifié.
    */
   .put(
-    '/:movieTitle',
+    '/modify/:movieTitle',
     checkingUser.checkAuthorization,
     validate('body', movieUpdateSchema),
     routerWrapper(moviesController.deleteMovie),
