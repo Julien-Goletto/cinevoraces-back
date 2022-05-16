@@ -28,7 +28,7 @@ content-type: application/json
 }
 
 ### Refresh tokens
-POST {{baseUrl}}/refreshTokens
+GET {{baseUrl}}/refreshTokens
 
 ### Update user
 PUT {{baseUrl}}/users/modify/Test2
@@ -43,7 +43,7 @@ GET {{baseUrl}}/users
 
 ### Get user with userId
 
-GET {{baseUrl}}/users/169
+GET {{baseUrl}}/users/2
 
 ### LogOut user
 GET {{{{baseUrl}}}}/users/logout
