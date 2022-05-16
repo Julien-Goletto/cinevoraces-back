@@ -14,14 +14,8 @@ const usersController = {
     const result = await usersDataMapper.logUser(user);
     const accessToken = jwtMethods.createAccessToken(result);
     const refreshToken = jwtMethods.createRefreshToken(result);
-    res.cookie('accessToken', accessToken, {
-      httpOnly: true,
-      sameSite: 'none',
-    });
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      sameSite: 'none',
-    });
+    res.cookie('accessToken', accessToken);
+    res.cookie('refreshToken', refreshToken);
     res.status(200).json(result);
   },
 
