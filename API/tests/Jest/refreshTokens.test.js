@@ -1,39 +1,22 @@
 require('dotenv').config();
 
-const supertest = require('supertest');
-// const session = require('supertest-session');
+const session = require('supertest-session');
 const app = require('../../app');
 
-const request = supertest(app);
+const userSession = session(app);
 
-// const testSession = session(app);
+const registeredUser = { pseudo: 'Mat-Mat', password: 'e5BkKI_rG5fg_6l!qG1I' };
 
 describe('API e2e', () => {
-  // beforeEach(function(done){
-  //   testSession.post('/v1/users/login')
-  //   .send({pseudo: "Tutu",password: "test"})
-  //   .expect(200)
-  //   .end(function (err) {
-  //     if (err) return done(err);
-  //     authenticatedSession = testSession;
-  //     return done();
-  //   });
-  // });
   describe('refreshTokens route', () => {
-    it('Should get general metrics', async () => {
-      const response = await request.get('/v1/metrics/');
+    it('Should log a user', async () => {
+      const response = await userSession.post('/v1/users/login').send({ ...registeredUser });
       expect(response.status).toBe(200);
-      expect(response.text).toContain('seasons_count');
     });
-    it('Should get all individual metrics', async () => {
-      const response = await request.get('/v1/metrics/all');
+    it('Should refresh both access and refresh tokens', async () => {
+      const response = await userSession.get('/v1/refreshTokens/');
       expect(response.status).toBe(200);
-      expect(response.text).toContain('proposed_movies_count');
-    });
-    it('Should get general metrics', async () => {
-      const response = await request.get('/v1/metrics/1');
-      expect(response.status).toBe(200);
-      expect(response.text).toContain('proposed_movies_count');
+      expect(response.text).toContain('1');
     });
   });
 });

@@ -20,17 +20,17 @@ const usersController = {
   },
 
   async updateUser(req, res) {
-    const requestedUserId = parseInt(req.params.userId, 10);
+    const requestedUserPseudo = req.params.userPseudo;
     // Additionnal Safe guard
-    const requestingUserId = jwtMethods.decryptAccessToken(
+    const requestingUserPseudo = jwtMethods.decryptAccessToken(
       jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
-    ).id;
-    if (requestedUserId !== requestingUserId) {
+    ).pseudo;
+    if (requestedUserPseudo !== requestingUserPseudo) {
       throw new APIError('You have no right to change these parameters');
     }
     const user = req.body;
-    await usersDataMapper.updateUser(requestedUserId, user);
-    res.status(200).json('Successfull change informations.');
+    const results = await usersDataMapper.updateUser(requestedUserPseudo, user);
+    res.status(201).json(results);
   },
 
   async getUserById(req, res) {
@@ -60,8 +60,14 @@ const usersController = {
   },
 
   async deleteUser(req, res) {
-    const { userId } = req.params;
-    const results = await usersDataMapper.deleteUserWithPseudo(userId);
+    const { userPseudo } = req.params;
+    const requestingUserRole = jwtMethods.decryptAccessToken(
+      jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
+    ).role;
+    if (requestingUserRole !== 'admin') {
+      throw new APIError('You must be an administrator to delete a user.');
+    }
+    const results = await usersDataMapper.deleteUserByPseudo(userPseudo);
     res.status(200).json(results);
   },
 };

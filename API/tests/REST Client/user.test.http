@@ -8,19 +8,15 @@
 POST {{baseUrl}}/users/register
 content-type: application/json
 
-{
-  "pseudo": "YusefDu93",
-  "mail": "la@france.fr",
-  "password": "MaFrance"
-}
+{ "pseudo": "Test", "mail": "Test@test.fr", "password": "Test" }
 
 ### Log user
 POST {{baseUrl}}/users/login
 content-type: application/json
 
 {
-  "pseudo": "Mat-Mat",
-  "password": "e5BkKI_rG5fg_6l!qG1I"
+  "pseudo": "Test2",
+  "password": "Test"
 }
 ### Log admin
 POST {{baseUrl}}/users/login
@@ -35,12 +31,11 @@ content-type: application/json
 POST {{baseUrl}}/refreshTokens
 
 ### Update user
-PUT {{baseUrl}}/users/33
+PUT {{baseUrl}}/users/modify/Test2
 content-type: application/json
 
 {
-  "pseudo": "YussefDu31",
-  "password": "FranceMaWesh"
+  "mail": "Test2"
 }
 
 ### Get all users from db
@@ -48,7 +43,7 @@ GET {{baseUrl}}/users
 
 ### Get user with userId
 
-GET {{baseUrl}}/users/33
+GET {{baseUrl}}/users/169
 
 ### LogOut user
 GET {{{{baseUrl}}}}/users/logout

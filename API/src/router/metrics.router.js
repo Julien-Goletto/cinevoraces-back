@@ -6,7 +6,7 @@ const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
 // Checking user and privegies
-// const checkingUser = require('../middlewares/checkingUser');
+const checkingUser = require('../middlewares/checkingUser');
 
 // Configuration du subRouter
 const metricsRouter = express.Router();
@@ -27,7 +27,7 @@ metricsRouter
    * proposed_movies_count, comments_counts, likes_count, watchlist_count & ratings_count
    * @returns {APIError} 401 - fail response
    */
-  .get('/all', routerWrapper(metricsController.allUsersMetrics))
+  .get('/all', checkingUser.checkLogStatus, routerWrapper(metricsController.allUsersMetrics))
   /**
    * Return metrics related to a specific user. Login required.
    * @route GET /v1/metrics/:userId
@@ -37,7 +37,7 @@ metricsRouter
    * proposed_movies_count, comments_counts, likes_count, watchlist_count & ratings_count
    * @returns {APIError} 401 - fail response
    */
-  .get('/:userId', routerWrapper(metricsController.userMetricsById));
+  .get('/:userId', checkingUser.checkLogStatus, routerWrapper(metricsController.userMetricsById));
 
 metricsRouter.use(handleError);
 

@@ -1,30 +1,62 @@
 require('dotenv').config();
 
 const supertest = require('supertest');
+const session = require('supertest-session');
 const app = require('../../app');
 
 const request = supertest(app);
+const newUserSession = session(app);
+const userSession = session(app);
+const adminSession = session(app);
 
-// const session = require('supertest-session');
+const newUser = { pseudo: 'Test', mail: 'Test@test.fr', password: 'Test' };
+const newUserLogin = { pseudo: 'Test', password: 'Test' };
+const modifiedNewUser = { mail: 'maibidon+tetedecon' };
+const registeredUser = { pseudo: 'Mat-Mat', password: 'e5BkKI_rG5fg_6l!qG1I' };
+const adminUser = { pseudo: 'Yves Signal', password: 'K_foDAInGDeXiN~bt/Bx' };
 
-// const testSession = session(app);
-
-const user = { pseudo: 'Test3', mail: 'Test3@test.fr', password: 'Test' };
-// const registeredUser = { pseudo: 'Test4', mail: 'Test4@test.fr', password: 'test' };
-// const adminUser = { pseudo: 'Test5', mail: 'Test5@test.fr', password: 'test' };
-
-describe('Users roads', () => {
-  it('Should register a new user in database', async () => {
-    const response = await request.post('/v1/users/register').send({ ...user });
-    expect(response.status).toBe(201);
-    expect(response.text).toContain('User successfully registered, please login to continue.');
-  });
-  it('Should be a objet user selected', async () => {
-    const response = await request.get('/v1/users/1');
-    expect(response.status).toBe(200);
-  });
-  it('Should return an array with all registered users', async () => {
-    const response = await request.get('/v1/users/');
-    expect(response.status).toBe(200);
+describe('API e2e', () => {
+  describe('Users routes', () => {
+    it('Should register a new user in database', async () => {
+      const response = await request.post('/v1/users/register').send({ ...newUser });
+      expect(response.status).toBe(201);
+      expect(response.text).toContain('User successfully registered, please login to continue.');
+    });
+    it('Should log the new user', async () => {
+      const response = await newUserSession.post('/v1/users/login').send({ ...newUserLogin });
+      expect(response.status).toBe(200);
+    });
+    it('Should update a user with Test2 pseudo instead of Test', async () => {
+      const response = await newUserSession.put(`/v1/users/modify/${newUser.pseudo}`).send(modifiedNewUser);
+      expect(response.status).toBe(201);
+    });
+    it('Should log a user', async () => {
+      const response = await userSession.post('/v1/users/login').send({ ...registeredUser });
+      expect(response.status).toBe(200);
+    });
+    it('Should see its own user infos', async () => {
+      const response = await userSession.get('/v1/users/1');
+      expect(response.status).toBe(200);
+      expect(response.text).toContain('mail');
+    });
+    it('Should see another user infos', async () => {
+      const response = await userSession.get('/v1/users/2');
+      expect(response.status).toBe(200);
+      expect(response.text).toContain('Yves Signal');
+    });
+    it('Should log the admin', async () => {
+      const response = await adminSession.post('/v1/users/login').send({ ...adminUser });
+      expect(response.status).toBe(200);
+    });
+    it('Should delete the user Test2', async () => {
+      const response = await adminSession.delete(`/v1/users/${newUser.pseudo}`);
+      expect(response.status).toBe(200);
+      expect(response.text).toContain('User successfuly deleted Test.');
+    });
+    it('Should not log the deleted user', async () => {
+      const response = await request.post('/v1/users/login').send({ ...newUserLogin });
+      expect(response.status).toBe(404);
+      expect(response.text).toContain('Invalid credentials');
+    });
   });
 });
