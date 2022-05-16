@@ -28,7 +28,7 @@ content-type: application/json
 }
 
 ### Refresh tokens
-POST {{baseUrl}}/refreshTokens
+GET {{baseUrl}}/refreshTokens
 
 ### Update user
 PUT {{baseUrl}}/users/modify/Test2
