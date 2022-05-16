@@ -5,9 +5,19 @@ const usersDataMapper = require('../database/models/users.datamapper');
 
 const refreshTokensController = {
   async refreshTokens(req, res) {
-    const user = jwtMethods.decryptRefreshToken(
-      jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'refreshToken'),
-    );
+    let token;
+    if (req.headers.authorization) {
+      // eslint-disable-next-line prefer-destructuring
+      token = req.headers.authorization.split(' ')[0];
+    }
+    if (req.headers.cookie) {
+      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'refreshToken');
+    }
+    if (!token) {
+      throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
+    }
+
+    const user = jwtMethods.decryptRefreshToken(token);
     const userInDB = await usersDataMapper.getUserById(user.id);
     if (!(userInDB)) {
       return new APIError('Ce compte utilisateur a été supprimé.', 401);
@@ -16,8 +26,14 @@ const refreshTokensController = {
     delete user.iat;
     delete user.exp;
     // Create new access and refresh tokens
-    res.cookie('accessToken', jwtMethods.createAccessToken(user));
-    res.cookie('refreshToken', jwtMethods.createRefreshToken(user));
+    res.cookie('accessToken', jwtMethods.createAccessToken(user), {
+      httpOnly: true,
+      sameSite: 'none',
+    });
+    res.cookie('refreshToken', jwtMethods.createRefreshToken(user), {
+      httpOnly: true,
+      sameSite: 'none',
+    });
     res.status(200).json(user.id);
   },
 };

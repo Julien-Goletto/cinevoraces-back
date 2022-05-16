@@ -26,7 +26,7 @@ describe('API e2e', () => {
       const response = await newUserSession.post('/v1/users/login').send({ ...newUserLogin });
       expect(response.status).toBe(200);
     });
-    it('Should update a user with Test2 pseudo instead of Test', async () => {
+    it('Should update a user with new mail', async () => {
       const response = await newUserSession.put(`/v1/users/modify/${newUser.pseudo}`).send(modifiedNewUser);
       expect(response.status).toBe(201);
     });
@@ -48,7 +48,7 @@ describe('API e2e', () => {
       const response = await adminSession.post('/v1/users/login').send({ ...adminUser });
       expect(response.status).toBe(200);
     });
-    it('Should delete the user Test2', async () => {
+    it('Should delete the user Test', async () => {
       const response = await adminSession.delete(`/v1/users/${newUser.pseudo}`);
       expect(response.status).toBe(200);
       expect(response.text).toContain('User successfuly deleted Test.');

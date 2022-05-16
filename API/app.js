@@ -7,16 +7,6 @@ const app = express();
 
 app.use(express.json());// Body parser
 
-// Setting session system
-const session = require('express-session');
-
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false, maxAge: null },
-}));
-
 // Setting CORS
 const cors = require('cors');
 
@@ -30,7 +20,15 @@ app.use(cors(corsOptions));
 const cookieParser = require('cookie-parser');
 const csurf = require('csurf');
 
-const csrfProtection = csurf({ cookie: { key: '__session', httpOnly: true } });
+const csrfProtection = csurf(
+  {
+    cookie: {
+      key: '__session',
+      sameSite: 'none',
+      secure: true,
+    },
+  },
+);
 app.use(cookieParser());
 const expressSwagger = require('express-swagger-generator')(app);
 const router = require('./src/router');
