@@ -26,8 +26,14 @@ const refreshTokensController = {
     delete user.iat;
     delete user.exp;
     // Create new access and refresh tokens
-    res.cookie('accessToken', jwtMethods.createAccessToken(user));
-    res.cookie('refreshToken', jwtMethods.createRefreshToken(user));
+    res.cookie('accessToken', jwtMethods.createAccessToken(user), {
+      httpOnly: true,
+      sameSite: 'none',
+    });
+    res.cookie('refreshToken', jwtMethods.createRefreshToken(user), {
+      httpOnly: true,
+      sameSite: 'none',
+    });
     res.status(200).json(user.id);
   },
 };
