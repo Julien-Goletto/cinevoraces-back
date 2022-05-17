@@ -6,7 +6,7 @@ BEGIN;
 DROP TABLE IF EXISTS "movie_has_genre" ;
 DROP TABLE IF EXISTS "movie_has_language" ;
 DROP TABLE IF EXISTS "movie_has_country" ;
-DROP TABLE IF EXISTS "review" ;
+DROP TABLE IF EXISTS "review" CASCADE ;
 DROP TABLE IF EXISTS "movie" ;
 DROP TABLE IF EXISTS "genre" ;
 DROP TABLE IF EXISTS "language" ;
