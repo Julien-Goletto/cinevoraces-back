@@ -135,8 +135,8 @@ CREATE VIEW filters_options AS
 		FROM (SELECT MIN(release_date) FROM movie) mind, (SELECT MAX(release_date) FROM movie) maxd) dl;
 
 -- Liste des commentaires pour un film
-CREATE VIEW reviews_movie AS
-	SELECT user_id,"user".pseudo,movie_id,rating,review.created_at,comment,avatar_url FROM review
+CREATE VIEW movie_comments AS
+	SELECT user_id,"user".pseudo AS user_pseudo,movie_id,rating,review.created_at,comment,avatar_url FROM review
 	JOIN "user" ON "user_id" = "user".id;
 	
 COMMIT;

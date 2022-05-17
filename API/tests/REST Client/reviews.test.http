@@ -5,5 +5,5 @@
 @baseUrl={{protocol}}{{host}}{{port}}{{prefix}}
 
 
-### Get all reviews with movieId
+### Get all comments with movieId
 GET {{baseUrl}}/reviews/3
