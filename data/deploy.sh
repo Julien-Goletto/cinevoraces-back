@@ -14,6 +14,7 @@ export PGDATABASE=cinevoraces
 # sqitch add version_3 -n "Création des vues"
 # sqitch add version_4 -n "Seeding données réelles"
 # sqitch add version_5 -n "Ajout des fonctions de maj updated_at"
+# sqitch add version_6 -n "Ajout des index"
 
 # To revert (each following command can be adressed to a specific version)
 sqitch revert db:pg:cinevoraces
