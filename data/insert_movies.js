@@ -24,7 +24,6 @@ async function fetchTMDBList() {
 }
 async function fetchTMDBListWithDetails() {
   const movies = await fetchAPI.fetchTMDBListWithDetails(listId,TMDB_API_KEY);
-  // return (await Promise.all(movies));
   return movies;
 }
 // End of module verifications ---------------------------------------------------------------------------------------
@@ -109,7 +108,7 @@ async function addAuthors(presentations){
   let id = 1;
   for (author of authorsList){
     const hashedPw = await createRandomPassWord(chaincharacter,20);
-    seedingQueries += `('${author}', 'mailbidon${id}' ,'${hashedPw}'),\n`
+    seedingQueries += `('${sanitizeSingleQuotes(author)}', 'mailbidon${id}' ,'${hashedPw}'),\n`
     id++
   }
   seedingQueries = seedingQueries.slice(0,-2) + `;`
@@ -172,3 +171,19 @@ async function prepareDBSeeding(presentations,moviesList) {
 // saveMoviesList();
 
 prepareDBSeeding(presentations,moviesList);
+
+function seedingPropositionSlots(season_number,first_episode,first_date){
+  let date = new Date(first_date);
+  const lastDate = new Date (first_date.slice(0,-6)+'-12-31');
+  let episode = first_episode;
+  let sqlInstructions = `INSERT INTO proposition_slot ("season_number","episode","publishing_date","is_booked") VALUES\n`;
+  while (date < lastDate){
+    sqlInstructions += `(${season_number},${episode},'${date.toISOString().slice(0,-14)}',false),\n`
+    date.setDate(date.getDate()+7);
+    episode++;
+  }
+  sqlInstructions = sqlInstructions.slice(0,-2)+';'
+  return sqlInstructions;
+}
+
+// console.log(seedingPropositionSlots(3,19,'2022-05-02'));
