@@ -25,7 +25,7 @@ const csrfProtection = csurf(
     cookie: {
       key: '__session',
       sameSite: 'none',
-      secure: true,
+      // secure: true,
     },
   },
 );
