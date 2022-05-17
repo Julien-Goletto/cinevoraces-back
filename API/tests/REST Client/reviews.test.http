@@ -12,11 +12,17 @@ GET {{baseUrl}}/reviews/3
 GET {{baseUrl}}/reviews/2/3
 
 ### Get all reviews fron user from on movie with userId and movieId
-POST {{baseUrl}}/reviews/2/8
+POST {{baseUrl}}/reviews/2/9
 content-type: application/json
 
 {
-  "comment": "bla bla bla double test"
+  "comment": "bla bla bla finaly test"
 }
 
-####
+### Get all reviews fron user from on movie with userId and movieId
+PUT {{baseUrl}}/reviews/3/9
+content-type: application/json
+
+{
+  "comment": "bla bla bla finaly test"
+}

@@ -30,6 +30,8 @@ reviewsRouter.get('/:userId/:movieId', checkingUser.checkLogStatus, routerWrappe
 /**
  * Create comment on movie
  * @group - Reviews
+ * @param {Integer} userId
+ * @param {Integer} movieId
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
@@ -37,6 +39,8 @@ reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapp
 /**
  * Update comment on movie
  * @group - Reviews
+ * @param {Integer} userId
+ * @param {Integer} movieId
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */

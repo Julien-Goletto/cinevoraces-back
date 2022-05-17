@@ -31,15 +31,32 @@ const reviewsDatamapper = {
       text: 'SELECT * FROM review WHERE user_id=$1 AND movie_id=$2',
       values: [userId, movieId],
     };
-    const results = await client.query(query);
-    if (results.rowCount > 0) {
+    const result = await client.query(query);
+    if (result.rowCount > 0) {
       throw new APIError('Commentaire déjà présent', '', 404);
     }
     query = {
       text: 'INSERT INTO review (user_id, movie_id, comment) VALUES ($1,$2,$3)',
       values: [userId, movieId, comment],
     };
+    await client.query(query);
+    return result.rows;
+  },
+
+  async updateComment(userId, movieId, comment) {
+    let query = {
+      text: 'SELECT * FROM review WHERE user_id=$1 AND movie_id=$2',
+      values: [userId, movieId],
+    };
     const result = await client.query(query);
+    if (!result.rowCount) {
+      throw new APIError('Commentaire déjà présent');
+    }
+    query = {
+      text: 'UPDATE review SET comment=$3 WHERE user_id=$1 AND movie_id=$2',
+      values: [userId, movieId, comment],
+    };
+    await client.query(query);
     return result.rows;
   },
 };
