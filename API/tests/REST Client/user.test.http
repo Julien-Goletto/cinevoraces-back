@@ -43,7 +43,7 @@ GET {{baseUrl}}/users
 
 ### Get user with userId
 
-GET {{baseUrl}}/users/2
+GET {{baseUrl}}/users/3
 
 ### LogOut user
 GET {{{{baseUrl}}}}/users/logout

@@ -36,3 +36,12 @@ content-type: application/json
   "movie_languages": ["Pусский","English","Roumain"],
   "movie_countries": ["Dans une foret"]
 }
+
+### Update a new movie
+PUT {{baseUrl}}/movies/modify/In the Mood for Love
+content-type: application/json
+
+{
+  "runtime": 102,
+  "presentation": "Le meilleur film de tous les temps, tout simplement. Tout est dit."
+}
