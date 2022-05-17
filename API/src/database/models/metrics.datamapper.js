@@ -31,8 +31,9 @@ const metricsDataMapper = {
    */
   async getUserMetricsByID(userId) {
     const query = {
-      text: `SELECT proposed_movies_count,comments_count,likes_counts,watchlist_count,ratings_count
-              FROM indiv_actions_metrics WHERE id=$1`,
+      text: `SELECT *
+              FROM indiv_actions_metrics
+              WHERE user_id=$1`,
       values: [userId],
     };
     const results = await client.query(query);
