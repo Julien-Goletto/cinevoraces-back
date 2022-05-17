@@ -64,11 +64,12 @@ describe('API e2e', () => {
       const response = await userSession.post('/v1/movies/newmovie').send(newMovie);
       expect(response.status).toBe(201);
     });
-    // it('Should update the new movie', async () => {
-    //   const response = await adminSession.put(`/v1/movies/modify/${newMovie.french_title}`).send(movieInfosToModify);
-    //   console.log(response);
-    //   expect(response.status).toBe(201);
-    // });
+    it('Should update the new movie', async () => {
+      const response = await adminSession
+        .put(`/v1/movies/modify/${newMovie.french_title}`)
+        .send(movieInfosToModify);
+      console.log(response.body);
+    });
     it('Should delete the new added movie', async () => {
       const response = await adminSession.delete(`/v1/movies/${newMovie.french_title}`);
       expect(response.status).toBe(200);

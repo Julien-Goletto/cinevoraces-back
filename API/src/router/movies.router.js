@@ -86,7 +86,7 @@ moviesRouter
     '/modify/:movieTitle',
     checkingUser.checkAuthorization,
     validate('body', movieUpdateSchema),
-    routerWrapper(moviesController.deleteMovie),
+    routerWrapper(moviesController.updateMovie),
   )
   /**
   * Delete a movie, on frontend request
