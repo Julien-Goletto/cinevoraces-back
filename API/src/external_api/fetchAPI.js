@@ -30,8 +30,8 @@ const fetchAPI = {
       const detailledMovie = fetchAPI.getMovieDetails(movie, TMDB_API_KEY);
       detailledMoviesPromises.push(detailledMovie);
     }
-    const detailledMovie = await Promise.all(detailledMoviesPromises);
-    return detailledMovie;
+    const detailledMovies = await Promise.all(detailledMoviesPromises);
+    return detailledMovies;
   },
 
   async fetchTMDBList(listId, TMDB_API_KEY) {
