@@ -13,5 +13,6 @@ SELECT "viewed","bookmarked","liked","rating","comment","user_id", "movie_id" FR
 SELECT "movie_id","genre_id" FROM "movie_has_genre";
 SELECT "movie_id","country_id" FROM "movie_has_country";
 SELECT "movie_id","language_id" FROM "movie_has_language";
+SELECT "id","season_id","episode","publishing_date","is_booked" FROM "proposition_slot";
 
 ROLLBACK;

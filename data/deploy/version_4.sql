@@ -455,4 +455,6 @@ Et 3h00 pour un tel scénario post-it, ce n’est juste pas possible ! On aurait
 merci Lukino pour cette reco exotique. Et aussi pour le jambon.'),
 (2,3,true,false,false,null,null);
 
+--Ajout des créneaux
+
 COMMIT;

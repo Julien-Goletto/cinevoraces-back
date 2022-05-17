@@ -138,5 +138,8 @@ CREATE VIEW filters_options AS
 CREATE VIEW movie_comments AS
 	SELECT user_id,"user".pseudo AS user_pseudo,movie_id,rating,review.created_at,comment,avatar_url FROM review
 	JOIN "user" ON "user_id" = "user".id;
+
+CREATE VIEW next_proposition_slots AS
+	SELECT * FROM "proposition_slot" LIMIT 10;
 	
 COMMIT;

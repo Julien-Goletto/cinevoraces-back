@@ -13,5 +13,6 @@ DROP TABLE IF EXISTS "language" ;
 DROP TABLE IF EXISTS "country" ;
 DROP TABLE IF EXISTS "season" ;
 DROP TABLE IF EXISTS "user" ;
+DROP TABLE IF EXISTS "proposition_slot" ;
 
 COMMIT;
