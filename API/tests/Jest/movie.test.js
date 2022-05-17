@@ -25,8 +25,8 @@ const movieInfosToModify = {
   presentation: 'Le meilleur film de tous les temps, tout simplement. Tout est dit.',
 };
 
-const registeredUser = { pseudo: 'Mat-Mat', password: 'e5BkKI_rG5fg_6l!qG1I' };
-const adminUser = { pseudo: 'Yves Signal', password: 'K_foDAInGDeXiN~bt/Bx' };
+const registeredUser = { pseudo: process.env.USER_PSEUDO, password: process.env.USER_PW };
+const adminUser = { pseudo: process.env.ADMIN_PSEUDO, password: process.env.ADMIN_PW };
 
 const unloggedSession = supertest(app);
 const userSession = session(app);
