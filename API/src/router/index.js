@@ -2,8 +2,6 @@ const { Router } = require('express');
 
 const router = Router();
 
-// Import middlewares for checking user role if necessary
-
 // Import subrouters :
 const refreshTokensRouter = require('./refreshTokens.router');
 const moviesRouter = require('./movies.router');
