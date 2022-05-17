@@ -50,7 +50,7 @@ const reviewsDatamapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError('Commentaire déjà présent');
+      throw new APIError('Commentaire non trouvé');
     }
     query = {
       text: 'UPDATE review SET comment=$3 WHERE user_id=$1 AND movie_id=$2',
