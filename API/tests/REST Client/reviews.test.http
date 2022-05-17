@@ -26,3 +26,6 @@ content-type: application/json
 {
   "comment": "frey"
 }
+
+### Delete a comment for movie with user id and movie id
+DELETE {{baseUrl}}/reviews/2/2

@@ -49,6 +49,15 @@ reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, validate('b
  * @returns {APIError} 404 - fil response
  */
 reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, validate('body', commentSchema), routerWrapper(reviewsController.updateComment));
+/**
+ * Delete comment on movie
+ * @group - Reviews
+ * @param {Integer} userId
+ * @param {Integer} movieId
+ * @returns {reviews} 200- success response
+ * @returns {APIError} 404 - fil response
+ */
+reviewsRouter.delete('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.deleteComment));
 
 reviewsRouter.use(handleError);
 

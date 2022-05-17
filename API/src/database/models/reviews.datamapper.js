@@ -1,5 +1,6 @@
 const client = require('../dbclient');
 const APIError = require('../../Errors/APIError');
+const { deleteComment } = require('../../controllers/reviews.controller');
 
 const reviewsDatamapper = {
   async getAllComments(movieId) {
@@ -59,6 +60,23 @@ const reviewsDatamapper = {
     await client.query(query);
     return result.rows;
   },
+
+  async deleteComment(userId, movieId) {
+    let query = {
+      text: 'SELECT * FROM review WHERE user_id=$1 AND movie_id=$2',
+      values: [userId, movieId],
+    };
+    const result = await client.query(query);
+    if (!result.rowCount) {
+      throw new APIError('Commentaire non trouvé');
+    }
+    query = {
+      text: 'UPDATE review SET comment = null WHERE user_id=$1 AND movie_id=$2',
+      values: [userId, movieId],
+    };
+    await client.query(query);
+    return result.rows;
+  }
 };
 
 module.exports = reviewsDatamapper;

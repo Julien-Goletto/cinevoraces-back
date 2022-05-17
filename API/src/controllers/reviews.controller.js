@@ -50,6 +50,20 @@ const reviewsController = {
     await reviewsDatamapper.updateComment(userId, movieId, comment);
     res.status(200).send('Commentaire modifié');
   },
+
+  async deleteComment(req, res) {
+    const userId = parseInt(req.params.userId, 10);
+    const movieId = parseInt(req.params.movieId, 10);
+    const requestingUserId = jwtMethods.decryptAccessToken(
+      jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
+    ).id;
+    if (userId !== requestingUserId) {
+      throw new APIError("Vous n'avez pas la permission de supprimer ce commentaire", req.url, 401);
+    }
+    // eslint-disable-next-line max-len
+    await reviewsDatamapper.updateComment(userId, movieId);
+    res.status(200).send('Commentaire supprimé');
+  },
 };
 
 module.exports = reviewsController;

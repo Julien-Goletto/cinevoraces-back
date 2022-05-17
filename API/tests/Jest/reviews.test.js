@@ -27,12 +27,16 @@ describe('API e2e', () => {
       expect(response.status).toBe(200);
       expect(response.text).toContain('user_id');
     });
-    it('Should be create a new comment on movie', async () => {
-      const response = await testSession.post('/v1/reviews/1/10').send({ ...createComment });
+    it('Should be create a new comment on a movie', async () => {
+      const response = await testSession.post('/v1/reviews/1/13').send({ ...createComment });
       expect(response.status).toBe(200);
     });
-    it('Should be modificate a comment on movie', async () => {
-      const response = await testSession.put('/v1/reviews/1/9').send({ ...updateComment });
+    it('Should be modificate a comment on a movie', async () => {
+      const response = await testSession.put('/v1/reviews/1/13').send({ ...updateComment });
+      expect(response.status).toBe(200);
+    });
+    it('Should be delete a comment on a movie', async () => {
+      const response = await testSession.delete('/v1/reviews/1/13');
       expect(response.status).toBe(200);
     });
   });
