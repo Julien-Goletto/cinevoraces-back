@@ -122,6 +122,7 @@ async function addAuthors(presentations){
 
 /**
  * Write down all psql instructions to pass, using new_movie function
+ * Corected with an await for addAuthors calling
  */
 async function prepareDBSeeding(presentations,moviesList) {
   const authors = await addAuthors(presentations);
