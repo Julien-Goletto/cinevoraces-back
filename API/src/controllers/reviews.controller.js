@@ -47,8 +47,8 @@ const reviewsController = {
       throw new APIError("Vous n'avez pas la permission de modifier ce commentaire", req.url, 401);
     }
     // eslint-disable-next-line max-len
-    const result = await reviewsDatamapper.updateComment(userId, movieId, comment);
-    res.status(200).json(result);
+    await reviewsDatamapper.updateComment(userId, movieId, comment);
+    res.status(200).send('Commentaire modifié');
   },
 };
 

@@ -7,6 +7,10 @@ const reviewsRouter = express.Router();
 
 const reviewsController = require('../controllers/reviews.controller');
 
+// Joi validation compulsary for each payload containing data
+const validate = require('../validation/validator');
+const commentSchema = require('../validation/schemas/comment.schema');
+
 /**
  * Get all comments from one movie with:
  * (users ids, movie id, users pseudos, users ratings,
@@ -35,7 +39,7 @@ reviewsRouter.get('/:userId/:movieId', checkingUser.checkLogStatus, routerWrappe
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
-reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.createComment));
+reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, validate('body', commentSchema), routerWrapper(reviewsController.createComment));
 /**
  * Update comment on movie
  * @group - Reviews
@@ -44,7 +48,7 @@ reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapp
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
-reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.updateComment));
+reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, validate('body', commentSchema), routerWrapper(reviewsController.updateComment));
 
 reviewsRouter.use(handleError);
 
