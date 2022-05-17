@@ -21,19 +21,26 @@ reviewsRouter.get('/:movieId', routerWrapper(reviewsController.getAllComments));
  * Get user reviews:
  * (id, movie id, pseudo, bookmarked, viewed, liked, rating, comment)
  * @group - Reviews
+ * @param {Integer} userId
  * @param {Integer} movieId
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
 reviewsRouter.get('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.getUserReview));
 /**
- * Add a comment on movie
+ * Create comment on movie
  * @group - Reviews
- * @param {Integer} movieId
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
-reviewsRouter.post('/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.addComment));
+reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.createComment));
+/**
+ * Update comment on movie
+ * @group - Reviews
+ * @returns {reviews} 200- success response
+ * @returns {APIError} 404 - fil response
+ */
+reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.updateComment));
 
 reviewsRouter.use(handleError);
 
