@@ -1,4 +1,5 @@
 const client = require('../dbclient');
+const APIError = require('../../Errors/APIError');
 
 const reviewsDatamapper = {
   async getAllComments(movieId) {
