@@ -12,7 +12,7 @@ describe('API e2e', () => {
     it('Should be list of all comment from movie id', async () => {
       const response = await request.get('/v1/reviews/3');
       expect(response.status).toBe(200);
-      // expect(response.text).toContain('user_id');
+      expect(response.text).toContain('user_id');
     });
   });
 });
