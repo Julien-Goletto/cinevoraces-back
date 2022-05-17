@@ -6,12 +6,11 @@ const usersDataMapper = require('../database/models/users.datamapper');
 const refreshTokensController = {
   async refreshTokens(req, res) {
     let token;
-    if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[0];
-    }
     if (req.headers.cookie) {
       token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'refreshToken');
+    } else if (req.headers.authorization) {
+      // eslint-disable-next-line prefer-destructuring
+      token = req.headers.authorization.split(' ')[1];
     }
     if (!token) {
       throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);

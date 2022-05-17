@@ -12,7 +12,7 @@ const metricsController = {
   },
 
   async userMetricsById(req, res) {
-    const results = await metricsDataMapper.getAllUsersMetrics(req.params.userId);
+    const results = await metricsDataMapper.getUserMetricsByID(req.params.userId);
     res.status(200).json(results);
   },
 };

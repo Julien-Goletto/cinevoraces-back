@@ -18,7 +18,7 @@ const handleError = async (err, req, res) => {
     myError = new APIError(err, req.url);
   }
   await myError.log();
-  res.status(myError.status).json(myError.message);
+  res.status(myError.status).send(myError.message);
 };
 
 module.exports = handleError;

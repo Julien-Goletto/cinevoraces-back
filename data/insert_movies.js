@@ -117,14 +117,16 @@ async function addAuthors(presentations){
   // Writing in a SQL instructions file
   const fileName = `createUsers.sql`
   appendFile(__dirname+"/"+fileName, seedingQueries);
-  return {...authorsList};
+  return authorsList;
 };
 
 /**
  * Write down all psql instructions to pass, using new_movie function
+ * Corected with an await for addAuthors calling
  */
-function prepareDBSeeding(presentations,moviesList) {
-  const authors = addAuthors(presentations);
+async function prepareDBSeeding(presentations,moviesList) {
+  const authors = await addAuthors(presentations);
+  console.log(authors);
   console.log(`Nombre de films présentés : ${Object.keys(presentations).length}` + `\n`
                 + `Nombre de films listés : ${moviesList.movies.length}`)
   let seedingQueries = ``;
