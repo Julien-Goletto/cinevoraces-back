@@ -1,6 +1,5 @@
 const client = require('../dbclient');
 const APIError = require('../../Errors/APIError');
-const { deleteComment } = require('../../controllers/reviews.controller');
 
 const reviewsDatamapper = {
   async getAllComments(movieId) {
@@ -76,7 +75,7 @@ const reviewsDatamapper = {
     };
     await client.query(query);
     return result.rows;
-  }
+  },
 };
 
 module.exports = reviewsDatamapper;
