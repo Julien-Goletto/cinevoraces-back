@@ -49,7 +49,7 @@ propositionsRouter
    * @returns {APIError} 401 - Le créneau n'a pas pu être réservé.
    */
   .put(
-    '/book/:publishingDate',
+    '/book',
     checkingUser.checkLogStatus,
     routerWrapper(propositionsController.bookPendingPropositionsSlot),
   )
@@ -62,7 +62,7 @@ propositionsRouter
    * @returns {APIError} 401 - Le créneau demandé a été libéré.
    */
   .put(
-    '/unbook/:publishingDate',
+    '/unbook',
     checkingUser.checkAuthorization,
     routerWrapper(propositionsController.unbookPendingPropositionsSlot),
   );

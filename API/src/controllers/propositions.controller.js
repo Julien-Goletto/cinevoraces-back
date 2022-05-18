@@ -4,7 +4,7 @@ const propositionsController = {
   async availablePropositionsSlots(req, res) {
     const results = await propositionsDataMapper.getAvailablePropositionSlots(req.params.userId);
     if (typeof results === 'string') {
-      res.status(200).json(results);
+      return res.status(200).json(results);
     }
     for (const slot of results) {
       const date = slot.publishing_date.toISOString().slice(0, -14);
@@ -23,12 +23,12 @@ const propositionsController = {
     res.status(200).json(results);
   },
   async bookPendingPropositionsSlot(req, res) {
-    const { publishingDate } = req.body;
+    const publishingDate = new Date(req.body.publishingDate);
     const results = await propositionsDataMapper.bookPropositionSlot(publishingDate);
     res.status(201).json(results);
   },
   async unbookPendingPropositionsSlot(req, res) {
-    const { publishingDate } = req.body;
+    const publishingDate = new Date(req.body.publishingDate);
     const results = await propositionsDataMapper.unbookPropositionSlot(publishingDate);
     res.status(201).json(results);
   },
