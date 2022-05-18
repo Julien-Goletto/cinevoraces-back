@@ -11,7 +11,7 @@ const moviesDataMapper = {
     const query = 'SELECT * FROM movies_infos WHERE is_published = true';
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('No movies saved yet', 404);
+      return 'No movies saved yet';
     }
     return results.rows;
   },
@@ -23,7 +23,7 @@ const moviesDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('No movie saved yet', 404);
+      return 'No movies saved yet';
     }
     return results.rows;
   },
@@ -33,7 +33,7 @@ const moviesDataMapper = {
                     LIMIT 1`;
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('No movies saved yet', 404);
+      return 'No movies saved yet';
     }
     return results.rows;
   },
@@ -41,7 +41,7 @@ const moviesDataMapper = {
     const query = 'SELECT * FROM last_season_movies WHERE is_published = true';
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('No movies saved yet', 404);
+      return 'No movies saved yet';
     }
     return results.rows;
   },
@@ -52,7 +52,7 @@ const moviesDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('No movies saved yet', 404);
+      return 'No movies saved yet';
     }
     return results.rows;
   },
@@ -63,7 +63,7 @@ const moviesDataMapper = {
     };
     let results = await client.query(query);
     if (results.rowCount) {
-      throw new APIError('Movie already here', 404);
+      throw new APIError('Movie already here', '', 400);
     }
     query = {
       text: 'SELECT new_movie($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)',
@@ -74,7 +74,7 @@ const moviesDataMapper = {
     };
     results = await client.query(query);
     if (!results.rowCount) {
-      throw new Error("Le film n'a pas pu être enregistré.");
+      throw new Error("Le film n'a pas pu être enregistré. Peut-être est-il déjà présent ?", '', 400);
     }
     return 'Movie added in database';
   },
@@ -86,7 +86,7 @@ const moviesDataMapper = {
     };
     let results = await client.query(query);
     if (!results) {
-      throw new Error("Le film demandé n'existe pas en base");
+      throw new Error("Le film demandé n'existe pas en base", '', 404);
     }
     query = {
       text: 'UPDATE movie SET ',
@@ -103,7 +103,7 @@ const moviesDataMapper = {
     query.values.push(movieTitle);
     results = await client.query(query);
     if (!results) {
-      throw new Error("Le film n'a pas pu être modifié.");
+      throw new Error("Le film n'a pas pu être modifié.", '', 400);
     }
     return 'Les données du film ont été modifiées.';
   },
@@ -114,7 +114,7 @@ const moviesDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('Le film demandé nexiste pas en base.', 404);
+      throw new APIError('Le film demandé nexiste pas en base.', '', 404);
     }
     return `Le film ${movieTitle} a bien été supprimé.`;
   },

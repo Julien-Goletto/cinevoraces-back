@@ -9,7 +9,6 @@ const usersDataMapper = {
    * Save a  new user in database, using bcrypt for password encrypting
    * @param {Object} user
    * @returns {String} feedback message
-   * @throws {APIError} if user already in base, due to unique constraint
    */
   async createUser(user) {
     const { pseudo, mail, password } = user;
@@ -21,9 +20,8 @@ const usersDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('This pseudo is already taken. Please choose another one.', 404);
+      return 'This pseudo is already taken. Please choose another one.';
     }
-
     return 'User successfully registered, please login to continue.';
   },
 
@@ -40,10 +38,10 @@ const usersDataMapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError('Invalid credentials', '', 404); // à déplacer dans les controllers
+      throw new APIError('Invalid credentials', '', 400); // à déplacer dans les controllers
     }
     if (!await bcrypt.compare(user.password, result.rows[0].password)) {
-      throw new APIError('Invalid credentials', '', 404);
+      throw new APIError('Invalid credentials', '', 400);
     }
     const keys = ['id', 'pseudo', 'role'];
     return Object.fromEntries(
@@ -56,6 +54,7 @@ const usersDataMapper = {
    * Modify user informations
    * @param {string} userPseudo of user
    * @param {Object} user informations
+   * @throws {APIError} if user doesn't exist
    */
   async updateUser(userPseudo, user) {
     const userToModify = user;
@@ -70,7 +69,7 @@ const usersDataMapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError("This account doesn't exist.", 404);
+      throw new APIError("This account doesn't exist.", '', 404);
     }
     query = { text: 'UPDATE "user" SET ', values: [] };
     let i = 1;
@@ -103,7 +102,7 @@ const usersDataMapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError("This account doesn't exist.", 404);
+      throw new APIError("This account doesn't exist.", '', 404);
     }
     return result.rows[0];
   },
@@ -117,7 +116,7 @@ const usersDataMapper = {
     const query = 'SELECT "user".id, "user".pseudo, "user".avatar_url, "user".created_at FROM "user";';
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('No user registered yet.', 404);
+      return 'No user registered yet.';
     }
     return results.rows;
   },
