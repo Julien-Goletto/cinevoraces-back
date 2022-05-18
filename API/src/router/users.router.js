@@ -70,7 +70,7 @@ usersRouter
   .get('/', checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
   /**
    * Delete a user, using the pseudo (admin only)
-   * @route GET /v1/users/:pseudo
+   * @route DELETE /v1/users/:pseudo
    * @group - Users
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
