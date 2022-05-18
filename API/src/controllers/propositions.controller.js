@@ -23,11 +23,13 @@ const propositionsController = {
     res.status(200).json(results);
   },
   async bookPendingPropositionsSlot(req, res) {
-    const results = await propositionsDataMapper.bookPropositionSlot(req.params.publishingDate);
+    const { publishingDate } = req.body;
+    const results = await propositionsDataMapper.bookPropositionSlot(publishingDate);
     res.status(201).json(results);
   },
   async unbookPendingPropositionsSlot(req, res) {
-    const results = await propositionsDataMapper.unbookPropositionSlot(req.params.publishingDate);
+    const { publishingDate } = req.body;
+    const results = await propositionsDataMapper.unbookPropositionSlot(publishingDate);
     res.status(201).json(results);
   },
 };
