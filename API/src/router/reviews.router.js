@@ -52,7 +52,7 @@ reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapp
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
-reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, validate('body', commentSchema), routerWrapper(reviewsController.updateReview));
+reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.updateReview));
 /**
  * Delete comment on movie
  * @route DELETE /v1/reviews/:userId/:movieId/comment

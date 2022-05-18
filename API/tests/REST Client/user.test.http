@@ -31,7 +31,7 @@ content-type: application/json
 GET {{baseUrl}}/refreshTokens
 
 ### Update user
-PUT {{baseUrl}}/users/modify/Test2
+PUT {{baseUrl}}/users/modify/Test
 content-type: application/json
 
 {
