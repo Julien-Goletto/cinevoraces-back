@@ -13,7 +13,7 @@ const checkingUser = require('../middlewares/checkingUser');
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
 const {
-  moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema,
+  movieSchema, movieUpdateSchema, genreSchema, languageSchema, countrySchema, seasonSchema,
 } = require('../validation/schemas');
 
 moviesRouter
@@ -25,6 +25,14 @@ moviesRouter
    * @returns {APIError} 404 - fail response
    */
   .get('/', routerWrapper(moviesController.getAllMovies))
+  /**
+   * Get the last movie
+   * @route Get /v1/movies/lastmovie
+   * @group - Movies
+   * @returns {Movie} 200 - success response
+   * @returns {APIError} 404 - fail response
+   */
+  .get('/lastmovie', routerWrapper(moviesController.getAllMoviesFromLastSeason))
   /**
    * Get all movie from last season
    * @route Get /v1/movies/lastseason
@@ -56,16 +64,45 @@ moviesRouter
    * @route POST /movies/newmovie/
    * @group - Movies
    * @param {NewMovie.model} NewMovie.body.required - correspond to movie Id
-   * @returns {Movie} 200 - success response
+   * @returns {Movie} 201 - success response
    * @returns {APIError} 404 - fail response
    */
   .post(
     '/newmovie/',
     checkingUser.checkLogStatus,
-    validate('body', moviesSchema, genreSchema, languageSchema, countrySchema, seasonSchema),
+    validate('body', movieSchema, genreSchema, languageSchema, countrySchema, seasonSchema),
     routerWrapper(moviesController.addNewMovie),
+  )
+  /**
+  * Update some datas from a posted movie, on frontend request
+   * @route PUT /movies/:movieTitle
+   * @group - Movies
+   * @param {String} movieTitle.required - french_title
+   * @param {MovieToUpdate.model} MovieToUpdate.body.required - correspond to movie Id
+   * @returns {String} 201 - Les données du film ont été modifiées.
+   * @returns {APIError} 404 - Le film n'a pas pu être modifié.
+   */
+  .put(
+    '/modify/:movieTitle',
+    checkingUser.checkAuthorization,
+    validate('body', movieUpdateSchema),
+    routerWrapper(moviesController.updateMovie),
+  )
+  /**
+  * Delete a movie, on frontend request
+   * @route DELETE /movies/:movieTitle
+   * @group - Movies
+   * @param {String} movieTitle.required - french_title
+   * @returns {String} 200 - Le film a bien été supprimé.
+   * @returns {APIError} 404 - Le film demandé nexiste pas en base.
+   */
+  .delete(
+    '/:movieTitle',
+    checkingUser.checkAuthorization,
+    routerWrapper(moviesController.deleteMovie),
   );
 
+moviesRouter.use(handleError);
 /**
  * @typedef NewMovie
  * @property {string} frenchTitle - french title
@@ -83,7 +120,17 @@ moviesRouter
  * @property {Array} movieLanguages - Array of movie languages (strings)
  * @property {Array} movieCountries - Array of movie Countries (strings)
  */
-
-moviesRouter.use(handleError);
+/**
+ * @typedef MovieToUpdate
+ * @property {string} frenchTitle - french title
+ * @property {string} originalTitle - originaltitle
+ * @property {string} posterUrl - poster hosted on TMDB
+ * @property {Array} directors - directors list (strings)
+ * @property {string} releaseDate - release date (date)
+ * @property {integer} runtime - runtime
+ * @property {Array} casting - five first actors from movie cast (strings)
+ * @property {string} presentation - user presentation
+ * @property {string} publishingDate - publishing date of the movie on Cinévoraces (date)
+ */
 
 module.exports = moviesRouter;

@@ -12,8 +12,9 @@ const adminSession = session(app);
 const newUser = { pseudo: 'Test', mail: 'Test@test.fr', password: 'Test' };
 const newUserLogin = { pseudo: 'Test', password: 'Test' };
 const modifiedNewUser = { mail: 'maibidon+tetedecon' };
-const registeredUser = { pseudo: 'Mat-Mat', password: 'e5BkKI_rG5fg_6l!qG1I' };
-const adminUser = { pseudo: 'Yves Signal', password: 'K_foDAInGDeXiN~bt/Bx' };
+
+const registeredUser = { pseudo: process.env.USER_PSEUDO, password: process.env.USER_PW };
+const adminUser = { pseudo: process.env.ADMIN_PSEUDO, password: process.env.ADMIN_PW };
 
 describe('API e2e', () => {
   describe('Users routes', () => {

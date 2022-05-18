@@ -1,4 +1,5 @@
-const moviesSchema = require('./movie.schema');
+const movieSchema = require('./movie.schema');
+const movieUpdateSchema = require('./movieUpdate.schema');
 const reviewSchema = require('./review.schema');
 const commentSchema = require('./comment.schema');
 const createUserSchema = require('./createuser.schema');
@@ -10,7 +11,8 @@ const countrySchema = require('./country.schema');
 const seasonSchema = require('./season.schema');
 
 module.exports = {
-  moviesSchema,
+  movieSchema,
+  movieUpdateSchema,
   reviewSchema,
   commentSchema,
   createUserSchema,

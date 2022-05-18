@@ -6,12 +6,11 @@ const usersDataMapper = require('../database/models/users.datamapper');
 const refreshTokensController = {
   async refreshTokens(req, res) {
     let token;
-    if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[0];
-    }
     if (req.headers.cookie) {
       token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'refreshToken');
+    } else if (req.headers.authorization) {
+      // eslint-disable-next-line prefer-destructuring
+      token = req.headers.authorization.split(' ')[1];
     }
     if (!token) {
       throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
@@ -26,15 +25,9 @@ const refreshTokensController = {
     delete user.iat;
     delete user.exp;
     // Create new access and refresh tokens
-    res.cookie('accessToken', jwtMethods.createAccessToken(user), {
-      httpOnly: true,
-      sameSite: 'none',
-    });
-    res.cookie('refreshToken', jwtMethods.createRefreshToken(user), {
-      httpOnly: true,
-      sameSite: 'none',
-    });
-    res.status(200).json(user.id);
+    res.cookie('accessToken', jwtMethods.createAccessToken(user));
+    res.cookie('refreshToken', jwtMethods.createRefreshToken(user));
+    res.status(200).json(user);
   },
 };
 
