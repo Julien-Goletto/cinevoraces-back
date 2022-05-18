@@ -40,20 +40,28 @@ const reviewsDatamapper = {
     return result.rows;
   },
 
-  async updateReview(userId, movieId, comment) {
+  async updateReview(userId, movieId, review) {
+    const reviewToUpdate = review;
     let query = {
       text: 'SELECT * FROM review WHERE user_id=$1 AND movie_id=$2',
       values: [userId, movieId],
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      return 'Commentaire non trouvé';
+      throw new APIError('Review non trouvé', '', 404);
     }
-    query = {
-      text: 'UPDATE review SET comment=$3 WHERE user_id=$1 AND movie_id=$2',
-      values: [userId, movieId, comment],
-    };
+    query = { text: 'UPDATE review SET ', values: [] };
+    let i = 1;
+    for (const key of Object.keys(reviewToUpdate)) {
+      query.text += `${key} = $${i},`;
+      query.values.push(reviewToUpdate[key]);
+      i += 1;
+    }
+    query.text = query.text.slice(0, -1);
+    query.text += ` WHERE user_id=$${i} AND movie_id=$${i + 1}`;
+    query.values.push(userId, movieId);
     await client.query(query);
+    console.log(query);
     return result.rows;
   },
 
