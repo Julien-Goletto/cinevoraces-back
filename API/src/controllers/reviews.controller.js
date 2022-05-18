@@ -37,7 +37,7 @@ const reviewsController = {
   },
 
   async updateReview(req, res) {
-    const { comment } = req.body;
+    const review = req.body;
     const userId = parseInt(req.params.userId, 10);
     const movieId = parseInt(req.params.movieId, 10);
     const requestingUserId = jwtMethods.decryptAccessToken(
@@ -47,7 +47,7 @@ const reviewsController = {
       throw new APIError("Vous n'avez pas la permission de modifier cette review", req.url, 401);
     }
     // eslint-disable-next-line max-len
-    await reviewsDatamapper.updateReview(userId, movieId, comment);
+    await reviewsDatamapper.updateReview(userId, movieId, review);
     res.status(200).send('Review modifié');
   },
 

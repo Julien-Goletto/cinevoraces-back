@@ -26,7 +26,7 @@ const usersController = {
       jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
     ).pseudo;
     if (requestedUserPseudo !== requestingUserPseudo) {
-      throw new APIError('You have no right to change these parameters');
+      throw new APIError('You have no right to change these parameters', req.url, 401);
     }
     const user = req.body;
     const results = await usersDataMapper.updateUser(requestedUserPseudo, user);
@@ -53,7 +53,7 @@ const usersController = {
 
   logOutUser(req, res) {
     if (!req.session.user) {
-      throw new APIError('You are not logged.');
+      throw new APIError('You are not logged.', req.url, 401);
     }
     delete req.session.user;
     res.status(200).json('You have successfuly logged out.');
@@ -65,7 +65,7 @@ const usersController = {
       jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
     ).role;
     if (requestingUserRole !== 'admin') {
-      throw new APIError('You must be an administrator to delete a user.');
+      throw new APIError('You must be an administrator to delete a user.', req.url, 401);
     }
     const results = await usersDataMapper.deleteUserByPseudo(userPseudo);
     res.status(200).json(results);
