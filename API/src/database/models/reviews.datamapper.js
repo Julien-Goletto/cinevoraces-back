@@ -27,7 +27,7 @@ const reviewsDatamapper = {
   },
 
   async createReview(userId, movieId) {
-    let query = {
+    const query = {
       text: 'SELECT * FROM review WHERE user_id=$1 AND movie_id=$2',
       values: [userId, movieId],
     };
@@ -35,15 +35,12 @@ const reviewsDatamapper = {
     if (result.rowCount > 0) {
       throw new APIError('Review déjà présente', '', 404);
     }
-    query = {
-      text: 'INSERT INTO review (user_id, movie_id) VALUES ($1,$2)',
-      values: [userId, movieId],
-    };
+    query.text = 'INSERT INTO review (user_id, movie_id) VALUES ($1,$2)';
     await client.query(query);
     return result.rows;
   },
 
-  async updateComment(userId, movieId, comment) {
+  async updateReview(userId, movieId, comment) {
     let query = {
       text: 'SELECT * FROM review WHERE user_id=$1 AND movie_id=$2',
       values: [userId, movieId],
@@ -60,8 +57,22 @@ const reviewsDatamapper = {
     return result.rows;
   },
 
+  async deleteComment(userId, movieId) {
+    const query = {
+      text: 'SELECT * FROM review WHERE user_id=$1 AND movie_id=$2',
+      values: [userId, movieId],
+    };
+    const result = await client.query(query);
+    if (!result.rowCount) {
+      throw new APIError('Review non trouvé');
+    }
+    query.text = 'UPDATE review SET comment = null WHERE user_id=$1 AND movie_id=$2';
+    await client.query(query);
+    return result.rows;
+  },
+
   async deleteReview(userId, movieId) {
-    let query = {
+    const query = {
       text: 'SELECT * FROM review WHERE user_id=$1 AND movie_id=$2',
       values: [userId, movieId],
     };
@@ -69,10 +80,7 @@ const reviewsDatamapper = {
     if (!result.rowCount) {
       throw new APIError('Review non trouvée');
     }
-    query = {
-      text: 'DELETE FROM Review WHERE user_id=$1 AND movie_id=$2',
-      values: [userId, movieId],
-    };
+    query.text = 'DELETE FROM Review WHERE user_id=$1 AND movie_id=$2';
     await client.query(query);
     return result.rows;
   }

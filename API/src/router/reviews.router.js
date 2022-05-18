@@ -44,25 +44,25 @@ reviewsRouter.get('/:userId/:movieId', checkingUser.checkLogStatus, routerWrappe
  */
 reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.createReview));
 /**
- * Update comment on movie
- * @route PUT /v1/reviews/:userId/:movieId/comment
- * @group - Reviews
- * @param {Integer} userId
- * @param {Integer} movieId
- * @returns {reviews} 200- success response
- * @returns {APIError} 404 - fil response
- */
-reviewsRouter.put('/:userId/:movieId/comment', checkingUser.checkLogStatus, validate('body', commentSchema), routerWrapper(reviewsController.updateComment));
-/**
  * Update review on movie
- * @route PUT /v1/reviews/:userId/:movieId/review/UPDATEENCOURSNONFONCTIONELLE
+ * @route PUT /v1/reviews/:userId/:movieId/
  * @group - Reviews
  * @param {Integer} userId
  * @param {Integer} movieId
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
-reviewsRouter.put('/:userId/:movieId/review', checkingUser.checkLogStatus, routerWrapper(reviewsController.updateReview));
+reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, validate('body', commentSchema), routerWrapper(reviewsController.updateReview));
+/**
+ * Delete comment on movie
+ * @route DELETE /v1/reviews/:userId/:movieId/comment
+ * @group - Reviews
+ * @param {Integer} userId
+ * @param {Integer} movieId
+ * @returns {reviews} 200- success response
+ * @returns {APIError} 404 - fil response
+ */
+reviewsRouter.delete('/:userId/:movieId/comment', checkingUser.checkLogStatus, routerWrapper(reviewsController.deleteComment));
 /**
  * Delete review on movie
  * @route DELETE /v1/reviews/:userId/:movieId
