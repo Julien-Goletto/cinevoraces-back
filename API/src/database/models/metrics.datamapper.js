@@ -36,9 +36,23 @@ const metricsDataMapper = {
               WHERE user_id=$1`,
       values: [userId],
     };
-    const results = await client.query(query);
+    let results = await client.query(query);
+    console.log(results.rows);
     if (!results.rowCount) {
-      throw new APIError("This user doesn't exist.", 404);
+      query.text = 'SELECT * FROM "user" WHERE id=$1';
+      results = await client.query(query);
+      if (!results.rowCount) {
+        throw new APIError("This user doesn't exist.", 404);
+      } else {
+        return [{
+          user_id: userId,
+          proposed_movies_count: 0,
+          comments_count: 0,
+          likes_count: 0,
+          watchlist_count: 0,
+          ratings_count: 0,
+        }];
+      }
     }
     return results.rows;
   },

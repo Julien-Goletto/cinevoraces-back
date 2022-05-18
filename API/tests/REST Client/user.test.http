@@ -15,8 +15,8 @@ POST {{baseUrl}}/users/login
 content-type: application/json
 
 {
-  "pseudo": "Test2",
-  "password": "Test"
+  "pseudo": "Mat-Mat",
+  "password": "f=2OB$Ix4F/OPB+~W;Xf"
 }
 ### Log admin
 POST {{baseUrl}}/users/login

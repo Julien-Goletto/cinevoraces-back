@@ -21,22 +21,21 @@ const reviewsController = {
     res.status(200).json(results);
   },
 
-  async createComment(req, res) {
-    const { comment } = req.body;
+  async createReview(req, res) {
     const userId = parseInt(req.params.userId, 10);
     const movieId = parseInt(req.params.movieId, 10);
     const requestingUserId = jwtMethods.decryptAccessToken(
       jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
     ).id;
     if (userId !== requestingUserId) {
-      throw new APIError("Vous n'avez pas la permission de créer un comentaire ici", req.url, 401);
+      throw new APIError("Vous n'avez pas la permission de créer une review", req.url, 401);
     }
     // eslint-disable-next-line max-len
-    await reviewsDatamapper.createComment(userId, movieId, comment);
-    res.status(200).send('Commentaire ajouté');
+    await reviewsDatamapper.createReview(userId, movieId);
+    res.status(200).send('Review crée');
   },
 
-  async updateComment(req, res) {
+  async updateReview(req, res) {
     const { comment } = req.body;
     const userId = parseInt(req.params.userId, 10);
     const movieId = parseInt(req.params.movieId, 10);
@@ -44,11 +43,11 @@ const reviewsController = {
       jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
     ).id;
     if (userId !== requestingUserId) {
-      throw new APIError("Vous n'avez pas la permission de modifier ce commentaire", req.url, 401);
+      throw new APIError("Vous n'avez pas la permission de modifier cette review", req.url, 401);
     }
     // eslint-disable-next-line max-len
-    await reviewsDatamapper.updateComment(userId, movieId, comment);
-    res.status(200).send('Commentaire modifié');
+    await reviewsDatamapper.updateReview(userId, movieId, comment);
+    res.status(200).send('Review modifié');
   },
 
   async deleteComment(req, res) {
@@ -61,8 +60,22 @@ const reviewsController = {
       throw new APIError("Vous n'avez pas la permission de supprimer ce commentaire", req.url, 401);
     }
     // eslint-disable-next-line max-len
-    await reviewsDatamapper.updateComment(userId, movieId);
+    await reviewsDatamapper.deleteComment(userId, movieId);
     res.status(200).send('Commentaire supprimé');
+  },
+
+  async deleteReview(req, res) {
+    const userId = parseInt(req.params.userId, 10);
+    const movieId = parseInt(req.params.movieId, 10);
+    const requestingUserId = jwtMethods.decryptAccessToken(
+      jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
+    ).id;
+    if (userId !== requestingUserId) {
+      throw new APIError("Vous n'avez pas la permission de supprimer cette Review", req.url, 401);
+    }
+    // eslint-disable-next-line max-len
+    await reviewsDatamapper.deleteReview(userId, movieId);
+    res.status(200).send('Review supprimée');
   },
 };
 
