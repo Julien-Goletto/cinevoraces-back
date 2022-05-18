@@ -18,8 +18,10 @@ POST {{baseUrl}}/reviews/1/10/
 PUT {{baseUrl}}/reviews/1/10/
 content-type: application/json
 
-{
-  "comment": "frey"
+{ 
+  "bookmarked": false,
+  "rating": 1,
+  "comment": "Kikou"
 }
 
 ### Delete a review for movie with user id and movie id
