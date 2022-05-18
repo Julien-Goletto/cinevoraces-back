@@ -8,7 +8,7 @@ const moviesDataMapper = {
    * @throws {APIError} If db is empty
    */
   async getAllMovies() {
-    const query = 'SELECT * FROM movies_infos';
+    const query = 'SELECT * FROM movies_infos WHERE is_published = true';
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError('No movies saved yet', 404);
@@ -18,7 +18,7 @@ const moviesDataMapper = {
 
   async getMovieByID(movieId) {
     const query = {
-      text: 'SELECT * FROM movies_infos WHERE id=$1',
+      text: 'SELECT * FROM movies_infos WHERE id=$1 AND is_published = true',
       values: [movieId],
     };
     const results = await client.query(query);
@@ -28,7 +28,9 @@ const moviesDataMapper = {
     return results.rows;
   },
   async getLastMovie() {
-    const query = 'SELECT * FROM public.last_season_movies';
+    const query = `SELECT * FROM last_season_movies WHERE is_published = true
+                    ORDER BY id DESC
+                    LIMIT 1`;
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError('No movies saved yet', 404);
@@ -36,7 +38,7 @@ const moviesDataMapper = {
     return results.rows;
   },
   async getAllMoviesFromLastSeason() {
-    const query = 'SELECT * FROM public.last_season_movies';
+    const query = 'SELECT * FROM last_season_movies WHERE is_published = true';
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError('No movies saved yet', 404);
@@ -45,7 +47,7 @@ const moviesDataMapper = {
   },
   async getAllMoviesBySeason(seasonId) {
     const query = {
-      text: 'SELECT * FROM movies_infos WHERE season_number=$1',
+      text: 'SELECT * FROM movies_infos WHERE season_number=$1 AND is_published = true',
       values: [seasonId],
     };
     const results = await client.query(query);
