@@ -8,38 +8,41 @@ INSERT INTO "season" ("number","year") VALUES
 
 -- Ajouts des users
 INSERT INTO "user" ("pseudo","mail","password") VALUES
-('Mat-Mat', 'mailbidon1' ,'$2b$10$0T0bFgKnPUSwfk7Wbl0FYOU/E3delg9YVpfJpaPQFpsgVF990WuHe'),
-('Yves Signal', 'mailbidon2' ,'$2b$10$6CbBwJQBg0n7zCn/6JYXf.63cy3G8PTJT6oVhIboqxUyF7y5vKdo6'),
-('ajcrou', 'mailbidon3' ,'$2b$10$i6FSfUFx01WNGIspi0eeV.4OqkScHtBhkjsllUgc5qUF6ibeYIgZy'),
-('Miku', 'mailbidon4' ,'$2b$10$qfg4tiSzgsJsSHpoc8sqF.a7cJuJiH3aVfYSDDXQRmG4LnqpUF6J2'),
-('Mordicus', 'mailbidon5' ,'$2b$10$JYhynIUpUZAtK1UQmkEN8elaRN3qKxbKg/sqOPXa/COkAFi38B2z.'),
-('Woulfo', 'mailbidon6' ,'$2b$10$DyJ2gfXfDZRVk8ZJcJJ54.GBjBMWZoE.bFPgeVAfQhdolBZ8ARrqm'),
-('Lukino', 'mailbidon7' ,'$2b$10$WGyM673z9R4/DeLLoHLpNOXDkre6y063FoZN0YvD06.JZjVVxhLtO'),
-('Guillaume', 'mailbidon8' ,'$2b$10$R53rwlpM5KfSIIGSE0iqyuasp7zWmdqxvSR5fYXK3zZu2SKy1VOTK'),
-('Checco', 'mailbidon9' ,'$2b$10$x.btjBEsdR1SMLD62ozOhekj4seJ5.ujJTINc5zs3DAtTTYvOljgC'),
-('Neofelis', 'mailbidon10' ,'$2b$10$qsOZCDwnjBU3/hUzyMm/cezMkBD7N6.l5gT509gDF.s.M1sxMKIbi'),
-('Sabbata', 'mailbidon11' ,'$2b$10$jvZHyudguU8hg7LCfyVf5uN4tQ494cQNK/aFnK/AA/P/4Ao1sX1Z6'),
-('benbossman', 'mailbidon12' ,'$2b$10$ZtFyPUZ0jQLLveJ7oUe2KuUagzyW4/q1DpHkq0BO4Z.oB./nDpwe6'),
-('HR', 'mailbidon13' ,'$2b$10$8CBYlf2cUPf9fadkwqER8.iQ9EKWLK0u/t.S.VSxtMfRW8q5Vnms6'),
-('Poulpator', 'mailbidon14' ,'$2b$10$fqEYGWBmsqlRtYGgKrViAOCpaMQyk9o3NKlPgNsWlMimHiWb0mqEe'),
-('Pyjama Wallon', 'mailbidon15' ,'$2b$10$NLyrNxAXHgBPqSp6Z4VZDedM.D8hXtfIDSxy9XrP52kug8EovxrDS'),
-('Sao', 'mailbidon16' ,'$2b$10$mPiFx6BKoE4CEUvFxkr3F.72NMFdOO6.YKqcGoF2J2Y/bdtEQdr6m'),
-('Fariboles', 'mailbidon17' ,'$2b$10$mYx7m8aiAxFF5jsXNqOu/ufzZHjM9lZAk8mMDr/SPCYVlHeL9I0JG'),
-('Eiffel-AD', 'mailbidon18' ,'$2b$10$NpevAsmiHHwduNEcMrDpye0FR5xdFX3gxmBnWh0qSU1zw4BOgwNL6'),
-('Niebelungen', 'mailbidon19' ,'$2b$10$6OIPKTvW911SQFYQUAGhPOE0Rn.AtvTRzxWY4u2gzFJwhBfyHTvOW'),
-('Flexagrume', 'mailbidon20' ,'$2b$10$CETEu4CUIOtK0GeqIlpsZuyI1Xzm0ASP6xs4.POqmfa2toQFYXWaa'),
-('Seurcha', 'mailbidon21' ,'$2b$10$ePIfRUQZtWpnsNJLvCOHV.fc4N/8hpHIYJVYEo1Frw5Dw3/60dpl.'),
-('TuBuzz', 'mailbidon22' ,'$2b$10$B9Hm.SzGZSluYqHqWRu7QOHUugBSupslZh.r5XxvXGowflwIQoLZ2'),
-('Klavor', 'mailbidon23' ,'$2b$10$PLiHParfSaLVI3.tNBm2YOmpN8YDRapyYJuMgab0pgEDnjzbq8SDe'),
-('Nieuh', 'mailbidon24' ,'$2b$10$A2ysuRRsFs9Cz1zFBjEUYuWU.ING4DvJ3gkODagVQcgVFlQ9R89pa'),
-('Ruadir', 'mailbidon25' ,'$2b$10$xMO0IcN2fBGro9fzltrakOFR8uLQB7zQBvHXhqe0VAEkVsxJ1fz1G'),
-('Morbo', 'mailbidon26' ,'$2b$10$.JxLZUsxoU/8cWI.rMs6/uzv0aHfZcofXVdsGyBg7taFo7SyqonmG'),
-('MrSetzer', 'mailbidon27' ,'$2b$10$Sba6n501cGd1/dZ4TrHJPeyD0VcfJWLhc5BkiG18dJWycIbrHJjPW'),
-('DrPierre', 'mailbidon28' ,'$2b$10$rXK9JgrDfgrlkpivvwX7mem3Y7mm1sx8R8QhHdjgMEZg4tQ9QRW/O'),
-('FlexAgrume', 'mailbidon29' ,'$2b$10$KrTlQqnpNlA1ELgZsTLdHO/v5KXx5oaXcFu/luMiNy7CWSFhQ/dCW'),
-('quilim', 'mailbidon30' ,'$2b$10$Z/lw4gwW03U/D/ot7u0Y..fibikvGqDAHqpcW65m557QWlBel0XTy'),
-('Louis-Cyrus', 'mailbidon31' ,'$2b$10$26bZGNRHo2T.KQ6cEVbXKOqunAk6gVDmKPCcpG986SrxobXATYx.6'),
-('Calys', 'mailbidon32' ,'$2b$10$k1a6mCOzwAMrvOHI6gaYnOgOmyapA1hadqYAjtEpuUtlNeGILUkJK');
+('Mat-Mat', 'mailbidon1' ,'$2b$10$CFMON7KCXaBruDX.4DXW3eb/ozki8kZsXIJbhCuQGSqteu0EatgRu'),
+('Yves Signal', 'mailbidon2' ,'$2b$10$ThmpYOLjWB/NMuETIuIox.TfmjbxOefxnZ4aJTB9J2uqIy2zWLsHC'),
+('ajcrou', 'mailbidon3' ,'$2b$10$D2wyB6f51W2wh0qnBx2oS.AUGyPjK44UvOqV.sj1iFK.7.Uij15Z.'),
+('Miku', 'mailbidon4' ,'$2b$10$7XA0X/rBaW/fqcc6Gjmi.uqj2tplev.4gjLvHccyzgr7HwqN9avSG'),
+('Mordicus', 'mailbidon5' ,'$2b$10$fkg2sIe17t5LARiTzj6l7ueyCaA2LvkBJRMLRv9pD3kmaprIeDw/e'),
+('Woulfo', 'mailbidon6' ,'$2b$10$MZG2vDspjA4mcXeGPD71S.WNBUf/BPs1lADoUClMTW10ADJhP0u5C'),
+('Lukino', 'mailbidon7' ,'$2b$10$7KRpfSF3VsZK4WpOXMP36u1Z9EGUpyNwTvPwGKLqzjAAk4SmLUnPW'),
+('Guillaume', 'mailbidon8' ,'$2b$10$Nswalk0lmBIsbEAl3K4v3.bhsRccHlTCxBeIZGZXIMLPBS9bZfVM6'),
+('Checco', 'mailbidon9' ,'$2b$10$7C0t02Xp/I2Tkn.m61DTVeySop.OvItwyx8Q50L346xqR0VW60Sou'),
+('Neofelis', 'mailbidon10' ,'$2b$10$jkhGwZidXNWc.0m3xMnRc.HGYtkHgIC6T6KVoyoa5E924VuzFS4Ey'),
+('Sabbata', 'mailbidon11' ,'$2b$10$QWivraYVmEb0oYFhKihFAuSdY.orSZQy/ZYT/qMHQ0d8aEaMNJfw.'),
+('benbossman', 'mailbidon12' ,'$2b$10$Mk7ZA2NHp/uIfuNVrYCvSOxhXJ0ZLATYW718.jvzKrEAin5sl/8da'),
+('HR', 'mailbidon13' ,'$2b$10$6NICdUrEV/wIS/BhxBF3ke.MSq0M//Xrq0DrK0tAIuUZwYC5uWQ7i'),
+('Poulpator', 'mailbidon14' ,'$2b$10$NhuH4Ma1/HX5jeb3yplhieKDmHDpzw9BUE.n6NJd.BQuCkzU5/1fW'),
+('Pyjama Wallon', 'mailbidon15' ,'$2b$10$SneqSDLj1bplwhW3zVSAlOAn70gPqMTwnAAUNzXS8.dW6FnPX05AW'),
+('Sao', 'mailbidon16' ,'$2b$10$9ND.K3IAP3d66UQTt.qOFekMRvMEchV4MsZ9FhZCEc.x0fsWKlLDe'),
+('Fariboles', 'mailbidon17' ,'$2b$10$qrjE5ppx30yfu9Sd/CjbtO6F8PvPTEK1z8jjKJCwKH1m262/WdevK'),
+('Eiffel-AD', 'mailbidon18' ,'$2b$10$9p.IcoGQF.h.x32Ft6CtBeh.zpC1pGD/h665PfDVm8p2fpFlpj6xi'),
+('Niebelungen', 'mailbidon19' ,'$2b$10$JeikUeVslkVmvUAbObGHM.Up.FnR0YzKCt7fESYbXLEJnOeMtI/LC'),
+('Flexagrume', 'mailbidon20' ,'$2b$10$Es8Gr5tpWG1lWvi080Hht.4SUFeTrw2snT9bHHxPaunGfeMS9TanG'),
+('Seurcha', 'mailbidon21' ,'$2b$10$XNdvL/jZgsvbEHXOmGvsG.vC4qybSjw7nOBxIhI7pzmH168f2Isiq'),
+('TuBuzz', 'mailbidon22' ,'$2b$10$U5E7CCGJIEdw0gyoTL718eej4upfngp8KEZJaa9q2YMQqaFYoY7p2'),
+('Klavor', 'mailbidon23' ,'$2b$10$8BDtfM34tn4.bgoLSzwZJ.MQtI3N92drjNE3KZ4FZvd18n48xV.HG'),
+('Nieuh', 'mailbidon24' ,'$2b$10$nc5bgszpn5gPubObw.hPDOVMeNLtKORGPh8557ZDk0FBlgmQrNiW.'),
+('Ruadir', 'mailbidon25' ,'$2b$10$VtrfXBiWErv/MVUG.yEH9OyV4AFFc5Da4rQxUWkw3mEfM.Z2jkwby'),
+('Morbo', 'mailbidon26' ,'$2b$10$PVTUW45ewYpwiTrfSN3PeevaiQ8qB897wVzd6kAlWus1KbFNMdySS'),
+('MrSetzer', 'mailbidon27' ,'$2b$10$kqRls/3fmlHGWrOUkaUyE.ejSVhkUL5bHa8K0IDpuusQg8O3YDixa'),
+('DrPierre', 'mailbidon28' ,'$2b$10$SCjuQvQiY5tGBFIZwiJqLuiRthkddlBlB/AKHMj5/WOdUvoHuD1uO'),
+('FlexAgrume', 'mailbidon29' ,'$2b$10$4pieJ3Lr8.MlSy/IcBcrm..HX5i3nCJC25YJ0Hmr0N6Rb7FDdXkjO'),
+('quilim', 'mailbidon30' ,'$2b$10$CKzwHT3uy04DpEgr0Hv9KuyPdS8ywrYqXqWQklvkiiG.58ReqUyTq'),
+('Louis-Cyrus', 'mailbidon31' ,'$2b$10$876tNNyRDoN7IgIcP2.dRu56qETf.zdXYcvb56yC2AqUiJOl.puJK'),
+('Calys', 'mailbidon32' ,'$2b$10$u6XTEw4baqqfFYvshgoFe.Gn6827CCRkr6IwpwTMkmbE2Y.a0R2Lq'),
+('olive qui tue', 'mailbidon33' ,'$2b$10$/iFzYjk.0LUCseqXpa7Lk.PdD2/jbEQb8dku/JFVfxE4YWMyn/o4a'),
+('Joffrey d''Ortoli', 'mailbidon34' ,'$2b$10$tIXMhms0TJk0X56H/ktpFuU3.ApYMkOpsAG51wuFcxUBWwEMLNeUm'),
+('Benoît Safari', 'mailbidon35' ,'$2b$10$oSJnHbPc1boyS5bgtVEcP.7XiA7PdZ5gEjKCjviZwk8//reiGyMGK');
 
 -- Passage de Yves Signal en admin
 UPDATE "user"
@@ -128,7 +131,7 @@ Mais regarder The Untouchables aujourd’hui c’est aussi l’occasion de rendr
 Un des réalisateurs les plus importants du cinéma américain, si ce n’est le plus important, le score du regretté Ennio Morricone, la prestation du non moins regretté Sean Connery, dans une de ses innombrables (et réussies) tentatives de briser son image.
 Petite pensée émue pour De Niro qui cabotine un peu (comme souvent) et les carrières naissantes de Costner et Andy Garcia, aujourd’hui bien derrière eux.
 Les Incorruptibles c’est tout ça, et bien d’autres choses encore. Mais c’est surtout le film de la semaine, disponible sur OCS.','2020-11-08',2,1,array['Crime','Drame','Histoire','Thriller'],array['English'],array['United States of America']);
-SELECT new_movie('Perfect Blue','パーフェクトブルー','https://image.tmdb.org/t/p/original/pTjuiITuZHIii9PSRZjWzTRNwoC.jpg',array['Satoshi Kon'],'1997-07-25','81',array['Junko Iwao','Rica Matsumoto','Shinpachi Tsuji','Masaaki Okura','Yousuke Akimoto'],'Hello !
+SELECT new_movie('Perfect Blue','パーフェクトブルー','https://image.tmdb.org/t/p/original/pTjuiITuZHIii9PSRZjWzTRNwoC.jpg',array['Satoshi Kon'],'1997-07-25','81',array['Junko Iwao','Rica Matsumoto','Shinpachi Tsuji','Masaaki Ôkura','Yousuke Akimoto'],'Hello !
 Pour cette semaine je vous propose de regarder un cultissime long-métrage de l''animation japonaise de la fin des années 90, réalisé par l''éminent Satoshi Kon : Perfect Blue.
 C''est souvent qualifié de thriller psychologique et je pense qu''il mérite bien ce nom, mais plus encore, car sa construction est complètement folle et va bien au-delà du thriller psycho qui ne te prendrait aux tripes que par son histoire. Là, la façon dont c''est construit participe au jeu, et c''est dingue.
 Un travail de dingue a été réalisé sur les transitions, ce qui semble être une marque de fabrique du réalisateur, c''est un régal, je vous laisse (re)découvrir ça pendant votre (re)visionnage !
@@ -215,7 +218,7 @@ Encore une fois, difficile de donner tort à cette vague de réalisateurs, compt
 Vous trouverez sans doute beaucoup de similitude avec les plus récents films Ip Man avec Donnie Yen.
 Je ne doute pas une seconde que la trilogie de Tsui Hark en soit une des inspiration majeures.
 Néanmoins, là où les Ip Man restent des pamphlets nationalistes hagiographiques, je trouve les 3 premiers Il Était une fois en Chine beaucoup plus fins et beaucoup plus intéressants dans leurs propos.
-Par contre les acteurs occidentaux dans les productions asiatiques sont toujours aussi nuls à chier à 25 ans d''intervalle. ','2021-04-29',2,2,array['Action','Drame'],array['广州话 / 廣州話','English','Français','普通话'],array['Hong Kong']);
+Par contre les acteurs occidentaux dans les productions asiatiques sont toujours aussi nuls à chier à 25 ans d''intervalle. ','2021-04-29',2,2,array['Action','Drame'],array['Français','普通话','English','广州话 / 廣州話'],array['Hong Kong']);
 SELECT new_movie('Only Lovers Left Alive','Only Lovers Left Alive','https://image.tmdb.org/t/p/original/kffoWJ7FfPRlFFBGixOMbq3blQp.jpg',array['Jim Jarmusch'],'2013-12-12','123',array['Tom Hiddleston','Tilda Swinton','Mia Wasikowska','John Hurt','Anton Yelchin'],'A la carte cette semaine, je vous propose mon film préféré de tous les temps (Ex-aequo avec Bagdad café) : Only lovers left alive de Jim Jarmusch. C’est un film d’une esthétique folle, autant au niveau des images que de la musique. Les acteurs sont d’une sensualité écrasante. Tout transpire le spleen et le Prozac. On est sur une bonne vieille histoire de love, mais avec beaucoup d’élégance et d’originalité. C’est un peu le Twilight version Arte qui serait plébiscité par France Inter. Ce n’est pas un film qui s’adresse seulement aux amateurs de « contemplatif », les images s’appuient sur un vrai scénario. Bref, si vous en avez l’occasion, foncez. C’est beau, mais c’est beau…','2021-05-03',13,2,array['Drame','Romance'],array['Türkçe','العربية','English','Français'],array['France','Germany','Greece','United Kingdom']);
 SELECT new_movie('The Killer','喋血雙雄','https://image.tmdb.org/t/p/original/xUesDDgPaRBTEHybs0I1Z8fTdk2.jpg',array['John Woo'],'1989-07-06','111',array['Chow Yun-Fat','Danny Lee Sau-Yin','Sally Yeh','Paul Chu Kong','Kenneth Tsang'],'Ce soir, on retourne en Chine.
 Enfin, en Chine ... À l''époque c''était plus vraiment la Chine car le film se déroule à Hong-Kong.
@@ -258,7 +261,7 @@ Un film à la fois disjoncté, méchant et drôle, avec du saxo parce que c''est
 Bonne semaine et bon film !','2021-07-12',2,2,array['Aventure','Action','Comédie','Thriller','Crime'],array['English'],array['United States of America']);
 SELECT new_movie('Spider-Man : New Generation','Spider-Man: Into the Spider-Verse','https://image.tmdb.org/t/p/original/jw9TRNYIMI1KsTjgQ3wVYSMXxlh.jpg',array['Rodney Rothman','Peter Ramsey','Bob Persichetti'],'2018-12-06','117',array['Shameik Moore','Jake Johnson','Hailee Steinfeld','Mahershala Ali','Brian Tyree Henry'],'Le film de la semaine est Spider-Man : Into the Spider-Verse (2018).
 Synopsis : Ce récit se concentre sur un Spider-Man plus récent dans le Spider-Verse : Miles Morales, adolescent afro-américain qui, à son tour, va se faire mordre par une araignée radio-active et se découvrir des super-pouvoirs. Dans le même temps, le plus redoutable cerveau criminel de la ville, le Caïd, a mis au point un accélérateur de particules nucléaires capable d''ouvrir un portail sur d''autres univers. Son invention va provoquer l''arrivée de plusieurs autres versions de Spider-Man dans le monde de Miles, dont un Peter Parker plus âgé, Spider-Gwen, Spider-Man Noir, Spider-Cochon et Peni Parker, venue d''un dessin animé japonais.
-Film d''animation produit par Sony Pictures Animation et réalisé non par un, ni deux, mais trois réalisateurs : Peter Ramsey, Bob Persichetti et Rodney Rothman. Ce film est un bijou de l''animation moderne. Il a su repousser les limites créatives dans le milieu de l''animation et se distinguer à la fois sur le plan artistique mais aussi technique. Le travail sur la manipulation de la 2D pour donner l''illusion de 3D est tout simplement bluffant. Le film a raflé de belles récompenses en 2019 : Golden Globes du meilleur film d''animation, Oscards du meilleur film d''animation, BAFA du meilleur film d''animation, etc.','2021-07-19',20,2,array['Action','Aventure','Animation','Science-Fiction'],array['English','Español'],array['United States of America']);
+Film d''animation produit par Sony Pictures Animation et réalisé non par un, ni deux, mais trois réalisateurs : Peter Ramsey, Bob Persichetti et Rodney Rothman. Ce film est un bijou de l''animation moderne. Il a su repousser les limites créatives dans le milieu de l''animation et se distinguer à la fois sur le plan artistique mais aussi technique. Le travail sur la manipulation de la 2D pour donner l''illusion de 3D est tout simplement bluffant. Le film a raflé de belles récompenses en 2019 : Golden Globes du meilleur film d''animation, Oscards du meilleur film d''animation, BAFA du meilleur film d''animation, etc.','2021-07-19',20,2,array['Action','Aventure','Animation','Science-Fiction'],array['English','日本語','Español'],array['United States of America']);
 SELECT new_movie('Pulp Fiction','Pulp Fiction','https://image.tmdb.org/t/p/original/4TBdF7nFw2aKNM0gPOlDNq3v3se.jpg',array['Quentin Tarantino'],'1994-09-10','154',array['John Travolta','Samuel L. Jackson','Uma Thurman','Bruce Willis','Ving Rhames'],'Le film de la semaine est Pulp Fiction (1994).
 Film de gangster américain par Quentin Tarantino. Plusieurs histoires entre mêlées dans une chronologie déstructurée mais où, à la fin, on remet tout dans l''ordre.
 C''est cru, violent et vulgaire mais diablement efficace. ','2021-07-26',18,2,array['Thriller','Crime'],array['English','Español','Français'],array['United States of America']);
@@ -267,7 +270,7 @@ Adapté d''une pièce de théâtre, le film de Joseph L. Mankiewicz propose une 
 Un remake est sorti en 2008, Michael Caine incarnant cette fois le vieil écrivain face à un jeune Jude Law. L''original laisse un bel héritage malgré sa relative confidentialité (il est rarement cité dans les listes des grands thrillers / films à énigmes), avec notamment une citation très visible dans le récent Knives Out.','2021-08-02',21,2,array['Mystère','Thriller','Crime'],array['Italiano','English'],array['United Kingdom']);
 SELECT new_movie('Comancheria','Hell or High Water','https://image.tmdb.org/t/p/original/3JEWbVppKyZyIyE0aCYak2zUsg8.jpg',array['David Mackenzie'],'2016-08-11','102',array['Jeff Bridges','Chris Pine','Ben Foster','Gil Birmingham','Marin Ireland'],'Voici donc la proposition alternative : Hell or High Water (2016). En France, il avait gardé son titre initial de Comancheria. Le film est réalisé par David McKenzie (c''est son meilleur projet à ce jour), sur un scénario de Taylor Sheridan (qui a notamment écrit les scripts des deux Sicario).
 S''il a moins d''ampleur et de génie que Sleuth(comment pourrait-il en être autrement), Hell or High Water repose lui aussi sur des duos. D''un côté, deux frères fatigués et désargentés (Ben Foster et un surprenant Chris Pine) qui, pour sauver le ranch familial, se lancent dans une série de braquages des banques de la région. De l''autre, deux policiers expérimentés à leurs trousses, incarnés par les impeccables Jeff Bridges et Gil Birmingham (que les amateurs de Bansheereconnaîtront sans peine).
-Il s''agit d''un néo-western crépusculaire, qui dépeint une Amérique post-subprimes en pleine déliquescence. C''est rêche, très beau visuellement, avec un dénouement inattendu. C''était l''un de mes coups de coeur de 2016, que je vous propose aujourd''hui car il n''avait pas bénéficié d''un gros éclairage en son temps.','2021-08-03',21,2,array['Crime','Western','Thriller','Drame'],array['English'],array['United States of America']);
+Il s''agit d''un néo-western crépusculaire, qui dépeint une Amérique post-subprimes en pleine déliquescence. C''est rêche, très beau visuellement, avec un dénouement inattendu. C''était l''un de mes coups de coeur de 2016, que je vous propose aujourd''hui car il n''avait pas bénéficié d''un gros éclairage en son temps.','2021-08-03',21,2,array['Crime','Thriller','Drame'],array['English'],array['United States of America']);
 SELECT new_movie('I Don''t Feel at Home in This World Anymore','I Don''t Feel at Home in This World Anymore','https://image.tmdb.org/t/p/original/1stdUlXBc3nxqhdWvZ6wWWEbCQW.jpg',array['Macon Blair'],'2017-01-19','93',array['Melanie Lynskey','Elijah Wood','David Yow','Jane Levy','Devon Graye'],'J''ai eu du mal à choisir mais celui-ci est sur Netflix donc go pour la proposition de la semaine : I Don''t Feel at Home in This World Anymore (2017) de Macon Blair (un acteur de petits rôles dont il s''agit du seul film en tant que réalisateur), une comédie dramatique qui flirte avec le cynisme pour nous offrir un duo aussi improbable que touchant, incarné par Melanie Lynskey et Elijah Wood.
 La première est une infirmière fin de la trentaine qui semble frappée de poisse chronique, à laquelle s''ajoute son tempérament conciliant qui ne l''aide pas et qu''elle envoie valser suite au cambriolage de sa maison. La goutte de trop qui va la lancer sur la traque des cambrioleurs, accompagnée de son voisin à l''équilibre mental douteux.
 Un film drôle, ludique, et crédible malgré tout, qui rend hommage aux personnes marginalisées dans une société aux codes définis.','2021-08-09',22,2,array['Comédie','Crime','Drame','Thriller'],array['English'],array['United States of America']);
@@ -402,10 +405,16 @@ Cette semaine je vous propose donc Doomsday ( de 2008 lui aussi ) réalisé par 
 Comme je disais un peu plus tôt ce n''est pas un film que j''ai particulièrement envie de revoir mais j''ai par contre très envie d''entendre vos retour dessus. De plus en allant voir la fiche IMDB j''ai été très surpris du 5.9 qu''il se tape, je le voyais beaucoup plus bas que ça. Du coup je suis tout de même curieux de voir quel regard je porterai sur ce film aujourd''hui. Peut-être que mon goût pour le nanard qui s''est depuis développé offrira un semblant de rédemption à ce truc ?
 Bref Doomsday dispo sur Prime, enjoy! ( Checco, je t''expliquerai pourquoi les meumeu m''ont marquées ensuite )','2022-04-25',26,3,array['Action','Thriller','Science-Fiction'],array['English'],array['Germany','United Kingdom','United States of America','South Africa']);
 SELECT new_movie('The Dictator','The Dictator','https://image.tmdb.org/t/p/original/zKcCaWewiEF2XGJDSureoXb2uoo.jpg',array['Larry Charles'],'2012-05-15','83',array['Sacha Baron Cohen','Ben Kingsley','Anna Faris','Jason Mantzoukas','Sayed Badreya'],'Je cherchais un film absurde, drôle ou politiquement incorrecte. J’avais d’abord pensé à Tonnerre sous les Tropiques (Tropic Thunder, 2008), mais finalement je l’ai trouvé trop convenu/connu. Alors, j’ai plutôt pensé au Le Fantôme de la liberté (1974) de Buñuel. Mais en le rematant (voyez comme je prends mon travail de proposeur au sérieux), je l’ai trouvé pas assez absurde et drôle, un peu déçu quoi. Alors, je me suis retourné vers ce vieux Chaplin, avec naturellement* Le Dictateur* (The Great Dictator, 1940), que tout le monde connaît, mais que personne n’a réellement vu en entier. Pareil (et ramaté) ce n’est pas un film super drôle/absurde, certes il montre l’absurdité des régimes fascistes, se moque de Hitler et Benito, mais son discours est une mise en garde, qui par les temps qui courent, on en sort le cœur lourd. Bon finalement, j’ai retiré Great, et je vous propose donc plutôt … Le Dictateur (The Dictator, 2012), de Larry Charles, avec naturellement Sacha Cohen ! Niveau humour con, vous serez servi !','2022-05-02',9,3,array['Comédie'],array['English','עִבְרִית'],array['United States of America']);
+SELECT new_movie('Chasseurs de Dragons','Chasseurs de dragons','https://image.tmdb.org/t/p/original/gHjcaVaXVqjYItJzjD5Y8YrXh84.jpg',array['Guillaume Ivernel','Arthur Qwak'],'2008-03-19','82',array['Vincent Lindon','Patrick Timsit','Philippe Nahon','Amanda Lear','Marie Drion'],'Alors, au menu cette semaine, je vous propose Chasseur de dragons, un film réalisé par Guillaume Ivernel, Arthur Qwak, produit par Philippe Delarue et Futurikon et sorti en 2008. Un des seuls films d''animation français que je peux visionner sans avoir envie de me petit-suissider (ref) et qui ne donne pas trop l''impression de prendre nos chères têtes blondes (rousses,brunes, bref) pour des c@ns. ça casse pas trois pattes à un c@nnard et le design des persos m''a rendue perplexe quand je l''ai visionné la première fois mais, l''ambiance complètement désolée, les paysages claqués de fou et certains passages un peu malaisants laissent une sensation de vide, chelou, mais pas déplaisante. C''est doublé avec de vrais acteurs, y''a des plans biens sympas, une bo pas dégueu (Klaus Badelt) bref, y''a moyen de passer un bon moment sans  se prendre le chou. Ah, ce film est adapté de la série animée du même nom, toujours du môsieur Qwak. Dispo sur Amazon Prime seulement (hélas, ni sur Netflix ou Disney +). Bon visionnage !','2022-05-10',33,3,array['Animation','Familial'],array['Español','Français'],array['France']);
+SELECT new_movie('Les Pleins Pouvoirs','Absolute Power','https://image.tmdb.org/t/p/original/sU0SPvZPJj9AORrCqoI8JnhJiIw.jpg',array['Clint Eastwood'],'1997-02-14','121',array['Clint Eastwood','Gene Hackman','Ed Harris','Laura Linney','Scott Glenn'],'Au menu cette semaine, j''ai envie de vous replonger dans l''ambiance si particulière des grands thrillers flamboyants des nineties ! Réalisation mineure d''un cinéaste majeur, Absolute Power (Les Pleins Pouvoirs, 1997) signe le retour aux affaires de Clint Eastwood, alors au sommet de sa gloire de réalisateur après les triomphes publics et critiques d''Impitoyable, et Sur la route de Maddison. Seulement voilà, ce thriller politique au casting cinq étoiles (les merveilleux Gene Hackman et Ed Harris sont de la partie) signe une phase de déclin pour Clint, avec une réception tiède aux Etats-Unis qui poussera Eastwood à annuler sa venue à Cannes, où le film devait être présenté en clôture de festival. Pourtant, le film bénéficiera d''un excellent accueil en France. Adapté du roman éponyme de David Baldacci, Absolute Power reste intéressant en ce qu''il est un témoignage limpide de la pensée politique du Clint : une méfiance totale envers un pouvoir central corrompu à tous les niveaux, auquel il oppose un héros certes hors-la-loi mais respectueux d''un code d''honneur. Bon visionnage ! ','2022-05-16',21,3,array['Crime','Drame','Action'],array['English','Español'],array['United States of America']);
 
 -- Mise à jour des statuts des films archivés
 UPDATE movie
 SET is_published = 'true';
+
+-- Ajout de deux nouvelles propositions
+SELECT new_movie('12 hommes en colère','12 Angry Men','https://image.tmdb.org/t/p/original/fFXrCl7nBFFaQU3IgTlinvk6vTi.jpg',array['Sidney Lumet'],'1957-04-10','95',array['Martin Balsam','John Fiedler','Lee J. Cobb','E.G. Marshall','Jack Klugman'],'12 hommes et beaucoup de colère. Mais zéro bagarre par contre. Même pas une tartine de pâté. C''est rude.','2022-05-23',34,3,array['Drame'],array['English'],array['United States of America']);
+SELECT new_movie('Garfield, le film','Garfield','https://image.tmdb.org/t/p/original/ec8AM30BnLlCoRE1Aw5INo5ubOe.jpg',array['Peter Hewitt'],'2004-06-10','81',array['Bill Murray','Breckin Meyer','Jennifer Love Hewitt','Stephen Tobolowsky','Evan Arnold'],'Un film bien en dessous de ce que l''on pourrait imaginer. Je veux dire, Garfield quoi! C''est un gage de qualité! Mais la on nous fournis une bouse infecte bien loin de la vision original du manga. Tout d''abord, Garfield n''obtient ses pouvoirs qu''après le combat contre Zackary Ford, or là, dés le départ Garfield est over-pété et roule sur tout ses adversaire... Ensuite Vegeta qui est fan frites et cours dans tout New York a la recherche d''une bonne baraque frites serieux j''ai pas compris le délire, le but c''est de tourner tout les personnages en ridicule? Est-ce que les fans de gaming et culture Jap sont forcement des noeuds-noeuds? Selon Spielberg, il semblerait que oui...','2022-05-30',35,3,array['Animation','Comédie','Familial'],array['English'],array['United States of America']);
 
 -- Ajout de reviews
 INSERT INTO "review" ("user_id","movie_id","bookmarked","viewed","liked","rating","comment") VALUES
@@ -454,5 +463,40 @@ C’est pourri. Bon, maintenant on est en Inde, ça reste pourri, mais je suis u
 Et 3h00 pour un tel scénario post-it, ce n’est juste pas possible ! On aurait très facilement pu retirer 1h30. En tout cas, pour l’instant, le meilleur film que j’ai vu de la S3 de cinévorace, 
 merci Lukino pour cette reco exotique. Et aussi pour le jambon.'),
 (2,3,true,false,false,null,null);
+
+--Ajout des créneaux
+INSERT INTO proposition_slot ("season_number","episode","publishing_date","is_booked") VALUES
+(3,21,'2022-05-23',true),
+(3,22,'2022-05-30',true),
+(3,23,'2022-06-06',false),
+(3,24,'2022-06-13',false),
+(3,25,'2022-06-20',false),
+(3,26,'2022-06-27',false),
+(3,27,'2022-07-04',false),
+(3,28,'2022-07-11',false),
+(3,29,'2022-07-18',false),
+(3,30,'2022-07-25',false),
+(3,31,'2022-08-01',false),
+(3,32,'2022-08-08',false),
+(3,33,'2022-08-15',false),
+(3,34,'2022-08-22',false),
+(3,35,'2022-08-29',false),
+(3,36,'2022-09-05',false),
+(3,37,'2022-09-12',false),
+(3,38,'2022-09-19',false),
+(3,39,'2022-09-26',false),
+(3,40,'2022-10-03',false),
+(3,41,'2022-10-10',false),
+(3,42,'2022-10-17',false),
+(3,43,'2022-10-24',false),
+(3,44,'2022-10-31',false),
+(3,45,'2022-11-07',false),
+(3,46,'2022-11-14',false),
+(3,47,'2022-11-21',false),
+(3,48,'2022-11-28',false),
+(3,49,'2022-12-05',false),
+(3,50,'2022-12-12',false),
+(3,51,'2022-12-19',false),
+(3,52,'2022-12-26',false);
 
 COMMIT;
