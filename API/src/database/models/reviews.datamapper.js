@@ -83,7 +83,7 @@ const reviewsDatamapper = {
     query.text = 'DELETE FROM Review WHERE user_id=$1 AND movie_id=$2';
     await client.query(query);
     return result.rows;
-  }
+  },
 };
 
 module.exports = reviewsDatamapper;
