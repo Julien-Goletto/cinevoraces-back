@@ -7,7 +7,7 @@ const app = require('../../app');
 const request = supertest(app);
 const userSession = session(app);
 
-const registeredUser = { pseudo: 'Mat-Mat', password: 'e5BkKI_rG5fg_6l!qG1I' };
+const registeredUser = { pseudo: process.env.USER_PSEUDO, password: process.env.USER_PW };
 
 describe('API e2e', () => {
   describe('Metrics routes', () => {

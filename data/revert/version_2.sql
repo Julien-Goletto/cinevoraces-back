@@ -3,5 +3,6 @@
 BEGIN;
 
 DROP FUNCTION IF EXISTS new_movie;
+DROP FUNCTION IF EXISTS new_season;
 
 COMMIT;

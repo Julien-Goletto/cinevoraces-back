@@ -14,7 +14,7 @@ CREATE OR REPLACE FUNCTION new_movie(
 	publishing_date DATE,
 	user_id INT,
 	season_id INT,
-  	movie_genres TEXT[],
+  movie_genres TEXT[],
 	movie_languages TEXT[],
 	movie_countries TEXT[]
 ) RETURNS void AS $$
@@ -75,5 +75,36 @@ BEGIN
 	END IF;
 END
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION new_season(
+season_to_add INT,
+year_to_add INT,
+first_episode DATE
+) RETURNS void AS $$
+
+DECLARE
+-- 	Variables annonymes
+    episode INT := 1;
+    episode_date DATE;
+BEGIN
+    --On rajoute la saison dans la table correspondante
+	IF NOT EXISTS (SELECT * FROM season WHERE season_to_add=season.number) THEN
+		INSERT INTO "season"("number","year") VALUES
+        (season_to_add,year_to_add);
+		-- Remplissage de la table proposition_slot
+        episode_date := first_episode;
+        WHILE EXTRACT(YEAR FROM episode_date) < (year_to_add + 1)
+        LOOP
+            INSERT INTO "proposition_slot" ("season_number","episode","publishing_date") VALUES
+            (season_to_add,episode,episode_date);
+            -- On incrémente les pointeurs
+            episode_date := episode_date + 7;
+            episode := episode + 1;
+		END LOOP;
+	ELSE
+		RAISE EXCEPTION 'Saison (%) déjà là', season_to_add;
+	END IF;
+END
+$$LANGUAGE plpgsql;
 
 COMMIT;
