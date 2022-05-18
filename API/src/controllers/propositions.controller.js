@@ -1,8 +1,8 @@
 const propositionsDataMapper = require('../database/models/propositions.datamapper');
 
 const propositionsController = {
-  async availablePropositionsSlots(_, res) {
-    const results = await propositionsDataMapper.getAvailablePropositionSlots();
+  async availablePropositionsSlots(req, res) {
+    const results = await propositionsDataMapper.getAvailablePropositionSlots(req.params.userId);
     res.status(200).json(results);
   },
 
@@ -17,6 +17,10 @@ const propositionsController = {
   },
   async bookPendingPropositionsSlot(req, res) {
     const results = await propositionsDataMapper.bookPropositionSlot(req.params.publishingDate);
+    res.status(201).json(results);
+  },
+  async unbookPendingPropositionsSlot(req, res) {
+    const results = await propositionsDataMapper.unbookPropositionSlot(req.params.publishingDate);
     res.status(201).json(results);
   },
 };

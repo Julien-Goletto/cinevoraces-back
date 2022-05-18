@@ -12,14 +12,7 @@ const checkingUser = require('../middlewares/checkingUser');
 const propositionsRouter = express.Router();
 
 propositionsRouter
-  /**
-   * Get all available propositions slots
-   * @route GET /v1/propositions/availableSlots
-   * @group - propositions
-   * @returns {Array} 200 - success response - next_propositions
-   * @returns {APIError} 404 - fail response
-   */
-  .get('/availableSlots', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
+
   /**
    * Return all users propositions. Admin required.
    * @route GET /v1/propositions/pendingPropositions
@@ -39,18 +32,39 @@ propositionsRouter
    */
   .get('/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.userPendingPropositionsById))
   /**
+   * Get all available propositions slots
+   * @route GET /v1/propositions/availableSlots
+   * @group - propositions
+   * @param {integer} userId - user id
+   * @returns {Array} 200 - success response - next_propositions
+   * @returns {APIError} 404 - fail response
+   */
+  .get('/availableSlots/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
+  /**
    * Book an available proposition slot.
    * @route GET /v1/propositions/book/:publishingDate
    * @group - propositions
    * @param {Date} publishingDate - publishing date
-   * @returns {Array} 201 - success response - for asked user :
-   * proposed_movies_count, comments_counts, likes_count, watchlist_count & ratings_count
-   * @returns {APIError} 401 - fail response
+   * @returns {String} 201 - success response - Le créneau demandé a été réservé.
+   * @returns {APIError} 401 - Le créneau n'a pas pu être réservé.
    */
   .put(
     '/book/:publishingDate',
     checkingUser.checkLogStatus,
     routerWrapper(propositionsController.bookPendingPropositionsSlot),
+  )
+  /**
+   * Unbook an unavailable proposition slot. As admin only.
+   * @route GET /v1/propositions/unbook/:publishingDate
+   * @group - propositions
+   * @param {Date} publishingDate - publishing date
+   * @returns {Array} 201 - success response - Le créneau n'a pas pu être libéré.
+   * @returns {APIError} 401 - Le créneau demandé a été libéré.
+   */
+  .put(
+    '/unbook/:publishingDate',
+    checkingUser.checkAuthorization,
+    routerWrapper(propositionsController.unbookPendingPropositionsSlot),
   );
 
 propositionsRouter.use(handleError);
