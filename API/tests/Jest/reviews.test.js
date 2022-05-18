@@ -8,7 +8,7 @@ const request = supertest(app);
 const testSession = session(app);
 
 const registeredUser = { pseudo: process.env.USER_PSEUDO, password: process.env.USER_PW };
-const updateComment = { comment: 'Recoucou' };
+const updateReview = { bookmarked: true, comment: 'Recoucou' };
 
 describe('API e2e', () => {
   describe('Reviews routes', () => {
@@ -31,7 +31,7 @@ describe('API e2e', () => {
       expect(response.status).toBe(200);
     });
     it('Should be modificate a review on a movie', async () => {
-      const response = await testSession.put('/v1/reviews/1/13').send({ ...updateComment });
+      const response = await testSession.put('/v1/reviews/1/13').send({ ...updateReview });
       expect(response.status).toBe(200);
     });
     it('Should be delete a comment on a movie', async () => {
