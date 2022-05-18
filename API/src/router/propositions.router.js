@@ -33,7 +33,7 @@ propositionsRouter
   .get('/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.userPendingPropositionsById))
   /**
    * Get all available propositions slots
-   * @route GET /v1/propositions/availableSlots
+   * @route GET /v1/propositions/availableSlots/:userId
    * @group - propositions
    * @param {integer} userId - user id
    * @returns {Array} 200 - success response - next_propositions
