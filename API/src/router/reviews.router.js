@@ -9,7 +9,7 @@ const reviewsController = require('../controllers/reviews.controller');
 
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
-const commentSchema = require('../validation/schemas/comment.schema');
+const reviewSchema = require('../validation/schemas/review.schema');
 
 /**
  * Get all comments from one movie with:
@@ -52,7 +52,7 @@ reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapp
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
-reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.updateReview));
+reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, validate('body', reviewSchema), routerWrapper(reviewsController.updateReview));
 /**
  * Delete comment on movie
  * @route DELETE /v1/reviews/:userId/:movieId/comment
