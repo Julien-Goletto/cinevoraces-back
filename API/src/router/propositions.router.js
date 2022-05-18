@@ -42,7 +42,7 @@ propositionsRouter
   .get('/availableSlots/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
   /**
    * Book an available proposition slot.
-   * @route GET /v1/propositions/book/:publishingDate
+   * @route PUT /v1/propositions/book/:publishingDate
    * @group - propositions
    * @param {Date} publishingDate - publishing date
    * @returns {String} 201 - success response - Le créneau demandé a été réservé.
@@ -55,7 +55,7 @@ propositionsRouter
   )
   /**
    * Unbook an unavailable proposition slot. As admin only.
-   * @route GET /v1/propositions/unbook/:publishingDate
+   * @route PUT /v1/propositions/unbook/:publishingDate
    * @group - propositions
    * @param {Date} publishingDate - publishing date
    * @returns {Array} 201 - success response - Le créneau n'a pas pu être libéré.
