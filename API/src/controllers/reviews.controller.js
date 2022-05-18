@@ -50,6 +50,21 @@ const reviewsController = {
     res.status(200).send('Commentaire modifié');
   },
 
+  async updateReview(req, res) {
+    const { comment } = req.body;
+    const userId = parseInt(req.params.userId, 10);
+    const movieId = parseInt(req.params.movieId, 10);
+    const requestingUserId = jwtMethods.decryptAccessToken(
+      jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
+    ).id;
+    if (userId !== requestingUserId) {
+      throw new APIError("Vous n'avez pas la permission de modifier ce commentaire", req.url, 401);
+    }
+    // eslint-disable-next-line max-len
+    await reviewsDatamapper.updateComment(userId, movieId, comment);
+    res.status(200).send('Commentaire modifié');
+  },
+
   async deleteReview(req, res) {
     const userId = parseInt(req.params.userId, 10);
     const movieId = parseInt(req.params.movieId, 10);
