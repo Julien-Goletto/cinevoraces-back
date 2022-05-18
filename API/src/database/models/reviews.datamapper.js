@@ -9,7 +9,7 @@ const reviewsDatamapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('Pas de commentaires sur ce film', '', 404);
+      throw new APIError('Pas de commentaires sur ce film', '', 400);
     }
     return results.rows;
   },

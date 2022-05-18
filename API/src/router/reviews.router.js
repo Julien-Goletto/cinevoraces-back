@@ -55,7 +55,7 @@ reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapp
 reviewsRouter.put('/:userId/:movieId/comment', checkingUser.checkLogStatus, validate('body', commentSchema), routerWrapper(reviewsController.updateComment));
 /**
  * Update review on movie
- * @route PUT /v1/reviews/:userId/:movieId/review
+ * @route PUT /v1/reviews/:userId/:movieId/review/UPDATEENCOURSNONFONCTIONELLE
  * @group - Reviews
  * @param {Integer} userId
  * @param {Integer} movieId
