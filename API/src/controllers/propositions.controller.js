@@ -3,6 +3,9 @@ const propositionsDataMapper = require('../database/models/propositions.datamapp
 const propositionsController = {
   async availablePropositionsSlots(req, res) {
     const results = await propositionsDataMapper.getAvailablePropositionSlots(req.params.userId);
+    if (typeof results === 'string') {
+      res.status(200).json(results);
+    }
     for (const slot of results) {
       const date = slot.publishing_date.toISOString().slice(0, -14);
       slot.publishing_date = date;
