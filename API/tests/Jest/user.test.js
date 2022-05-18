@@ -56,7 +56,7 @@ describe('API e2e', () => {
     });
     it('Should not log the deleted user', async () => {
       const response = await request.post('/v1/users/login').send({ ...newUserLogin });
-      expect(response.status).toBe(404);
+      expect(response.status).toBe(400);
       expect(response.text).toContain('Invalid credentials');
     });
   });

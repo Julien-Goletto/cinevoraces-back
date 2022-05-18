@@ -25,7 +25,7 @@ describe('API e2e', () => {
     });
     it('Should get a 404 because logged user as already proposed a movie', async () => {
       const response = await userSession1.get(`/v1/propositions/availableSlots/${registeredUserId1}`);
-      expect(response.status).toBe(404);
+      expect(response.status).toBe(200);
       expect(response.text).toContain('Vous avez déjà une proposition en attente. Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.');
     });
     it('Should get all available slots, logged as user (no proposition pending)', async () => {

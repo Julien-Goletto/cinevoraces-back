@@ -9,7 +9,7 @@ const reviewsDatamapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('Pas de commentaires sur ce film', '', 400);
+      return 'Pas de commentaires sur ce film';
     }
     return results.rows;
   },
@@ -21,7 +21,7 @@ const reviewsDatamapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('Pas de données pour ce film', '', 404);
+      return "Cet utilisateur n'a pas encore intéragit avec ce film";
     }
     return results.rows;
   },
@@ -33,7 +33,7 @@ const reviewsDatamapper = {
     };
     const result = await client.query(query);
     if (result.rowCount > 0) {
-      throw new APIError('Review déjà présente', '', 404);
+      throw new APIError('Review déjà présente', '', 400);
     }
     query.text = 'INSERT INTO review (user_id, movie_id) VALUES ($1,$2)';
     await client.query(query);
@@ -47,7 +47,7 @@ const reviewsDatamapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError('Commentaire non trouvé');
+      return 'Commentaire non trouvé';
     }
     query = {
       text: 'UPDATE review SET comment=$3 WHERE user_id=$1 AND movie_id=$2',
@@ -64,7 +64,7 @@ const reviewsDatamapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError('Review non trouvé');
+      throw new APIError('Review non trouvé', '', 400);
     }
     query.text = 'UPDATE review SET comment = null WHERE user_id=$1 AND movie_id=$2';
     await client.query(query);
@@ -78,7 +78,7 @@ const reviewsDatamapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError('Review non trouvée');
+      throw new APIError('Review non trouvé', '', 400);
     }
     query.text = 'DELETE FROM Review WHERE user_id=$1 AND movie_id=$2';
     await client.query(query);

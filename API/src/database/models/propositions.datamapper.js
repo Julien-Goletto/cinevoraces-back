@@ -16,32 +16,30 @@ const propositionsDataMapper = {
     };
     let results = await client.query(query);
     if (results.rowCount) {
-      throw new APIError('Vous avez déjà une proposition en attente. Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.', '', 404);
+      return 'Vous avez déjà une proposition en attente. Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.';
     }
     query = 'SELECT * FROM next_propositions';
     results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('Aucun créneau de proposition disponible.', '', 404);
+      return 'Aucun créneau de proposition disponible.';
     }
     return results.rows;
   },
   /**
    * Get all pending propositions
    * @returns {ARRAY} all pending propositions
-   * @throws {APIError} If db is empty
    */
   async getPendingPropositions() {
     const query = 'SELECT * FROM pending_propositions';
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('Aucune proposition enregistrée en base.', '', 404);
+      return 'Aucune proposition enregistrée en base.';
     }
     return results.rows;
   },
   /**
    * Get the pending proposition from one user
    * @returns {ARRAY} propositions per user
-   * @throws {APIError} If db is empty
    */
   async getPendingPropositionByUserID(userId) {
     const query = {
@@ -52,14 +50,14 @@ const propositionsDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError("Cet utilisateur n'a pas de proposition de film en attente.", 404);
+      return "Cet utilisateur n'a pas de proposition de film en attente.";
     }
     return results.rows;
   },
   /**
    * Update a proposition slot from is_booked = false to true
    * @returns {ARRAY} propositions per user
-   * @throws {APIError} If db is empty
+   * @throws {APIError} If the slot is already reserved
    */
   async bookPropositionSlot(publishingDate) {
     const query = {
@@ -79,7 +77,7 @@ const propositionsDataMapper = {
   /**
    * Update a proposition slot from is_booked = false to true
    * @returns {ARRAY} propositions per user
-   * @throws {APIError} If db is empty
+   * @throws {APIError} If the slot couldn't be turned available again
    */
   async unbookPropositionSlot(publishingDate) {
     const query = {
@@ -90,7 +88,7 @@ const propositionsDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError("Le créneau n'a pas pu être libéré.", 400);
+      throw new APIError("Le créneau n'a pas pu être libéré.", '', 400);
     }
     return 'Le créneau demandé a été libéré.';
   },
