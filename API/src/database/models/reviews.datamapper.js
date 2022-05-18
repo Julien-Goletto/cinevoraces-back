@@ -8,9 +8,9 @@ const reviewsDatamapper = {
       values: [movieId],
     };
     const results = await client.query(query);
-    if (!results.rowCount) {
-      return 'Pas de commentaires sur ce film';
-    }
+    // if (!results.rowCount) {
+    //   return 'Pas de commentaires sur ce film';
+    // }
     return results.rows;
   },
 

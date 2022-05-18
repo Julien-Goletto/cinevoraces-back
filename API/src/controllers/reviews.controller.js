@@ -5,7 +5,8 @@ const jwtMethods = require('../JWT/jwt.module');
 const reviewsController = {
   async getAllComments(req, res) {
     const results = await reviewsDatamapper.getAllComments(req.params.movieId);
-    res.status(200).json(results);
+    // eslint-disable-next-line no-unused-expressions
+    (results.length === 0) ? res.status(204) : res.status(200).json(results);
   },
 
   async getUserReview(req, res) {

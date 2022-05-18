@@ -6,7 +6,7 @@
 
 
 ### Get all comments with movieId
-GET {{baseUrl}}/reviews/3/comments
+GET {{baseUrl}}/reviews/104/comments
 
 ### Get all reviews fron user from on movie with userId and movieId
 GET {{baseUrl}}/reviews/1/3
