@@ -8,7 +8,6 @@ const request = supertest(app);
 const testSession = session(app);
 
 const registeredUser = { pseudo: 'Mat-Mat', password: 'e5BkKI_rG5fg_6l!qG1I' };
-const createComment = { comment: 'Coucou' };
 const updateComment = { comment: 'Recoucou' };
 
 describe('API e2e', () => {
@@ -27,15 +26,15 @@ describe('API e2e', () => {
       expect(response.status).toBe(200);
       expect(response.text).toContain('user_id');
     });
-    it('Should be create a new comment on a movie', async () => {
-      const response = await testSession.post('/v1/reviews/1/13').send({ ...createComment });
+    it('Should be create a new empty review on a movie', async () => {
+      const response = await testSession.post('/v1/reviews/1/13');
       expect(response.status).toBe(200);
     });
     it('Should be modificate a comment on a movie', async () => {
       const response = await testSession.put('/v1/reviews/1/13').send({ ...updateComment });
       expect(response.status).toBe(200);
     });
-    it('Should be delete a comment on a movie', async () => {
+    it('Should be delete a review on a movie', async () => {
       const response = await testSession.delete('/v1/reviews/1/13');
       expect(response.status).toBe(200);
     });

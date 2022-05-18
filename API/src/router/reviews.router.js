@@ -32,14 +32,14 @@ reviewsRouter.get('/:movieId', routerWrapper(reviewsController.getAllComments));
  */
 reviewsRouter.get('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.getUserReview));
 /**
- * Create comment on movie
+ * Create review on movie
  * @group - Reviews
  * @param {Integer} userId
  * @param {Integer} movieId
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
-reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, validate('body', commentSchema), routerWrapper(reviewsController.createComment));
+reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.createReview));
 /**
  * Update comment on movie
  * @group - Reviews
@@ -50,14 +50,14 @@ reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, validate('b
  */
 reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, validate('body', commentSchema), routerWrapper(reviewsController.updateComment));
 /**
- * Delete comment on movie
+ * Delete review on movie
  * @group - Reviews
  * @param {Integer} userId
  * @param {Integer} movieId
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
-reviewsRouter.delete('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.deleteComment));
+reviewsRouter.delete('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.deleteReview));
 
 reviewsRouter.use(handleError);
 

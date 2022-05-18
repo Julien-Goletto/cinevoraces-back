@@ -11,13 +11,8 @@ GET {{baseUrl}}/reviews/3
 ### Get all reviews fron user from on movie with userId and movieId
 GET {{baseUrl}}/reviews/2/3
 
-### Create a comment for movie with user id and movie id
+### Create a review empty for movie with user id and movie id
 POST {{baseUrl}}/reviews/2/10
-content-type: application/json
-
-{
-  "comment": "bla bla bla double test"
-}
 
 ### Update a comment for movie with user id and movie id
 PUT {{baseUrl}}/reviews/2/10
@@ -28,4 +23,4 @@ content-type: application/json
 }
 
 ### Delete a comment for movie with user id and movie id
-DELETE {{baseUrl}}/reviews/2/2
+DELETE {{baseUrl}}/reviews/2/10
