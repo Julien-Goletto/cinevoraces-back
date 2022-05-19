@@ -136,8 +136,16 @@ CREATE VIEW filters_options AS
 
 -- Liste des commentaires pour un film
 CREATE VIEW movie_comments AS
-	SELECT user_id,"user".pseudo AS user_pseudo,movie_id,rating,review.created_at,comment,avatar_url FROM review
-	JOIN "user" ON "user_id" = "user".id;
+	SELECT review.user_id,
+	"user".pseudo AS user_pseudo,
+	review.movie_id,
+	review.rating,
+	review.created_at,
+	review.comment,
+	"user".avatar_url
+	FROM review
+		JOIN "user" ON review.user_id = "user".id
+	WHERE review.comment IS NOT NULL;
 
 CREATE VIEW next_propositions AS
 	SELECT * FROM
