@@ -20,7 +20,7 @@ propositionsRouter
    * @returns {Array} 200 - success response - movies that are pending
    * @returns {APIError} 404 - fail response
    */
-  .get('/', checkingUser.checkAuthorization, routerWrapper(propositionsController.pendingPropositions))
+  .get('/pendingPropositions', checkingUser.checkAuthorization, routerWrapper(propositionsController.pendingPropositions))
   /**
    * Return propositions related to a specific user. Login required.
    * @route GET /v1/propositions/:userId
@@ -33,7 +33,7 @@ propositionsRouter
   .get('/availableSlots', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
   /**
    * Book an available proposition slot.
-   * @route PUT /v1/propositions/book/
+   * @route PUT /v1/propositions/:userId
    * @group - propositions
    * @param {Date} publishingDate - publishing date
    * @returns {String} 201 - success response - Le créneau demandé a été réservé.
