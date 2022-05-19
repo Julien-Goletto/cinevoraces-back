@@ -179,7 +179,7 @@ function seedingPropositionSlots(season_number,first_episode,first_date){
   let sqlInstructions = `INSERT INTO proposition_slot ("season_number","episode","publishing_date","is_booked") VALUES\n`;
   while (date < lastDate){
     console.log(date);
-    sqlInstructions += `(${season_number},${episode},'${date.toISOString()}',false),\n`
+    sqlInstructions += `(${season_number},${episode},'${date.toISOString().slice(0,-14)+' 12:00:00.00000+02'}',false),\n`
     date.setDate(date.getDate()+7);
     episode++;
   }
