@@ -7,6 +7,9 @@ const reviewsRouter = express.Router();
 
 const reviewsController = require('../controllers/reviews.controller');
 
+// Sanitizer
+const cleaner = require('../middlewares/cleaner');
+
 // Joi validation compulsary for each payload containing data
 const validate = require('../validation/validator');
 const reviewSchema = require('../validation/schemas/review.schema');
@@ -42,7 +45,7 @@ reviewsRouter.get('/:userId/:movieId', checkingUser.checkLogStatus, routerWrappe
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
-reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapper(reviewsController.createReview));
+reviewsRouter.post('/:userId/:movieId', cleaner, checkingUser.checkLogStatus, routerWrapper(reviewsController.createReview));
 /**
  * Update review on movie
  * @route PUT /v1/reviews/:userId/:movieId/
@@ -52,7 +55,7 @@ reviewsRouter.post('/:userId/:movieId', checkingUser.checkLogStatus, routerWrapp
  * @returns {reviews} 200- success response
  * @returns {APIError} 404 - fil response
  */
-reviewsRouter.put('/:userId/:movieId', checkingUser.checkLogStatus, validate('body', reviewSchema), routerWrapper(reviewsController.updateReview));
+reviewsRouter.put('/:userId/:movieId', cleaner, checkingUser.checkLogStatus, validate('body', reviewSchema), routerWrapper(reviewsController.updateReview));
 /**
  * Delete comment on movie
  * @route DELETE /v1/reviews/:userId/:movieId/comment

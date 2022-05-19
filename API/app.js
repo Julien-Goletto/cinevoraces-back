@@ -5,6 +5,8 @@ const express = require('express');
 
 const app = express();
 
+const expressSwagger = require('express-swagger-generator')(app);
+
 app.use(express.json());// Body parser
 
 // Setting CORS
@@ -30,7 +32,7 @@ const csrfProtection = csurf(
   },
 );
 app.use(cookieParser());
-const expressSwagger = require('express-swagger-generator')(app);
+
 const router = require('./src/router');
 
 app.use('/v1', router); // Prefixing API routes and using router

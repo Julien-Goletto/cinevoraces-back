@@ -50,7 +50,6 @@ describe('API e2e', () => {
       expect(response.status).toBe(201);
     });
     afterAll(async () => {
-      await adminSession.put('/v1/propositions/unbook').send(publishingDate1);
       await adminSession.put('/v1/propositions/unbook').send(publishingDate);
     });
   });

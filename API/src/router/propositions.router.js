@@ -5,6 +5,9 @@ const propositionsController = require('../controllers/propositions.controller')
 const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
+// Sanitizer
+const cleaner = require('../middlewares/cleaner');
+
 // Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
 
@@ -50,6 +53,7 @@ propositionsRouter
    */
   .put(
     '/book',
+    cleaner,
     checkingUser.checkLogStatus,
     routerWrapper(propositionsController.bookPendingPropositionsSlot),
   )
@@ -63,6 +67,7 @@ propositionsRouter
    */
   .put(
     '/unbook',
+    cleaner,
     checkingUser.checkAuthorization,
     routerWrapper(propositionsController.unbookPendingPropositionsSlot),
   );
