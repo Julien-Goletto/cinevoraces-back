@@ -30,6 +30,15 @@ propositionsRouter
    * proposed_movies_count, comments_counts, likes_count, watchlist_count & ratings_count
    * @returns {APIError} 401 - fail response
    */
+  .get('/availableSlots', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
+  /**
+   * Book an available proposition slot.
+   * @route PUT /v1/propositions/book/
+   * @group - propositions
+   * @param {Date} publishingDate - publishing date
+   * @returns {String} 201 - success response - Le créneau demandé a été réservé.
+   * @returns {APIError} 401 - Le créneau n'a pas pu être réservé.
+   */
   .get('/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.userPendingPropositionsById))
   /**
    * Check if the user has an already existing proposition
@@ -47,15 +56,6 @@ propositionsRouter
    * @group - propositions
    * @returns {Array} 200 - next_propositions[]
    * @returns {String} 200 - Aucun créneau de proposition disponible.
-   */
-  .get('/availableSlots', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
-  /**
-   * Book an available proposition slot.
-   * @route PUT /v1/propositions/book/
-   * @group - propositions
-   * @param {Date} publishingDate - publishing date
-   * @returns {String} 201 - success response - Le créneau demandé a été réservé.
-   * @returns {APIError} 401 - Le créneau n'a pas pu être réservé.
    */
   .put(
     '/book',

@@ -16,25 +16,22 @@ const propositionsDataMapper = {
     };
     const results = await client.query(query);
     if (results.rowCount) {
-      return new APIError(
+      throw new APIError(
         `Vous avez déjà une proposition en attente.
           Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.`,
         '',
         400,
       );
     }
-    return { hasAPendingProposition: true };
+    return { hasAPendingProposition: false };
   },
   /**
    * Get all available propositions slots
    * @returns {ARRAY} propositions slots
    */
   async getAvailablePropositionSlots() {
-    const query = {
-      text: `SELECT id, season_number, episode, publishing_date::text, is_booked
-              FROM next_propositions`,
-      values: [userId],
-    };
+    const query = `SELECT id, season_number, episode, publishing_date::text, is_booked
+      FROM next_propositions`;
     const results = await client.query(query);
     if (!results.rowCount) {
       return 'Aucun créneau de proposition disponible.';

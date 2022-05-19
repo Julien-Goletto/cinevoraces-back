@@ -27,38 +27,37 @@ describe('API e2e', () => {
       await adminSession.post('/v1/users/login').send(adminUser);
     });
     it("Should get a 400 because user can't publish a new movie for now", async () => {
-      const response = await userSession1.get(`/v1/propositions/hasAPendingProposition/${registeredUserId1}`);
+      const response = await userSession1.get(`/v1/propositions/hasPendingProposition/${registeredUserId1}`);
       expect(response.status).toBe(400);
-      expect(response.text).toContain();
     });
-    it("Should get a true message because the user doesn't have a pending proposition", async () => {
-      const response = await userSession.get(`/v1/propositions/hasAPendingProposition/${registeredUserId}`);
+    it("Should get true because the user doesn't have a pending proposition", async () => {
+      const response = await userSession.get(`/v1/propositions/hasPendingProposition/${registeredUserId}`);
       expect(response.status).toBe(200);
-      expect(response.text).toContain();
+      expect(response.text).toContain('false');
     });
     it('Should get all available slots, logged as user (no proposition pending)', async () => {
-      const response = await userSession.get(`/v1/propositions/availableSlots/${registeredUserId}`);
+      const response = await userSession.get('/v1/propositions/availableSlots');
       expect(response.status).toBe(200);
       expect(response.text).toContain('season_number');
     });
-    // it('Should get all the pending propositions, logged as admin', async () => {
-    //   const response = await adminSession.get('/v1/propositions');
-    //   expect(response.status).toBe(200);
-    // });
-    // it("Should get the user's pending proposition, logged as user", async () => {
-    //   const response = await userSession1.get(`/v1/propositions/${registeredUserId1}`);
-    //   expect(response.status).toBe(200);
-    // });
-    // it('Should get a 400, because this slot is already taken', async () => {
-    //   const response = await userSession.put('/v1/propositions/book').send(publishingDate1);
-    //   expect(response.status).toBe(400);
-    // });
-    // it('Should book a slot, logged as user, with no proposition pending', async () => {
-    //   const response = await userSession.put('/v1/propositions/book').send(publishingDate);
-    //   expect(response.status).toBe(201);
-    // });
-    // afterAll(async () => {
-    //   await adminSession.put('/v1/propositions/unbook').send(publishingDate);
-    // });
+    it('Should get all the pending propositions, logged as admin', async () => {
+      const response = await adminSession.get('/v1/propositions');
+      expect(response.status).toBe(200);
+    });
+    it("Should get the user's pending proposition, logged as user", async () => {
+      const response = await userSession1.get(`/v1/propositions/${registeredUserId1}`);
+      expect(response.status).toBe(200);
+    });
+    it('Should get a 400, because this slot is already taken', async () => {
+      const response = await userSession.put('/v1/propositions/book').send(publishingDate1);
+      expect(response.status).toBe(400);
+    });
+    it('Should book a slot, logged as user, with no proposition pending', async () => {
+      const response = await userSession.put('/v1/propositions/book').send(publishingDate);
+      expect(response.status).toBe(201);
+    });
+    afterAll(async () => {
+      await adminSession.put('/v1/propositions/unbook').send(publishingDate);
+    });
   });
 });
