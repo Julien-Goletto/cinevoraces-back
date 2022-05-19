@@ -18,7 +18,8 @@ const propositionsDataMapper = {
     if (results.rowCount) {
       return 'Vous avez déjà une proposition en attente. Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.';
     }
-    query = 'SELECT * FROM next_propositions';
+    query = `SELECT id, season_number, episode, publishing_date::text, is_booked
+              FROM next_propositions`;
     results = await client.query(query);
     if (!results.rowCount) {
       return 'Aucun créneau de proposition disponible.';
