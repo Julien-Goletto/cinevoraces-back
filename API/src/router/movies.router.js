@@ -7,6 +7,7 @@ const moviesRouter = express.Router();
 // Gestion des erreurs
 const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
+
 // Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
 

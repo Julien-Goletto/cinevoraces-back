@@ -30,12 +30,22 @@ content-type: application/json
 ### Refresh tokens
 GET {{baseUrl}}/refreshTokens
 
+### Log user test
+POST {{baseUrl}}/users/login
+content-type: application/json
+
+{
+  "pseudo": "Test",
+  "password": "Test"
+}
 ### Update user
 PUT {{baseUrl}}/users/modify/Test
 content-type: application/json
 
 {
-  "mail": "Test2"
+  "pseudo": "Test1",
+  "oldPassword": "Test",
+  "password": "Test1"
 }
 
 ### Get all users from db

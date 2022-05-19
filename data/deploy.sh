@@ -21,4 +21,4 @@ sqitch revert db:pg:cinevoraces
 # To deploy
 sqitch deploy db:pg:cinevoraces
 # To verify
-sqitch verify db:pg:cinevoraces
+# sqitch verify db:pg:cinevoraces

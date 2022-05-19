@@ -26,6 +26,15 @@ usersRouter
    */
   .post('/register', validate('body', createUserSchema), routerWrapper(usersController.createUser))
   /**
+   * Update user with informations give by user
+   * @route PUT /v1/users/userPseudo
+   * @group - Users
+   * @param {UserUpdate.model} UserUpdate.body.required - user object credentials
+   * @returns {User} 200 - success response
+   * @returns {APIError} 404 - fail response
+   */
+  .put('/modify/:userPseudo', checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
+  /**
    * Log the user comparing entered credentails with hashed datas in database,
    * then create two JWT: Access and Refresh tokens, passed into cookies.
    * @route POST /v1/users/login
@@ -34,7 +43,7 @@ usersRouter
    * @returns {User} 200 - success response
    * @returns {APIError} 404 - fail response
    */
-  .put('/modify/:userPseudo', checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
+  .post('/login', validate('body', userLoginSchema), routerWrapper(usersController.logUser))
   /**
    * Disconnect user, suppressing the session.user
    * @route GET /v1/users/logout
@@ -42,18 +51,9 @@ usersRouter
    * @return {String} 200 - success response
    * @return {APIError} 404 - fail response
    */
-  .post('/login', validate('body', userLoginSchema), routerWrapper(usersController.logUser))
-  /**
-   * Update user with informations give by user
-   * @route PUT /v1/users/userId
-   * @group - Users
-   * @param {UserUpdate.model} UserUpdate.body.required - user object credentials
-   * @returns {User} 200 - success response
-   * @returns {APIError} 404 - fail response
-   */
   .get('/logout', checkingUser.checkLogStatus, routerWrapper(usersController.logOutUser))
   /**
-   * Return user
+   * Get on user by id
    * @route GET /v1/users/userId
    * @group - Users
    * @returns {String} 200 - success response
@@ -70,7 +70,7 @@ usersRouter
   .get('/', checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
   /**
    * Delete a user, using the pseudo (admin only)
-   * @route DELETE /v1/users/:pseudo
+   * @route DELETE /v1/users/:userPseudo
    * @group - Users
    * @returns {String} 200 - success response
    * @returns {APIError} 404 - fail response
@@ -90,6 +90,7 @@ usersRouter
  */
 /**
  * @typedef UserUpdate
+ * @property {String} oldPaswword - user old password
  * @property {String} pseudo - User Pseudo (unique)
  * @property {String} mail - User mail (unique)
  * @property {String} password - User password
