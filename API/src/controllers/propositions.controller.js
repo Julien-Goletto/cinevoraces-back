@@ -1,12 +1,12 @@
 const propositionsDataMapper = require('../database/models/propositions.datamapper');
 
 const propositionsController = {
-  async availablePropositionsSlots(req, res) {
-    const results = await propositionsDataMapper.getAvailablePropositionSlots(req.params.userId);
-    if (typeof results === 'string') {
-      return res.status(200).json(results);
-    }
-    console.log(results);
+  async hasAPendingProposition(req, res) {
+    const results = await propositionsDataMapper.hasAPendingProposition(req.params.userId);
+    return res.status(200).json(results);
+  },
+  async availablePropositionsSlots(_, res) {
+    const results = await propositionsDataMapper.getAvailablePropositionSlots();
     res.status(200).json(results);
   },
 
