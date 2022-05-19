@@ -9,8 +9,8 @@ const registeredUserId = 1;
 const registeredUserId1 = 35;
 
 const adminUser = { pseudo: process.env.ADMIN_PSEUDO, password: process.env.ADMIN_PW };
-const publishingDate = { publishingDate: '2022-06-06' };
-const publishingDate1 = { publishingDate: '2022-05-30' };
+const publishingDate = { publishing_date: '2022-06-06' };
+const publishingDate1 = { publishing_date: '2022-05-30' };
 
 const userSession = session(app);
 const userSession1 = session(app);
@@ -50,7 +50,6 @@ describe('API e2e', () => {
       expect(response.status).toBe(201);
     });
     afterAll(async () => {
-      await adminSession.put('/v1/propositions/unbook').send(publishingDate1);
       await adminSession.put('/v1/propositions/unbook').send(publishingDate);
     });
   });

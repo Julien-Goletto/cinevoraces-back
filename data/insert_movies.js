@@ -170,7 +170,7 @@ async function prepareDBSeeding(presentations,moviesList) {
 // fetchTMDBListWithDetails().then(result => console.log(result));
 // saveMoviesList();
 
-prepareDBSeeding(presentations,moviesList);
+// prepareDBSeeding(presentations,moviesList);
 
 function seedingPropositionSlots(season_number,first_episode,first_date){
   let date = new Date(first_date);
@@ -178,7 +178,8 @@ function seedingPropositionSlots(season_number,first_episode,first_date){
   let episode = first_episode;
   let sqlInstructions = `INSERT INTO proposition_slot ("season_number","episode","publishing_date","is_booked") VALUES\n`;
   while (date < lastDate){
-    sqlInstructions += `(${season_number},${episode},'${date.toISOString().slice(0,-14)}',false),\n`
+    console.log(date);
+    sqlInstructions += `(${season_number},${episode},'${date.toISOString()}',false),\n`
     date.setDate(date.getDate()+7);
     episode++;
   }
@@ -186,4 +187,4 @@ function seedingPropositionSlots(season_number,first_episode,first_date){
   return sqlInstructions;
 }
 
-// console.log(seedingPropositionSlots(3,19,'2022-05-02'));
+console.log(seedingPropositionSlots(3,19,'2022-05-02'));
