@@ -6,21 +6,36 @@ const propositionsDataMapper = {
    * Get all available propositions slots
    * @returns {ARRAY} propositions slots
    */
-  async getAvailablePropositionSlots(userId) {
+  async hasAPendingProposition(userId) {
     // Verification that the user has no pending proposition
-    let query = {
+    const query = {
       text: `SELECT *
               FROM pending_propositions
               WHERE user_id=$1`,
       values: [userId],
     };
-    let results = await client.query(query);
+    const results = await client.query(query);
     if (results.rowCount) {
-      return 'Vous avez déjà une proposition en attente. Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.';
+      return new APIError(
+        `Vous avez déjà une proposition en attente.
+          Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.`,
+        '',
+        400,
+      );
     }
-    query = `SELECT id, season_number, episode, publishing_date::text, is_booked
-              FROM next_propositions`;
-    results = await client.query(query);
+    return { hasAPendingProposition: true };
+  },
+  /**
+   * Get all available propositions slots
+   * @returns {ARRAY} propositions slots
+   */
+  async getAvailablePropositionSlots() {
+    const query = {
+      text: `SELECT id, season_number, episode, publishing_date::text, is_booked
+              FROM next_propositions`,
+      values: [userId],
+    };
+    const results = await client.query(query);
     if (!results.rowCount) {
       return 'Aucun créneau de proposition disponible.';
     }

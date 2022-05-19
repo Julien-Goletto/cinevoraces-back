@@ -24,8 +24,13 @@ describe('API e2e', () => {
       await adminSession.post('/v1/users/login').send(adminUser);
     });
     it("Should get a message because user can't publish a new movie for now", async () => {
-      const response = await userSession1.get(`/v1/propositions/availableSlots/${registeredUserId1}`);
-      expect(response.status).toBe(200);
+      const response = await userSession1.get(`/v1/propositions/hasAPendingProposition/${registeredUserId1}`);
+      expect(response.status).toBe(400);
+      expect(response.text).toContain('Vous avez déjà une proposition en attente. Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.');
+    });
+    it("Should get a true message because the user doesn't have a pending proposition", async () => {
+      const response = await userSession1.get(`/v1/propositions/hasAPendingProposition/${registeredUserId1}`);
+      expect(response.status).toBe(400);
       expect(response.text).toContain('Vous avez déjà une proposition en attente. Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.');
     });
     it('Should get all available slots, logged as user (no proposition pending)', async () => {

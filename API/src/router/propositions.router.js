@@ -32,14 +32,23 @@ propositionsRouter
    */
   .get('/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.userPendingPropositionsById))
   /**
-   * Get all available propositions slots
-   * @route GET /v1/propositions/availableSlots/:userId
+   * Check if the user has an already existing proposition
+   * @route GET /v1/propositions/hasPendingProposition/:userId
    * @group - propositions
    * @param {integer} userId - user id
-   * @returns {Array} 200 - success response - next_propositions
-   * @returns {APIError} 404 - fail response
+   * @returns {boolean} 200 - true
+   * @returns {APIError} 400 - Vous avez déjà une proposition en attente.
+   * Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.
    */
-  .get('/availableSlots/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
+  .get('/hasPendingProposition/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.hasAPendingProposition))
+  /**
+   * Get all available propositions slots
+   * @route GET /v1/propositions/availableSlots/
+   * @group - propositions
+   * @returns {Array} 200 - next_propositions[]
+   * @returns {String} 200 - Aucun créneau de proposition disponible.
+   */
+  .get('/availableSlots', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
   /**
    * Book an available proposition slot.
    * @route PUT /v1/propositions/book/
