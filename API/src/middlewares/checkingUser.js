@@ -29,7 +29,7 @@ const checkingUser = {
     }
     let user;
     try {
-      user = jwtMethods.decryptRefreshToken(token);
+      user = jwtMethods.decryptAccessToken(token);
     } catch (e) {
       throw new APIError('La vérification du contenu du refresh token a échouée.', req.url, 401);
     }
@@ -52,7 +52,7 @@ const checkingUser = {
     }
     let user;
     try {
-      user = jwtMethods.decryptRefreshToken(token);
+      user = jwtMethods.decryptAccessToken(token);
     } catch (e) {
       throw new APIError('La vérification du contenu du refresh token a échouée.', req.url, 401);
     }
