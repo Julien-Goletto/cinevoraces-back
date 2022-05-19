@@ -79,7 +79,6 @@ usersRouter
    * @returns {APIError} 404 - fail response
    */
   .delete('/:userPseudo', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
-
 /**
  * @typedef UserRegistration
  * @property {String} pseudo - User Pseudo (unique)
