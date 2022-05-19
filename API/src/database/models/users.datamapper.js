@@ -71,6 +71,10 @@ const usersDataMapper = {
     if (!result.rowCount) {
       throw new APIError("This account doesn't exist.", '', 404);
     }
+    if (!await bcrypt.compare(userToModify.oldPassword, result.rows[0].password)) {
+      throw new APIError('Invalid credentials', '', 400);
+    }
+    delete userToModify.oldPassword;
     query = { text: 'UPDATE "user" SET ', values: [] };
     let i = 1;
     for (const key of Object.keys(userToModify)) {
