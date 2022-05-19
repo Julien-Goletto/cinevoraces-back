@@ -27,7 +27,12 @@ const checkingUser = {
     if (!token) {
       throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
     }
-    const user = jwtMethods.decryptAccessToken(token);
+    let user;
+    try {
+      user = jwtMethods.decryptRefreshToken(token);
+    } catch (e) {
+      throw new APIError('La vérification du contenu du refresh token a échouée.', req.url, 401);
+    }
     if (jwtMethods.checkTokenContent(user)) {
       next();
     } else {
@@ -45,7 +50,12 @@ const checkingUser = {
     if (!token) {
       throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
     }
-    const user = jwtMethods.decryptAccessToken(token);
+    let user;
+    try {
+      user = jwtMethods.decryptRefreshToken(token);
+    } catch (e) {
+      throw new APIError('La vérification du contenu du refresh token a échouée.', req.url, 401);
+    }
     if (jwtMethods.checkTokenAuthorization(user)) {
       next();
     } else {
