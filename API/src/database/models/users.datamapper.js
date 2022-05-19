@@ -20,9 +20,9 @@ const usersDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      return 'This pseudo is already taken. Please choose another one.';
+      throw new APIError('Le pseudo et/ou le mail sont déjà utilisés en base de donnée.', '', 400);
     }
-    return 'User successfully registered, please login to continue.';
+    return "L'utilsiateur est bien enregistré en base, mercid e vous connecter pour continuer.";
   },
 
   /**
