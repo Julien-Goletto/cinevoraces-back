@@ -93,6 +93,7 @@ moviesRouter
   * Delete a movie, on frontend request
    * @route DELETE /movies/:movieId
    * @param {Integer} movieId.required - french_title
+   * @group - Movies
    * @returns {String} 200 - Le film a bien été supprimé.
    * @returns {APIError} 404 - Le film demandé n'existe pas en base.
    */
