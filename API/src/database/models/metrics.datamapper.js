@@ -33,7 +33,7 @@ const metricsDataMapper = {
     const query = {
       text: `SELECT *
               FROM indiv_actions_metrics
-              WHERE user_id=$1`,
+              WHERE id=$1`,
       values: [userId],
     };
     let results = await client.query(query);

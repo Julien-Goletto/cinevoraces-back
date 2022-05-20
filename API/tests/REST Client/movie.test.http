@@ -45,3 +45,11 @@ content-type: application/json
   "runtime": 102,
   "presentation": "Le meilleur film de tous les temps, tout simplement. Tout est dit."
 }
+
+### Update a new movie
+PUT {{baseUrl}}/movies/publishing/112
+content-type: application/json
+
+{
+  "isPublished": true
+}

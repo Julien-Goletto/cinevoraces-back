@@ -58,7 +58,6 @@ const reviewsDatamapper = {
     query.text += ` WHERE user_id=$${i} AND movie_id=$${i + 1}`;
     query.values.push(userId, movieId);
     await client.query(query);
-    console.log(query);
     return result.rows;
   },
 
