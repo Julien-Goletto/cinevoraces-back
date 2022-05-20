@@ -2,11 +2,7 @@ const client = require('../dbclient');
 const APIError = require('../../Errors/APIError');
 
 const moviesDataMapper = {
-  /**
-   * Get all movies in database
-   * @returns {ARRAY} Game objects
-   * @throws {APIError} If db is empty
-   */
+
   async getAllMovies() {
     const query = 'SELECT * FROM movies_infos WHERE is_published = true';
     const results = await client.query(query);
@@ -27,6 +23,7 @@ const moviesDataMapper = {
     }
     return results.rows;
   },
+
   async getLastMovie() {
     const query = `SELECT * FROM last_season_movies WHERE is_published = true
                     ORDER BY id DESC
@@ -37,6 +34,7 @@ const moviesDataMapper = {
     }
     return results.rows;
   },
+
   async getAllMoviesFromLastSeason() {
     const query = 'SELECT * FROM last_season_movies WHERE is_published = true';
     const results = await client.query(query);
@@ -45,6 +43,7 @@ const moviesDataMapper = {
     }
     return results.rows;
   },
+
   async getAllMoviesBySeason(seasonId) {
     const query = {
       text: 'SELECT * FROM movies_infos WHERE season_number=$1 AND is_published = true',
@@ -56,6 +55,7 @@ const moviesDataMapper = {
     }
     return results.rows;
   },
+
   async addNewMovie(movie) {
     let query = {
       text: 'SELECT * FROM movie WHERE french_title=$1',
@@ -78,6 +78,7 @@ const moviesDataMapper = {
     }
     return 'Film ajouté en base';
   },
+
   async updateMovie(movieId, movieInfos) {
     const movieInfosToModify = movieInfos;
     let query = {
@@ -107,6 +108,7 @@ const moviesDataMapper = {
     }
     return 'Les données du film ont été modifiées.';
   },
+
   async deleteMovie(movieId) {
     const query = {
       text: 'DELETE FROM movie WHERE id=$1',
@@ -117,6 +119,24 @@ const moviesDataMapper = {
       throw new APIError("Le film demandé n'existe pas en base.", '', 404);
     }
     return `Le film ${movieId} a bien été supprimé.`;
+  },
+
+  async publishMovie(movieId, isPublished) {
+    let query = {
+      text: 'SELECT * FROM movie WHERE id=$1;',
+      values: [movieId],
+    };
+    const result = await client.query(query);
+    console.log(result.rows);
+    if (!result) {
+      throw new Error("Le film demandé n'existe pas en base.", '', 404);
+    }
+    query = {
+      text: 'UPDATE movie SET is_published=$1 WHERE id=$2',
+      values: [isPublished, movieId],
+    };
+    await client.query(query);
+    return 'Le film est publié.';
   },
 };
 

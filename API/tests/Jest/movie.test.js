@@ -64,18 +64,23 @@ describe('API e2e', () => {
     });
     it('Should create a new movie in database', async () => {
       const response = await userSession.post('/v1/movies/newmovie').send(newMovie);
+      console.log(response.body);
       expect(response.status).toBe(201);
     });
     it('Should get the last movie published in database', async () => {
       const response = await adminSession.get('/v1/propositions/pendingPropositions');
       const propositionsArray = response.body;
-      newMovieId = propositionsArray[propositionsArray.length - 1].id;
+      newMovieId = propositionsArray[0].id;
       expect(response.status).toBe(200);
     });
     it('Should update the new movie', async () => {
       await adminSession
         .put(`/v1/movies/modify/${newMovieId}`)
         .send(movieInfosToModify);
+    });
+    it('Should publish movie', async () => {
+      const response = await adminSession.put(`/v1/movies/publishing/${newMovieId}`);
+      expect(response.status).toBe(200);
     });
     it('Should delete the new added movie', async () => {
       const response = await adminSession.delete(`/v1/movies/${newMovieId}`);

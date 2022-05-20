@@ -28,11 +28,11 @@ describe('API e2e', () => {
     });
     it('Should be create a new empty review on a movie', async () => {
       const response = await testSession.post('/v1/reviews/1/13');
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
     });
     it('Should be modificate a review on a movie', async () => {
       const response = await testSession.put('/v1/reviews/1/13').send({ ...updateReview });
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
     });
     it('Should be delete a comment on a movie', async () => {
       const response = await testSession.delete('/v1/reviews/1/13/comment');

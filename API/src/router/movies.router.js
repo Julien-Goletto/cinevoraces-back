@@ -78,7 +78,7 @@ moviesRouter
   * Update some datas from a posted movie, on frontend request
    * @route PUT /movies/modify/:movieId
    * @group - Movies
-   * @param {String} movieId.required - movieId
+   * @param {Integer} movieId.required - movieId
    * @param {MovieToUpdate.model} MovieToUpdate.body.required - correspond to movie Id
    * @returns {String} 201 - Les données du film ont été modifiées.
    * @returns {APIError} 400 - Le film n'a pas pu être modifié.
@@ -92,7 +92,7 @@ moviesRouter
   /**
   * Delete a movie, on frontend request
    * @route DELETE /movies/:movieId
-   * @param {String} movieId.required - french_title
+   * @param {Integer} movieId.required - french_title
    * @returns {String} 200 - Le film a bien été supprimé.
    * @returns {APIError} 404 - Le film demandé n'existe pas en base.
    */
@@ -100,6 +100,20 @@ moviesRouter
     '/:movieId',
     checkingUser.checkAuthorization,
     routerWrapper(moviesController.deleteMovie),
+  )
+  /**
+  * Update movie, to publish it
+   * @route PUT /movies/publishing/:movieId
+   * @group - Movies
+   * @param {Integer} movieId.required - movieId
+   * @param {MovieToPublish.model} MovieToPublish.body.required - correspond to movie Id
+   * @returns {String} 201 - Le film est publié.
+   * @returns {APIError} 400 - Le film demandé n'existe pas en base.
+   */
+  .put(
+    '/publishing/:movieId',
+    checkingUser.checkAuthorization,
+    routerWrapper(moviesController.publishMovie),
   );
 
 moviesRouter.use(handleError);
@@ -131,6 +145,10 @@ moviesRouter.use(handleError);
  * @property {Array} casting - five first actors from movie cast (strings)
  * @property {string} presentation - user presentation
  * @property {string} publishing_date - publishing date of the movie on Cinévoraces (date)
+ */
+/**
+ * @typedef MoviePublish
+ * @property {string} is_published - french title
  */
 
 module.exports = moviesRouter;

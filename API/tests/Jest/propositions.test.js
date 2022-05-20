@@ -41,7 +41,7 @@ describe('API e2e', () => {
       expect(response.text).toContain('season_number');
     });
     it('Should get all the pending propositions, logged as admin', async () => {
-      const response = await adminSession.get('/v1/propositions');
+      const response = await adminSession.get('/v1/propositions/pendingPropositions');
       expect(response.status).toBe(200);
     });
     it("Should get the user's pending proposition, logged as user", async () => {
