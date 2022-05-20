@@ -76,7 +76,7 @@ const moviesDataMapper = {
     if (!results.rowCount) {
       throw new Error("Le film n'a pas pu être enregistré. Peut-être est-il déjà présent ?", '', 400);
     }
-    return { id: 62, message: 'Film ajouté en base' };
+    return 'Film ajouté en base';
   },
   async updateMovie(movieId, movieInfos) {
     const movieInfosToModify = movieInfos;
