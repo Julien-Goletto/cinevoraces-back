@@ -13,28 +13,39 @@ CREATE VIEW global_metrics AS
 
 -- Aggrégation de toutes les intéractions de l'utilisateur : films proposés, commentaires publiés, films likés, films mis en bookmarks et films notés 
 CREATE VIEW indiv_actions_metrics AS
-	SELECT movie.user_id, COUNT(*) "proposed_movies_count",
-			COALESCE(cc.comments_count,0) AS "comments_count",COALESCE(lc.likes_count,0) AS "likes_count",
-			COALESCE(wc.watchlist_count,0) AS "watchlist_count",COALESCE(rc.ratings_count,0) AS "ratings_count"
-	FROM "movie"
-		FULL OUTER JOIN 
-			(SELECT "user_id", COUNT(*) "comments_count"
-				FROM "review" WHERE "comment" IS NOT NULL GROUP BY review.user_id) cc
-		ON movie.user_id = cc.user_id
-		FULL OUTER JOIN
-			(SELECT "user_id", COUNT(*) "likes_count"
-				FROM "review" WHERE "liked" = true GROUP BY review.user_id) lc
-		ON movie.user_id = lc.user_id
-		FULL OUTER JOIN
-			(SELECT "user_id", COUNT(*) "watchlist_count" FROM "review"
-				WHERE "bookmarked" = true GROUP BY review.user_id) wc
-		ON movie.user_id = wc.user_id
-		FULL OUTER JOIN
-			(SELECT "user_id", COUNT(*) "ratings_count" FROM "review"
-				WHERE "rating" IS NOT NULL GROUP BY review.user_id) rc
-		ON movie.user_id = rc.user_id
-	GROUP BY movie.user_id,cc.comments_count, lc.likes_count, wc.watchlist_count, rc.ratings_count
-	ORDER BY movie.user_id ASC;
+SELECT "user".id,
+    COALESCE(pc.propositions_count, 0::bigint) AS propositions_count,
+    COALESCE(cc.comments_count, 0::bigint) AS comments_count,
+    COALESCE(lc.likes_count, 0::bigint) AS likes_count,
+    COALESCE(wc.watchlist_count, 0::bigint) AS watchlist_count,
+    COALESCE(rc.ratings_count, 0::bigint) AS ratings_count
+   FROM "user"
+     FULL JOIN ( SELECT movie.user_id,
+            count(*) AS propositions_count
+           FROM movie
+          GROUP BY movie.user_id) pc ON "user".id = pc.user_id
+     FULL JOIN ( SELECT review.user_id,
+            count(*) AS comments_count
+           FROM review
+          WHERE review.comment IS NOT NULL
+          GROUP BY review.user_id) cc ON "user".id = cc.user_id
+     FULL JOIN ( SELECT review.user_id,
+            count(*) AS likes_count
+           FROM review
+          WHERE review.liked = true
+          GROUP BY review.user_id) lc ON "user".id = lc.user_id
+     FULL JOIN ( SELECT review.user_id,
+            count(*) AS watchlist_count
+           FROM review
+          WHERE review.bookmarked = true
+          GROUP BY review.user_id) wc ON "user".id = wc.user_id
+     FULL JOIN ( SELECT review.user_id,
+            count(*) AS ratings_count
+           FROM review
+          WHERE review.rating IS NOT NULL
+          GROUP BY review.user_id) rc ON "user".id = rc.user_id
+  GROUP BY "user".id, cc.comments_count, lc.likes_count, wc.watchlist_count, rc.ratings_count, pc.propositions_count
+  ORDER BY "user".id;
 
 -- Récupère toutes les informations des tables secondaires pour préparer une liste d'objets films complets avec
 -- Les métadonnées de l'objet film lui-même
