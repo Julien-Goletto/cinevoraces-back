@@ -187,4 +187,5 @@ function seedingPropositionSlots(season_number,first_episode,first_date){
   return sqlInstructions;
 }
 
-console.log(seedingPropositionSlots(3,19,'2022-05-02'));
+// console.log(seedingPropositionSlots(3,19,'2022-05-16'));
+createRandomPassWord(chaincharacter,20).then(result => console.log('Nouveau mot de passe : ' + result));

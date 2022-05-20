@@ -40,9 +40,7 @@ INSERT INTO "user" ("pseudo","mail","password") VALUES
 ('quilim', 'mailbidon30' ,'$2b$10$CKzwHT3uy04DpEgr0Hv9KuyPdS8ywrYqXqWQklvkiiG.58ReqUyTq'),
 ('Louis-Cyrus', 'mailbidon31' ,'$2b$10$876tNNyRDoN7IgIcP2.dRu56qETf.zdXYcvb56yC2AqUiJOl.puJK'),
 ('Calys', 'mailbidon32' ,'$2b$10$u6XTEw4baqqfFYvshgoFe.Gn6827CCRkr6IwpwTMkmbE2Y.a0R2Lq'),
-('olive qui tue', 'mailbidon33' ,'$2b$10$/iFzYjk.0LUCseqXpa7Lk.PdD2/jbEQb8dku/JFVfxE4YWMyn/o4a'),
-('Joffrey d''Ortoli', 'mailbidon34' ,'$2b$10$tIXMhms0TJk0X56H/ktpFuU3.ApYMkOpsAG51wuFcxUBWwEMLNeUm'),
-('Benoît Safari', 'mailbidon35' ,'$2b$10$oSJnHbPc1boyS5bgtVEcP.7XiA7PdZ5gEjKCjviZwk8//reiGyMGK');
+('olive qui tue', 'mailbidon33' ,'$2b$10$/iFzYjk.0LUCseqXpa7Lk.PdD2/jbEQb8dku/JFVfxE4YWMyn/o4a');
 
 -- Passage de Yves Signal en admin
 UPDATE "user"
@@ -411,10 +409,6 @@ SELECT new_movie('Les Pleins Pouvoirs','Absolute Power','https://image.tmdb.org/
 -- Mise à jour des statuts des films archivés
 UPDATE movie
 SET is_published = 'true';
-
--- Ajout de deux nouvelles propositions
-SELECT new_movie('12 hommes en colère','12 Angry Men','https://image.tmdb.org/t/p/original/fFXrCl7nBFFaQU3IgTlinvk6vTi.jpg',array['Sidney Lumet'],'1957-04-10','95',array['Martin Balsam','John Fiedler','Lee J. Cobb','E.G. Marshall','Jack Klugman'],'12 hommes et beaucoup de colère. Mais zéro bagarre par contre. Même pas une tartine de pâté. C''est rude.','2022-05-23',34,3,array['Drame'],array['English'],array['United States of America']);
-SELECT new_movie('Garfield, le film','Garfield','https://image.tmdb.org/t/p/original/ec8AM30BnLlCoRE1Aw5INo5ubOe.jpg',array['Peter Hewitt'],'2004-06-10','81',array['Bill Murray','Breckin Meyer','Jennifer Love Hewitt','Stephen Tobolowsky','Evan Arnold'],'Un film bien en dessous de ce que l''on pourrait imaginer. Je veux dire, Garfield quoi! C''est un gage de qualité! Mais la on nous fournis une bouse infecte bien loin de la vision original du manga. Tout d''abord, Garfield n''obtient ses pouvoirs qu''après le combat contre Zackary Ford, or là, dés le départ Garfield est over-pété et roule sur tout ses adversaire... Ensuite Vegeta qui est fan frites et cours dans tout New York a la recherche d''une bonne baraque frites serieux j''ai pas compris le délire, le but c''est de tourner tout les personnages en ridicule? Est-ce que les fans de gaming et culture Jap sont forcement des noeuds-noeuds? Selon Spielberg, il semblerait que oui...','2022-05-30',35,3,array['Animation','Comédie','Familial'],array['English'],array['United States of America']);
 
 -- Ajout de reviews
 INSERT INTO "review" ("user_id","movie_id","bookmarked","viewed","liked","rating","comment") VALUES
