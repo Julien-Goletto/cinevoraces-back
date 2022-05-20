@@ -21,17 +21,19 @@ usersRouter
    * @route POST /v1/users/register
    * @group - Users
    * @param {UserRegistration.model}  UserRegistration.body.required- user object credentials
-   * @returns {String} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @returns {String} 200 - Utilisateur enregistré avec succès, merci de vous connecter
+   * @returns {APIError} 400 - Ce pseudo ou cet email sont déjà enregistrés
    */
   .post('/register', validate('body', createUserSchema), routerWrapper(usersController.createUser))
   /**
    * Update user with informations give by user
-   * @route PUT /v1/users/userPseudo
+   * @route PUT /v1/users/modify/:userPseudo
    * @group - Users
+   * @param {String} userPseudo
    * @param {UserUpdate.model} UserUpdate.body.required - user object credentials
-   * @returns {User} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @returns {User} 200 - Modifications effectuées
+   * @returns {APIError} 404 - Ce compte n'existe pas
+   * @returns {APIError} 400 - Informations éronnées
    */
   .put('/modify/:userPseudo', checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
   /**
@@ -40,43 +42,36 @@ usersRouter
    * @route POST /v1/users/login
    * @group - Users
    * @param {UserLogin.model} UserLogin.body.required - user object credentials
-   * @returns {User} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @returns {User} 200
+   * @returns {APIError} 400 - Informations éronnées
    */
   .post('/login', validate('body', userLoginSchema), routerWrapper(usersController.logUser))
   /**
-   * Disconnect user, suppressing the session.user
-   * @route GET /v1/users/logout
-   * @group - Users
-   * @return {String} 200 - success response
-   * @return {APIError} 404 - fail response
-   */
-  .get('/logout', checkingUser.checkLogStatus, routerWrapper(usersController.logOutUser))
-  /**
    * Get on user by id
-   * @route GET /v1/users/userId
+   * @route GET /v1/users/:userId
    * @group - Users
-   * @returns {String} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @param {Integer} userId
+   * @returns {User} 200 - User Object
+   * @returns {APIError} 404 - Ce compte n'existe pas
    */
   .get('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
   /**
    * Return users listing
    * @route GET /v1/users/
    * @group - Users
-   * @returns {String} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @returns {Array} 200 - Array of users
+   * @returns {String} 404 - Aucun utilisateurs enregistré
    */
   .get('/', checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
   /**
    * Delete a user, using the pseudo (admin only)
    * @route DELETE /v1/users/:userPseudo
    * @group - Users
-   * @returns {String} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @param {String} userPseudo
+   * @returns {String} 200 - Utilisateur supprimé
+   * @returns {APIError} 404 - Cet utilisateur n'existe pas
    */
   .delete('/:userPseudo', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
-
 /**
  * @typedef UserRegistration
  * @property {String} pseudo - User Pseudo (unique)
@@ -90,7 +85,7 @@ usersRouter
  */
 /**
  * @typedef UserUpdate
- * @property {String} oldPaswword - user old password
+ * @property {String} oldPassword - user old password
  * @property {String} pseudo - User Pseudo (unique)
  * @property {String} mail - User mail (unique)
  * @property {String} password - User password

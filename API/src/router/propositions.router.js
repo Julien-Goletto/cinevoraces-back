@@ -15,20 +15,20 @@ propositionsRouter
 
   /**
    * Return all users propositions. Admin required.
-   * @route GET /v1/propositions/pendingPropositions
-   * @group - propositions
-   * @returns {Array} 200 - success response - movies that are pending
-   * @returns {APIError} 404 - fail response
+   * @route GET /v1/propositions/
+   * @group - Propositions
+   * @returns {Array} 200 - Movies objects that are pending
+   * @returns {APIError} 404 - Aucune proposition enregistrée en base.
    */
   .get('/pendingPropositions', checkingUser.checkAuthorization, routerWrapper(propositionsController.pendingPropositions))
   /**
    * Return propositions related to a specific user. Login required.
    * @route GET /v1/propositions/:userId
-   * @group - propositions
+   * @group - Propositions
    * @param {integer} userId - user id
-   * @returns {Array} 200 - success response - for asked user :
+   * @returns {Array} 200 - for asked user :
    * proposed_movies_count, comments_counts, likes_count, watchlist_count & ratings_count
-   * @returns {APIError} 401 - fail response
+   * @returns {APIError} 404 - Cet utilisateur n'a pas de proposition de film en attente.
    */
   .get('/availableSlots', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
   /**
@@ -51,11 +51,12 @@ propositionsRouter
    */
   .get('/hasPendingProposition/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.hasAPendingProposition))
   /**
-   * Get all available propositions slots
-   * @route GET /v1/propositions/availableSlots/
-   * @group - propositions
-   * @returns {Array} 200 - next_propositions[]
-   * @returns {String} 200 - Aucun créneau de proposition disponible.
+   * Book an available proposition slot.
+   * @route PUT /v1/propositions/book/
+   * @group - Propositions
+   * @param {String} publishingDate.body.required - publishing date
+   * @returns {String} 201 - Le créneau demandé a été réservé.
+   * @returns {APIError} 400 - Le créneau demandé n'est pas disponible.
    */
   .put(
     '/book',
@@ -65,10 +66,10 @@ propositionsRouter
   /**
    * Unbook an unavailable proposition slot. As admin only.
    * @route PUT /v1/propositions/unbook/
-   * @group - propositions
-   * @param {Date} publishingDate - publishing date
-   * @returns {Array} 201 - success response - Le créneau n'a pas pu être libéré.
-   * @returns {APIError} 401 - Le créneau demandé a été libéré.
+   * @group - Propositions
+   * @param {String} publishingDate.body.required - publishing date
+   * @returns {Array} 201 - Le créneau a été libéré.
+   * @returns {APIError} 400 - Le créneau demandé n'a ps pu être libéré.
    */
   .put(
     '/unbook',
