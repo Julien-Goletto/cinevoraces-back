@@ -26,7 +26,7 @@ const usersController = {
       jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
     ).pseudo;
     if (requestedUserPseudo !== requestingUserPseudo) {
-      throw new APIError('You have no right to change these parameters', req.url, 401);
+      throw new APIError("Vous n'avez la permission pour modifier ces champs.", req.url, 401);
     }
     const user = req.body;
     const results = await usersDataMapper.updateUser(requestedUserPseudo, user);
@@ -51,21 +51,13 @@ const usersController = {
     res.status(200).json(results);
   },
 
-  logOutUser(req, res) {
-    if (!req.session.user) {
-      throw new APIError('You are not logged.', req.url, 401);
-    }
-    delete req.session.user;
-    res.status(200).json('You have successfuly logged out.');
-  },
-
   async deleteUser(req, res) {
     const { userPseudo } = req.params;
     const requestingUserRole = jwtMethods.decryptAccessToken(
       jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
     ).role;
     if (requestingUserRole !== 'admin') {
-      throw new APIError('You must be an administrator to delete a user.', req.url, 401);
+      throw new APIError("Vous n'avez pas l'autorisation de supprimer un utilisateur", req.url, 401);
     }
     const results = await usersDataMapper.deleteUserByPseudo(userPseudo);
     res.status(200).json(results);

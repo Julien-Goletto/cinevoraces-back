@@ -33,7 +33,7 @@ const propositionsDataMapper = {
     const query = 'SELECT * FROM pending_propositions';
     const results = await client.query(query);
     if (!results.rowCount) {
-      return 'Aucune proposition enregistrée en base.';
+      throw new APIError('Aucune proposition enregistrée en base.', '', 404);
     }
     return results.rows;
   },
@@ -50,7 +50,7 @@ const propositionsDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      return "Cet utilisateur n'a pas de proposition de film en attente.";
+      throw new APIError("Cet utilisateur n'a pas de proposition de film en attente.", '', 404);
     }
     return results.rows;
   },

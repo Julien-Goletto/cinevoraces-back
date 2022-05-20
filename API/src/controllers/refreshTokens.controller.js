@@ -19,7 +19,7 @@ const refreshTokensController = {
     const user = jwtMethods.decryptRefreshToken(token);
     const userInDB = await usersDataMapper.getUserById(user.id);
     if (!(userInDB)) {
-      return new APIError('Ce compte utilisateur a été supprimé.', 401);
+      return new APIError('Ce compte utilisateur a été supprimé.', 404);
     }
     // Need to purge extra datas from tokens structure
     delete user.iat;

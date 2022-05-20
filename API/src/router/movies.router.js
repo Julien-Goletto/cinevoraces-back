@@ -25,24 +25,24 @@ moviesRouter
    * Get a list of all movies objects saved in database
    * @route Get /v1/movies
    * @group - Movies
-   * @returns {Array} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @returns {Array} 200 - Array of all movies
+   * @returns {APIError} 404 - Aucun film n'est enregistré en base
    */
   .get('/', routerWrapper(moviesController.getAllMovies))
   /**
    * Get the last movie
    * @route Get /v1/movies/lastmovie
    * @group - Movies
-   * @returns {Movie} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @returns {Movie} 200 - Movie Object
+   * @returns {APIError} 404 - Aucun film n'a été publié.
    */
   .get('/lastmovie', routerWrapper(moviesController.getAllMoviesFromLastSeason))
   /**
    * Get all movie from last season
    * @route Get /v1/movies/lastseason
    * @group - Movies
-   * @returns {Movie} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @returns {Array} 200 - Movie objects
+   * @returns {APIError} 404 - Il n'y a pas de film dans la dernière saison.
    */
   .get('/lastseason', routerWrapper(moviesController.getAllMoviesFromLastSeason))
   /**
@@ -50,8 +50,8 @@ moviesRouter
    * @route Get /v1/movies/:movieId
    * @group - Movies
    * @param {Integer} movieId
-   * @returns {Movie} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @returns {Movie} 200 - movie object
+   * @returns {APIError} 404 - Ce film n'est pas enregistré en base, ou pas encore publié
    */
   .get('/:movieId', routerWrapper(moviesController.getMovieByID))
   /**
@@ -59,8 +59,8 @@ moviesRouter
    * @route Get /v1/movies/season/:seasonId
    * @group - Movies
    * @param {Integer} seasonId
-   * @returns {Movie} 200 - success response
-   * @returns {APIError} 404 - fail response
+   * @returns {Array} 200 - Movie objects
+   * @returns {APIError} 404 - Il n'y a pas de film publié dans cette saison.
    */
   .get('/season/:seasonId', routerWrapper(moviesController.getAllMoviesBySeason))
   /**
@@ -68,8 +68,8 @@ moviesRouter
    * @route POST /movies/newmovie/
    * @group - Movies
    * @param {NewMovie.model} NewMovie.body.required - correspond to movie Id
-   * @returns {Movie} 201 - success response
-   * @returns {APIError} 404 - fail response
+   * @returns {Movie} 201 - Film ajouté en base
+   * @returns {APIError} 400 - Le film n'a pas pu être enregistré. Peut-être est-il déjà présent ?
    */
   .post(
     '/newmovie/',
@@ -79,12 +79,12 @@ moviesRouter
   )
   /**
   * Update some datas from a posted movie, on frontend request
-   * @route PUT /movies/:movieTitle
+   * @route PUT /movies/modify/:movieTitle
    * @group - Movies
    * @param {String} movieTitle.required - french_title
    * @param {MovieToUpdate.model} MovieToUpdate.body.required - correspond to movie Id
    * @returns {String} 201 - Les données du film ont été modifiées.
-   * @returns {APIError} 404 - Le film n'a pas pu être modifié.
+   * @returns {APIError} 400 - Le film n'a pas pu être modifié.
    */
   .put(
     '/modify/:movieTitle',
@@ -98,7 +98,7 @@ moviesRouter
    * @group - Movies
    * @param {String} movieTitle.required - french_title
    * @returns {String} 200 - Le film a bien été supprimé.
-   * @returns {APIError} 404 - Le film demandé nexiste pas en base.
+   * @returns {APIError} 404 - Le film demandé n'existe pas en base.
    */
   .delete(
     '/:movieTitle',
@@ -109,32 +109,32 @@ moviesRouter
 moviesRouter.use(handleError);
 /**
  * @typedef NewMovie
- * @property {string} frenchTitle - french title
- * @property {string} originalTitle - originaltitle
- * @property {string} posterUrl - poster hosted on TMDB
+ * @property {string} french_title - french title
+ * @property {string} original_title - originaltitle
+ * @property {string} poster_url - poster hosted on TMDB
  * @property {Array} directors - directors list (strings)
- * @property {string} releaseDate - release date (date)
+ * @property {string} release_date - release date (date)
  * @property {integer} runtime - runtime
  * @property {Array} casting - five first actors from movie cast (strings)
  * @property {string} presentation - user presentation
- * @property {string} publishingDate - publishing date of the movie on Cinévoraces (date)
- * @property {integer} userId - user id
- * @property {integer} seasonId - season id
- * @property {Array} movieGenres - Array of movie genres (strings)
- * @property {Array} movieLanguages - Array of movie languages (strings)
- * @property {Array} movieCountries - Array of movie Countries (strings)
+ * @property {string} publishing_date - publishing date of the movie on Cinévoraces (date)
+ * @property {integer} user_id - user id
+ * @property {integer} season_id - season id
+ * @property {Array} movie_genres - Array of movie genres (strings)
+ * @property {Array} movie_languages - Array of movie languages (strings)
+ * @property {Array} movie_countries - Array of movie Countries (strings)
  */
 /**
  * @typedef MovieToUpdate
- * @property {string} frenchTitle - french title
- * @property {string} originalTitle - originaltitle
- * @property {string} posterUrl - poster hosted on TMDB
+ * @property {string} french_title - french title
+ * @property {string} original_title - originaltitle
+ * @property {string} poster_url - poster hosted on TMDB
  * @property {Array} directors - directors list (strings)
- * @property {string} releaseDate - release date (date)
+ * @property {string} release_date - release date (date)
  * @property {integer} runtime - runtime
  * @property {Array} casting - five first actors from movie cast (strings)
  * @property {string} presentation - user presentation
- * @property {string} publishingDate - publishing date of the movie on Cinévoraces (date)
+ * @property {string} publishing_date - publishing date of the movie on Cinévoraces (date)
  */
 
 module.exports = moviesRouter;

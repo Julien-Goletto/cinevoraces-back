@@ -11,7 +11,7 @@ const moviesDataMapper = {
     const query = 'SELECT * FROM movies_infos WHERE is_published = true';
     const results = await client.query(query);
     if (!results.rowCount) {
-      return 'No movies saved yet';
+      throw new APIError("Aucun film n'a été publié.", '', 404);
     }
     return results.rows;
   },
@@ -23,7 +23,7 @@ const moviesDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      return 'No movies saved yet';
+      throw new APIError("Ce film n'est pas enregistré en base, ou pas encore publié.", '', 404);
     }
     return results.rows;
   },
@@ -33,7 +33,7 @@ const moviesDataMapper = {
                     LIMIT 1`;
     const results = await client.query(query);
     if (!results.rowCount) {
-      return 'No movies saved yet';
+      throw new APIError("Aucun film n'a été publié.", '', 404);
     }
     return results.rows;
   },
@@ -41,7 +41,7 @@ const moviesDataMapper = {
     const query = 'SELECT * FROM last_season_movies WHERE is_published = true';
     const results = await client.query(query);
     if (!results.rowCount) {
-      return 'No movies saved yet';
+      throw new APIError("Il n'y a pas de film dans la dernière saison.", '', 404);
     }
     return results.rows;
   },
@@ -52,7 +52,7 @@ const moviesDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      return 'No movies saved yet';
+      throw new APIError("Il n'y a pas de film publié dans cette saison.", '', 404);
     }
     return results.rows;
   },
@@ -76,7 +76,7 @@ const moviesDataMapper = {
     if (!results.rowCount) {
       throw new Error("Le film n'a pas pu être enregistré. Peut-être est-il déjà présent ?", '', 400);
     }
-    return 'Movie added in database';
+    return 'Film ajouté en base';
   },
   async updateMovieByTitle(movieTitle, movieInfos) {
     const movieInfosToModify = movieInfos;
@@ -114,7 +114,7 @@ const moviesDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('Le film demandé nexiste pas en base.', '', 404);
+      throw new APIError("Le film demandé n'existe pas en base.", '', 404);
     }
     return `Le film ${movieTitle} a bien été supprimé.`;
   },
