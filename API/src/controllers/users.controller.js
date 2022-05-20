@@ -20,16 +20,16 @@ const usersController = {
   },
 
   async updateUser(req, res) {
-    const requestedUserPseudo = req.params.userPseudo;
+    const requestedUserId = parseInt(req.params.userId, 10);
     // Additionnal Safe guard
-    const requestingUserPseudo = jwtMethods.decryptAccessToken(
+    const requestingUserId = jwtMethods.decryptAccessToken(
       jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
-    ).pseudo;
-    if (requestedUserPseudo !== requestingUserPseudo) {
+    ).id;
+    if (requestedUserId !== requestingUserId) {
       throw new APIError("Vous n'avez la permission pour modifier ces champs.", req.url, 401);
     }
     const user = req.body;
-    const results = await usersDataMapper.updateUser(requestedUserPseudo, user);
+    const results = await usersDataMapper.updateUser(requestedUserId, user);
     res.status(201).json(results);
   },
 
@@ -52,14 +52,14 @@ const usersController = {
   },
 
   async deleteUser(req, res) {
-    const { userPseudo } = req.params;
+    const userId = parseInt(req.params.userId, 10);
     const requestingUserRole = jwtMethods.decryptAccessToken(
       jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
     ).role;
     if (requestingUserRole !== 'admin') {
       throw new APIError("Vous n'avez pas l'autorisation de supprimer un utilisateur", req.url, 401);
     }
-    const results = await usersDataMapper.deleteUserByPseudo(userPseudo);
+    const results = await usersDataMapper.deleteUserById(userId);
     res.status(200).json(results);
   },
 };

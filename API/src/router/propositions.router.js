@@ -23,9 +23,8 @@ propositionsRouter
   .get('/pendingPropositions', checkingUser.checkAuthorization, routerWrapper(propositionsController.pendingPropositions))
   /**
    * Return propositions related to a specific user. Login required.
-   * @route GET /v1/propositions/:userId
+   * @route GET /v1/propositions/availableSlots
    * @group - Propositions
-   * @param {integer} userId - user id
    * @returns {Array} 200 - for asked user :
    * proposed_movies_count, comments_counts, likes_count, watchlist_count & ratings_count
    * @returns {APIError} 404 - Cet utilisateur n'a pas de proposition de film en attente.
@@ -45,7 +44,7 @@ propositionsRouter
    * @route GET /v1/propositions/hasPendingProposition/:userId
    * @group - propositions
    * @param {integer} userId - user id
-   * @returns {boolean} 200 - true
+   * @returns {boolean} 200 - { hasAPendingProposition: false }
    * @returns {APIError} 400 - Vous avez déjà une proposition en attente.
    * Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.
    */

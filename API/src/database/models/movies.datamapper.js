@@ -78,11 +78,11 @@ const moviesDataMapper = {
     }
     return 'Film ajouté en base';
   },
-  async updateMovieByTitle(movieTitle, movieInfos) {
+  async updateMovie(movieId, movieInfos) {
     const movieInfosToModify = movieInfos;
     let query = {
-      text: 'SELECT * FROM movie WHERE french_title=$1;',
-      values: [movieTitle],
+      text: 'SELECT * FROM movie WHERE id=$1;',
+      values: [movieId],
     };
     let results = await client.query(query);
     if (!results) {
@@ -100,23 +100,23 @@ const moviesDataMapper = {
     }
     query.text = query.text.slice(0, -1);
     query.text += ` WHERE id=$${i}`;
-    query.values.push(movieTitle);
+    query.values.push(movieId);
     results = await client.query(query);
     if (!results) {
       throw new Error("Le film n'a pas pu être modifié.", '', 400);
     }
     return 'Les données du film ont été modifiées.';
   },
-  async deleteMovieByTitle(movieTitle) {
+  async deleteMovie(movieId) {
     const query = {
-      text: 'DELETE FROM movie WHERE french_title=$1',
-      values: [movieTitle],
+      text: 'DELETE FROM movie WHERE id=$1',
+      values: [movieId],
     };
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError("Le film demandé n'existe pas en base.", '', 404);
     }
-    return `Le film ${movieTitle} a bien été supprimé.`;
+    return `Le film ${movieId} a bien été supprimé.`;
   },
 };
 
