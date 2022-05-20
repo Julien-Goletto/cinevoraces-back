@@ -5,9 +5,6 @@ const usersController = require('../controllers/users.controller');
 const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
-// Sanitizer
-const cleaner = require('../middlewares/cleaner');
-
 // Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
 
@@ -27,7 +24,7 @@ usersRouter
    * @returns {String} 200 - Utilisateur enregistré avec succès, merci de vous connecter
    * @returns {APIError} 400 - Ce pseudo ou cet email sont déjà enregistrés
    */
-  .post('/register', cleaner, validate('body', createUserSchema), routerWrapper(usersController.createUser))
+  .post('/register', validate('body', createUserSchema), routerWrapper(usersController.createUser))
   /**
    * Update user with informations give by user
    * @route PUT /v1/users/modify/:userPseudo
@@ -38,7 +35,7 @@ usersRouter
    * @returns {APIError} 404 - Ce compte n'existe pas
    * @returns {APIError} 400 - Informations éronnées
    */
-  .put('/modify/:userPseudo', checkingUser.checkLogStatus, cleaner, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
+  .put('/modify/:userPseudo', checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
   /**
    * Log the user comparing entered credentails with hashed datas in database,
    * then create two JWT: Access and Refresh tokens, passed into cookies.

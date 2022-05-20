@@ -8,9 +8,6 @@ const moviesRouter = express.Router();
 const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
-// Sanitizer
-const cleaner = require('../middlewares/cleaner');
-
 // Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
 

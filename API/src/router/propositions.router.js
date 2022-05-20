@@ -5,9 +5,6 @@ const propositionsController = require('../controllers/propositions.controller')
 const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
-// Sanitizer
-const cleaner = require('../middlewares/cleaner');
-
 // Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
 
@@ -23,7 +20,7 @@ propositionsRouter
    * @returns {Array} 200 - Movies objects that are pending
    * @returns {APIError} 404 - Aucune proposition enregistrée en base.
    */
-  .get('/', checkingUser.checkAuthorization, routerWrapper(propositionsController.pendingPropositions))
+  .get('/pendingPropositions', checkingUser.checkAuthorization, routerWrapper(propositionsController.pendingPropositions))
   /**
    * Return propositions related to a specific user. Login required.
    * @route GET /v1/propositions/:userId
@@ -33,16 +30,26 @@ propositionsRouter
    * proposed_movies_count, comments_counts, likes_count, watchlist_count & ratings_count
    * @returns {APIError} 404 - Cet utilisateur n'a pas de proposition de film en attente.
    */
+  .get('/availableSlots', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
+  /**
+   * Book an available proposition slot.
+   * @route PUT /v1/propositions/:userId
+   * @group - propositions
+   * @param {Date} publishingDate - publishing date
+   * @returns {String} 201 - success response - Le créneau demandé a été réservé.
+   * @returns {APIError} 401 - Le créneau n'a pas pu être réservé.
+   */
   .get('/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.userPendingPropositionsById))
   /**
-   * Get all available propositions slots
-   * @route GET /v1/propositions/availableSlots/:userId
-   * @group - Propositions
+   * Check if the user has an already existing proposition
+   * @route GET /v1/propositions/hasPendingProposition/:userId
+   * @group - propositions
    * @param {integer} userId - user id
-   * @returns {Array} 200 - next_propositions objects
-   * @returns {APIError} 404 - fail response
+   * @returns {boolean} 200 - true
+   * @returns {APIError} 400 - Vous avez déjà une proposition en attente.
+   * Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.
    */
-  .get('/availableSlots/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
+  .get('/hasPendingProposition/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.hasAPendingProposition))
   /**
    * Book an available proposition slot.
    * @route PUT /v1/propositions/book/
@@ -53,7 +60,6 @@ propositionsRouter
    */
   .put(
     '/book',
-    cleaner,
     checkingUser.checkLogStatus,
     routerWrapper(propositionsController.bookPendingPropositionsSlot),
   )
@@ -67,7 +73,6 @@ propositionsRouter
    */
   .put(
     '/unbook',
-    cleaner,
     checkingUser.checkAuthorization,
     routerWrapper(propositionsController.unbookPendingPropositionsSlot),
   );

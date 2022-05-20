@@ -15,8 +15,12 @@ const refreshTokensController = {
     if (!token) {
       throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
     }
-
-    const user = jwtMethods.decryptRefreshToken(token);
+    let user;
+    try {
+      user = jwtMethods.decryptRefreshToken(token);
+    } catch (e) {
+      throw new APIError('La vérification du contenu du refresh token a échouée.', req.url, 401);
+    }
     const userInDB = await usersDataMapper.getUserById(user.id);
     if (!(userInDB)) {
       return new APIError('Ce compte utilisateur a été supprimé.', 404);
