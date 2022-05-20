@@ -109,7 +109,8 @@ CREATE VIEW movies_infos AS
 		movie.runtime, movie.casting,movie.presentation, movie.is_published,
 		movie.publishing_date, movie.user_id, movie.season_id,
 		"user_id",user_pseudo,user_avatar_url,season_number,
-		watchlist_count,views_count,likes_count,ratings_count,avg_rating;
+		watchlist_count,views_count,likes_count,ratings_count,avg_rating
+	ORDER BY movie.id DESC;
 
 -- Liste des propositions en attente, avec french_title, poster_url, directors, release_date
 CREATE VIEW pending_propositions AS
