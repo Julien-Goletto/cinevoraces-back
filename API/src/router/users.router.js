@@ -27,15 +27,15 @@ usersRouter
   .post('/register', validate('body', createUserSchema), routerWrapper(usersController.createUser))
   /**
    * Update user with informations give by user
-   * @route PUT /v1/users/modify/:userPseudo
+   * @route PUT /v1/users/modify/:userId
    * @group - Users
-   * @param {String} userPseudo
+   * @param {String} userId
    * @param {UserUpdate.model} UserUpdate.body.required - user object credentials
    * @returns {User} 200 - Modifications effectuées
    * @returns {APIError} 404 - Ce compte n'existe pas
    * @returns {APIError} 400 - Informations éronnées
    */
-  .put('/modify/:userPseudo', checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
+  .put('/modify/:userId', checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
   /**
    * Log the user comparing entered credentails with hashed datas in database,
    * then create two JWT: Access and Refresh tokens, passed into cookies.
@@ -64,14 +64,14 @@ usersRouter
    */
   .get('/', checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
   /**
-   * Delete a user, using the pseudo (admin only)
-   * @route DELETE /v1/users/:userPseudo
+   * Delete a user, using the id (admin only)
+   * @route DELETE /v1/users/:userId
    * @group - Users
-   * @param {String} userPseudo
+   * @param {String} userId
    * @returns {String} 200 - Utilisateur supprimé
    * @returns {APIError} 404 - Cet utilisateur n'existe pas
    */
-  .delete('/:userPseudo', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
+  .delete('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
 /**
  * @typedef UserRegistration
  * @property {String} pseudo - User Pseudo (unique)

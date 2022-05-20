@@ -76,29 +76,28 @@ moviesRouter
   )
   /**
   * Update some datas from a posted movie, on frontend request
-   * @route PUT /movies/modify/:movieTitle
+   * @route PUT /movies/modify/:movieId
    * @group - Movies
-   * @param {String} movieTitle.required - french_title
+   * @param {String} movieId.required - movieId
    * @param {MovieToUpdate.model} MovieToUpdate.body.required - correspond to movie Id
    * @returns {String} 201 - Les données du film ont été modifiées.
    * @returns {APIError} 400 - Le film n'a pas pu être modifié.
    */
   .put(
-    '/modify/:movieTitle',
+    '/modify/:movieId',
     checkingUser.checkAuthorization,
     validate('body', movieUpdateSchema),
     routerWrapper(moviesController.updateMovie),
   )
   /**
   * Delete a movie, on frontend request
-   * @route DELETE /movies/:movieTitle
-   * @group - Movies
-   * @param {String} movieTitle.required - french_title
+   * @route DELETE /movies/:movieId
+   * @param {String} movieId.required - french_title
    * @returns {String} 200 - Le film a bien été supprimé.
    * @returns {APIError} 404 - Le film demandé n'existe pas en base.
    */
   .delete(
-    '/:movieTitle',
+    '/:movieId',
     checkingUser.checkAuthorization,
     routerWrapper(moviesController.deleteMovie),
   );

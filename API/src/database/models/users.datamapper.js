@@ -52,11 +52,11 @@ const usersDataMapper = {
 
   /**
    * Modify user informations
-   * @param {string} userPseudo of user
+   * @param {string} userId of user
    * @param {Object} user informations
    * @throws {APIError} if user doesn't exist
    */
-  async updateUser(userPseudo, user) {
+  async updateUser(userId, user) {
     const userToModify = user;
     if (userToModify.password) {
       const salt = await bcrypt.genSalt(10);
@@ -64,8 +64,8 @@ const usersDataMapper = {
       userToModify.password = passwordCrypted;
     }
     let query = {
-      text: 'SELECT * FROM "user" WHERE pseudo = $1',
-      values: [userPseudo],
+      text: 'SELECT * FROM "user" WHERE id = $1',
+      values: [userId],
     };
     const result = await client.query(query);
     if (!result.rowCount) {
@@ -83,8 +83,8 @@ const usersDataMapper = {
       i += 1;
     }
     query.text = query.text.slice(0, -1);
-    query.text += ` WHERE pseudo=$${i}`;
-    query.values.push(userPseudo);
+    query.text += ` WHERE id=$${i}`;
+    query.values.push(userId);
     await client.query(query);
     return 'Modifications effectuées.';
   },
@@ -124,16 +124,16 @@ const usersDataMapper = {
     }
     return results.rows;
   },
-  async deleteUserByPseudo(userPseudo) {
+  async deleteUserById(userId) {
     const query = {
-      text: 'DELETE FROM "user" WHERE pseudo = $1;',
-      values: [userPseudo],
+      text: 'DELETE FROM "user" WHERE id = $1;',
+      values: [userId],
     };
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError("Cet utilisateur n'existe pas.", 404);
     }
-    return `Utilisateur ${userPseudo} supprimé.`;
+    return `Utilisateur ${userId} supprimé.`;
   },
 };
 
