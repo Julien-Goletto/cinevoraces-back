@@ -22,7 +22,7 @@ const usersDataMapper = {
     if (!results.rowCount) {
       throw new APIError('Le pseudo et/ou le mail sont déjà utilisés en base de donnée.', '', 400);
     }
-    return "L'utilsiateur est bien enregistré en base, mercid e vous connecter pour continuer.";
+    return "L'utilisateur est bien enregistré en base, merci de vous connecter pour continuer.";
   },
 
   /**
