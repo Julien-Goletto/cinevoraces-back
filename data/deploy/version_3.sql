@@ -113,7 +113,7 @@ CREATE VIEW movies_infos AS
 
 -- Liste des propositions en attente, avec french_title, poster_url, directors, release_date
 CREATE VIEW pending_propositions AS
-	SELECT french_title,poster_url,directors,release_date,"user_id",publishing_date,genres
+	SELECT id,french_title,poster_url,directors,release_date,"user_id",publishing_date,genres
 	FROM movies_infos
 	WHERE is_published = false;
 
