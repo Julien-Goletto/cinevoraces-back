@@ -36,6 +36,7 @@ async function uploadThumbnails(rPathTofolder) {
   const dataToExtract = ['original_filename', 'url', 'secure_url'];
   return uploads.map(
     (upload) => Object.fromEntries(
+      // eslint-disable-next-line no-unused-vars
       Object.entries(upload).filter(([key, _]) => dataToExtract.includes(key)),
     ),
   );
