@@ -9,21 +9,21 @@ const newUserSession = session(app);
 const userSession = session(app);
 const adminSession = session(app);
 
-const newUser = { pseudo: 'Test2', mail: 'Test@test.fr', password: 'Test' };
+const newUser = { pseudo: 'Test', mail: 'Test@test.fr', password: 'Test' };
 let newUserId;
-const newUserLogin = { pseudo: 'Test2', password: 'Test' };
-const modifiedNewUser = { oldPassword: 'Test', mail: 'maibidon+tetedecon@mail.fr' };
+const newUserLogin = { pseudo: 'Test', password: 'Test' };
+const modifiedNewUser = { oldPassword: 'Test', mail: 'maibidon+tetedecon' };
 
 const registeredUser = { pseudo: process.env.USER_PSEUDO, password: process.env.USER_PW };
-const adminUser = { pseudo: process.env.ADMIN_PSEUDO, password: "< script src='gamekult.com' >" };
+const adminUser = { pseudo: process.env.ADMIN_PSEUDO, password: process.env.ADMIN_PW };
 
 describe('API e2e', () => {
   describe('Users routes', () => {
-    // it('Should register a new user in database', async () => {
-    //   const response = await request.post('/v1/users/register').send(newUser);
-    //   expect(response.status).toBe(201);
-    //   expect(response.text).toContain('Utilisateur enregistré avec succès');
-    // });
+    it('Should register a new user in database', async () => {
+      const response = await request.post('/v1/users/register').send(newUser);
+      expect(response.status).toBe(201);
+      expect(response.text).toContain('Utilisateur enregistré avec succès');
+    });
     it('Should log the new user', async () => {
       const response = await newUserSession.post('/v1/users/login').send(newUserLogin);
       newUserId = response.body.id;
@@ -49,7 +49,6 @@ describe('API e2e', () => {
     });
     it('Should log the admin', async () => {
       const response = await adminSession.post('/v1/users/login').send(adminUser);
-      console.log(response.body);
       expect(response.status).toBe(200);
     });
     it('Should delete the user Test', async () => {
