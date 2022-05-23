@@ -12,9 +12,14 @@ const reviewsController = {
   async getUserReview(req, res) {
     const userId = parseInt(req.params.userId, 10);
     const movieId = parseInt(req.params.movieId, 10);
-    const requestingUserId = jwtMethods.decryptAccessToken(
-      jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken'),
-    ).id;
+    let token;
+    if (req.headers.cookie) {
+      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
+    } else if (req.headers.authorization) {
+      // eslint-disable-next-line prefer-destructuring
+      token = req.headers.authorization.split(' ')[1];
+    }
+    const requestingUserId = jwtMethods.decryptAccessToken(token).id;
     if (userId !== requestingUserId) {
       throw new APIError("Vous n'avez pas la permission de visualiser cette review.", req.url, 401);
     }
