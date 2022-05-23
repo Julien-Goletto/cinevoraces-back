@@ -28,8 +28,8 @@ const csrfProtection = csurf(
     cookie: {
       key: '__session',
       sameSite: 'none',
-      secure: true,
-      httpOnly: true,
+      /*secure: true,
+      httpOnly: true,*/
     },
   },
 );

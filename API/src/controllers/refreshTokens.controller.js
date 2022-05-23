@@ -3,7 +3,7 @@ const jwtMethods = require('../JWT/jwt.module');
 
 const usersDataMapper = require('../database/models/users.datamapper');
 
-const cookieOption = { secure: true, httpOnly: true, sameSite: 'none' };
+const cookieOption = { /*secure: true, httpOnly: true,*/ sameSite: 'none' };
 
 const refreshTokensController = {
   async refreshTokens(req, res) {
