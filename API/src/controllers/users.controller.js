@@ -2,8 +2,7 @@ const usersDataMapper = require('../database/models/users.datamapper');
 const APIError = require('../Errors/APIError');
 const jwtMethods = require('../JWT/jwt.module');
 
-const cookieOption = {  /*httpOnly: true,*/ secure: true, sameSite: 'none' };
-
+const cookieOption = {  /*httpOnly: true,*/ sameSite: 'none', secure: true };
 
 const usersController = {
   async createUser(req, res) {
