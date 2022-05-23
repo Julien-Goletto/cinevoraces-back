@@ -18,8 +18,10 @@ const usersController = {
     // const refreshToken = jwtMethods.createRefreshToken(result);
     // res.cookie('accessToken', accessToken, cookieOption);
     // res.cookie('refreshToken', refreshToken, cookieOption);
-    result.accessToken = jwtMethods.createAccessToken(result);
-    result.refreshToken = jwtMethods.createRefreshToken(result);
+    const newAccessToken = jwtMethods.createAccessToken(result);
+    const newRefreshToken = jwtMethods.createRefreshToken(result);
+    result.accessToken = newAccessToken;
+    result.refreshToken = newRefreshToken;
     res.status(200).json(result);
   },
 
