@@ -29,7 +29,7 @@ const csrfProtection = csurf(
       key: '__session',
       sameSite: 'none',
       secure: true,
-      httpOnly: true,
+      // httpOnly: true,
     },
   },
 );
