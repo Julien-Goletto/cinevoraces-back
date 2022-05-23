@@ -64,7 +64,6 @@ describe('API e2e', () => {
     });
     it('Should create a new movie in database', async () => {
       const response = await userSession.post('/v1/movies/newmovie').send(newMovie);
-      console.log(response.body);
       expect(response.status).toBe(201);
     });
     it('Should get the last movie published in database', async () => {
