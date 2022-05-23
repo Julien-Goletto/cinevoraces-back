@@ -3,7 +3,7 @@ const jwtMethods = require('../JWT/jwt.module');
 
 const usersDataMapper = require('../database/models/users.datamapper');
 
-const cookieOption = {  /*httpOnly: true,*/ sameSite: 'none', secure: true };
+// const cookieOption = {  /*httpOnly: true,*/ sameSite: 'none', secure: true };
 
 const refreshTokensController = {
   async refreshTokens(req, res) {
@@ -30,10 +30,14 @@ const refreshTokensController = {
     // Need to purge extra datas from tokens structure
     delete user.iat;
     delete user.exp;
-    // Create new access and refresh tokens
-    res.cookie('accessToken', jwtMethods.createAccessToken(user), cookieOption);
-    res.cookie('refreshToken', jwtMethods.createRefreshToken(user), cookieOption);
-    res.status(200).json(user);
+    // Create new access and refresh tokens - old version in cookies, new version througth body
+    // res.cookie('accessToken', jwtMethods.createAccessToken(user), cookieOption);
+    // res.cookie('refreshToken', jwtMethods.createRefreshToken(user), cookieOption);
+    res.status(200).json({
+      user,
+      accessToken: jwtMethods.createAccessToken(user),
+      refreshToken: jwtMethods.createAccessToken(user),
+    });
   },
 };
 

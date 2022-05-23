@@ -2,7 +2,7 @@ const usersDataMapper = require('../database/models/users.datamapper');
 const APIError = require('../Errors/APIError');
 const jwtMethods = require('../JWT/jwt.module');
 
-const cookieOption = {  /*httpOnly: true,*/ sameSite: 'none', secure: true };
+// const cookieOption = {  /*httpOnly: true,*/ sameSite: 'none', secure: true };
 
 const usersController = {
   async createUser(req, res) {
@@ -18,7 +18,11 @@ const usersController = {
     const refreshToken = jwtMethods.createRefreshToken(result);
     res.cookie('accessToken', accessToken, cookieOption);
     res.cookie('refreshToken', refreshToken, cookieOption);
-    res.status(200).json(result);
+    res.status(200).json({
+      result,
+      accessToken: jwtMethods.createAccessToken(user),
+      refreshToken: jwtMethods.createAccessToken(user),
+    });
   },
 
   async updateUser(req, res) {
