@@ -5,9 +5,6 @@ const propositionsController = require('../controllers/propositions.controller')
 const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
-// Sanitizer
-const cleaner = require('../middlewares/cleaner');
-
 // Checking user and privegies
 const checkingUser = require('../middlewares/checkingUser');
 
@@ -18,56 +15,63 @@ propositionsRouter
 
   /**
    * Return all users propositions. Admin required.
-   * @route GET /v1/propositions/pendingPropositions
-   * @group - propositions
-   * @returns {Array} 200 - success response - movies that are pending
-   * @returns {APIError} 404 - fail response
+   * @route GET /v1/propositions/
+   * @group - Propositions
+   * @returns {Array} 200 - Movies objects that are pending
+   * @returns {APIError} 404 - Aucune proposition enregistrée en base.
    */
-  .get('/', checkingUser.checkAuthorization, routerWrapper(propositionsController.pendingPropositions))
+  .get('/pendingPropositions', checkingUser.checkAuthorization, routerWrapper(propositionsController.pendingPropositions))
   /**
    * Return propositions related to a specific user. Login required.
-   * @route GET /v1/propositions/:userId
-   * @group - propositions
-   * @param {integer} userId - user id
-   * @returns {Array} 200 - success response - for asked user :
+   * @route GET /v1/propositions/availableSlots
+   * @group - Propositions
+   * @returns {Array} 200 - for asked user :
    * proposed_movies_count, comments_counts, likes_count, watchlist_count & ratings_count
-   * @returns {APIError} 401 - fail response
+   * @returns {APIError} 404 - Cet utilisateur n'a pas de proposition de film en attente.
    */
-  .get('/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.userPendingPropositionsById))
-  /**
-   * Get all available propositions slots
-   * @route GET /v1/propositions/availableSlots/:userId
-   * @group - propositions
-   * @param {integer} userId - user id
-   * @returns {Array} 200 - success response - next_propositions
-   * @returns {APIError} 404 - fail response
-   */
-  .get('/availableSlots/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
+  .get('/availableSlots', checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
   /**
    * Book an available proposition slot.
-   * @route PUT /v1/propositions/book/
+   * @route PUT /v1/propositions/:userId
    * @group - propositions
    * @param {Date} publishingDate - publishing date
    * @returns {String} 201 - success response - Le créneau demandé a été réservé.
    * @returns {APIError} 401 - Le créneau n'a pas pu être réservé.
    */
+  .get('/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.userPendingPropositionsById))
+  /**
+   * Check if the user has an already existing proposition
+   * @route GET /v1/propositions/hasPendingProposition/:userId
+   * @group - propositions
+   * @param {integer} userId - user id
+   * @returns {boolean} 200 - { hasAPendingProposition: false }
+   * @returns {APIError} 400 - Vous avez déjà une proposition en attente.
+   * Vous pourrez réserver un nouveau créneau une fois votre proposition publiée.
+   */
+  .get('/hasPendingProposition/:userId', checkingUser.checkLogStatus, routerWrapper(propositionsController.hasAPendingProposition))
+  /**
+   * Book an available proposition slot.
+   * @route PUT /v1/propositions/book/
+   * @group - Propositions
+   * @param {String} publishingDate.body.required - publishing date
+   * @returns {String} 201 - Le créneau demandé a été réservé.
+   * @returns {APIError} 400 - Le créneau demandé n'est pas disponible.
+   */
   .put(
     '/book',
-    cleaner,
     checkingUser.checkLogStatus,
     routerWrapper(propositionsController.bookPendingPropositionsSlot),
   )
   /**
    * Unbook an unavailable proposition slot. As admin only.
    * @route PUT /v1/propositions/unbook/
-   * @group - propositions
-   * @param {Date} publishingDate - publishing date
-   * @returns {Array} 201 - success response - Le créneau n'a pas pu être libéré.
-   * @returns {APIError} 401 - Le créneau demandé a été libéré.
+   * @group - Propositions
+   * @param {String} publishingDate.body.required - publishing date
+   * @returns {Array} 201 - Le créneau a été libéré.
+   * @returns {APIError} 400 - Le créneau demandé n'a ps pu être libéré.
    */
   .put(
     '/unbook',
-    cleaner,
     checkingUser.checkAuthorization,
     routerWrapper(propositionsController.unbookPendingPropositionsSlot),
   );

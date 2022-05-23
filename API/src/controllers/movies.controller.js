@@ -29,14 +29,19 @@ const moviesController = {
     res.status(201).json(result);
   },
   async updateMovie(req, res) {
-    const { movieTitle } = req.params;
+    const { movieId } = req.params;
     const movieInfos = req.body;
-    const result = await moviesDataMapper.updateMovieByTitle(movieTitle, movieInfos);
+    const result = await moviesDataMapper.updateMovie(movieId, movieInfos);
     res.status(201).json(result);
   },
   async deleteMovie(req, res) {
-    const { movieTitle } = req.params;
-    const result = await moviesDataMapper.deleteMovieByTitle(movieTitle);
+    const { movieId } = req.params;
+    const result = await moviesDataMapper.deleteMovie(movieId);
+    res.status(200).json(result);
+  },
+
+  async publishMovie(req, res) {
+    const result = await moviesDataMapper.publishMovie(req.params.movieId, req.body.isPublished);
     res.status(200).json(result);
   },
 };

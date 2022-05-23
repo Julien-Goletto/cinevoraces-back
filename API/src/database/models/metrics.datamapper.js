@@ -20,7 +20,7 @@ const metricsDataMapper = {
     const query = 'SELECT * FROM indiv_actions_metrics';
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('No user saved in database.', '', 404);
+      throw new APIError('Aucun utilisateur enregistré.', '', 404);
     }
     return results.rows;
   },
@@ -33,7 +33,7 @@ const metricsDataMapper = {
     const query = {
       text: `SELECT *
               FROM indiv_actions_metrics
-              WHERE user_id=$1`,
+              WHERE id=$1`,
       values: [userId],
     };
     let results = await client.query(query);
@@ -42,7 +42,7 @@ const metricsDataMapper = {
       query.text = 'SELECT * FROM "user" WHERE id=$1';
       results = await client.query(query);
       if (!results.rowCount) {
-        throw new APIError("This user doesn't exist.", '', 404);
+        throw new APIError("Cet utilisateur n'existe pas.", '', 404);
       } else {
         return [{
           user_id: userId,

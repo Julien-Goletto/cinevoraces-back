@@ -20,9 +20,9 @@ const usersDataMapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      return 'This pseudo is already taken. Please choose another one.';
+      throw new APIError('Ce pseudo ou cet email sont déjà enregistrés.', '', 400);
     }
-    return 'User successfully registered, please login to continue.';
+    return 'Utilisateur enregistré avec succès, merci de vous connecter.';
   },
 
   /**
@@ -38,10 +38,10 @@ const usersDataMapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError('Invalid credentials', '', 400); // à déplacer dans les controllers
+      throw new APIError('Informations éronnées', '', 400); // à déplacer dans les controllers
     }
     if (!await bcrypt.compare(user.password, result.rows[0].password)) {
-      throw new APIError('Invalid credentials', '', 400);
+      throw new APIError('Informations éronnées', '', 400);
     }
     const keys = ['id', 'pseudo', 'role'];
     return Object.fromEntries(
@@ -52,11 +52,11 @@ const usersDataMapper = {
 
   /**
    * Modify user informations
-   * @param {string} userPseudo of user
+   * @param {string} userId of user
    * @param {Object} user informations
    * @throws {APIError} if user doesn't exist
    */
-  async updateUser(userPseudo, user) {
+  async updateUser(userId, user) {
     const userToModify = user;
     if (userToModify.password) {
       const salt = await bcrypt.genSalt(10);
@@ -64,13 +64,17 @@ const usersDataMapper = {
       userToModify.password = passwordCrypted;
     }
     let query = {
-      text: 'SELECT * FROM "user" WHERE pseudo = $1',
-      values: [userPseudo],
+      text: 'SELECT * FROM "user" WHERE id = $1',
+      values: [userId],
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError("This account doesn't exist.", '', 404);
+      throw new APIError("Ce compte n'existe pas.", '', 404);
     }
+    if (!await bcrypt.compare(userToModify.oldPassword, result.rows[0].password)) {
+      throw new APIError('Informations éronnées', '', 400);
+    }
+    delete userToModify.oldPassword;
     query = { text: 'UPDATE "user" SET ', values: [] };
     let i = 1;
     for (const key of Object.keys(userToModify)) {
@@ -79,10 +83,10 @@ const usersDataMapper = {
       i += 1;
     }
     query.text = query.text.slice(0, -1);
-    query.text += ` WHERE pseudo=$${i}`;
-    query.values.push(userPseudo);
+    query.text += ` WHERE id=$${i}`;
+    query.values.push(userId);
     await client.query(query);
-    return 'User modifications have been saved.';
+    return 'Modifications effectuées.';
   },
 
   /**
@@ -102,7 +106,7 @@ const usersDataMapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError("This account doesn't exist.", '', 404);
+      throw new APIError("Ce compte n'existe pas.", '', 404);
     }
     return result.rows[0];
   },
@@ -116,20 +120,20 @@ const usersDataMapper = {
     const query = 'SELECT "user".id, "user".pseudo, "user".avatar_url, "user".created_at FROM "user";';
     const results = await client.query(query);
     if (!results.rowCount) {
-      return 'No user registered yet.';
+      throw new APIError('Aucun utilisateurs enregistré.', '', 404);
     }
     return results.rows;
   },
-  async deleteUserByPseudo(userPseudo) {
+  async deleteUserById(userId) {
     const query = {
-      text: 'DELETE FROM "user" WHERE pseudo = $1;',
-      values: [userPseudo],
+      text: 'DELETE FROM "user" WHERE id = $1;',
+      values: [userId],
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError("This user doesn't exist.", 404);
+      throw new APIError("Cet utilisateur n'existe pas.", 404);
     }
-    return `User successfuly deleted ${userPseudo}.`;
+    return `Utilisateur ${userId} supprimé.`;
   },
 };
 

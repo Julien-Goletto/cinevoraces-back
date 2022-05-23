@@ -25,6 +25,8 @@ const movieInfosToModify = {
   presentation: 'Le meilleur film de tous les temps, tout simplement. Tout est dit.',
 };
 
+let newMovieId;
+
 const registeredUser = { pseudo: process.env.USER_PSEUDO, password: process.env.USER_PW };
 const adminUser = { pseudo: process.env.ADMIN_PSEUDO, password: process.env.ADMIN_PW };
 
@@ -62,16 +64,26 @@ describe('API e2e', () => {
     });
     it('Should create a new movie in database', async () => {
       const response = await userSession.post('/v1/movies/newmovie').send(newMovie);
+      console.log(response.body);
       expect(response.status).toBe(201);
     });
+    it('Should get the last movie published in database', async () => {
+      const response = await adminSession.get('/v1/propositions/pendingPropositions');
+      const propositionsArray = response.body;
+      newMovieId = propositionsArray[0].id;
+      expect(response.status).toBe(200);
+    });
     it('Should update the new movie', async () => {
-      const response = await adminSession
-        .put(`/v1/movies/modify/${newMovie.french_title}`)
+      await adminSession
+        .put(`/v1/movies/modify/${newMovieId}`)
         .send(movieInfosToModify);
-      console.log(response.body);
+    });
+    it('Should publish movie', async () => {
+      const response = await adminSession.put(`/v1/movies/publishing/${newMovieId}`);
+      expect(response.status).toBe(200);
     });
     it('Should delete the new added movie', async () => {
-      const response = await adminSession.delete(`/v1/movies/${newMovie.french_title}`);
+      const response = await adminSession.delete(`/v1/movies/${newMovieId}`);
       expect(response.status).toBe(200);
     });
   });

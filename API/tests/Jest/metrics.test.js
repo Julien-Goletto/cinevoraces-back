@@ -31,19 +31,20 @@ describe('API e2e', () => {
       expect(response.text).toContain('seasons_count');
     });
     it('Should get all individual metrics as admin', async () => {
-      const response = await userSession.get('/v1/metrics/all');
+      const response = await adminSession.get('/v1/metrics/all');
       expect(response.status).toBe(200);
-      expect(response.text).toContain('proposed_movies_count');
+      expect(response.text).toContain('propositions_count');
     });
     it('Should get individual metrics for user n°1 as user n°1', async () => {
       const response = await userSession.get('/v1/metrics/1');
+      console.log(response.body);
       expect(response.status).toBe(200);
-      expect(response.text).toContain('proposed_movies_count');
+      expect(response.text).toContain('propositions_count');
     });
     it('Should get individual metrics for new as new user', async () => {
       const response = await newUserSession.get(`/v1/metrics/${newUserId}`);
       expect(response.status).toBe(200);
-      expect(response.text).toContain('proposed_movies_count');
+      expect(response.text).toContain('propositions_count');
     });
     afterAll(async () => {
       await adminSession.delete(`/v1/users/${newUser.pseudo}`);

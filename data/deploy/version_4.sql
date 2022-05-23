@@ -40,9 +40,7 @@ INSERT INTO "user" ("pseudo","mail","password") VALUES
 ('quilim', 'mailbidon30' ,'$2b$10$CKzwHT3uy04DpEgr0Hv9KuyPdS8ywrYqXqWQklvkiiG.58ReqUyTq'),
 ('Louis-Cyrus', 'mailbidon31' ,'$2b$10$876tNNyRDoN7IgIcP2.dRu56qETf.zdXYcvb56yC2AqUiJOl.puJK'),
 ('Calys', 'mailbidon32' ,'$2b$10$u6XTEw4baqqfFYvshgoFe.Gn6827CCRkr6IwpwTMkmbE2Y.a0R2Lq'),
-('olive qui tue', 'mailbidon33' ,'$2b$10$/iFzYjk.0LUCseqXpa7Lk.PdD2/jbEQb8dku/JFVfxE4YWMyn/o4a'),
-('Joffrey d''Ortoli', 'mailbidon34' ,'$2b$10$tIXMhms0TJk0X56H/ktpFuU3.ApYMkOpsAG51wuFcxUBWwEMLNeUm'),
-('Benoît Safari', 'mailbidon35' ,'$2b$10$oSJnHbPc1boyS5bgtVEcP.7XiA7PdZ5gEjKCjviZwk8//reiGyMGK');
+('olive qui tue', 'mailbidon33' ,'$2b$10$/iFzYjk.0LUCseqXpa7Lk.PdD2/jbEQb8dku/JFVfxE4YWMyn/o4a');
 
 -- Passage de Yves Signal en admin
 UPDATE "user"
@@ -412,10 +410,6 @@ SELECT new_movie('Les Pleins Pouvoirs','Absolute Power','https://image.tmdb.org/
 UPDATE movie
 SET is_published = 'true';
 
--- Ajout de deux nouvelles propositions
-SELECT new_movie('12 hommes en colère','12 Angry Men','https://image.tmdb.org/t/p/original/fFXrCl7nBFFaQU3IgTlinvk6vTi.jpg',array['Sidney Lumet'],'1957-04-10','95',array['Martin Balsam','John Fiedler','Lee J. Cobb','E.G. Marshall','Jack Klugman'],'12 hommes et beaucoup de colère. Mais zéro bagarre par contre. Même pas une tartine de pâté. C''est rude.','2022-05-23',34,3,array['Drame'],array['English'],array['United States of America']);
-SELECT new_movie('Garfield, le film','Garfield','https://image.tmdb.org/t/p/original/ec8AM30BnLlCoRE1Aw5INo5ubOe.jpg',array['Peter Hewitt'],'2004-06-10','81',array['Bill Murray','Breckin Meyer','Jennifer Love Hewitt','Stephen Tobolowsky','Evan Arnold'],'Un film bien en dessous de ce que l''on pourrait imaginer. Je veux dire, Garfield quoi! C''est un gage de qualité! Mais la on nous fournis une bouse infecte bien loin de la vision original du manga. Tout d''abord, Garfield n''obtient ses pouvoirs qu''après le combat contre Zackary Ford, or là, dés le départ Garfield est over-pété et roule sur tout ses adversaire... Ensuite Vegeta qui est fan frites et cours dans tout New York a la recherche d''une bonne baraque frites serieux j''ai pas compris le délire, le but c''est de tourner tout les personnages en ridicule? Est-ce que les fans de gaming et culture Jap sont forcement des noeuds-noeuds? Selon Spielberg, il semblerait que oui...','2022-05-30',35,3,array['Animation','Comédie','Familial'],array['English'],array['United States of America']);
-
 -- Ajout de reviews
 INSERT INTO "review" ("user_id","movie_id","bookmarked","viewed","liked","rating","comment") VALUES
 (1,1,false,true,true,5,'Un grand merci à Wade pour cette proposition. C''est la deuxième fois que je le vois et, pour résumer, je l''ai trouvé encore plus puissant. Je vais essayer d''être pertinent et pas trop brouillon mais
@@ -465,38 +459,42 @@ merci Lukino pour cette reco exotique. Et aussi pour le jambon.'),
 (2,3,true,false,false,null,null);
 
 --Ajout des créneaux
+--2022-06-26T22:00:00.000Z
 INSERT INTO proposition_slot ("season_number","episode","publishing_date","is_booked") VALUES
-(3,21,'2022-05-23',true),
-(3,22,'2022-05-30',true),
-(3,23,'2022-06-06',false),
-(3,24,'2022-06-13',false),
-(3,25,'2022-06-20',false),
-(3,26,'2022-06-27',false),
-(3,27,'2022-07-04',false),
-(3,28,'2022-07-11',false),
-(3,29,'2022-07-18',false),
-(3,30,'2022-07-25',false),
-(3,31,'2022-08-01',false),
-(3,32,'2022-08-08',false),
-(3,33,'2022-08-15',false),
-(3,34,'2022-08-22',false),
-(3,35,'2022-08-29',false),
-(3,36,'2022-09-05',false),
-(3,37,'2022-09-12',false),
-(3,38,'2022-09-19',false),
-(3,39,'2022-09-26',false),
-(3,40,'2022-10-03',false),
-(3,41,'2022-10-10',false),
-(3,42,'2022-10-17',false),
-(3,43,'2022-10-24',false),
-(3,44,'2022-10-31',false),
-(3,45,'2022-11-07',false),
-(3,46,'2022-11-14',false),
-(3,47,'2022-11-21',false),
-(3,48,'2022-11-28',false),
-(3,49,'2022-12-05',false),
-(3,50,'2022-12-12',false),
-(3,51,'2022-12-19',false),
-(3,52,'2022-12-26',false);
+(3,19,'2022-05-02',true),
+(3,20,'2022-05-09',true),
+(3,21,'2022-05-16',true),
+(3,22,'2022-05-23',true),
+(3,23,'2022-05-30',true),
+(3,24,'2022-06-06',false),
+(3,25,'2022-06-13',false),
+(3,26,'2022-06-20',false),
+(3,27,'2022-06-27',false),
+(3,28,'2022-07-04',false),
+(3,29,'2022-07-11',false),
+(3,30,'2022-07-18',false),
+(3,31,'2022-07-25',false),
+(3,32,'2022-08-01',false),
+(3,33,'2022-08-08',false),
+(3,34,'2022-08-15',false),
+(3,35,'2022-08-22',false),
+(3,36,'2022-08-29',false),
+(3,37,'2022-09-05',false),
+(3,38,'2022-09-12',false),
+(3,39,'2022-09-19',false),
+(3,40,'2022-09-26',false),
+(3,41,'2022-10-03',false),
+(3,42,'2022-10-10',false),
+(3,43,'2022-10-17',false),
+(3,44,'2022-10-24',false),
+(3,45,'2022-10-31',false),
+(3,46,'2022-11-07',false),
+(3,47,'2022-11-14',false),
+(3,48,'2022-11-21',false),
+(3,49,'2022-11-28',false),
+(3,50,'2022-12-05',false),
+(3,51,'2022-12-12',false),
+(3,52,'2022-12-19',false),
+(3,53,'2022-12-26',false);
 
 COMMIT;

@@ -14,7 +14,7 @@ const cors = require('cors');
 
 const corsOptions = {
   credentials: true,
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'https://cinevoraces-api.herokuapp.com/', 'https://cinevoraces.herokuapp.com/'],
   optionSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));

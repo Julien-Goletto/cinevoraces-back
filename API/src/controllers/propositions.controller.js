@@ -1,15 +1,12 @@
 const propositionsDataMapper = require('../database/models/propositions.datamapper');
 
 const propositionsController = {
-  async availablePropositionsSlots(req, res) {
-    const results = await propositionsDataMapper.getAvailablePropositionSlots(req.params.userId);
-    if (typeof results === 'string') {
-      return res.status(200).json(results);
-    }
-    for (const slot of results) {
-      const date = slot.publishing_date.toISOString().slice(0, -14);
-      slot.publishing_date = date;
-    }
+  async hasAPendingProposition(req, res) {
+    const results = await propositionsDataMapper.hasAPendingProposition(req.params.userId);
+    return res.status(200).json(results);
+  },
+  async availablePropositionsSlots(_, res) {
+    const results = await propositionsDataMapper.getAvailablePropositionSlots();
     res.status(200).json(results);
   },
 
@@ -23,13 +20,11 @@ const propositionsController = {
     res.status(200).json(results);
   },
   async bookPendingPropositionsSlot(req, res) {
-    const publishingDate = new Date(req.body.publishingDate);
-    const results = await propositionsDataMapper.bookPropositionSlot(publishingDate);
+    const results = await propositionsDataMapper.bookPropositionSlot(req.body.publishing_date);
     res.status(201).json(results);
   },
   async unbookPendingPropositionsSlot(req, res) {
-    const publishingDate = new Date(req.body.publishingDate);
-    const results = await propositionsDataMapper.unbookPropositionSlot(publishingDate);
+    const results = await propositionsDataMapper.unbookPropositionSlot(req.body.publishing_date);
     res.status(201).json(results);
   },
 };
