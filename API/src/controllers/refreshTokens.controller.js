@@ -3,6 +3,8 @@ const jwtMethods = require('../JWT/jwt.module');
 
 const usersDataMapper = require('../database/models/users.datamapper');
 
+const cookieOption = { secure: true, httpOnly: true };
+
 const refreshTokensController = {
   async refreshTokens(req, res) {
     let token;
@@ -29,8 +31,8 @@ const refreshTokensController = {
     delete user.iat;
     delete user.exp;
     // Create new access and refresh tokens
-    res.cookie('accessToken', jwtMethods.createAccessToken(user));
-    res.cookie('refreshToken', jwtMethods.createRefreshToken(user));
+    res.cookie('accessToken', jwtMethods.createAccessToken(user), cookieOption);
+    res.cookie('refreshToken', jwtMethods.createRefreshToken(user), cookieOption);
     res.status(200).json(user);
   },
 };
