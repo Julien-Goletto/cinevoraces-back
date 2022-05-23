@@ -77,7 +77,7 @@ function stringifyPresentation(array){
 };
 
 // const chaincharacter = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789~!@#$%^&*()_-+={}[]/\:;."'<>?`
-const chaincharacter = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789~!@#$%^&*_-+=/:;."<>?`
+const chaincharacter = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789~!@#$%^*_-+=/:;.?`
 async function createRandomPassWord (chaincharacter,length){
   let password = '';
   const salt = await bcrypt.genSalt(10);
