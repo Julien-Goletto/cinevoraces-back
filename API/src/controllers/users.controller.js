@@ -14,15 +14,13 @@ const usersController = {
   async logUser(req, res) {
     const user = req.body;
     const result = await usersDataMapper.logUser(user);
-    const accessToken = jwtMethods.createAccessToken(result);
-    const refreshToken = jwtMethods.createRefreshToken(result);
-    res.cookie('accessToken', accessToken, cookieOption);
-    res.cookie('refreshToken', refreshToken, cookieOption);
-    res.status(200).json({
-      result,
-      accessToken: jwtMethods.createAccessToken(user),
-      refreshToken: jwtMethods.createAccessToken(user),
-    });
+    // const accessToken = jwtMethods.createAccessToken(result);
+    // const refreshToken = jwtMethods.createRefreshToken(result);
+    // res.cookie('accessToken', accessToken, cookieOption);
+    // res.cookie('refreshToken', refreshToken, cookieOption);
+    result.accessToken = jwtMethods.createAccessToken(result);
+    result.refreshToken = jwtMethods.createRefreshToken(result);
+    res.status(200).json(result);
   },
 
   async updateUser(req, res) {

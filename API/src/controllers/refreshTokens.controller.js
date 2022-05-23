@@ -33,11 +33,9 @@ const refreshTokensController = {
     // Create new access and refresh tokens - old version in cookies, new version througth body
     // res.cookie('accessToken', jwtMethods.createAccessToken(user), cookieOption);
     // res.cookie('refreshToken', jwtMethods.createRefreshToken(user), cookieOption);
-    res.status(200).json({
-      user,
-      accessToken: jwtMethods.createAccessToken(user),
-      refreshToken: jwtMethods.createAccessToken(user),
-    });
+    user.accessToken = jwtMethods.createAccessToken(user);
+    user.refreshToken = jwtMethods.createRefreshToken(user);
+    res.status(200).json(user);
   },
 };
 
