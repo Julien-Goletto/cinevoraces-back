@@ -11,7 +11,9 @@ const sanitize = (obj) => {
 const cleaner = (request, response, next) => {
   sanitize(request.params);
   sanitize(request.query);
-  if (request.body) {
+  if (request.body.presentation) {
+    sanitize(request.body.presentation);
+  } else {
     sanitize(request.body);
   }
   next();
