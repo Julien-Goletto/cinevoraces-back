@@ -6,6 +6,7 @@ const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
 // Checking user and privegies
+const getTokens = require('../middlewares/getTokens');
 const checkingUser = require('../middlewares/checkingUser');
 
 // Configuration du subRouter
@@ -27,7 +28,7 @@ metricsRouter
    * proposed_movies_count, comments_counts, likes_count, watchlist_count & ratings_count
    * @returns {APIError} 404 - Aucun utilisateur enregistré.
    */
-  .get('/all', checkingUser.checkLogStatus, routerWrapper(metricsController.allUsersMetrics))
+  .get('/all', getTokens.getAccessToken, checkingUser.checkLogStatus, routerWrapper(metricsController.allUsersMetrics))
   /**
    * Return metrics related to a specific user. Login required.
    * @route GET /v1/metrics/:userId
@@ -37,7 +38,7 @@ metricsRouter
    * proposed_movies_count, comments_counts, likes_count, watchlist_count & ratings_count
    * @returns {APIError} 404 - Cet utilisateur n'existe pas.
    */
-  .get('/:userId', checkingUser.checkLogStatus, routerWrapper(metricsController.userMetricsById));
+  .get('/:userId', getTokens.getAccessToken, checkingUser.checkLogStatus, routerWrapper(metricsController.userMetricsById));
 
 metricsRouter.use(handleError);
 

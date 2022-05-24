@@ -3,17 +3,11 @@ const jwtMethods = require('../JWT/jwt.module');
 
 const usersDataMapper = require('../database/models/users.datamapper');
 
-// const cookieOption = {  /*httpOnly: true,*/ sameSite: 'none', secure: true };
+// const cookieOption = { httpOnly: true, sameSite: 'none', secure: true };
 
 const refreshTokensController = {
   async refreshTokens(req, res) {
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'refreshToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     if (!token) {
       throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
     }
@@ -31,12 +25,12 @@ const refreshTokensController = {
     delete user.iat;
     delete user.exp;
     // Create new access and refresh tokens - old version in cookies, new version througth body
-    // res.cookie('accessToken', jwtMethods.createAccessToken(user), cookieOption);
-    // res.cookie('refreshToken', jwtMethods.createRefreshToken(user), cookieOption);
-    const newAccessToken = jwtMethods.createAccessToken(user);
-    const newRefreshToken = jwtMethods.createRefreshToken(user);
-    user.accessToken = newAccessToken;
-    user.refreshToken = newRefreshToken;
+    const accessToken = jwtMethods.createAccessToken(user);
+    const refreshToken = jwtMethods.createRefreshToken(user);
+    res.cookie('accessToken', accessToken);
+    res.cookie('refreshToken', refreshToken);
+    user.accessToken = accessToken;
+    user.refreshToken = refreshToken;
     res.status(200).json(user);
   },
 };

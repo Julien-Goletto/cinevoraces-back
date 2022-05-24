@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { HOST, PORT } = process.env;
+const { HOST, PORT, SESSION_SECRET } = process.env;
 const express = require('express');
 
 const app = express();
@@ -9,13 +9,24 @@ const expressSwagger = require('express-swagger-generator')(app);
 
 app.use(express.json());// Body parser
 
+const session = require('express-session');
+
+const sessionOptions = {
+  secret: SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true },
+};
+
+app.use(session(sessionOptions));
+
 // Setting CORS
 const cors = require('cors');
 
 const corsOptions = {
   credentials: true,
-  origin: ['http://localhost:3000', 'https://localhost:3000', 'https://cinevoraces-api.herokuapp.com', 'https://cinevoraces.herokuapp.com',
-    'https://cinevoraces.e-anthony.fr', 'http://cinevoraces.e-anthony.fr'],
+  origin: ['http://localhost:3000', 'https://localhost:3000', 'https://cinevoraces-api.herokuapp.com',
+    'https://cinevoraces.herokuapp.com', 'https://cinevoraces.e-anthony.fr', 'http://cinevoraces.e-anthony.fr'],
   optionSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));

@@ -17,16 +17,13 @@ const checkingUser = {
    * Check the jwt in session to ensure it presents the correct format
    */
   checkLogStatus(req, _, next) {
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     if (!token) {
       throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
     }
+    // Token storage in session
+    req.session.token = token;
+    // Then token verification
     let user;
     try {
       user = jwtMethods.decryptAccessToken(token);
@@ -40,16 +37,13 @@ const checkingUser = {
     }
   },
   checkAuthorization(req, _, next) {
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     if (!token) {
       throw new APIError('Vous devez être connecté pour poursuivre.', req.url, 401);
     }
+    // Token storage in session
+    req.session.token = token;
+    // Then token verification
     let user;
     try {
       user = jwtMethods.decryptAccessToken(token);

@@ -9,6 +9,7 @@ const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
 // Checking user and privegies
+const getTokens = require('../middlewares/getTokens');
 const checkingUser = require('../middlewares/checkingUser');
 
 // Joi validation compulsary for each payload containing data
@@ -70,6 +71,7 @@ moviesRouter
    */
   .post(
     '/newmovie/',
+    getTokens.getAccessToken,
     checkingUser.checkLogStatus,
     validate('body', movieSchema, genreSchema, languageSchema, countrySchema, seasonSchema),
     routerWrapper(moviesController.addNewMovie),
@@ -85,6 +87,7 @@ moviesRouter
    */
   .put(
     '/modify/:movieId',
+    getTokens.getAccessToken,
     checkingUser.checkAuthorization,
     validate('body', movieUpdateSchema),
     routerWrapper(moviesController.updateMovie),
@@ -99,6 +102,7 @@ moviesRouter
    */
   .delete(
     '/:movieId',
+    getTokens.getAccessToken,
     checkingUser.checkAuthorization,
     routerWrapper(moviesController.deleteMovie),
   )
@@ -113,6 +117,7 @@ moviesRouter
    */
   .put(
     '/publishing/:movieId',
+    getTokens.getAccessToken,
     checkingUser.checkAuthorization,
     routerWrapper(moviesController.publishMovie),
   );

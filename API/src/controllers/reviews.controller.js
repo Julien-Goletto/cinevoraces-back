@@ -12,13 +12,7 @@ const reviewsController = {
   async getUserReview(req, res) {
     const userId = parseInt(req.params.userId, 10);
     const movieId = parseInt(req.params.movieId, 10);
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     const requestingUserId = jwtMethods.decryptAccessToken(token).id;
     if (userId !== requestingUserId) {
       throw new APIError("Vous n'avez pas la permission de visualiser cette review.", req.url, 401);
@@ -30,13 +24,7 @@ const reviewsController = {
   async createReview(req, res) {
     const userId = parseInt(req.params.userId, 10);
     const movieId = parseInt(req.params.movieId, 10);
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     const requestingUserId = jwtMethods.decryptAccessToken(token).id;
     if (userId !== requestingUserId) {
       throw new APIError("Vous n'avez pas la permission de créer une review.", req.url, 401);
@@ -50,13 +38,7 @@ const reviewsController = {
     const review = req.body;
     const userId = parseInt(req.params.userId, 10);
     const movieId = parseInt(req.params.movieId, 10);
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     const requestingUserId = jwtMethods.decryptAccessToken(token).id;
     if (userId !== requestingUserId) {
       throw new APIError("Vous n'avez pas la permission de modifier cette review.", req.url, 401);
@@ -69,13 +51,7 @@ const reviewsController = {
   async deleteComment(req, res) {
     const userId = parseInt(req.params.userId, 10);
     const movieId = parseInt(req.params.movieId, 10);
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     const requestingUserId = jwtMethods.decryptAccessToken(token).id;
     if (userId !== requestingUserId) {
       throw new APIError("Vous n'avez pas la permission de supprimer ce commentaire.", req.url, 401);
@@ -88,13 +64,7 @@ const reviewsController = {
   async deleteReview(req, res) {
     const userId = parseInt(req.params.userId, 10);
     const movieId = parseInt(req.params.movieId, 10);
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     const requestingUserId = jwtMethods.decryptAccessToken(token).id;
     if (userId !== requestingUserId) {
       throw new APIError("Vous n'avez pas la permission de supprimer cette Review.", req.url, 401);

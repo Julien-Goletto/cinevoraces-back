@@ -6,6 +6,7 @@ const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
 // Checking user and privegies
+const getTokens = require('../middlewares/getTokens');
 const checkingUser = require('../middlewares/checkingUser');
 
 // Joi validation compulsary for each payload containing data
@@ -35,7 +36,7 @@ usersRouter
    * @returns {APIError} 404 - Ce compte n'existe pas
    * @returns {APIError} 400 - Informations éronnées
    */
-  .put('/modify/:userId', checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
+  .put('/modify/:userId', getTokens.getAccessToken, checkingUser.checkLogStatus, validate('body', userUpdateSchema), routerWrapper(usersController.updateUser))
   /**
    * Log the user comparing entered credentails with hashed datas in database,
    * then create two JWT: Access and Refresh tokens, passed into cookies.
@@ -54,7 +55,7 @@ usersRouter
    * @returns {User} 200 - User Object
    * @returns {APIError} 404 - Ce compte n'existe pas
    */
-  .get('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
+  .get('/:userId', getTokens.getAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.getUserById))
   /**
    * Return users listing
    * @route GET /v1/users/
@@ -62,7 +63,7 @@ usersRouter
    * @returns {Array} 200 - Array of users
    * @returns {String} 404 - Aucun utilisateurs enregistré
    */
-  .get('/', checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
+  .get('/', getTokens.getAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
   /**
    * Delete a user, using the id (admin only)
    * @route DELETE /v1/users/:userId
@@ -71,7 +72,7 @@ usersRouter
    * @returns {String} 200 - Utilisateur supprimé
    * @returns {APIError} 404 - Cet utilisateur n'existe pas
    */
-  .delete('/:userId', checkingUser.checkLogStatus, routerWrapper(usersController.deleteUser));
+  .delete('/:userId', getTokens.getAccessToken, checkingUser.checkAuthorization, routerWrapper(usersController.deleteUser));
 /**
  * @typedef UserRegistration
  * @property {String} pseudo - User Pseudo (unique)

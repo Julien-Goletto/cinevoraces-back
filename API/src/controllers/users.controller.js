@@ -2,7 +2,7 @@ const usersDataMapper = require('../database/models/users.datamapper');
 const APIError = require('../Errors/APIError');
 const jwtMethods = require('../JWT/jwt.module');
 
-// const cookieOption = {  /*httpOnly: true,*/ sameSite: 'none', secure: true };
+// const cookieOption = { httpOnly: true, sameSite: 'none', secure: true };
 
 const usersController = {
   async createUser(req, res) {
@@ -14,27 +14,19 @@ const usersController = {
   async logUser(req, res) {
     const user = req.body;
     const result = await usersDataMapper.logUser(user);
-    // const accessToken = jwtMethods.createAccessToken(result);
-    // const refreshToken = jwtMethods.createRefreshToken(result);
-    // res.cookie('accessToken', accessToken, cookieOption);
-    // res.cookie('refreshToken', refreshToken, cookieOption);
-    const newAccessToken = jwtMethods.createAccessToken(result);
-    const newRefreshToken = jwtMethods.createRefreshToken(result);
-    result.accessToken = newAccessToken;
-    result.refreshToken = newRefreshToken;
+    const accessToken = jwtMethods.createAccessToken(result);
+    const refreshToken = jwtMethods.createRefreshToken(result);
+    res.cookie('accessToken', accessToken);
+    res.cookie('refreshToken', refreshToken);
+    result.accessToken = accessToken;
+    result.refreshToken = refreshToken;
     res.status(200).json(result);
   },
 
   async updateUser(req, res) {
     const requestedUserId = parseInt(req.params.userId, 10);
     // Additionnal Safe guard
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     const requestingUserId = jwtMethods.decryptAccessToken(token).id;
     if (requestedUserId !== requestingUserId) {
       throw new APIError("Vous n'avez la permission pour modifier ces champs.", req.url, 401);
@@ -46,13 +38,7 @@ const usersController = {
 
   async getUserById(req, res) {
     const requestedUserId = parseInt(req.params.userId, 10);
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     const requestingUserId = jwtMethods.decryptAccessToken(token).id;
     let hasRights = false;
     if (requestedUserId === requestingUserId) {
@@ -69,13 +55,7 @@ const usersController = {
 
   async deleteUser(req, res) {
     const userId = parseInt(req.params.userId, 10);
-    let token;
-    if (req.headers.cookie) {
-      token = jwtMethods.cookieFinder(jwtMethods.cookieParser(req.headers.cookie), 'accessToken');
-    } else if (req.headers.authorization) {
-      // eslint-disable-next-line prefer-destructuring
-      token = req.headers.authorization.split(' ')[1];
-    }
+    const { token } = req.session;
     const requestingUserRole = jwtMethods.decryptAccessToken(token).role;
     if (requestingUserRole !== 'admin') {
       throw new APIError("Vous n'avez pas l'autorisation de supprimer un utilisateur", req.url, 401);
