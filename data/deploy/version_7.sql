@@ -4,9 +4,9 @@ BEGIN;
 
 -- Nouveaux utilisateurs pour les tests
 INSERT INTO "user" ("pseudo","mail","password") VALUES
-('Joffrey d''Ortoli', 'mailbidon34' ,'$2b$10$98WLI/kXbEg3xwwUEtlKpO1qcjozziBUlyQPNZ8z4M09yR6UQo7ne'),
-('Benoît Safari', 'mailbidon35' ,'$2b$10$HxLQIfcAfJiyEm5R7Ntag.bDOASUcpb3T2B43A485v8QJAS5YiOe.'),
-('Jean Test', 'mailbidon36' ,'$2b$10$.f82UwpcmA3nd5gXGsz24u3JcVBuCKpQwfuieyu9cI3TKyiZuB7XG');
+('Joffrey d''Ortoli', 'mailbidon34' ,'$2b$10$fNwqHYQdB8z2TYljQTAU6OnL8BqtOH.wn8MIOzzpj2VwsE.Y9FmcS'),
+('Benoît Safari', 'mailbidon35' ,'$2b$10$z6hd1aqv7aRAIX1Jvw8sIONcaMDtSV2M2UkDYJJEipQXANR9q5L4W'),
+('Jean Test', 'mailbidon36' ,'$2b$10$IK5jJO8ntnu.nbyGTHVG6uXYhuWDt0ZFfVSQmEQHkHbu0L5sl9/42');
 
 -- Ajout de deux nouvelles propositions
 SELECT new_movie('12 hommes en colère','12 Angry Men','https://image.tmdb.org/t/p/original/fFXrCl7nBFFaQU3IgTlinvk6vTi.jpg',array['Sidney Lumet'],'1957-04-10','95',array['Martin Balsam','John Fiedler','Lee J. Cobb','E.G. Marshall','Jack Klugman'],'12 hommes et beaucoup de colère. Mais zéro bagarre par contre. Même pas une tartine de pâté. C''est rude.','2022-05-23',34,3,array['Drame'],array['English'],array['United States of America']);
