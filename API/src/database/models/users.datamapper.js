@@ -117,7 +117,7 @@ const usersDataMapper = {
    * @throws {APIError} if the table user is empty
    */
   async getUsersList() {
-    const query = 'SELECT "user".id, "user".pseudo, "user".avatar_url, "user.role, "user".created_at FROM "user";';
+    const query = 'SELECT id, pseudo, avatar_url, role, created_at FROM "user";';
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError('Aucun utilisateurs enregistré.', '', 404);
