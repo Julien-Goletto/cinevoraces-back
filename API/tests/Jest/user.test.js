@@ -51,6 +51,10 @@ describe('API e2e', () => {
       const response = await adminSession.post('/v1/users/login').send(adminUser);
       expect(response.status).toBe(200);
     });
+    it('Should see all user infos', async () => {
+      const response = await adminSession.get('/v1/users');
+      expect(response.status).toBe(200);
+    });
     it('Should delete the user Test', async () => {
       const response = await adminSession.delete(`/v1/users/${newUserId}`);
       expect(response.status).toBe(200);
