@@ -16,7 +16,7 @@ propositionsRouter
 
   /**
    * Return all users propositions. Admin required.
-   * @route GET /v1/propositions/
+   * @route GET /v1/propositions/pendingPropositions
    * @group - Propositions
    * @returns {Array} 200 - Movies objects that are pending
    * @returns {APIError} 404 - Aucune proposition enregistrée en base.
@@ -34,7 +34,7 @@ propositionsRouter
   /**
    * Book an available proposition slot.
    * @route PUT /v1/propositions/:userId
-   * @group - propositions
+   * @group - Propositions
    * @param {Date} publishingDate - publishing date
    * @returns {String} 201 - success response - Le créneau demandé a été réservé.
    * @returns {APIError} 401 - Le créneau n'a pas pu être réservé.
@@ -43,7 +43,7 @@ propositionsRouter
   /**
    * Check if the user has an already existing proposition
    * @route GET /v1/propositions/hasPendingProposition/:userId
-   * @group - propositions
+   * @group - Propositions
    * @param {integer} userId - user id
    * @returns {boolean} 200 - { hasAPendingProposition: false }
    * @returns {APIError} 400 - Vous avez déjà une proposition en attente.

@@ -63,7 +63,7 @@ usersRouter
    * @returns {Array} 200 - Array of users
    * @returns {String} 404 - Aucun utilisateurs enregistré
    */
-  .get('/', getTokens.getAccessToken, checkingUser.checkLogStatus, routerWrapper(usersController.getUsersList))
+  .get('/', getTokens.getAccessToken, checkingUser.checkAuthorization, routerWrapper(usersController.getUsersList))
   /**
    * Delete a user, using the id (admin only)
    * @route DELETE /v1/users/:userId
