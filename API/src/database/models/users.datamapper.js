@@ -59,6 +59,31 @@ const usersDataMapper = {
   /**
    * Modify user informations
    * @param {string} userId of user
+   * @param {string} avatarUrl profile pic url
+   * @param {Object} user informations
+   * @throws {APIError} if user doesn't exist
+   */
+  async addProfilePic(userId, avatarUrl) {
+    const query = {
+      text: 'SELECT * FROM "user" WHERE id = $1',
+      values: [userId],
+    };
+    let result = await client.query(query);
+    if (!result.rowCount) {
+      throw new APIError("Ce compte n'existe pas.", '', 404);
+    }
+    query.text = 'UPDATE "user" SET avatar_url = $1 WHERE id = $2';
+    query.values.splice(0, 0, avatarUrl);
+    result = await client.query(query);
+    if (!result.rowCount) {
+      throw new APIError("L'image n'a pas pu être modifiée.", '', 400);
+    }
+    return 'Image envoyée.';
+  },
+
+  /**
+   * Modify user informations
+   * @param {string} userId of user
    * @param {Object} user informations
    * @throws {APIError} if user doesn't exist
    */
