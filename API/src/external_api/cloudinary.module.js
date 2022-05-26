@@ -17,7 +17,6 @@ const cloudinaryUpload = {
     const { options } = cloudinaryUpload;
     options.public_id = userPseudo;
     const upload = await cloudinary.uploader.upload(sourceImage, options);
-    console.log(upload);
     return upload.url;
   },
 };
