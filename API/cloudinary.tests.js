@@ -13,7 +13,6 @@ const options = {
   tags: 'avatar',
   width: 200,
   height: 200,
-  radius: 'max',
   crop: 'fill',
   gravity: 'faces',
   format: 'jpg',
