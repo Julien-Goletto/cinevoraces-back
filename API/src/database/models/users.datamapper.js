@@ -12,15 +12,21 @@ const usersDataMapper = {
    */
   async createUser(user) {
     const { pseudo, mail, password } = user;
+    const query = {
+      text: 'SELECT * FROM "user" WHERE pseudo=$1 OR mail=$2',
+      values: [pseudo, mail],
+    };
+    let results = await client.query(query);
+    if (results.rowCount) {
+      throw new APIError('Ce pseudo ou cet email sont déjà enregistrés.', '', 400);
+    }
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(password, salt);
-    const query = {
-      text: 'INSERT INTO "user"("pseudo", "mail", "password") VALUES ($1,$2,$3)',
-      values: [pseudo, mail, encryptedPassword],
-    };
-    const results = await client.query(query);
+    query.text = 'INSERT INTO "user"("pseudo", "mail", "password") VALUES ($1,$2,$3)';
+    query.values.push(encryptedPassword);
+    results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError('Ce pseudo ou cet email sont déjà enregistrés.', '', 400);
+      throw new APIError("L'enregistrement n'a pas été réalisé.", '', 400);
     }
     return 'Utilisateur enregistré avec succès, merci de vous connecter.';
   },
@@ -134,6 +140,26 @@ const usersDataMapper = {
       throw new APIError("Cet utilisateur n'existe pas.", 404);
     }
     return `Utilisateur ${userId} supprimé.`;
+  },
+  async togglePrivileges(userId) {
+    const query = {
+      text: 'SELECT role from "user" WHERE id = $1;',
+      values: [userId],
+    };
+    let results = client.query(query);
+    const currentRole = results.rows[0];
+    let newRole = '';
+    if (currentRole === 'user') newRole = 'admin';
+    if (currentRole === 'user') newRole = 'user';
+    console.log(currentRole, newRole);
+    query.values.splice(0, 0, currentRole);
+    console.log(query.values);
+    query.text = 'UPDATE "user" SET role = $1 WHERE role id = $2;';
+    results = await client.query(query);
+    if (!results.rowCount) {
+      throw new APIError("Les droits de l'utilisateur n'ont pas pu être modifiés.", 404);
+    }
+    return `Droits de l'utilisateur ${userId} modifés.`;
   },
 };
 

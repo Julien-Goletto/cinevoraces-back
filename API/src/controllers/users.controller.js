@@ -65,6 +65,16 @@ const usersController = {
     const results = await usersDataMapper.deleteUserById(userId);
     res.status(200).json(results);
   },
+  async togglePrivileges(req, res) {
+    const userId = parseInt(req.params.userId, 10);
+    const { token } = req.session;
+    const requestingUserRole = jwtMethods.decryptAccessToken(token).role;
+    if (requestingUserRole !== 'admin') {
+      throw new APIError("Vous n'avez pas d'éditer un utilisateur", req.url, 401);
+    }
+    const results = await usersDataMapper.togglePrivileges(userId);
+    res.status(200).json(results);
+  },
 };
 
 module.exports = usersController;

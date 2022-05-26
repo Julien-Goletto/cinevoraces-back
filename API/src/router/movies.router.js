@@ -63,7 +63,7 @@ moviesRouter
   .get('/season/:seasonId', routerWrapper(moviesController.getAllMoviesBySeason))
   /**
   * Post a movie to database, on frontend request
-   * @route POST /movies/newmovie/
+   * @route POST v1/movies/newmovie/
    * @group - Movies
    * @param {NewMovie.model} NewMovie.body.required - correspond to movie Id
    * @returns {Movie} 201 - Film ajouté en base
@@ -78,7 +78,7 @@ moviesRouter
   )
   /**
   * Update some datas from a posted movie, on frontend request
-   * @route PUT /movies/modify/:movieId
+   * @route PUT v1/movies/modify/:movieId
    * @group - Movies
    * @param {Integer} movieId.required - movieId
    * @param {MovieToUpdate.model} MovieToUpdate.body.required - correspond to movie Id
@@ -94,7 +94,7 @@ moviesRouter
   )
   /**
   * Delete a movie, on frontend request
-   * @route DELETE /movies/:movieId
+   * @route DELETE v1/movies/:movieId
    * @param {Integer} movieId.required - french_title
    * @group - Movies
    * @returns {String} 200 - Le film a bien été supprimé.
@@ -108,7 +108,7 @@ moviesRouter
   )
   /**
   * Update movie, to publish it
-   * @route PUT /movies/publishing/:movieId
+   * @route PUT v1/movies/publishing/:movieId
    * @group - Movies
    * @param {Integer} movieId.required - movieId
    * @param {MovieToPublish.model} MovieToPublish.body.required - correspond to movie Id
@@ -153,7 +153,7 @@ moviesRouter.use(handleError);
  * @property {string} publishing_date - publishing date of the movie on Cinévoraces (date)
  */
 /**
- * @typedef MoviePublish
+ * @typedef MovieToPublish
  * @property {string} is_published - french title
  */
 

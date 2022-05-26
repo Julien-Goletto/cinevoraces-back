@@ -72,7 +72,16 @@ usersRouter
    * @returns {String} 200 - Utilisateur supprimé
    * @returns {APIError} 404 - Cet utilisateur n'existe pas
    */
-  .delete('/:userId', getTokens.getAccessToken, checkingUser.checkAuthorization, routerWrapper(usersController.deleteUser));
+  .delete('/:userId', getTokens.getAccessToken, checkingUser.checkAuthorization, routerWrapper(usersController.deleteUser))
+  /**
+   * Toggle the requested user privileges, using the id (admin only)
+   * @route PUT /v1/users/togglePrivileges/:userId
+   * @group - Users
+   * @param {String} userId
+   * @returns {String} 200 - Droits utilisateur modifiés
+   * @returns {APIError} 404 - Cet utilisateur n'existe pas
+   */
+  .put('/togglePrivileges/:userId', getTokens.getAccessToken, checkingUser.checkAuthorization, routerWrapper(usersController.togglePrivileges));
 /**
  * @typedef UserRegistration
  * @property {String} pseudo - User Pseudo (unique)

@@ -24,6 +24,11 @@ describe('API e2e', () => {
       expect(response.status).toBe(201);
       expect(response.text).toContain('Utilisateur enregistré avec succès');
     });
+    it('Should send an error because user already exists', async () => {
+      const response = await request.post('/v1/users/register').send(newUser);
+      expect(response.status).toBe(400);
+      expect(response.text).toContain('Ce pseudo ou cet email sont déjà enregistrés.');
+    });
     it('Should log the new user', async () => {
       const response = await newUserSession.post('/v1/users/login').send(newUserLogin);
       newUserId = response.body.id;
@@ -54,6 +59,16 @@ describe('API e2e', () => {
     it('Should see all user infos', async () => {
       const response = await adminSession.get('/v1/users');
       expect(response.status).toBe(200);
+    });
+    it('Should update the user Test privileges to admin', async () => {
+      const response = await adminSession.put(`/v1/users/togglePrivileges${newUserId}`);
+      expect(response.status).toBe(201);
+      expect(response.text).toContain("Droits de l'utilisateur");
+    });
+    it('Should update the user Test privileges back to user', async () => {
+      const response = await adminSession.put(`/v1/users/togglePrivileges${newUserId}`);
+      expect(response.status).toBe(201);
+      expect(response.text).toContain("Droits de l'utilisateur");
     });
     it('Should delete the user Test', async () => {
       const response = await adminSession.delete(`/v1/users/${newUserId}`);
