@@ -1,6 +1,10 @@
 const usersDataMapper = require('../database/models/users.datamapper');
 const APIError = require('../Errors/APIError');
 const jwtMethods = require('../JWT/jwt.module');
+require('dotenv').config();
+const cloudinaryUpload = require('../external_api/cloudinary.module');
+
+const { CLOUDINARY_URL } = process.env;
 
 // const cookieOption = { httpOnly: true, sameSite: 'none', secure: true };
 
@@ -21,6 +25,26 @@ const usersController = {
     result.accessToken = accessToken;
     result.refreshToken = refreshToken;
     res.status(200).json(result);
+  },
+
+  async addProfilePic(req, res) {
+    const requestedUserId = parseInt(req.params.userId, 10);
+    // Additionnal Safe guard
+    const { token } = req.session;
+    const user = jwtMethods.decryptAccessToken(token);
+    const requestingUserId = user.id;
+    const userPseudo = user.pseudo;
+    if (requestedUserId !== requestingUserId) {
+      throw new APIError("Vous n'avez pas la permission de modifier cette photo de profil.", '', 401);
+    }
+    const { sourceImage } = req.body;
+    const avatarUrl = await cloudinaryUpload.uploadThumbnail(
+      CLOUDINARY_URL,
+      userPseudo,
+      sourceImage,
+    );
+    const results = await usersDataMapper.addProfilePic(requestedUserId, avatarUrl);
+    res.status(201).json(results);
   },
 
   async updateUser(req, res) {
