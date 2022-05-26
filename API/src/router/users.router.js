@@ -2,7 +2,6 @@ const express = require('express');
 const usersController = require('../controllers/users.controller');
 
 // Gestion des erreurs
-const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
 // Checking user and privegies
@@ -90,6 +89,5 @@ usersRouter
  * @property {String} mail - User mail (unique)
  * @property {String} password - User password
  */
-usersRouter.use(handleError);
 
 module.exports = usersRouter;

@@ -2,7 +2,6 @@ const express = require('express');
 const propositionsController = require('../controllers/propositions.controller');
 
 // Gestion des erreurs
-const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
 // Checking user and privegies
@@ -75,7 +74,5 @@ propositionsRouter
     checkingUser.checkAuthorization,
     routerWrapper(propositionsController.unbookPendingPropositionsSlot),
   );
-
-propositionsRouter.use(handleError);
 
 module.exports = propositionsRouter;

@@ -2,7 +2,6 @@ const express = require('express');
 const metricsController = require('../controllers/metrics.controller');
 
 // Gestion des erreurs
-const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
 // Checking user and privegies
@@ -38,7 +37,5 @@ metricsRouter
    * @returns {APIError} 404 - Cet utilisateur n'existe pas.
    */
   .get('/:userId', checkingUser.checkLogStatus, routerWrapper(metricsController.userMetricsById));
-
-metricsRouter.use(handleError);
 
 module.exports = metricsRouter;
