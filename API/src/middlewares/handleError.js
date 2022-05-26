@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const APIError = require('../Errors/APIError');
 
 /**
@@ -10,7 +11,7 @@ const APIError = require('../Errors/APIError');
    * @param {res} response
    * @returns {APIError} in JSON format
    */
-const handleError = async (err, req, res) => {
+const handleError = async (err, req, res, next) => {
   let myError;
   if (err instanceof APIError) {
     myError = err;
@@ -18,7 +19,7 @@ const handleError = async (err, req, res) => {
     myError = new APIError(err, req.url);
   }
   await myError.log();
-  res.status(myError.status).send(myError.message);
+  res.status(myError.status).json({ error: myError.message, status: myError.status });
 };
 
 module.exports = handleError;

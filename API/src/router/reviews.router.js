@@ -1,5 +1,4 @@
 const express = require('express');
-const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
 // User verifications
@@ -76,8 +75,6 @@ reviewsRouter.delete('/:userId/:movieId/comment', getTokens.getAccessToken, chec
  * @returns {APIError} 401 - Vous n'avez pas la permission de supprimer cette Review.
  */
 reviewsRouter.delete('/:userId/:movieId', getTokens.getAccessToken, checkingUser.checkLogStatus, routerWrapper(reviewsController.deleteReview));
-
-reviewsRouter.use(handleError);
 
 /**
  * @typedef reviewUpdate

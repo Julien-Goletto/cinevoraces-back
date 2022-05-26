@@ -5,7 +5,6 @@ const moviesController = require('../controllers/movies.controller');
 const moviesRouter = express.Router();
 
 // Gestion des erreurs
-const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
 // Checking user and privegies
@@ -121,8 +120,6 @@ moviesRouter
     checkingUser.checkAuthorization,
     routerWrapper(moviesController.publishMovie),
   );
-
-moviesRouter.use(handleError);
 /**
  * @typedef NewMovie
  * @property {string} french_title - french title

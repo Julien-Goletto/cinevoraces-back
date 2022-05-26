@@ -4,7 +4,6 @@ const refreshTokensController = require('../controllers/refreshTokens.controller
 const getTokens = require('../middlewares/getTokens');
 
 // Gestion des erreurs
-const handleError = require('../middlewares/handleError');
 const routerWrapper = require('../middlewares/routerWrapper');
 
 // Configuration du subRouter
@@ -21,7 +20,5 @@ refreshTokensRouter
    * @returns {User} 404 - Ce compte utilisateur a été supprimé ou n'existe pas.
    */
   .get('/', getTokens.getRefreshToken, routerWrapper(refreshTokensController.refreshTokens));
-
-refreshTokensRouter.use(handleError);
 
 module.exports = refreshTokensRouter;
