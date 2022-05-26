@@ -5,7 +5,7 @@ const ACCESS_TOKEN_SECRET = `${process.env.ACCESS_TOKEN_SECRET}`;
 const REFRESH_TOKEN_SECRET = `${process.env.REFRESH_TOKEN_SECRET}`;
 
 const jwtATConfig = {
-  expiresIn: 60,
+  expiresIn: 5,
   algorithm: 'HS256',
 };
 const jwtRTConfig = {
