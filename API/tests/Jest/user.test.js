@@ -61,12 +61,13 @@ describe('API e2e', () => {
       expect(response.status).toBe(200);
     });
     it('Should update the user Test privileges to admin', async () => {
-      const response = await adminSession.put(`/v1/users/togglePrivileges${newUserId}`);
+      const response = await adminSession.put(`/v1/users/togglePrivileges/${newUserId}`);
+      console.log(response.body);
       expect(response.status).toBe(201);
       expect(response.text).toContain("Droits de l'utilisateur");
     });
     it('Should update the user Test privileges back to user', async () => {
-      const response = await adminSession.put(`/v1/users/togglePrivileges${newUserId}`);
+      const response = await adminSession.put(`/v1/users/togglePrivileges/${newUserId}`);
       expect(response.status).toBe(201);
       expect(response.text).toContain("Droits de l'utilisateur");
     });

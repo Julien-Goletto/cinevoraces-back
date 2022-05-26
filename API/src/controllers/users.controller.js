@@ -73,7 +73,8 @@ const usersController = {
       throw new APIError("Vous n'avez pas d'éditer un utilisateur", req.url, 401);
     }
     const results = await usersDataMapper.togglePrivileges(userId);
-    res.status(200).json(results);
+    console.log(results);
+    res.status(201).json(results);
   },
 };
 

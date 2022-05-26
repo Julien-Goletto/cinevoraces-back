@@ -146,15 +146,13 @@ const usersDataMapper = {
       text: 'SELECT role from "user" WHERE id = $1;',
       values: [userId],
     };
-    let results = client.query(query);
+    let results = await client.query(query);
     const currentRole = results.rows[0];
     let newRole = '';
     if (currentRole === 'user') newRole = 'admin';
     if (currentRole === 'user') newRole = 'user';
-    console.log(currentRole, newRole);
-    query.values.splice(0, 0, currentRole);
-    console.log(query.values);
-    query.text = 'UPDATE "user" SET role = $1 WHERE role id = $2;';
+    query.values.splice(0, 0, newRole);
+    query.text = 'UPDATE "user" SET role = $1 WHERE id = $2;';
     results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError("Les droits de l'utilisateur n'ont pas pu être modifiés.", 404);
