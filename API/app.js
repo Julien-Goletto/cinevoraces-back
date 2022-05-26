@@ -33,6 +33,7 @@ app.use(cors(corsOptions));
 
 const cookieParser = require('cookie-parser');
 const csurf = require('csurf');
+const cleaner = require('./src/middlewares/cleaner');
 
 const csrfProtection = csurf(
   {
@@ -45,6 +46,7 @@ const csrfProtection = csurf(
   },
 );
 app.use(cookieParser());
+app.use(cleaner);
 
 const router = require('./src/router');
 
