@@ -49,7 +49,7 @@ const usersDataMapper = {
     if (!await bcrypt.compare(user.password, result.rows[0].password)) {
       throw new APIError('Informations éronnées', '', 400);
     }
-    const keys = ['id', 'pseudo', 'role'];
+    const keys = ['id', 'pseudo', 'role', 'avatar_url'];
     return Object.fromEntries(
       // eslint-disable-next-line comma-dangle
       Object.entries(result.rows[0]).filter(([key]) => keys.includes(key))
