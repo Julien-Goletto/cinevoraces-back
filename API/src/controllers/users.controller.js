@@ -28,20 +28,21 @@ const usersController = {
   },
 
   async addProfilePic(req, res) {
+    // Check user
     const requestedUserId = parseInt(req.params.userId, 10);
-    // Additionnal Safe guard
     const { token } = req.session;
     const user = jwtMethods.decryptAccessToken(token);
     const requestingUserId = user.id;
-    const userPseudo = user.pseudo;
     if (requestedUserId !== requestingUserId) {
       throw new APIError("Vous n'avez pas la permission de modifier cette photo de profil.", '', 401);
     }
-    const { sourceImage } = req.body;
+    // Pic adding / modification
+    const userPseudo = user.pseudo;
+    const { fileName } = req;
     const avatarUrl = await cloudinaryUpload.uploadThumbnail(
       CLOUDINARY_URL,
       userPseudo,
-      sourceImage,
+      fileName,
     );
     const results = await usersDataMapper.addProfilePic(requestedUserId, avatarUrl);
     res.status(201).json(results);

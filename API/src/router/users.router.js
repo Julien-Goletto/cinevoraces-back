@@ -12,6 +12,9 @@ const checkingUser = require('../middlewares/checkingUser');
 const validate = require('../validation/validator');
 const { createUserSchema, userLoginSchema, userUpdateSchema } = require('../validation/schemas');
 
+// Using multer to images to the backend
+const upload = require('../middlewares/upload');
+
 // Configuration du subRouter
 const usersRouter = express.Router();
 
@@ -36,8 +39,8 @@ usersRouter
   .put(
     '/addProfilePic/:userId',
     getTokens.getAccessToken,
+    upload.avatar,
     checkingUser.checkLogStatus,
-    /* validate('body', profilePicUrlSchema), */
     routerWrapper(usersController.addProfilePic),
   )
   /**

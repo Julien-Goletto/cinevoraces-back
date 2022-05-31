@@ -1,4 +1,7 @@
 const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
+const path = require('path');
+const APIError = require('../Errors/APIError');
 
 const cloudinaryUpload = {
   options: {
@@ -10,13 +13,16 @@ const cloudinaryUpload = {
     gravity: 'faces',
     format: 'jpg',
   },
-  async uploadThumbnail(CLOUDINARY_URL, userPseudo, sourceImage) {
+  async uploadThumbnail(CLOUDINARY_URL, userPseudo, fileName) {
     cloudinary.config({
       cloudinary_url: CLOUDINARY_URL,
     });
     const { options } = cloudinaryUpload;
     options.public_id = userPseudo;
-    const upload = await cloudinary.uploader.upload(sourceImage, options);
+    const imagePath = path.resolve(__dirname, `../uploads/${fileName}`);
+    const upload = await cloudinary.uploader.upload(imagePath, options);
+    if (!upload) throw new APIError('Le chargement de la ressource a échoué.', '', 400);
+    fs.rm(imagePath);
     return upload.url;
   },
 };
