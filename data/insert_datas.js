@@ -170,7 +170,7 @@ async function prepareDBSeeding(presentations,moviesList) {
 // fetchTMDBListWithDetails().then(result => console.log(result));
 // saveMoviesList();
 
-// prepareDBSeeding(presentations,moviesList);
+prepareDBSeeding(presentations,moviesList);
 
 function seedingPropositionSlots(season_number,first_episode,first_date){
   let date = new Date(first_date);
@@ -188,4 +188,4 @@ function seedingPropositionSlots(season_number,first_episode,first_date){
 }
 
 // console.log(seedingPropositionSlots(3,19,'2022-05-16'));
-createRandomPassWord(chaincharacter,20).then(result => console.log('Nouveau mot de passe : ' + result));
+// createRandomPassWord(chaincharacter,20).then(result => console.log('Nouveau mot de passe : ' + result));

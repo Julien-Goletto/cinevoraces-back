@@ -49,7 +49,7 @@ const usersDataMapper = {
     if (!await bcrypt.compare(user.password, result.rows[0].password)) {
       throw new APIError('Informations éronnées', '', 400);
     }
-    const keys = ['id', 'pseudo', 'role'];
+    const keys = ['id', 'pseudo', 'role', 'avatar_url'];
     return Object.fromEntries(
       // eslint-disable-next-line comma-dangle
       Object.entries(result.rows[0]).filter(([key]) => keys.includes(key))
@@ -98,7 +98,7 @@ const usersDataMapper = {
       text: 'SELECT * FROM "user" WHERE id = $1',
       values: [userId],
     };
-    const result = await client.query(query);
+    let result = await client.query(query);
     if (!result.rowCount) {
       throw new APIError("Ce compte n'existe pas.", '', 404);
     }
@@ -116,7 +116,10 @@ const usersDataMapper = {
     query.text = query.text.slice(0, -1);
     query.text += ` WHERE id=$${i}`;
     query.values.push(userId);
-    await client.query(query);
+    result = await client.query(query);
+    if (!result.rowCount) {
+      throw new APIError("La modification n'a pas pu être enregistrée", '', 400);
+    }
     return 'Modifications effectuées.';
   },
 

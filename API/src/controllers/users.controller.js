@@ -54,12 +54,12 @@ const usersController = {
     const requestingUserId = jwtMethods.decryptAccessToken(token).id;
     const requestingToken = jwtMethods.decryptAccessToken(token).role;
     console.log(requestingToken);
-    if (requestedUserId === requestingUserId || requestingToken === 'admin') {
-      const user = req.body;
-      const results = await usersDataMapper.updateUser(requestedUserId, user);
-      res.status(201).json(results);
+    if (requestedUserId !== requestingUserId && requestingToken !== 'admin') {
+      throw new APIError("Vous n'avez la permission pour modifier ces champs.", req.url, 401);
     }
-    throw new APIError("Vous n'avez la permission pour modifier ces champs.", req.url, 401);
+    const user = req.body;
+    const results = await usersDataMapper.updateUser(requestedUserId, user);
+    res.status(201).json(results);
   },
 
   async getUserById(req, res) {
