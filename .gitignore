@@ -1,5 +1,5 @@
 # sqitch confs
-sqitch.conf
+data/sqitch.conf
 
 # Logs
 logs
