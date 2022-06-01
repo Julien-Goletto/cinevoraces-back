@@ -7,7 +7,9 @@ const app = express();
 
 const expressSwagger = require('express-swagger-generator')(app);
 
-app.use(express.json());// Body parser
+// Body parser
+app.use(express.json());
+app.use(express.urlencoded());
 
 const session = require('express-session');
 

@@ -12,6 +12,8 @@ const checkingUser = require('../middlewares/checkingUser');
 const validate = require('../validation/validator');
 const { createUserSchema, userLoginSchema, userUpdateSchema } = require('../validation/schemas');
 
+// Using multer to images to the backend
+const upload = require('../middlewares/upload');
 // Configuration du subRouter
 const usersRouter = express.Router();
 
@@ -25,6 +27,21 @@ usersRouter
    * @returns {APIError} 400 - Ce pseudo ou cet email sont déjà enregistrés
    */
   .post('/register', validate('body', createUserSchema), routerWrapper(usersController.createUser))
+/**
+   * Update user with informations give by user
+   * @route PUT /v1/users/addProfilePic/:userId
+   * @group - Users
+   * @param {String} userId
+   * @returns {User} 200 - Modifications effectuées
+   * @returns {APIError} 404 - Ce compte n'existe pas
+   */
+  .put(
+    '/addProfilePic/:userId',
+    getTokens.getAccessToken,
+    checkingUser.checkLogStatus,
+    upload,
+    routerWrapper(usersController.addProfilePic),
+  )
   /**
    * Update user with informations give by user
    * @route PUT /v1/users/modify/:userId
