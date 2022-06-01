@@ -22,7 +22,15 @@ const cloudinaryUpload = {
     const imagePath = path.resolve(__dirname, `../uploads/${fileName}`);
     const upload = await cloudinary.uploader.upload(imagePath, options);
     if (!upload) throw new APIError('Le chargement de la ressource a échoué.', '', 400);
-    fs.rm(imagePath);
+    console.log(imagePath);
+    if (!fs.existsSync(imagePath)) {
+      return ("Le fichier a supprimer n'existe pas / plus.");
+    }
+    fs.rm(imagePath, { recursive: true }, (err) => {
+      if (err) {
+        throw new APIError(err.message, '', 400);
+      }
+    });
     return upload.url;
   },
 };

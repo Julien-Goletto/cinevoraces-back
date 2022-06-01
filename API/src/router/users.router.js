@@ -14,7 +14,6 @@ const { createUserSchema, userLoginSchema, userUpdateSchema } = require('../vali
 
 // Using multer to images to the backend
 const upload = require('../middlewares/upload');
-
 // Configuration du subRouter
 const usersRouter = express.Router();
 
@@ -39,8 +38,8 @@ usersRouter
   .put(
     '/addProfilePic/:userId',
     getTokens.getAccessToken,
-    upload.avatar,
     checkingUser.checkLogStatus,
+    upload,
     routerWrapper(usersController.addProfilePic),
   )
   /**

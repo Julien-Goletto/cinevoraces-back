@@ -21,9 +21,8 @@ const refreshTokensController = {
     if (!(userInDB)) {
       return new APIError('Ce compte utilisateur a été supprimé.', 404);
     }
-    // Need to purge extra datas from tokens structure
-    delete user.iat;
-    delete user.exp;
+    // On récupère les données user à jour
+    user = userInDB;
     // Create new access and refresh tokens - old version in cookies, new version througth body
     const accessToken = jwtMethods.createAccessToken(user);
     const refreshToken = jwtMethods.createRefreshToken(user);

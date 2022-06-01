@@ -28,6 +28,8 @@ const usersController = {
   },
 
   async addProfilePic(req, res) {
+    console.log('On rentre dans le controller');
+    console.log(req.body);
     // Check user
     const requestedUserId = parseInt(req.params.userId, 10);
     const { token } = req.session;
@@ -39,12 +41,15 @@ const usersController = {
     // Pic adding / modification
     const userPseudo = user.pseudo;
     const { fileName } = req;
+    console.log(`Le fichier à ajouter est ${fileName}`);
     const avatarUrl = await cloudinaryUpload.uploadThumbnail(
       CLOUDINARY_URL,
       userPseudo,
       fileName,
     );
+    console.log(`L'url à ajouter est le ${avatarUrl}`);
     const results = await usersDataMapper.addProfilePic(requestedUserId, avatarUrl);
+    console.log('La pic est bien envoyée à cloudinary.');
     res.status(201).json(results);
   },
 

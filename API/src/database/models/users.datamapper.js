@@ -130,7 +130,7 @@ const usersDataMapper = {
    * @throws {APIError} if user doesen't in db
    */
   async getUserById(userId, hasRights) {
-    let columns = 'id,pseudo,avatar_url,created_at';
+    let columns = 'id,pseudo,role,avatar_url,created_at';
     if (hasRights) {
       columns += ',mail';
     }
