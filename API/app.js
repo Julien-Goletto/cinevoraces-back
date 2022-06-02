@@ -28,7 +28,7 @@ const corsOptions = {
   origin: ['http://localhost:3000', 'https://localhost:3000',
     'https://cinevoraces-api.herokuapp.com', 'http://cinevoraces-api.herokuapp.com',
     'https://cinevoraces.herokuapp.com', 'http://cinevoraces.herokuapp.com',
-    'https://cinevoraces-front.herokuapp.com/', 'http://cinevoraces-front.herokuapp.com/'],
+    'https://cinevoraces-front.herokuapp.com', 'http://cinevoraces-front.herokuapp.com'],
   optionSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));
