@@ -8,7 +8,7 @@ CREATE VIEW global_metrics AS
 	SELECT sc.ct "seasons_count",mc.ct "movies_count",cc.ct "countries_count"
 	FROM
 		(SELECT COUNT (*) ct FROM "season")sc,
-		(SELECT COUNT (*) ct FROM "movie")mc,
+		(SELECT COUNT (*) ct FROM "movie" WHERE is_published = 'true')mc,
 		(SELECT COUNT (*) ct FROM "country")cc;
 
 -- Aggrégation de toutes les intéractions de l'utilisateur : films proposés, commentaires publiés, films likés, films mis en bookmarks et films notés 
