@@ -21,38 +21,22 @@ moviesRouter
   /**
    * Get a list of all movies objects saved in database, corresponding to passed filters
    * If not filter is used, returns all movies in view movies_infos
-   * @route Get /v1/movies
+   * @route Get /v1/movies/filter/:filters
    * @group - Movies
-   * @param {string} filters
+   * @param {string} filters - optionnal
    * @returns {Array} 200 - Array of all movies
    * @returns {APIError} 404 - Aucun film n'est enregistré en base
    */
-  .get('/:filters', routerWrapper(moviesController.getMovies))
-  /**
-   * Get the last movie
-   * @route Get /v1/movies/lastmovie
-   * @group - Movies
-   * @returns {Movie} 200 - Movie Object
-   * @returns {APIError} 404 - Aucun film n'a été publié.
-   */
-  .get('/lastmovie', routerWrapper(moviesController.getLastMovie))
-  /**
-   * Get all movie from last season
-   * @route Get /v1/movies/lastseason
-   * @group - Movies
-   * @returns {Array} 200 - Movie objects
-   * @returns {APIError} 404 - Il n'y a pas de film dans la dernière saison.
-   */
-  .get('/lastseason', routerWrapper(moviesController.getAllMoviesFromLastSeason))
+  .get('/filter/:filters?', routerWrapper(moviesController.getMovies))
   /**
    * Get a detailled movie object saved in database via its id
-   * @route Get /v1/movies/:movieId
+   * @route Get /v1/movies/id/:movieId
    * @group - Movies
    * @param {Integer} movieId
    * @returns {Movie} 200 - movie object
    * @returns {APIError} 404 - Ce film n'est pas enregistré en base, ou pas encore publié
    */
-  .get('/:movieId', routerWrapper(moviesController.getMovieByID))
+  .get('/id/:movieId', routerWrapper(moviesController.getMovieByID))
   /**
    * Get all movie by season
    * @route Get /v1/movies/season/:seasonId

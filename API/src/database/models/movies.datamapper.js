@@ -6,11 +6,13 @@ const moviesDataMapper = {
 
   async getMovies(filters, userId) {
     let query;
+    console.log('dans le data mapper, filters = ', filters);
     if (!filters) {
       query = 'SELECT * FROM movies_infos WHERE is_published = true';
     } else {
       query = filtersQuery.writeSQLFilters(filters, userId);
     }
+    console.log(query);
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError('Aucun film ne correspond à la recherche.', '', 404);

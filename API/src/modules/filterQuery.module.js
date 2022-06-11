@@ -116,6 +116,4 @@ const customFilters = {
   },
 };
 
-console.log(customFilters.writeSQLFilters(filters, 2));
-
 module.exports = customFilters;

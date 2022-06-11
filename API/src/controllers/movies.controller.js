@@ -4,12 +4,13 @@ const jwtMethods = require('../JWT/jwt.module');
 const moviesController = {
   async getMovies(req, res) {
     const { filters } = req.params;
+    console.log('Dans le controller on récupère les filters :', filters);
     const { token } = req.session;
     let userId;
     if (token) {
       userId = jwtMethods.decryptAccessToken(token).id;
     }
-    const results = await moviesDataMapper.getAllMovies(filters, userId);
+    const results = await moviesDataMapper.getMovies(filters, userId);
     res.status(200).json(results);
   },
 
