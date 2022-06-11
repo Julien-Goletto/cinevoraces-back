@@ -1,8 +1,15 @@
 const moviesDataMapper = require('../database/models/movies.datamapper');
+const jwtMethods = require('../JWT/jwt.module');
 
 const moviesController = {
-  async getAllMovies(_, res) {
-    const results = await moviesDataMapper.getAllMovies();
+  async getMovies(req, res) {
+    const { filters } = req.params;
+    const { token } = req.session;
+    let userId;
+    if (token) {
+      userId = jwtMethods.decryptAccessToken(token).id;
+    }
+    const results = await moviesDataMapper.getAllMovies(filters, userId);
     res.status(200).json(results);
   },
 
@@ -11,7 +18,7 @@ const moviesController = {
     const result = await moviesDataMapper.getMovieByID(movieId);
     res.status(200).json(result);
   },
-  async lastMovie(_, res) {
+  async getLastMovie(_, res) {
     const results = await moviesDataMapper.getLastMovie();
     res.status(200).json(results);
   },

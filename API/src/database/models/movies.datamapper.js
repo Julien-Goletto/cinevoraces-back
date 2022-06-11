@@ -1,13 +1,19 @@
 const client = require('../dbclient');
+const filtersQuery = require('../../modules/filterQuery.module');
 const APIError = require('../../Errors/APIError');
 
 const moviesDataMapper = {
 
-  async getAllMovies() {
-    const query = 'SELECT * FROM movies_infos WHERE is_published = true';
+  async getMovies(filters, userId) {
+    let query;
+    if (!filters) {
+      query = 'SELECT * FROM movies_infos WHERE is_published = true';
+    } else {
+      query = filtersQuery.writeSQLFilters(filters, userId);
+    }
     const results = await client.query(query);
     if (!results.rowCount) {
-      throw new APIError("Aucun film n'a été publié.", '', 404);
+      throw new APIError('Aucun film ne correspond à la recherche.', '', 404);
     }
     return results.rows;
   },

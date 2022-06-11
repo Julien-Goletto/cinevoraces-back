@@ -19,13 +19,15 @@ const {
 
 moviesRouter
   /**
-   * Get a list of all movies objects saved in database
+   * Get a list of all movies objects saved in database, corresponding to passed filters
+   * If not filter is used, returns all movies in view movies_infos
    * @route Get /v1/movies
    * @group - Movies
+   * @param {string} filters
    * @returns {Array} 200 - Array of all movies
    * @returns {APIError} 404 - Aucun film n'est enregistré en base
    */
-  .get('/', routerWrapper(moviesController.getAllMovies))
+  .get('/:filters', routerWrapper(moviesController.getMovies))
   /**
    * Get the last movie
    * @route Get /v1/movies/lastmovie
@@ -33,7 +35,7 @@ moviesRouter
    * @returns {Movie} 200 - Movie Object
    * @returns {APIError} 404 - Aucun film n'a été publié.
    */
-  .get('/lastmovie', routerWrapper(moviesController.getAllMoviesFromLastSeason))
+  .get('/lastmovie', routerWrapper(moviesController.getLastMovie))
   /**
    * Get all movie from last season
    * @route Get /v1/movies/lastseason
