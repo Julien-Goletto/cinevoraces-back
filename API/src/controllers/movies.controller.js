@@ -4,7 +4,6 @@ const jwtMethods = require('../JWT/jwt.module');
 const moviesController = {
   async getMovies(req, res) {
     const { filters } = req.params;
-    console.log('Dans le controller on récupère les filters :', filters);
     const { token } = req.session;
     let userId;
     if (token) {

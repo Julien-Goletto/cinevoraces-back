@@ -6,13 +6,11 @@ const moviesDataMapper = {
 
   async getMovies(filters, userId) {
     let query;
-    console.log('dans le data mapper, filters = ', filters);
     if (!filters) {
       query = 'SELECT * FROM movies_infos WHERE is_published = true';
     } else {
       query = filtersQuery.writeSQLFilters(filters, userId);
     }
-    console.log(query);
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError('Aucun film ne correspond à la recherche.', '', 404);
@@ -101,15 +99,16 @@ const moviesDataMapper = {
       text: 'UPDATE movie SET ',
       values: [],
     };
-    let i = 0;
+    let i = 1;
     for (const key of Object.keys(movieInfosToModify)) {
       query.text += `"${key}" = $${i},`;
-      query.values.push(userToModify[key]);
+      query.values.push(movieInfosToModify[key]);
       i += 1;
     }
     query.text = query.text.slice(0, -1);
     query.text += ` WHERE id=$${i}`;
     query.values.push(movieId);
+    console.log(query);
     results = await client.query(query);
     if (!results) {
       throw new Error("Le film n'a pas pu être modifié.", '', 400);
@@ -135,7 +134,6 @@ const moviesDataMapper = {
       values: [movieId],
     };
     const result = await client.query(query);
-    console.log(result.rows);
     if (!result) {
       throw new Error("Le film demandé n'existe pas en base.", '', 404);
     }

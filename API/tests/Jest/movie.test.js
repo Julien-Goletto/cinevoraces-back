@@ -4,22 +4,14 @@ const supertest = require('supertest');
 const session = require('supertest-session');
 const app = require('../../app');
 
-// const filters = 'season_number=3'
-//                   + '&genres=Comédie|Drame|Thriller'
-//                   + '&countries=Japan|United+States+of+America|France'
-//                   + '&runtime=l80|h120'
-//                   + '&release_date=l1954|h2018'
-//                   + '&avg_rating=l3'
-//                   + '&viewed=true'
-//                   + '&bookmarked=false'
-//                   + '&liked=true'
-//                   + '&rating=l4';
-
 const customQuery = 'season_number=3'
                       + '&genres=Comédie|Drame|Thriller'
                       + '&countries=Japan|United+States+of+America|France'
                       + '&runtime=l80|h120'
                       + '&release_date=l1954|h2018';
+
+const customQueryWithUser1 = 'viewed=true&bookmarked=false&liked=true&rating=l4';
+const customQueryWithUser2 = 'bookmarked=true';
 
 const newMovie = {
   french_title: 'In the Mood for Love',
@@ -46,7 +38,6 @@ let newMovieId;
 
 const registeredUser = { pseudo: process.env.USER_PSEUDO, password: process.env.USER_PW };
 const adminUser = { pseudo: process.env.ADMIN_PSEUDO, password: process.env.ADMIN_PW };
-console.log(adminUser);
 
 const unloggedSession = supertest(app);
 const userSession = session(app);
@@ -55,7 +46,7 @@ const adminSession = session(app);
 describe('API e2e', () => {
   describe('Movies routes', () => {
     beforeAll(async () => {
-      // await userSession.post('/v1/users/login').send(registeredUser);
+      await userSession.post('/v1/users/login').send(registeredUser);
       await adminSession.post('/v1/users/login').send(adminUser);
     });
     it('Should get all movies in database', async () => {
@@ -63,7 +54,6 @@ describe('API e2e', () => {
       expect(response.status).toBe(200);
     });
     it('Should get a specific movie', async () => {
-      console.log('avec la queryCustom');
       const response = await unloggedSession.get(`/v1/movies/search/${customQuery}`);
       expect(response.status).toBe(200);
     });
@@ -72,33 +62,43 @@ describe('API e2e', () => {
       expect(response.status).toBe(200);
       expect(response.text).toContain('Stalker');
     });
-    // it('Should get all movie from a particular season', async () => {
-    //   const response = await unloggedSession.get('/v1/movies/season/2');
-    //   expect(response.status).toBe(200);
-    //   expect(response.text).toContain('La Cité de Dieu');
-    // });
-    // it('Should create a new movie in database', async () => {
-    //   const response = await userSession.post('/v1/movies/newmovie').send(newMovie);
-    //   expect(response.status).toBe(201);
-    // });
-    // it('Should get the last movie published in database', async () => {
-    //   const response = await adminSession.get('/v1/propositions/pendingPropositions');
-    //   const propositionsArray = response.body;
-    //   newMovieId = propositionsArray[0].id;
-    //   expect(response.status).toBe(200);
-    // });
-    // it('Should update the new movie', async () => {
-    //   await adminSession
-    //     .put(`/v1/movies/modify/${newMovieId}`)
-    //     .send(movieInfosToModify);
-    // });
-    // it('Should publish movie', async () => {
-    //   const response = await adminSession.put(`/v1/movies/publishing/${newMovieId}`);
-    //   expect(response.status).toBe(200);
-    // });
-    // it('Should delete the new added movie', async () => {
-    //   const response = await adminSession.delete(`/v1/movies/${newMovieId}`);
-    //   expect(response.status).toBe(200);
-    // });
+    it('Should get all movie from a particular season', async () => {
+      const response = await unloggedSession.get('/v1/movies/search/season_number=2');
+      expect(response.status).toBe(200);
+      expect(response.text).toContain('La Cité de Dieu');
+    });
+    it('Should get Free Guy movie object', async () => {
+      const response = await adminSession.get(`/v1/movies/search/${customQueryWithUser1}`);
+      expect(response.status).toBe(200);
+      expect(response.text).toContain('Free Guy');
+    });
+    it('Should get Les Pleins Pouvoirs movie object', async () => {
+      const response = await adminSession.get(`/v1/movies/search/${customQueryWithUser2}`);
+      expect(response.status).toBe(200);
+      expect(response.text).toContain('Les Pleins Pouvoirs');
+    });
+    it('Should create a new movie in database', async () => {
+      const response = await userSession.post('/v1/movies/newmovie').send(newMovie);
+      expect(response.status).toBe(201);
+    });
+    it('Should get the last movie published in database', async () => {
+      const response = await adminSession.get('/v1/propositions/pendingPropositions');
+      const propositionsArray = response.body;
+      newMovieId = propositionsArray[0].id;
+      expect(response.status).toBe(200);
+    });
+    it('Should update the new movie', async () => {
+      await adminSession
+        .put(`/v1/movies/modify/${newMovieId}`)
+        .send(movieInfosToModify);
+    });
+    it('Should publish movie', async () => {
+      const response = await adminSession.put(`/v1/movies/publishing/${newMovieId}`);
+      expect(response.status).toBe(200);
+    });
+    it('Should delete the new added movie', async () => {
+      const response = await adminSession.delete(`/v1/movies/${newMovieId}`);
+      expect(response.status).toBe(200);
+    });
   });
 });

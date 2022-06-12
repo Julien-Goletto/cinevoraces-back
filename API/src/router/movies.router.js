@@ -19,15 +19,31 @@ const {
 
 moviesRouter
   /**
-   * Get a list of movies objects, corresponding to passed filters
-   * If no filter is used, returns all movies in view movies_infos
+   * Get a list of movies objects, corresponding to passed filters.
+   * If no filter is used, returns all movies in view movies_infos.
+   * Filters options are (with examples) :
+   *  - For invited users :
+   *    - season_number=3
+   *    - genres=Comédie|Drame|Thriller (string concatenation with pipes)
+   *    - countries=Japan|United+States+of+America|France (string concat with pipes, + for spaces)
+   *    - runtime=l80|h120 (Two values, lower prefixed with l, higher with h,  separated by a pipe)
+   *    - avg_rating=l3 (lower user rating accepted, prefixed with l)
+   *  - For logged users only :
+   *    - viewed=true (boolean true/false)
+   *    - bookmarked=true
+   *    - liked=true
+   *    - rating=l4 (lower user rating accepted, prefixed with l)
+   *
+   * Each filter is joined with a & char, the example above would give a searchString like this :
+   * season_number=3&genres=Comédie|Drame|Thriller&countries=Japan|United+States+of+America|France
+   *  &runtime=l80|h120&viewed=true&bookmarked=true&liked=true&rating=l4
    * @route Get /v1/movies/search/:filters?
    * @group - Movies
    * @param {string} filters - optionnal
    * @returns {Array} 200 - Array of all movies
    * @returns {APIError} 404 - Aucun film n'est enregistré en base
    */
-  .get('/search/:filters?', routerWrapper(moviesController.getMovies))
+  .get('/search/:filters?', getTokens.getAccessToken, routerWrapper(moviesController.getMovies))
   /**
    * Get a detailled movie object saved in database via its id
    * @route Get /v1/movies/id/:movieId
