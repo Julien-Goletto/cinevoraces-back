@@ -20,7 +20,9 @@ const getTokens = {
       // eslint-disable-next-line prefer-destructuring
       token = req.headers.authorization.split(' ')[1];
     }
-    req.session.token = token;
+    if (token) {
+      req.session.token = token;
+    }
     next();
   },
 };
