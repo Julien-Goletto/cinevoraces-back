@@ -8,7 +8,7 @@
 POST {{baseUrl}}/users/register
 content-type: application/json
 
-{ "pseudo": "Test", "mail": "Test@test.fr", "password": "Test" }
+{ "pseudo": "Yves", "mail": "Test@test.fr", "password": "Test" }
 
 ### Log user
 POST {{baseUrl}}/users/login
@@ -24,7 +24,7 @@ content-type: application/json
 
 {
   "pseudo": "Yves Signal",
-  "password": "K4V!8S%2PgUF\"S_^P&UD"
+  "password": "PojJr454N7aO1dL3hn;b"
 }
 
 ### Refresh tokens

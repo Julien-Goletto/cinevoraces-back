@@ -46,6 +46,7 @@ let newMovieId;
 
 const registeredUser = { pseudo: process.env.USER_PSEUDO, password: process.env.USER_PW };
 const adminUser = { pseudo: process.env.ADMIN_PSEUDO, password: process.env.ADMIN_PW };
+console.log(adminUser);
 
 const unloggedSession = supertest(app);
 const userSession = session(app);
@@ -53,17 +54,17 @@ const adminSession = session(app);
 
 describe('API e2e', () => {
   describe('Movies routes', () => {
-  //   beforeAll(async () => {
-  //     await userSession.post('/v1/users/login').send(registeredUser);
-  //     await adminSession.post('/v1/users/login').send(adminUser);
-  //   });
+    beforeAll(async () => {
+      // await userSession.post('/v1/users/login').send(registeredUser);
+      await adminSession.post('/v1/users/login').send(adminUser);
+    });
     it('Should get all movies in database', async () => {
-      const response = await unloggedSession.get('/v1/movies/filter/');
+      const response = await unloggedSession.get('/v1/movies/search/');
       expect(response.status).toBe(200);
     });
     it('Should get a specific movie', async () => {
       console.log('avec la queryCustom');
-      const response = await unloggedSession.get(`/v1/movies/filter/${customQuery}`);
+      const response = await unloggedSession.get(`/v1/movies/search/${customQuery}`);
       expect(response.status).toBe(200);
     });
     it('Should get a specific object from database whith id', async () => {

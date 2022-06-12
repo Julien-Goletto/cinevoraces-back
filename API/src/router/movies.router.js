@@ -19,15 +19,15 @@ const {
 
 moviesRouter
   /**
-   * Get a list of all movies objects saved in database, corresponding to passed filters
-   * If not filter is used, returns all movies in view movies_infos
-   * @route Get /v1/movies/filter/:filters
+   * Get a list of movies objects, corresponding to passed filters
+   * If no filter is used, returns all movies in view movies_infos
+   * @route Get /v1/movies/search/:filters?
    * @group - Movies
    * @param {string} filters - optionnal
    * @returns {Array} 200 - Array of all movies
    * @returns {APIError} 404 - Aucun film n'est enregistré en base
    */
-  .get('/filter/:filters?', routerWrapper(moviesController.getMovies))
+  .get('/search/:filters?', routerWrapper(moviesController.getMovies))
   /**
    * Get a detailled movie object saved in database via its id
    * @route Get /v1/movies/id/:movieId

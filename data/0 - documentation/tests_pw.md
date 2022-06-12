@@ -1,0 +1,34 @@
+# Mots de passe en clair pour les tests
+
+- P/bJ5VR;mCUHUo0s4skJ - Mat-Mat
+- dp+Ih-uGNZ=Df$zfVg~h - Yves Signal
+- iUNcJCy_p$^82EIeW/56
+- KS2%tSI1t7Mb7a04fjMP
+- $N1CI;03^;vU1Ql!2DDo
+- Hn~SJ^qm$HNW*nZPGnpI
+- fKaouYep?F~Ni_WyBuSj
+- T#2=@0_2MI0Xv=h5Di/W
+- _9mi~*cRnzDJB$Z4G#EJ
+- WUHK$HKM_#tJH6*=/tc0
+- OmbK9x-.rGEZ8buAiFtN
+- 9XgFCe:J2tiQ$s3Cpo^U
+- QtDXGF-idJdm3*%OI?I0
+- ahl_zYx^@J%Rn8DtQz=z
+- aSW9vZ29QX-ClEr69y%0
+- j-dAiAop6HXLY/VX-4Oy
+- 8Jb-FUOv+jMZ!+s1O.G!
+- ztNJXyzEISWYEY@QD2A=
+- !~mTxAftz69H;Ro@d#p7
+- tL@xsZZllF.MC/#u0l8i
+- PYo%s7E5#rkr?U8cx!rg
+- _cnK5qxS*x1pp790iSMi
+- !d7%L;GZu:Jdo+ltu$=j
+- 9O@PPg:IXJq1L-8S~b6O
+- n9QShKAXAXCd1riCgO;o
+- uNqH@IZUvpB=__~^oHZ8
+- M8OF5CmBJ5D?6g%/jNu?
+- dPsAhaCp@vC$AtdcI#F#
+- p7%~/0*4srb+ElsyL6#~
+- 5%-3-!R0*lInibse7-^v
+- D^-iD8@.m/th+vN5$saL
+- v:rC4kZhOMFXC0TkIQ7d

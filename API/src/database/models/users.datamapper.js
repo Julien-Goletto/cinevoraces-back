@@ -44,7 +44,7 @@ const usersDataMapper = {
     };
     const result = await client.query(query);
     if (!result.rowCount) {
-      throw new APIError('Informations éronnées', '', 400); // à déplacer dans les controllers
+      throw new APIError("L'utilisateur demandé n'existe pas", '', 400); // à déplacer dans les controllers
     }
     if (!await bcrypt.compare(user.password, result.rows[0].password)) {
       throw new APIError('Informations éronnées', '', 400);
