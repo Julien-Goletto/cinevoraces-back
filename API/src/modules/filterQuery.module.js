@@ -4,7 +4,7 @@
 // const filters = 'season_number=3'
 //                   + '&genres=Comédie|Drame|Thriller'
 //                   + '&countries=Japan|United+States+of+America|France'
-//                   + '&runtime=l80|h120'
+//                   + '&runtime=h120'
 //                   + '&release_date=l1954|h2018'
 //                   + '&avg_rating=l3'
 //                   + '&viewed=true'
@@ -71,16 +71,15 @@ const customFilters = {
           filtersQuery += `AND ${filter} && ARRAY[${
             filtersObject[filter].reduce((query, f) => `${query},'${f}'`, '').replace(',', '')}]\n`;
           break;
-        case 'runtime':
-          filtersQuery += `AND ${filter} BETWEEN ${
-            filtersObject[filter][0].replace('l', '')} AND ${filtersObject[filter][1].replace('h', '')}\n`;
-          break;
         case 'release_date':
           filtersQuery += `AND EXTRACT(YEAR FROM ${filter}) BETWEEN ${
             filtersObject[filter][0].replace('l', '')} AND ${filtersObject[filter][1].replace('h', '')}\n`;
           break;
         case 'avg_rating': case 'rating':
           filtersQuery += `AND ${filter} >= ${filtersObject[filter].replace('l', '')}\n`;
+          break;
+        case 'runtime':
+          filtersQuery += `AND ${filter} <= ${filtersObject[filter].replace('h', '')}\n`;
           break;
         default: // For season, bookmarked, viewed, liked
           filtersQuery += `AND ${filter} = ${filtersObject[filter]}\n`;

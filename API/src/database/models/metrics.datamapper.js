@@ -56,6 +56,15 @@ const metricsDataMapper = {
     }
     return results.rows;
   },
+  async getFiltersOptions() {
+    const query = 'SELECT * FROM filters_options;';
+    const results = await client.query(query);
+    console.log(results);
+    if (!results.rowCount) {
+      throw new APIError("Aucune donnée n'est encore en base", '', 404);
+    }
+    return (await results).rows;
+  },
 };
 
 module.exports = metricsDataMapper;

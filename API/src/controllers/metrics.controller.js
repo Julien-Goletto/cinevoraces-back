@@ -15,6 +15,11 @@ const metricsController = {
     const results = await metricsDataMapper.getUserMetricsByID(parseInt(req.params.userId, 10));
     res.status(200).json(results);
   },
+
+  async filtersOptions(_, res) {
+    const results = await metricsDataMapper.getFiltersOptions();
+    res.status(200).json(results);
+  },
 };
 
 module.exports = metricsController;

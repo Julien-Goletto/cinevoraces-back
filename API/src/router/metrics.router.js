@@ -29,6 +29,13 @@ metricsRouter
    */
   .get('/all', getTokens.getAccessToken, checkingUser.checkLogStatus, routerWrapper(metricsController.allUsersMetrics))
   /**
+   * Return all filters options, from the corresponding view of the db
+   * @route GET v1/metrics/filters
+   * @group - Metrics
+   * @returns {Array} 200 - Lis of all general filters options available
+   */
+  .get('/filters', routerWrapper(metricsController.filtersOptions))
+  /**
    * Return metrics related to a specific user. Login required.
    * @route GET /v1/metrics/:userId
    * @group - Metrics

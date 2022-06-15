@@ -7,7 +7,7 @@ const app = require('../../app');
 const customQuery = 'season_number=3'
                       + '&genres=Comédie|Drame|Thriller'
                       + '&countries=Japan|United+States+of+America|France'
-                      + '&runtime=l80|h120'
+                      + '&runtime=h120'
                       + '&release_date=l1954|h2018';
 
 const customQueryWithUser1 = 'viewed=true&bookmarked=false&liked=true&rating=l4';
