@@ -26,7 +26,9 @@ moviesRouter
    *    - season_number=3
    *    - genres=Comédie|Drame|Thriller (string concatenation with pipes)
    *    - countries=Japan|United+States+of+America|France (string concat with pipes, + for spaces)
-   *    - runtime=l80|h120 (Two values, lower prefixed with l, higher with h,  separated by a pipe)
+   *    - runtime=h120 ( high value prefixed with h)
+   *    - release_date=l1954|h2018
+   *      ( lowest value prefixed with l, highest value prefixed with h,  separated by a pipe)
    *    - avg_rating=l3 (lower user rating accepted, prefixed with l)
    *  - For logged users only :
    *    - viewed=true (boolean true/false)
@@ -36,7 +38,7 @@ moviesRouter
    *
    * Each filter is joined with a & char, the example above would give a searchString like this :
    * season_number=3&genres=Comédie|Drame|Thriller&countries=Japan|United+States+of+America|France
-   *  &runtime=l80|h120&viewed=true&bookmarked=true&liked=true&rating=l4
+   *  &runtime=h120&release_date=l1954|h2018&viewed=true&bookmarked=true&liked=true&rating=l4
    * @route Get /v1/movies/search/:filters?
    * @group - Movies
    * @param {string} filters - optionnal
