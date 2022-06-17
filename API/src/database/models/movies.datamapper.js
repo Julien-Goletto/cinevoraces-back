@@ -11,6 +11,7 @@ const moviesDataMapper = {
     } else {
       query = filtersQuery.writeSQLFilters(filters, userId);
     }
+    console.log(query);
     const results = await client.query(query);
     if (!results.rowCount) {
       throw new APIError('Aucun film ne correspond à la recherche.', '', 404);
