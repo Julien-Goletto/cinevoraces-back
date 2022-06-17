@@ -18,7 +18,6 @@ const customFilters = {
   eAccentAiguMajUTF8: ['%C3%89', 'É'],
   eAccentGraveMinUTF8: ['%C3%A8', 'è'],
   aAccentGraveMinUTF8: ['%C3%A0', 'à'],
-  accentAiguUTF8: ['%C3%A9', 'é'],
   allowedFilters: [
     'season_number',
     'genres',
