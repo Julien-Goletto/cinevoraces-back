@@ -14,6 +14,11 @@
 
 const customFilters = {
   plusRegex: /(?<=[A-Za-z])\+(?=[A-Za-z])/gm,
+  eAccentAiguMinUTF8: ['%C3%A9', 'é'],
+  eAccentAiguMajUTF8: ['%C3%89', 'É'],
+  eAccentGraveMinUTF8: ['%C3%A8', 'è'],
+  aAccentGraveMinUTF8: ['%C3%A0', 'à'],
+  accentAiguUTF8: ['%C3%A9', 'é'],
   allowedFilters: [
     'season_number',
     'genres',
@@ -34,6 +39,10 @@ const customFilters = {
    * @returns {Object} filtersObject
    */
   filtersParser: (filtersQuery) => filtersQuery
+    .replace(customFilters.eAccentAiguMinUTF8[0], customFilters.eAccentAiguMinUTF8[1])
+    .replace(customFilters.eAccentAiguMajUTF8[0], customFilters.eAccentAiguMajUTF8[1])
+    .replace(customFilters.eAccentGraveMinUTF8[0], customFilters.eAccentGraveMinUTF8[1])
+    .replace(customFilters.aAccentGraveMinUTF8[0], customFilters.aAccentGraveMinUTF8[1])
     .split('&')
     .map((f) => f.split('='))
     .map((f) => [f[0], (f[1].includes('|')) ? f[1].replace(customFilters.plusRegex, ' ').split('|') : f[1]])

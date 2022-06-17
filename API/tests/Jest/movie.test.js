@@ -10,7 +10,7 @@ const customQuery = 'season_number=3'
                       + '&runtime=h120'
                       + '&release_date=l1954|h2018';
 
-const customQueryGenres = 'genres=Comédie|Drame|Thriller';
+const customQueryGenres = 'genres=Com%C3%A9die|Drame|Thriller';
 const customQueryCountries = 'countries=Japan|United+States+of+America|France';
 const customQueryWithUser1 = 'viewed=true&bookmarked=false&liked=true&rating=l4';
 const customQueryWithUser2 = 'bookmarked=true';
