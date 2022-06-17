@@ -10,6 +10,8 @@ const customQuery = 'season_number=3'
                       + '&runtime=h120'
                       + '&release_date=l1954|h2018';
 
+const customQueryGenres = 'genres=Comédie|Drame|Thriller';
+const customQueryCountries = 'countries=Japan|United+States+of+America|France';
 const customQueryWithUser1 = 'viewed=true&bookmarked=false&liked=true&rating=l4';
 const customQueryWithUser2 = 'bookmarked=true';
 
@@ -53,8 +55,17 @@ describe('API e2e', () => {
       const response = await unloggedSession.get('/v1/movies/search/');
       expect(response.status).toBe(200);
     });
-    it('Should get a specific movie', async () => {
+    it('Should get movies corresponding with general filters aggregated', async () => {
       const response = await unloggedSession.get(`/v1/movies/search/${customQuery}`);
+      expect(response.status).toBe(200);
+    });
+    it('Should get movies corresponding to genres filter', async () => {
+      const response = await unloggedSession.get(`/v1/movies/search/${customQueryGenres}`);
+      expect(response.status).toBe(200);
+    });
+    it('Should get movies corresponding to countries filter', async () => {
+      const response = await unloggedSession.get(`/v1/movies/search/${customQueryCountries}`);
+      console.log(response.body);
       expect(response.status).toBe(200);
     });
     it('Should get a specific object from database whith id', async () => {
