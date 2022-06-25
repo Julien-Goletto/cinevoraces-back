@@ -47,6 +47,14 @@ moviesRouter
    */
   .get('/search/:filters?', getTokens.getAccessToken, routerWrapper(moviesController.getMovies))
   /**
+   * Get the last movie
+   * @route Get /v1/movies/lastmovie
+   * @group - Movies
+   * @returns {Movie} 200 - Movie Object
+   * @returns {APIError} 404 - Aucun film n'a été publié.
+   */
+  .get('/lastmovie', routerWrapper(moviesController.getAllMoviesFromLastSeason))
+  /**
    * Get a detailled movie object saved in database via its id
    * @route Get /v1/movies/id/:movieId
    * @group - Movies
