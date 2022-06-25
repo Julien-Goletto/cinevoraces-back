@@ -12,10 +12,6 @@ const moviesController = {
     const results = await moviesDataMapper.getMovies(filters, userId);
     res.status(200).json(results);
   },
-  async lastMovie(_, res) {
-    const results = await moviesDataMapper.getLastMovie();
-    res.status(200).json(results);
-  },
   async getMovieByID(req, res) {
     const { movieId } = req.params;
     const result = await moviesDataMapper.getMovieByID(movieId);
