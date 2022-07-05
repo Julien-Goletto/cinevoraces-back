@@ -59,7 +59,7 @@ usersRouter
    * @route POST /v1/users/login
    * @group - Users
    * @param {UserLogin.model} UserLogin.body.required - user object credentials
-   * @returns {User} 200
+   * @returns {User} 200 - id, pseudo, mail, avatar_url and tokens
    * @returns {APIError} 400 - Informations éronnées
    */
   .post('/login', validate('body', userLoginSchema), routerWrapper(usersController.logUser))

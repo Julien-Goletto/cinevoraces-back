@@ -40,6 +40,7 @@ describe('API e2e', () => {
     });
     it('Should log a user', async () => {
       const response = await userSession.post('/v1/users/login').send(registeredUser);
+      console.log(response.body);
       expect(response.status).toBe(200);
     });
     it('Should see its own user infos', async () => {
