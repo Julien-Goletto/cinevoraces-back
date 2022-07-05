@@ -39,7 +39,7 @@ const moviesDataMapper = {
     if (!results.rowCount) {
       throw new APIError("Aucun film n'a été publié.", '', 404);
     }
-    return results.rows;
+    return results.rows[0];
   },
 
   async getAllMoviesFromLastSeason() {
