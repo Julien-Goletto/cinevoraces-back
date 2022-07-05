@@ -17,8 +17,8 @@ const refreshTokensController = {
     } catch (e) {
       throw new APIError('La vérification du contenu du refresh token a échouée.', req.url, 401);
     }
-    const userInDB = await usersDataMapper.getUserById(user.id);
-    if (!(userInDB)) {
+    const userInDB = await usersDataMapper.getUserById(user.id, true);
+    if (!userInDB) {
       return new APIError('Ce compte utilisateur a été supprimé.', 404);
     }
     // On récupère les données user à jour

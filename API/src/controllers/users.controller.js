@@ -20,6 +20,7 @@ const usersController = {
     const result = await usersDataMapper.logUser(user);
     const accessToken = jwtMethods.createAccessToken(result);
     const refreshToken = jwtMethods.createRefreshToken(result);
+    // For Heroku hosting, it's compulsary to emit tokens with both cookies and response body
     res.cookie('accessToken', accessToken);
     res.cookie('refreshToken', refreshToken);
     result.accessToken = accessToken;
