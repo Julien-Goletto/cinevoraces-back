@@ -22,7 +22,7 @@ propositionsRouter
    */
   .get('/pendingPropositions', getTokens.getAccessToken, checkingUser.checkAuthorization, routerWrapper(propositionsController.pendingPropositions))
   /**
-   * Return propositions related to a specific user. Login required.
+   * Get available slots among the next 10 slots
    * @route GET /v1/propositions/availableSlots
    * @group - Propositions
    * @returns {Array} 200 - for asked user :
@@ -31,7 +31,7 @@ propositionsRouter
    */
   .get('/availableSlots', getTokens.getAccessToken, checkingUser.checkLogStatus, routerWrapper(propositionsController.availablePropositionsSlots))
   /**
-   * Book an available proposition slot.
+   * Get the pending proposition for one user
    * @route PUT /v1/propositions/:userId
    * @group - Propositions
    * @param {Date} publishingDate - publishing date

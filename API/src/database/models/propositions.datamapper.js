@@ -34,7 +34,7 @@ const propositionsDataMapper = {
       FROM next_propositions`;
     const results = await client.query(query);
     if (!results.rowCount) {
-      return 'Aucun créneau de proposition disponible.';
+      throw new APIError('Aucun créneau de proposition disponible.', '', 400);
     }
     return results.rows;
   },
@@ -65,7 +65,7 @@ const propositionsDataMapper = {
     if (!results.rowCount) {
       throw new APIError("Cet utilisateur n'a pas de proposition de film en attente.", '', 404);
     }
-    return results.rows;
+    return results.rows[0];
   },
   /**
    * Update a proposition slot from is_booked = false to true
