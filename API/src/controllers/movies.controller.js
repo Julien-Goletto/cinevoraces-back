@@ -10,8 +10,8 @@ const moviesController = {
     if (token) {
       try {
         userId = jwtMethods.decryptAccessToken(token).id;
-      } catch {
-        throw new APIError('Le token est expiré', req.url, 401);
+      } catch (err) {
+        throw new APIError(err.message, req.url, 401);
       }
     }
     const results = await moviesDataMapper.getMovies(filters, userId);
