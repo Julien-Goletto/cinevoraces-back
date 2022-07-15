@@ -1,5 +1,6 @@
 const moviesDataMapper = require('../database/models/movies.datamapper');
 const jwtMethods = require('../JWT/jwt.module');
+const APIError = require('../Errors/APIError');
 
 const moviesController = {
   async getMovies(req, res) {
@@ -7,7 +8,11 @@ const moviesController = {
     const { token } = req.session;
     let userId;
     if (token) {
-      userId = jwtMethods.decryptAccessToken(token).id;
+      try {
+        userId = jwtMethods.decryptAccessToken(token).id;
+      } catch {
+        throw new APIError('Le token est expiré', req.url, 401);
+      }
     }
     const results = await moviesDataMapper.getMovies(filters, userId);
     res.status(200).json(results);
