@@ -18,7 +18,7 @@ const reviewsDatamapper = {
     };
     const results = await client.query(query);
     if (!results.rowCount) {
-      return "Cet utilisateur n'a pas encore intéragit avec ce film";
+      throw new APIError("Cet utilisateur n'a pas encore intéragit avec ce film", '', 404);
     }
     return results.rows;
   },
